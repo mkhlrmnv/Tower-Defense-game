@@ -10,6 +10,14 @@ public:
 
     Vector2D() : x(0), y(0) {}
     Vector2D(int x, int y) : x(x), y(y) {}
+
+    bool operator==(const Vector2D& other) const {
+        return (x == other.x && y == other.y);
+    }
+
+    bool operator!=(const Vector2D& other) const {
+        return !(*this == other);
+    }
 };
 
 #endif
