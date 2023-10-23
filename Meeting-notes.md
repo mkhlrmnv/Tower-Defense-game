@@ -1,5 +1,6 @@
 # Meeting Notes
-In this file, you are required to take notes for your weekly meetings. 
+
+In this file, you are required to take notes for your weekly meetings.
 In each meeting, you are required to discuss:
 
 1. What each member has done during the week?
@@ -7,19 +8,46 @@ In each meeting, you are required to discuss:
 3. Plan for the next week for everyone
 4. Deviations and changes to the project plan, if any
 
+# Meeting 23.10.2023 12::00
+
+**Participants**:
+
+1. Mikhail Romanov
+2. Kalle Lindgren
+3. Aki Oura
+4. Leo Teodosin
+
+## Actions
+
+1. Mikhail Romanov will start level class
+2. Leo Teodosin will start object class
+3. Kalle Lindgren will look into sfml
+4. Aki Oura will help Leo with object class, and start designing models for towers and enemies
+
+## Project status
+
+Planning is complete, starting work on object and level classes. Also looking into sfml library
+
+### TODOs
+
+1. Level and Object classes
+2. Get to know sfml library
+3. Graphics
 
 # Meeting dd.mm.2021 HH::MM
 
-**Participants**: 
+**Participants**:
+
 1. Member 1
 2. Member 2
 3. Member 3
-4. Member 4 
+4. Member 4
 
 ## Summary of works
-1. Member 1 
-   
-   Implementing the class XX. Tested the class XX. 
+
+1. Member 1
+
+   Implementing the class XX. Tested the class XX.
    Results are in `tests/<class-xx-tests>`. Resolved the identified problems.
 
 2. Member 2
@@ -34,19 +62,22 @@ In each meeting, you are required to discuss:
 2. ...
 
 ## Actions
-1. Member 1 is going to look into defining an abstract interface for monsters 
+
+1. Member 1 is going to look into defining an abstract interface for monsters
    to enable easy UI integration.
-2. Member 2 is going to work with Member 1 to use abstract interface in derived 
+2. Member 2 is going to work with Member 1 to use abstract interface in derived
    monster classes.
 3. Member 2 is going to test the interface.
 4. Member 3 is going to use ...
 
-> Please reflect these action decisions in your git commit messages so that 
+> Please reflect these action decisions in your git commit messages so that
 > your group members and advisor can follow the progress.
 
-## Project status 
-Short summary of current project status. 
+## Project status
+
+Short summary of current project status.
 
 ### TODOs
+
 1. Member 1: Write an action.
 2. ...
