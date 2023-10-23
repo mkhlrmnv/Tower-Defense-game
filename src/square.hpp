@@ -15,7 +15,7 @@ class Square {
 public:
     Square(Vector2D center);
 
-    ~Square();
+    ~Square() { }
 
     // returns center cordinates of square
     const Vector2D get_Center() const;
@@ -29,7 +29,7 @@ public:
     // Adds object to the square
     void add_Object(Object object);
 
-    // Occupyes square by something
+    // Occupies square by something
     void occupy_by_grass();
     void occupy_by_road();
     void occupy_by_tower();

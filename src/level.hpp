@@ -14,7 +14,15 @@ class Level {
 public:
     Level(int resolution, std::string level, int cash, int lives);
 
-    ~Level();
+    ~Level() {
+        for (std::vector<Square*> collumn : _grid){
+            for (Square* s : collumn){
+                delete s;
+            }
+            collumn.clear();
+        }
+        _grid.clear();
+    }
 
     // Returns current round
     const int get_Round() const;
@@ -40,7 +48,7 @@ private:
     int _square_size;
     std::string _level_type;
     int _round, _cash, _lives;
-    std::vector<std::vector<Square>> _grid;
+    std::vector<std::vector<Square*>> _grid;
 };
 
 

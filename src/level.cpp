@@ -18,14 +18,13 @@ const int Level::get_Lives() const {
 void Level::make_Grid() {
     for (int i = 0; i < 10; i++)
     {
-        for (int j = 0; i < 10; i++)
+        for (int j = 0; j < 10; i++)
         {
             Vector2D cords;
             cords.x = (_square_size / 2) + (i * _square_size);
             cords.y = (_square_size / 2) + (j * _square_size);
-            _grid[i][j] = Square(cords);
+            _grid[i][j] = new Square(cords);
         }
-        
     } 
 }
 
@@ -42,10 +41,10 @@ int Level::read_file(const std::string& file_name){
         {
             char c = file.get();
             if (c == '#'){
-                _grid[i][j].occupy_by_grass();
+                _grid[i][j]->occupy_by_grass();
             } 
             else if (c == '='){
-                _grid[i][j].occupy_by_road();
+                _grid[i][j]->occupy_by_road();
             }
         }
         
@@ -64,10 +63,10 @@ int Level::save_to_file(const std::string& file_name){
     {
         for (int j = 0; j < 10; i++)
         {
-            if (_grid[i][j].get_Occupied() == grass){
+            if (_grid[i][j]->get_Occupied() == grass){
                 file << "#";
             }
-            else if (_grid[i][j].get_Occupied() == road || _grid[i][j].get_Occupied() == tower){
+            else if (_grid[i][j]->get_Occupied() == road || _grid[i][j]->get_Occupied() == tower){
                 file << "=";
             }
         }

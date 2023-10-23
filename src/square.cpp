@@ -18,9 +18,17 @@ const int Square::get_Occupied() const{
 
 void Square::add_Object(Object object){
     _objects.push_back(object);
-    //Update oocupied_by
+    //Update occupied_by
 }
 
-void Square::make_grass(){
+void Square::occupy_by_grass(){
     _occupied_by = grass;
+}
+
+void Square::occupy_by_road(){
+    _occupied_by = road;
+}
+
+void Square::occupy_by_tower(){
+    _occupied_by = road;
 }
