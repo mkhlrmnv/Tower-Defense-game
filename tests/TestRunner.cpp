@@ -3,7 +3,7 @@
 int main() {
     // Run your tests here
     std::cout << "Running ObjectTests..." << std::endl;
-    int objectTestsResult = system("ObjectTests.exe");  // Replace "ObjectTests.exe" with the actual name of your test executable.
+    int objectTestsResult = system("ObjectTests");
 
     // You can add more test runners for other classes in your project.
 

@@ -4,6 +4,8 @@ Object::Object(int health, int damage, int range, int attack_speed, Vector2D& po
     : _health_points(health), _damage(damage), _range(range), _attack_speed(attack_speed), _position(position) {
 }
 
+Object::~Object() {}
+
 const int Object::get_damage() const {
     return _damage;
 }

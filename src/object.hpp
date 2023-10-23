@@ -8,6 +8,8 @@ public:
     Object(int health, int damage, 
             int range, int attack_speed, Vector2D& position);
 
+    ~Object();
+
     const int get_damage() const;
     const int get_health() const;
     const int get_range() const;
