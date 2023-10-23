@@ -1,5 +1,3 @@
-// Vector2D.hpp
-
 #ifndef VECTOR2D_HPP
 #define VECTOR2D_HPP
 
