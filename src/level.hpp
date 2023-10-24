@@ -12,7 +12,7 @@
 
 class Level {
 public:
-    Level(int resolution, std::string level, int cash, int lives);
+    Level(int resolution, int cash, int lives);
 
     ~Level() {
         for (std::vector<Square*> column : _grid){
@@ -51,7 +51,6 @@ public:
 
 private:
     int _square_size;
-    std::string _level_type;
     int _round, _cash, _lives;
     std::vector<std::vector<Square*>> _grid;
 };
