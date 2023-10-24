@@ -13,5 +13,14 @@ int main() {
         std::cout << "Some tests failed." << std::endl;
     }
 
+    std::cout << "Running SquareTest..." << std::endl;
+    int levelTestResult = system("SquareTests.exe");
+    
+    if (levelTestResult == 0){
+        std::cout << "All tests passed." << std::endl;
+    } else {
+        std::cout << "Some tests failed." << std::endl;
+    }
+
     return objectTestsResult;
 }

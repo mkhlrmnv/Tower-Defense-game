@@ -15,6 +15,14 @@ const int Level::get_Lives() const {
     return _lives;
 }
 
+const Level::std::vector<std::vector<Square*>> get_Grid() const{
+    return _
+}
+
+void Level::plus_Round() {
+    _round++;
+}
+
 void Level::make_Grid() {
     for (int i = 0; i < 10; i++)
     {

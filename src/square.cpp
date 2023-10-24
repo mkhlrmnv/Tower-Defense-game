@@ -1,7 +1,7 @@
 #include "square.hpp"
 
 Square::Square(Vector2D center):
-    _center(center) {}
+    _center(center){}
 
 
 const Vector2D Square::get_Center() const {
@@ -21,14 +21,23 @@ void Square::add_Object(Object object){
     //Update occupied_by
 }
 
-void Square::occupy_by_grass(){
-    _occupied_by = grass;
+bool Square::occupy_by_grass(){
+    if (_occupied_by != tower && _occupied_by != road)
+        _occupied_by = grass;
+        return true;
+    return false;
 }
 
-void Square::occupy_by_road(){
-    _occupied_by = road;
+bool Square::occupy_by_road(){
+    if (_occupied_by != tower && _occupied_by != grass)
+        _occupied_by = road;
+        return true;
+    return false;
 }
 
-void Square::occupy_by_tower(){
-    _occupied_by = road;
+bool Square::occupy_by_tower(){
+    if (_occupied_by != tower && _occupied_by != grass && _occupied_by != tower)
+        _occupied_by = tower;
+        return true;
+    return false;
 }

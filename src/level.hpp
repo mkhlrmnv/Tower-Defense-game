@@ -33,8 +33,13 @@ public:
     // Returns current lives
     const int get_Lives() const;
 
+    // Returns grid
+    const std::vector<std::vector<Square*>> get_Grid() const;
+
     // Makes new grid
     void make_Grid();
+
+    void plus_Round();
 
     // Load level from file
     int read_file(const std::string& file_name);
