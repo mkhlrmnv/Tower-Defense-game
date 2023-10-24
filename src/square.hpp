@@ -18,21 +18,21 @@ public:
     ~Square() { }
 
     // returns center cordinates of square
-    const Vector2D get_Center() const;
+    const Vector2D get_center() const;
 
     // Returns list of objects that are in the square
-    const std::vector<Object> get_Objects() const;
+    const std::vector<Object> get_objects() const;
 
     // Returns what is occupuing square
-    const int get_Occupied() const;
+    const int get_occupied() const;
 
     // Adds object to the square
-    void add_Object(Object object);
+    void add_object(Object object);
 
     // Occupies square by something
-    void occupy_by_grass();
-    void occupy_by_road();
-    void occupy_by_tower();
+    bool occupy_by_grass();
+    bool occupy_by_road();
+    bool occupy_by_tower(Object obj);
 
 private:
     Vector2D _center;

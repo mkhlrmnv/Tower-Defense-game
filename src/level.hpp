@@ -15,31 +15,31 @@ public:
     Level(int resolution, std::string level, int cash, int lives);
 
     ~Level() {
-        for (std::vector<Square*> collumn : _grid){
-            for (Square* s : collumn){
+        for (std::vector<Square*> column : _grid){
+            for (Square* s : column){
                 delete s;
             }
-            collumn.clear();
+            column.clear();
         }
         _grid.clear();
     }
 
     // Returns current round
-    const int get_Round() const;
+    const int get_round() const;
 
     // Returns current cash
-    const int get_Cash() const;
+    const int get_cash() const;
 
     // Returns current lives
-    const int get_Lives() const;
+    const int get_lives() const;
 
     // Returns grid
-    const std::vector<std::vector<Square*>> get_Grid() const;
+    const std::vector<std::vector<Square*>> get_grid() const;
 
     // Makes new grid
-    void make_Grid();
+    void make_grid();
 
-    void plus_Round();
+    void plus_round();
 
     // Load level from file
     int read_file(const std::string& file_name);
