@@ -5,17 +5,17 @@ Square::Square(Vector2D center):
     _center(center){}
 
 // Returns center of the square
-const Vector2D Square::get_center() const {
+Vector2D Square::get_center() const {
     return _center;
 }
 
 // Returns list of all objects
-const std::vector<Object> Square::get_objects() const{
+std::vector<Object> Square::get_objects() const{
     return _objects;
 }
 
 // Returns who occupies square 
-const int Square::get_occupied() const{
+int Square::get_occupied() const{
     return _occupied_by;
 }
 
@@ -27,26 +27,29 @@ void Square::add_object(Object object){
 
 // occupies square by grass
 bool Square::occupy_by_grass(){ 
-    if (_occupied_by != tower && _occupied_by != road)
+    if (_occupied_by != tower && _occupied_by != road) {
         _occupied_by = grass;
         _objects.clear();  // deletes tower from object list
         return true;
+    }
     return false;
 }
 
 // occupies square by road
 bool Square::occupy_by_road(){ 
-    if (_occupied_by != tower && _occupied_by != grass)
+    if (_occupied_by != tower && _occupied_by != grass) {
         _occupied_by = road;
         return true;
+    }
     return false;
 }
 
 // occupies square by tower
 bool Square::occupy_by_tower(Object obj){
-    if (_occupied_by != tower && _occupied_by != road)
+    if (_occupied_by != tower && _occupied_by != road) {
         _occupied_by = tower;
         _objects.push_back(obj); // adds tower to object list
         return true;
+    }
     return false;
 }

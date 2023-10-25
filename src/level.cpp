@@ -5,22 +5,22 @@ Level::Level(int resolution, int cash, int lives):
     _square_size(resolution/10), _round(0), _cash(cash), _lives(lives) { }
 
 // Returns current round
-const int Level::get_round() const {
+int Level::get_round() const {
     return _round;
 }
 
 // Returns current cash
-const int Level::get_cash() const {
+int Level::get_cash() const {
     return _cash;
 }
 
 // Returns current lives
-const int Level::get_lives() const {
+int Level::get_lives() const {
     return _lives;
 }
 
 // Returns current grid
-const std::vector<std::vector<Square*>> Level::get_grid() const{
+std::vector<std::vector<Square*>> Level::get_grid() const{
     return _grid;
 }
 
@@ -52,6 +52,22 @@ void Level::make_grid() {
         }
         _grid.push_back(new_column); // add just created column to grid
     } 
+}
+
+void Level::add_cash(int how_much){
+    _cash += how_much;
+}
+
+void Level::take_cash(int how_much){
+    _cash -= how_much;
+}
+
+void Level::add_lives(int how_much){
+    _lives += how_much;
+}
+
+void Level::take_lives(int how_much){
+    _lives -= how_much;
 }
 
 // Initialize map from file

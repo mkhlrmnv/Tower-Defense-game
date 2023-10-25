@@ -1,2 +1,3 @@
-/mnt/c/Users/lleij/Documents/Aalto/Programming/cpp-project/tower-defence/build/CMakeFiles/edit_cache.dir
-/mnt/c/Users/lleij/Documents/Aalto/Programming/cpp-project/tower-defence/build/CMakeFiles/rebuild_cache.dir
+/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/build/CMakeFiles/test.dir
+/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/build/CMakeFiles/edit_cache.dir
+/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/build/CMakeFiles/rebuild_cache.dir
