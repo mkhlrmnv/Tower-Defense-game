@@ -27,29 +27,29 @@ void Square::add_object(Object object){
 
 // occupies square by grass
 bool Square::occupy_by_grass(){ 
-    if (_occupied_by != tower && _occupied_by != road) {
-        _occupied_by = grass;
-        _objects.clear();  // deletes tower from object list
-        return true;
+    if (_occupied_by == tower || _occupied_by == road){
+        return false;
     }
-    return false;
+    _occupied_by = grass;
+    _objects.clear();  // deletes tower from object list
+    return true;
 }
 
 // occupies square by road
 bool Square::occupy_by_road(){ 
-    if (_occupied_by != tower && _occupied_by != grass) {
-        _occupied_by = road;
-        return true;
+    if (_occupied_by == tower && _occupied_by == grass) {
+        return false;
     }
-    return false;
+    _occupied_by = road;
+    return true;
 }
 
 // occupies square by tower
 bool Square::occupy_by_tower(Object obj){
-    if (_occupied_by != tower && _occupied_by != road) {
-        _occupied_by = tower;
-        _objects.push_back(obj); // adds tower to object list
-        return true;
+    if (_occupied_by == tower && _occupied_by == road) {
+        return false;   
     }
-    return false;
+    _occupied_by = tower;
+    _objects.push_back(obj); // adds tower to object list
+    return true;
 }

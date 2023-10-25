@@ -60,6 +60,8 @@ public:
     // Saves current level to file
     int save_to_file(const std::string& file_name);
 
+    void print_map();
+
     // void randomly_generate();
 
 private:

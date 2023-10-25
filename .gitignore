@@ -23,7 +23,8 @@
 
 
 #built folder
-build/
+build/*
+!build/build.xml
 
 # Executables
 *.exe

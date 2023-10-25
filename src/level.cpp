@@ -46,7 +46,7 @@ void Level::make_grid() {
         for (int j = 0; j < 10; j++) // counts from 0 -> 9 to make 10 squares in each column
         {
             Vector2D cords;
-            cords.x = (_square_size / 2) + (i * _square_size); //calculates cordinates for square center
+            cords.x = (_square_size / 2) + (i * _square_size); //calculates cordinates8 for square center
             cords.y = (_square_size / 2) + (j * _square_size);
             new_column.push_back(new Square(cords)); // adds new square to current column
         }
@@ -108,21 +108,45 @@ int Level::save_to_file(const std::string& file_name){
     if (!file.is_open()){ // checks if file is open, if isn't return -1
         return -1;
     }
-
-    for (int i = 0; i < 10; i++) // counts 0 -> 9, because there is 10 columns
+    
+    for (size_t i = 0; i < _grid.size(); i++)
     {
-        for (int j = 0; j < 10; j++)// counts 0 -> 9 because there is 10 squares in each column
-        {
-            if (_grid[i][j]->get_occupied() == grass || _grid[i][j]->get_occupied() == tower){  // if square is occupied by grass or by tower writes #
+        for (size_t j = 0; j < _grid.size(); j++)
+        { // checks what every square is occupied by and writes charecter depending on that
+            Square* sq = _grid[i][j];
+            if (sq->get_occupied() == grass || sq->get_occupied() == tower){
                 file << "#";
-            }
-            else if (_grid[i][j]->get_occupied() == road){ // if square is occupied by road writes =
+            } 
+            else if (sq->get_occupied() == road){
                 file << "=";
             }
         }
-        if (i != 9){  // new line after 10 elements
-            file << "\n";
+        if (i < 9){
+            file << std::endl;
         }
+    }
+    return 1;
+}
+
+// Prints current map
+void Level::print_map(){
+    if (_grid.empty()){ // checks if there is existing grid
+        std::cout << "There isn't map to print" << std::endl;
+        return;
+    }
+    for (size_t i = 0; i < _grid.size(); i++)
+    {
+        for (size_t j = 0; j < _grid.size(); j++) 
+        { // checks what every square is occupied by and prints charecter depending on that
+            Square* sq = _grid[i][j]; 
+            if (sq->get_occupied() == grass || sq->get_occupied() == tower){
+                std::cout << "#";
+            } 
+            else if (sq->get_occupied() == road){
+                std::cout << "=";
+            }
+        }
+        std::cout << std::endl;
     }
 }
 

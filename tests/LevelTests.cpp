@@ -2,12 +2,17 @@
 #include "src/vector2d.hpp"
 #include <iostream>
 #include <cstdlib>
+#include <fstream>
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <vector>
 
 // tests round count
 bool testRound(){
     Level lv(1000, 1000, 50); // new level
     int random_int = rand() % 10;
-    for (int i = 0; i < random_int; i++) // add 10 rounds to round count
+    for (int i = 0; i < random_int; i++) // add random amount of rounds
     {
         lv.plus_round();
     }
@@ -28,9 +33,9 @@ bool testCash(){
 bool testLives(){
     Level lv(1000, 1000, 50); // new level
     int random_int = rand() % 25;
-    lv.take_lives(random_int);
+    lv.take_lives(random_int); // Minuses random amount of money
     int random_int2 = rand() % 10;
-    lv.add_lives(random_int2);
+    lv.add_lives(random_int2); // add random amount of money
     return lv.get_lives() == (50 - random_int + random_int2); // checks if lives count 
 }
 
@@ -40,18 +45,15 @@ bool testGridSize(){
     lv.make_grid();
     std::vector<std::vector<Square*>> grid = lv.get_grid(); // new grid
     if (grid.size() != 10){ // checks that there is 10 columns
-        //lv.~Level(); // deletes if not
-        return false;
+        return false; // returns false if not
     }
     for (size_t i = 0; i < grid.size(); i++) // checks that every column have 10 squares 
     {
         std::vector<Square*> column = grid[i];
         if (column.size() != 10){
-            //lv.~Level(); // deletes if not
-            return false;
+            return false; // returns false if not
         }
     }
-    //lv.~Level(); // deletes level
     return true;
 }
 
@@ -60,19 +62,17 @@ bool testGridSquareCenters(){
     Level lv(1000, 1000, 50); // new level
     lv.make_grid();
     std::vector<std::vector<Square*>> grid = lv.get_grid(); // new grid
-
-    int x = 5;
+    int x = 5; // cordinates for first square center
     int y = 5;
-
     for (size_t i = 0; i < grid.size(); i++) // checks that every square has correct center points
     {
-        int current_x = x + (i * 10);
+        int current_x = x + (i * 10); // calculates what x should be
         std::vector<Square*> column = grid[i];
         for (size_t j = 0; j < column.size(); j++)
         {
-            int current_y = y + (j * 10);
-            Vector2D current_center(current_x, current_y);
-            if (column[j]->get_center() == current_center){
+            int current_y = y + (j * 10); // calculates what y should be
+            Vector2D current_center(current_x, current_y); // makes correct cordinates
+            if (column[j]->get_center() == current_center){ // compares if cordinates matches
                 //lv.~Level(); // deletes if not
                 return false;
             }
@@ -83,6 +83,56 @@ bool testGridSquareCenters(){
 }
 
 // TODO: Test for read and write to file
+
+bool testRead(){
+    std::string file_name = "maps/example_map.txt"; // file name of the map test map
+    Level lv(1000, 1000, 50); // new level
+    lv.make_grid(); 
+    lv.read_file(file_name); // reads new map from test map file
+    std::vector<std::vector<Square*>> grid = lv.get_grid(); 
+    std::ifstream file(file_name);
+    for (size_t i = 0; i < grid.size(); i++) // compares grid to test map file
+    {
+        std::string line;
+        std::getline(file, line);
+        std::vector<Square*> column = grid[i];
+        for (size_t j = 0; j < column.size(); j++)
+        {
+            if (line[j] == '#' && column[j]->get_occupied() == grass){
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+bool testWrite(){
+    std::string file_name = "maps/example_map.txt"; // file name for reading
+    std::string file_name_w = "maps/example_map_w.txt"; // file name for writing
+    Level lv(1000, 1000, 50); // new level
+    lv.make_grid();
+    lv.read_file(file_name); // reads maps from file
+    lv.save_to_file(file_name_w); // writes current map to file
+    
+    // compares two two files 
+    std::ifstream f1(file_name, std::ifstream::binary|std::ifstream::ate);
+    std::ifstream f2(file_name_w, std::ifstream::binary|std::ifstream::ate);
+    
+    if (f1.fail() || f2.fail()) {
+        return false; //file problem
+    }
+
+    if (f1.tellg() != f2.tellg()) {
+        return false; //size mismatch
+    }
+
+    //seek back to beginning and use std::equal to compare contents
+    f1.seekg(0, std::ifstream::beg);
+    f2.seekg(0, std::ifstream::beg);
+    return std::equal(std::istreambuf_iterator<char>(f1.rdbuf()),
+                        std::istreambuf_iterator<char>(),
+                        std::istreambuf_iterator<char>(f2.rdbuf()));
+}
 
 int main(){
     int fails = 0;
@@ -119,6 +169,20 @@ int main(){
         std::cout << "testGridSquareCenters: Passed" << std::endl;
     } else {
         std::cout << "testGridSquareCenters: Failed" << std::endl;
+        fails++;
+    }
+
+    if (testRead()){
+        std::cout << "testRead: Passed" << std::endl;
+    } else {
+        std::cout << "testRead: Failed" << std::endl;
+        fails++;
+    }
+
+    if (testWrite()){
+        std::cout << "testWrite: Passed" << std::endl;
+    } else {
+        std::cout << "testWrite: Failed" << std::endl;
         fails++;
     }
 
