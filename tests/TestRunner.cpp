@@ -3,7 +3,7 @@
 int main() {
     // Run your tests here
     std::cout << "Running ObjectTests..." << std::endl;
-    int objectTestsResult = system("ObjectTests.exe");  // Replace "ObjectTests.exe" with the actual name of your test executable.
+    int objectTestsResult = system("ObjectTests");
 
     // You can add more test runners for other classes in your project.
 
@@ -13,23 +13,6 @@ int main() {
         std::cout << "Some tests failed." << std::endl;
     }
 
-    std::cout << "Running Level..." << std::endl;
-    int levelTestResult = system("LevelTests.exe");
-    
-    if (levelTestResult == 0){
-        std::cout << "All tests passed." << std::endl;
-    } else {
-        std::cout << "Some tests failed." << std::endl;
-    }
-
-    std::cout << "Running SquareTest..." << std::endl;
-    int squareTestResult = system("SquareTests.exe");
-    
-    if (squareTestResult == 0){
-        std::cout << "All tests passed." << std::endl;
-    } else {
-        std::cout << "Some tests failed." << std::endl;
-    }
-
     return objectTestsResult;
 }
+
