@@ -142,6 +142,36 @@ bool testRandomMap(){
     return true;
 }
 
+bool testRandomHelp(){
+    Level lv(1000, 1000, 50); // new level
+    lv.make_grid();
+    std::vector<Direction> list;
+    list.push_back(right);
+    list.push_back(right);
+    bool res = !lv.can_go_notfirst(right, list); // should fail
+    list.push_back(left);
+    res = lv.can_go_notfirst(right, list); // should pass
+    list.clear();
+    list.push_back(down);
+    list.push_back(down);
+    res = !lv.can_go_notfirst(up, list);// should fail
+    list.push_back(right);
+    res = lv.can_go_notfirst(up, list); // should pass
+    list.clear();
+    list.push_back(up);
+    list.push_back(up);
+    res = !lv.can_go_notfirst(down, list); // should fail
+    list.push_back(right);
+    res = lv.can_go_notfirst(down, list); // should pass
+    list.clear();
+    list.push_back(left);
+    list.push_back(left);
+    res = !lv.can_go_notfirst(left, list); // should fail
+    list.push_back(right);
+    res = lv.can_go_notfirst(left, list); // should pass
+    return res;
+}
+
 int main(){
     int fails = 0;
 
@@ -194,14 +224,22 @@ int main(){
         fails++;
     }
 
+    
+    std::cout << "Making random map:" << std::endl;
+    testRandomMap();
+
+    if (testRandomHelp()){
+        std::cout << "testRandomHelp: Passed" << std::endl;
+    } else {
+        std::cout << "testRandomHelp: Failed" << std::endl;
+        fails++;
+    }
+
     if (fails == 0){
         std::cout << "All test passed" << std::endl;
     } else {
         std::cout << fails << " test failed" << std::endl;
     }
-
-    std::cout << "Making random map:" << std::endl;
-    testRandomMap();
     
     return fails;
 }

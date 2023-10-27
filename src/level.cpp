@@ -116,7 +116,7 @@ int Level::save_to_file(const std::string& file_name){
             Square* sq = _grid[i][j];
             if (sq->get_occupied() == grass || sq->get_occupied() == tower){
                 file << "#";
-            } 
+                } 
             else if (sq->get_occupied() == road){
                 file << "=";
             }
@@ -150,17 +150,55 @@ void Level::print_map(){
     }
 }
 
-enum Direction{
-    up, down, right
-};
+// ALL BELOW IS FOR randomly_generated function
+
+bool Level::can_go_notfirst(Direction dir, std::vector<Direction> dir_list){
+    size_t list_size = dir_list.size();
+    switch (dir)
+    {
+    case up:
+        if (dir_list[list_size - 1] == down && dir_list[list_size - 2] == down) {
+            return false;
+        }
+        break;
+    case down:
+        if (dir_list[list_size - 1] == up && dir_list[list_size - 2] == up) {
+            return false;
+        }
+        break;
+    case right:
+        if (dir_list[list_size - 1] == right && dir_list[list_size - 2] == right){
+            return false;
+        }
+    break;
+    case left:
+        if (dir_list[list_size - 1] == left && dir_list[list_size - 2] == left){
+            return false;
+        }
+        break;
+    default:
+        break;
+    }
+    return true;
+}
+
+bool Level::can_go_first(Direction dir){
+    if (dir == left){
+        return false;
+    }
+    return true;
+}
 
 void Level::randomly_generate(){
     srand((unsigned int)time(NULL)); // makes rand() more random
-    Direction direction[] = {up, down, right}; // list of directions
+    Direction direction[] = {up, down, right, left}; // list of directions
 
     int currentRow = 1 + rand() % 7; // Start in the middle row
     int currentCol = 0; // Start from the left side
     int roadLength = 0;
+    
+    int cout_left = 0;
+    int max_left = 4;
 
     Direction dir;
     std::vector<Direction> prev_dirs;
@@ -173,52 +211,43 @@ void Level::randomly_generate(){
         _grid[currentRow][currentCol]->occupy_by_road();
 
         // Randomly choose the next direction (up or down)
-        int dirIndex = std::rand() % 3;
+        int dirIndex = std::rand() % 4;
         dir = direction[dirIndex];
 
         // Move to the next square in the chosen direction
-        switch (dir)
-        {
-        case up:
-            if (!prev_dirs.empty()){
-                if (prev_dirs[prev_dirs.size() - 1] != down && prev_dirs[prev_dirs.size() - 2] != down){
-                    new_row = currentRow + 1;
-                    break;
-                }else {
-                    new_col = currentCol + 1;
-                    break;
-                }
-            } else {
-                new_row = currentRow + 1;
+        if (prev_dirs.size() == 0 && can_go_first(dir)){
+            switch (dir)
+            {
+            case up:
+                new_row++;
+                break;
+            case down:
+                new_row--;
+                break;
+            case right:
+                new_col++;
+            default:
                 break;
             }
-        case down: 
-            if (!prev_dirs.empty()){
-                if (prev_dirs[prev_dirs.size() - 1] != up && prev_dirs[prev_dirs.size() - 2] != up){
-                    new_row = currentRow - 1;
-                    break;
-                } else {
-                    new_col = currentCol + 1;
-                    break;
+        } else if (prev_dirs.size() != 0 && can_go_notfirst(dir, prev_dirs)) {
+            switch (dir)
+            {
+            case up:
+                new_row++;
+                break;
+            case down:
+                new_row--;
+                break;
+            case right:
+                new_col++;
+            case left:
+                if (cout_left < max_left){
+                    new_col--;
+                    cout_left++;
                 }
-            } else {
-                new_row = currentRow - 1;
+            default:
                 break;
             }
-        case right:
-            if (!prev_dirs.empty()){
-                if (prev_dirs[prev_dirs.size() - 1] != right && prev_dirs[prev_dirs.size() - 2] != right){
-                    new_col = currentCol + 1;
-                    break;
-                } else {
-                    break;
-                }
-            } else {
-                new_col = currentCol + 1;
-                break;
-            }
-        default:
-            break;
         }
 
         // Check if the new square is within the grid boundaries

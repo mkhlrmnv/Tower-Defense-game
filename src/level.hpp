@@ -12,6 +12,10 @@
 #include <cstdlib>
 #include <ctime>
 
+enum Direction{
+    up, down, right, left
+};
+
 class Level {
 public:
     Level(int resolution, int cash, int lives);
@@ -63,6 +67,9 @@ public:
     int save_to_file(const std::string& file_name);
 
     void print_map();
+
+    bool can_go_notfirst(Direction dir, std::vector<Direction> dir_list);
+    bool can_go_first(Direction dir);
 
     void randomly_generate();
 
