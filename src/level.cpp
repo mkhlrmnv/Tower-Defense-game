@@ -150,3 +150,84 @@ void Level::print_map(){
     }
 }
 
+enum Direction{
+    up, down, right
+};
+
+void Level::randomly_generate(){
+    srand((unsigned int)time(NULL)); // makes rand() more random
+    Direction direction[] = {up, down, right}; // list of directions
+
+    int currentRow = 1 + rand() % 7; // Start in the middle row
+    int currentCol = 0; // Start from the left side
+    int roadLength = 0;
+
+    Direction dir;
+    std::vector<Direction> prev_dirs;
+
+    int new_row = currentRow; // initialize variabels for next  row and column
+    int new_col = currentCol;
+
+    while (roadLength < 100 && currentCol < 10) {
+        // Mark the current square as a road
+        _grid[currentRow][currentCol]->occupy_by_road();
+
+        // Randomly choose the next direction (up or down)
+        int dirIndex = std::rand() % 3;
+        dir = direction[dirIndex];
+
+        // Move to the next square in the chosen direction
+        switch (dir)
+        {
+        case up:
+            if (!prev_dirs.empty()){
+                if (prev_dirs[prev_dirs.size() - 1] != down && prev_dirs[prev_dirs.size() - 2] != down){
+                    new_row = currentRow + 1;
+                    break;
+                }else {
+                    new_col = currentCol + 1;
+                    break;
+                }
+            } else {
+                new_row = currentRow + 1;
+                break;
+            }
+        case down: 
+            if (!prev_dirs.empty()){
+                if (prev_dirs[prev_dirs.size() - 1] != up && prev_dirs[prev_dirs.size() - 2] != up){
+                    new_row = currentRow - 1;
+                    break;
+                } else {
+                    new_col = currentCol + 1;
+                    break;
+                }
+            } else {
+                new_row = currentRow - 1;
+                break;
+            }
+        case right:
+            if (!prev_dirs.empty()){
+                if (prev_dirs[prev_dirs.size() - 1] != right && prev_dirs[prev_dirs.size() - 2] != right){
+                    new_col = currentCol + 1;
+                    break;
+                } else {
+                    break;
+                }
+            } else {
+                new_col = currentCol + 1;
+                break;
+            }
+        default:
+            break;
+        }
+
+        // Check if the new square is within the grid boundaries
+        if (new_row >= 0 && new_row < 10 && new_col >= 0 && new_col < 10){
+            currentCol = new_col;
+            currentRow = new_row;
+            prev_dirs.push_back(dir);
+        } 
+        roadLength++;
+    }
+}
+

@@ -9,6 +9,8 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include <cstdlib>
+#include <ctime>
 
 class Level {
 public:
@@ -62,7 +64,7 @@ public:
 
     void print_map();
 
-    // void randomly_generate();
+    void randomly_generate();
 
 private:
     int _square_size;
