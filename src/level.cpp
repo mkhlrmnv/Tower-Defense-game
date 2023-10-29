@@ -152,41 +152,66 @@ void Level::print_map(){
 
 // ALL BELOW IS FOR randomly_generated function
 
-bool Level::can_go_notfirst(Direction dir, std::vector<Direction> dir_list){
-    size_t list_size = dir_list.size();
+std::pair<int, int> Level::can_go_notstart(Direction dir, std::vector<Direction> prev_dirs, int row, int col, bool can_go_left){
+    std::pair<int, int> pair = std::make_pair(row, col);
+    size_t size = prev_dirs.size();
+    Direction prev = prev_dirs[size - 1];
+    Direction sec_prev = prev_dirs[size - 2];
     switch (dir)
     {
     case up:
-        if (dir_list[list_size - 1] == down && dir_list[list_size - 2] == down) {
-            return false;
+        if (prev != down && sec_prev != down && row != 0){
+            pair.first--;
         }
         break;
     case down:
-        if (dir_list[list_size - 1] == up && dir_list[list_size - 2] == up) {
-            return false;
+        if (prev != up && sec_prev != up && row != 9){
+            pair.first++;
         }
         break;
     case right:
-        if (dir_list[list_size - 1] == right && dir_list[list_size - 2] == right){
-            return false;
-        }
-    break;
-    case left:
-        if (dir_list[list_size - 1] == left && dir_list[list_size - 2] == left){
-            return false;
+        if (prev != right && sec_prev != right && prev != left && sec_prev != left && col != 9){
+            pair.second++;
         }
         break;
-    default:
+    case left:
+        if (prev != right && sec_prev != right && prev != left && sec_prev != left && col != 0 && can_go_left){
+            pair.second--;
+        }
         break;
     }
-    return true;
+    return pair;
 }
 
-bool Level::can_go_first(Direction dir){
-    if (dir == left){
-        return false;
-    }
-    return true;
+std::pair<int, int> Level::can_go_start(Direction dir, std::vector<Direction> prev_dirs, int row, int col){
+        std::pair<int, int> pair = std::make_pair(row, col);  // <row, col>
+        switch (dir) 
+        {
+        case up:
+            if (prev_dirs.empty() && row != 0){
+                pair.first--;
+            } else if (!prev_dirs.empty() && prev_dirs[0] != down && row != 0){
+                pair.first--;
+            }
+            break;
+        case down:
+            if (prev_dirs.empty() && row != 10){
+                pair.first++;
+            } else if (!prev_dirs.empty() && prev_dirs[0] != up && row != 9){
+                pair.first++;
+            }
+            break;
+        case right:
+            pair.second++;
+            break;
+        case left:
+            if (!prev_dirs.empty() && prev_dirs[0] != right){
+                pair.second++;
+            }
+        default:
+            break;
+        }
+        return pair;
 }
 
 void Level::randomly_generate(){
@@ -203,60 +228,31 @@ void Level::randomly_generate(){
     Direction dir;
     std::vector<Direction> prev_dirs;
 
-    int new_row = currentRow; // initialize variabels for next  row and column
-    int new_col = currentCol;
-
-    while (roadLength < 100 && currentCol < 10) {
+    while (currentCol != 9) {
         // Mark the current square as a road
         _grid[currentRow][currentCol]->occupy_by_road();
 
         // Randomly choose the next direction (up or down)
         int dirIndex = std::rand() % 4;
-        dir = direction[dirIndex];
+        dir = direction[dirIndex - 1];
+
+        std::pair<int, int> pair;
 
         // Move to the next square in the chosen direction
-        if (prev_dirs.size() == 0 && can_go_first(dir)){
-            switch (dir)
-            {
-            case up:
-                new_row++;
-                break;
-            case down:
-                new_row--;
-                break;
-            case right:
-                new_col++;
-            default:
-                break;
-            }
-        } else if (prev_dirs.size() != 0 && can_go_notfirst(dir, prev_dirs)) {
-            switch (dir)
-            {
-            case up:
-                new_row++;
-                break;
-            case down:
-                new_row--;
-                break;
-            case right:
-                new_col++;
-            case left:
-                if (cout_left < max_left){
-                    new_col--;
-                    cout_left++;
-                }
-            default:
-                break;
-            }
-        }
+        if (prev_dirs.size() < 2){
+            pair = can_go_start(dir, prev_dirs, currentRow, currentCol);
+        } else if (prev_dirs.size() >= 2) {
+            pair = can_go_notstart(dir, prev_dirs, currentRow, currentCol, cout_left < max_left);
+        }  
 
-        // Check if the new square is within the grid boundaries
-        if (new_row >= 0 && new_row < 10 && new_col >= 0 && new_col < 10){
-            currentCol = new_col;
-            currentRow = new_row;
+        if (pair.first != currentRow || pair.second != currentCol){
+            currentRow = pair.first;
+            currentCol = pair.second;
             prev_dirs.push_back(dir);
-        } 
+        }
         roadLength++;
+        print_map();
+        std::cout << dir << roadLength << std::endl;
     }
 }
 

@@ -142,7 +142,7 @@ bool testRandomMap(){
     return true;
 }
 
-bool testRandomHelp(){
+/*bool testRandomHelp(){
     Level lv(1000, 1000, 50); // new level
     lv.make_grid();
     std::vector<Direction> list;
@@ -170,6 +170,53 @@ bool testRandomHelp(){
     list.push_back(right);
     res = lv.can_go_notfirst(left, list); // should pass
     return res;
+}*/
+
+/*bool testRandom1(){ // test for can_go_start()
+    Level lv(1000, 1000, 50); // new level
+    lv.make_grid();
+    std::vector<Direction> list;
+    std::pair<int, int> pair = lv.can_go_start(right, list, 4, 10);
+    std::cout << pair.first << " " << pair.second << std::endl;
+    list.push_back(right);
+    pair = lv.can_go_start(left, list, 4, 1);
+    std::cout << pair.first << " " << pair.second << std::endl;
+    list.clear();
+    list.push_back(down);
+    pair = lv.can_go_start(up, list, 4, 0);
+    std::cout << pair.first << " " << pair.second << std::endl;
+    list.clear();
+    list.push_back(up);
+    pair = lv.can_go_start(down, list, 4, 0);
+    std::cout << pair.first << " " << pair.second << std::endl;
+    return true;
+}*/
+
+bool testRandom2(){
+    Level lv(1000, 1000, 50); // new level
+    lv.make_grid();
+    std::vector<Direction> list;
+    list.push_back(right);
+    list.push_back(up);
+    std::pair<int, int> pair = lv.can_go_notstart(up, list, 10, 4, true);
+    std::cout << pair.first << " " << pair.second << std::endl;
+
+    list.push_back(right);
+    list.push_back(down);
+    pair = lv.can_go_notstart(down, list, 0, 4, true);
+    std::cout << pair.first << " " << pair.second << std::endl;
+
+    list.push_back(up);
+    list.push_back(up);
+    pair = lv.can_go_notstart(right, list, 4, 10, true);
+    std::cout << pair.first << " " << pair.second << std::endl;
+
+    list.push_back(up);
+    list.push_back(up);
+    pair = lv.can_go_notstart(left, list, 4, 0, true);
+    std::cout << pair.first << " " << pair.second << std::endl;
+
+    return true;
 }
 
 int main(){
@@ -228,12 +275,7 @@ int main(){
     std::cout << "Making random map:" << std::endl;
     testRandomMap();
 
-    if (testRandomHelp()){
-        std::cout << "testRandomHelp: Passed" << std::endl;
-    } else {
-        std::cout << "testRandomHelp: Failed" << std::endl;
-        fails++;
-    }
+    testRandom2();
 
     if (fails == 0){
         std::cout << "All test passed" << std::endl;

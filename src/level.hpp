@@ -68,8 +68,8 @@ public:
 
     void print_map();
 
-    bool can_go_notfirst(Direction dir, std::vector<Direction> dir_list);
-    bool can_go_first(Direction dir);
+    std::pair<int, int> can_go_notstart(Direction dir, std::vector<Direction> prev_dirs, int row, int col, bool can_go_left);
+    std::pair<int, int> can_go_start(Direction dir, std::vector<Direction> dir_list, int row, int col);
 
     void randomly_generate();
 
