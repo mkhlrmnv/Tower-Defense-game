@@ -289,7 +289,7 @@ bool Level::randomly_generate(){
             if (prev_dirs[prev_dirs.size() - 1] == down || prev_dirs[prev_dirs.size() - 2]){
                 dir == right;
             } else {
-                di r = up;
+                dir = up;
             }
         }
 
