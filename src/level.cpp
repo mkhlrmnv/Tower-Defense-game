@@ -150,32 +150,53 @@ void Level::print_map(){
     }
 }
 
-// ALL BELOW IS FOR randomly_generated function
+// ALL BELOW IS FOR randomly_generated function -------------------------------------------------
 
+/*
+Function that checks can we move to some direction, in case that 
+there is already two squares occupied by road
+*/
 std::pair<int, int> Level::can_go_notstart(Direction dir, std::vector<Direction> prev_dirs, int row, int col, bool can_go_left){
-    std::pair<int, int> pair = std::make_pair(row, col);
-    size_t size = prev_dirs.size();
-    Direction prev = prev_dirs[size - 1];
-    Direction sec_prev = prev_dirs[size - 2];
-    switch (dir)
+    std::pair<int, int> pair = std::make_pair(row, col); // makes pair that will be returned with new row and col
+    size_t size = prev_dirs.size(); // saves size of list to make if statements smaller
+    Direction prev = prev_dirs[size - 1]; // takes previous direction
+    Direction sec_prev = prev_dirs[size - 2]; // takes second to previous direction
+    switch (dir) // switch case for direction
     {
     case up:
         if (prev != down && sec_prev != down && row != 0){
+            /* 
+            if direction is up and previous and next to previous
+            isn't down and if we are not on top row we can move up
+            */
             pair.first--;
         }
         break;
     case down:
         if (prev != up && sec_prev != up && row != 9){
+            /*
+            if direction is down and previous and next to previous
+            isn't up and if we are not on bottom row we can move down
+            */
             pair.first++;
         }
         break;
     case right:
-        if (prev != right && sec_prev != right && prev != left && sec_prev != left && col != 9){
+        if (prev != left && sec_prev != left && col != 9){
+            /*
+            if direction is right and previous and next to previous
+            isn't left and if we are not on last column row we can move right
+            */
             pair.second++;
         }
         break;
     case left:
         if (prev != right && sec_prev != right && prev != left && sec_prev != left && col != 0 && can_go_left){
+            /*
+            if direction is left, previous and next to previous
+            isn't right or left, if maximum left steps isn't full
+            and if we are not on first col row we can move left
+            */
             pair.second--;
         }
         break;
@@ -183,44 +204,64 @@ std::pair<int, int> Level::can_go_notstart(Direction dir, std::vector<Direction>
     return pair;
 }
 
+/*
+Function that checks can we move to some direction, in that there
+isn't any squares occupied by road or there is only one square occupied
+*/
 std::pair<int, int> Level::can_go_start(Direction dir, std::vector<Direction> prev_dirs, int row, int col){
-        std::pair<int, int> pair = std::make_pair(row, col);  // <row, col>
-        switch (dir) 
+        std::pair<int, int> pair = std::make_pair(row, col);  // makes pair that will be returned with new row and col
+        switch (dir) // switch case for direction
         {
         case up:
             if (prev_dirs.empty() && row != 0){
+                /*
+                If its fist move and its not top row, can move up
+                */
                 pair.first--;
             } else if (!prev_dirs.empty() && prev_dirs[0] != down && row != 0){
+                /*
+                If its not first move, previous direction isn't down
+                and its not top row we can move up
+                !prev_dirs.empty() is there that program doesn't try to
+                call prev_dirs[0] if list is empty
+                */
                 pair.first--;
             }
             break;
         case down:
-            if (prev_dirs.empty() && row != 10){
+            if (prev_dirs.empty() && row != 9){
+                /*
+                If its fist move and its not bottom row, can move down
+                */
                 pair.first++;
             } else if (!prev_dirs.empty() && prev_dirs[0] != up && row != 9){
+                /*
+                If its not first move, previous direction isn't up
+                and its not bottom row we can move down
+                for !prev_dirs.empty() explanation look to up case
+                */
                 pair.first++;
             }
             break;
         case right:
+            // in first two steps, always can move right
             pair.second++;
             break;
         case left:
-            if (!prev_dirs.empty() && prev_dirs[0] != right){
-                pair.second++;
-            }
+            // in first two steps, never can go left
+            break;
         default:
             break;
         }
         return pair;
 }
 
-void Level::randomly_generate(){
-    srand((unsigned int)time(NULL)); // makes rand() more random
+bool Level::randomly_generate(){
     Direction direction[] = {up, down, right, left}; // list of directions
 
     int currentRow = 1 + rand() % 7; // Start in the middle row
     int currentCol = 0; // Start from the left side
-    int roadLength = 0;
+    int count = 0;
     
     int cout_left = 0;
     int max_left = 4;
@@ -228,7 +269,7 @@ void Level::randomly_generate(){
     Direction dir;
     std::vector<Direction> prev_dirs;
 
-    while (currentCol != 9) {
+    while (count < 200 || currentCol != 9) {
         // Mark the current square as a road
         _grid[currentRow][currentCol]->occupy_by_road();
 
@@ -237,6 +278,20 @@ void Level::randomly_generate(){
         dir = direction[dirIndex - 1];
 
         std::pair<int, int> pair;
+
+        if (currentRow == 0){
+            if (prev_dirs[prev_dirs.size() - 1] == up || prev_dirs[prev_dirs.size() - 2] == up){
+                dir = right;
+            } else {
+                dir = down;
+            }
+        } else if (currentRow == 9){
+            if (prev_dirs[prev_dirs.size() - 1] == down || prev_dirs[prev_dirs.size() - 2]){
+                dir == right;
+            } else {
+                di r = up;
+            }
+        }
 
         // Move to the next square in the chosen direction
         if (prev_dirs.size() < 2){
@@ -250,9 +305,13 @@ void Level::randomly_generate(){
             currentCol = pair.second;
             prev_dirs.push_back(dir);
         }
-        roadLength++;
-        print_map();
-        std::cout << dir << roadLength << std::endl;
-    }
+        count++;
+        if (currentCol == 9){
+            _grid[currentRow][currentCol]->occupy_by_road();
+            return true;
+        }
+        //print_map(); // for debugging
+        //std::cout << dir << " " << roadLength << std::endl;
+        }
+    return false;
 }
-
