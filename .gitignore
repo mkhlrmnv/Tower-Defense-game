@@ -18,6 +18,10 @@
 
 # Libraries
 
+# built
+build/**/*
+
+
 
 # Shared objects (inc. Windows DLLs)
 
