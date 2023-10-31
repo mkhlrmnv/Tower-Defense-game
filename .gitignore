@@ -21,6 +21,9 @@
 
 # Shared objects (inc. Windows DLLs)
 
+#build folder
+build/*
+!build/build.xml
 
 # Executables
 *.exe
