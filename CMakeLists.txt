@@ -1,36 +1,22 @@
-cmake_minimum_required(VERSION 3.11.0)
-project(test VERSION 0.1.0)
+cmake_minimum_required(VERSION 3.10)
+project(Tower-Defence)
 
-enable_language(CXX)
+# Specify the C++ standard for your project
+set(CMAKE_CXX_STANDARD 11)
 
-# Use C++ standard version 17
-set(CMAKE_CXX_STANDARD 17)
-# Produce non-optimized code with debug symbols
-set(CMAKE_BUILD_TYPE Debug)
+# Add the "src" directory to the project for your source files
+add_subdirectory(src)
 
-message(STATUS "BUILD directory is ${CMAKE_BINARY_DIR}")
-message(STATUS "SRC directory is ${CMAKE_SOURCE_DIR}")
+# Add the "tests" directory to the project for your test files
+add_subdirectory(tests)
 
-# Add your source files (only .cpp files) to the source file list
-set(GAME_SOURCE_FILES
-    src/level.cpp
-    src/square.cpp
-    tests/main.cpp  # Include the main.cpp for your executable
-)
+# Optionally, you can create an executable for running the tests
+# If main.cpp in the "tests" directory is used to run tests
+add_executable(TestRunner tests/main.cpp)
+add_executable(MainExec src/main.cpp)
 
-# Create a separate list for header files (only .hpp files)
-set(GAME_HEADER_FILES
-    src/level.hpp
-    src/square.hpp
-    src/Vector2d.hpp
-)
+# Link the test runner with the source code and any test libraries
+target_link_libraries(TestRunner PUBLIC src_code_library)
+target_link_libraries(MainExec PUBLIC src_code_library)
 
-# Add the executable target
-add_executable(Game ${GAME_SOURCE_FILES})
-
-# Include the directory with header files so that you can use #include "header.hpp" in your source files
-target_include_directories(Game PRIVATE ${CMAKE_SOURCE_DIR})
-
-# Optionally, you can specify additional directories for header files if needed
-# target_include_directories(Game PRIVATE ${CMAKE_SOURCE_DIR}/some_other_directory)
 

@@ -1,5 +1,5 @@
 #ifndef SQUARE_HPP
-#define SQUARe_HPP
+#define SQUARE_HPP
 
 #include "vector2d.hpp"
 #include "object.hpp"

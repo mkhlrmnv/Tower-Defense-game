@@ -1,5 +1,4 @@
 #include "level.hpp"
-#include "vector2d.hpp"
 #include <iostream>
 #include <cstdlib>
 #include <fstream>
@@ -82,7 +81,7 @@ bool testGridSquareCenters(){
     return true;
 }
 
-// TODO: Test for read and write to file
+// Test for read and write to file
 
 bool testRead(){
     std::string file_name = "maps/example_map.txt"; // file name of the map test map
@@ -219,7 +218,7 @@ bool testRandomMap(){
     return true;
 }*/
 
-int main(){
+static int level_test(){
     srand((unsigned int)time(NULL)); // makes rand() more random
     int fails = 0;
 

@@ -1,5 +1,4 @@
-#include "src/square.hpp"
-#include "vector2d.hpp"
+#include "square.hpp"
 #include <iostream>
 
 bool testCenter(){
@@ -22,7 +21,7 @@ bool testObjectList(){
     return true;
 }
 
-int main() {
+static int square_test() {
     int fails = 0;
 
     if (testCenter()){
