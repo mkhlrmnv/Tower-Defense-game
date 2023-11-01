@@ -1,5 +1,5 @@
-#include "object.hpp"
-#include "Vector2D.hpp"
+#include "../src/object.hpp"
+#include "../src/vector2D.hpp"
 #include <iostream>
 
 bool testObjectHealth() {

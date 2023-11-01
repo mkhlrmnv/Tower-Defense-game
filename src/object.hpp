@@ -8,6 +8,8 @@ public:
     Object(int health, int damage, 
             int range, int attack_speed, Vector2D& position);
 
+    ~Object();
+
     const int get_damage() const;
     const int get_health() const;
     const int get_range() const;
@@ -16,9 +18,14 @@ public:
 
     void set_position(const Vector2D& position);
 
+    void gain_damage(int amount);
+    void gain_health(int amount);
+    void gain_range(int amount);
+    void gain_attack_speed(int amount);
+
     void lose_health(int amount);
 
-    virtual void attack();
+    virtual void attack(Object target);
 
 private:
     int _health_points;
