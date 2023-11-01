@@ -117,24 +117,24 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named test
+# Target rules for targets named Game
 
 # Build rule for target.
-test: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test
-.PHONY : test
+Game: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Game
+.PHONY : Game
 
 # fast build rule for target.
-test/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/build
-.PHONY : test/fast
+Game/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Game.dir/build.make CMakeFiles/Game.dir/build
+.PHONY : Game/fast
 
 src/level.o: src/level.cpp.o
 .PHONY : src/level.o
 
 # target to build an object file
 src/level.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/level.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Game.dir/build.make CMakeFiles/Game.dir/src/level.cpp.o
 .PHONY : src/level.cpp.o
 
 src/level.i: src/level.cpp.i
@@ -142,7 +142,7 @@ src/level.i: src/level.cpp.i
 
 # target to preprocess a source file
 src/level.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/level.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Game.dir/build.make CMakeFiles/Game.dir/src/level.cpp.i
 .PHONY : src/level.cpp.i
 
 src/level.s: src/level.cpp.s
@@ -150,63 +150,15 @@ src/level.s: src/level.cpp.s
 
 # target to generate assembly for a file
 src/level.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/level.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Game.dir/build.make CMakeFiles/Game.dir/src/level.cpp.s
 .PHONY : src/level.cpp.s
-
-src/main.o: src/main.cpp.o
-.PHONY : src/main.o
-
-# target to build an object file
-src/main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/main.cpp.o
-.PHONY : src/main.cpp.o
-
-src/main.i: src/main.cpp.i
-.PHONY : src/main.i
-
-# target to preprocess a source file
-src/main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/main.cpp.i
-.PHONY : src/main.cpp.i
-
-src/main.s: src/main.cpp.s
-.PHONY : src/main.s
-
-# target to generate assembly for a file
-src/main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/main.cpp.s
-.PHONY : src/main.cpp.s
-
-src/object.o: src/object.cpp.o
-.PHONY : src/object.o
-
-# target to build an object file
-src/object.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/object.cpp.o
-.PHONY : src/object.cpp.o
-
-src/object.i: src/object.cpp.i
-.PHONY : src/object.i
-
-# target to preprocess a source file
-src/object.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/object.cpp.i
-.PHONY : src/object.cpp.i
-
-src/object.s: src/object.cpp.s
-.PHONY : src/object.s
-
-# target to generate assembly for a file
-src/object.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/object.cpp.s
-.PHONY : src/object.cpp.s
 
 src/square.o: src/square.cpp.o
 .PHONY : src/square.o
 
 # target to build an object file
 src/square.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/square.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Game.dir/build.make CMakeFiles/Game.dir/src/square.cpp.o
 .PHONY : src/square.cpp.o
 
 src/square.i: src/square.cpp.i
@@ -214,7 +166,7 @@ src/square.i: src/square.cpp.i
 
 # target to preprocess a source file
 src/square.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/square.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Game.dir/build.make CMakeFiles/Game.dir/src/square.cpp.i
 .PHONY : src/square.cpp.i
 
 src/square.s: src/square.cpp.s
@@ -222,8 +174,32 @@ src/square.s: src/square.cpp.s
 
 # target to generate assembly for a file
 src/square.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/src/square.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Game.dir/build.make CMakeFiles/Game.dir/src/square.cpp.s
 .PHONY : src/square.cpp.s
+
+tests/main.o: tests/main.cpp.o
+.PHONY : tests/main.o
+
+# target to build an object file
+tests/main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Game.dir/build.make CMakeFiles/Game.dir/tests/main.cpp.o
+.PHONY : tests/main.cpp.o
+
+tests/main.i: tests/main.cpp.i
+.PHONY : tests/main.i
+
+# target to preprocess a source file
+tests/main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Game.dir/build.make CMakeFiles/Game.dir/tests/main.cpp.i
+.PHONY : tests/main.cpp.i
+
+tests/main.s: tests/main.cpp.s
+.PHONY : tests/main.s
+
+# target to generate assembly for a file
+tests/main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Game.dir/build.make CMakeFiles/Game.dir/tests/main.cpp.s
+.PHONY : tests/main.cpp.s
 
 # Help Target
 help:
@@ -233,19 +209,16 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... test"
+	@echo "... Game"
 	@echo "... src/level.o"
 	@echo "... src/level.i"
 	@echo "... src/level.s"
-	@echo "... src/main.o"
-	@echo "... src/main.i"
-	@echo "... src/main.s"
-	@echo "... src/object.o"
-	@echo "... src/object.i"
-	@echo "... src/object.s"
 	@echo "... src/square.o"
 	@echo "... src/square.i"
 	@echo "... src/square.s"
+	@echo "... tests/main.o"
+	@echo "... tests/main.i"
+	@echo "... tests/main.s"
 .PHONY : help
 
 

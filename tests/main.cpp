@@ -1,5 +1,5 @@
-#include "level.hpp"
-#include "vector2d.hpp"
+#include "src/level.hpp"
+#include "src/vector2d.hpp"
 #include <iostream>
 #include <cstdlib>
 #include <fstream>
@@ -82,8 +82,7 @@ bool testGridSquareCenters(){
     return true;
 }
 
-// TODO: Test for read and write to file
-
+// Test for read and write to file
 bool testRead(){
     std::string file_name = "maps/example_map.txt"; // file name of the map test map
     Level lv(1000, 1000, 50); // new level

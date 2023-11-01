@@ -1,4 +1,4 @@
-#include "src/object.hpp"
+#include "object.hpp"
 #include "Vector2D.hpp"
 #include <iostream>
 
