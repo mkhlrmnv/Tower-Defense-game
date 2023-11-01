@@ -48,9 +48,9 @@ static int square_test() {
     */
 
     if (fails == 0){
-        std::cout << "All test passed" << std::endl;
+        std::cout << "All Square test passed" << std::endl;
     } else {
-        std::cout << fails << " test failed" << std::endl;
+        std::cout << fails << " Square test failed" << std::endl;
     }
 
     return fails;

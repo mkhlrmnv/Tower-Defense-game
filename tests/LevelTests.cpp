@@ -282,9 +282,9 @@ static int level_test(){
     //testRandom2();
 
     if (fails == 0){
-        std::cout << "All test passed" << std::endl;
+        std::cout << "All Level test passed" << std::endl;
     } else {
-        std::cout << fails << " test failed" << std::endl;
+        std::cout << fails << " Level test failed" << std::endl;
     }
     
     return fails;
