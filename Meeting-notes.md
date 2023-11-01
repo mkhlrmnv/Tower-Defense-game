@@ -34,6 +34,57 @@ Planning is complete, starting work on object and level classes. Also looking in
 2. Get to know sfml library
 3. Graphics
 
+# Meeting 1.11.2023 14::00
+
+**Participants**:
+
+1. Mikhail Romanov
+2. Kalle Lindgren
+3. Aki Oura
+4. Leo Teodosin
+
+## Summary of works
+
+1. Kalle Lindgren
+
+   Watched sfml, look into cmake and made "src/game.hpp"
+
+2. Aki Oura
+
+   Drew five new characters
+
+3. Leo Teodosin
+
+   Made object, tower and enemy classes, also started making classes for each charrecter
+
+4. Mikhail Romanov
+
+   Made level and square classes
+
+## Challenges
+
+1. Random generated map function in level.hpp / level.cpp
+
+## Actions
+
+1. Kalle starts designing gui for the game
+2. Aki draws all missing charrecters
+3. Leo starts making classes for each charrecter
+4. Mikhail makes cmake file for tests and helps leo
+
+> Please reflect these action decisions in your git commit messages so that
+> your group members and advisor can follow the progress.
+
+## Project status
+
+Under work
+
+### TODOs
+
+1. GUI
+2. object class
+3. charrecters textures
+
 # Meeting dd.mm.2021 HH::MM
 
 **Participants**:
