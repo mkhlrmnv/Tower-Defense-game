@@ -1,32 +1,53 @@
 #include "game.hpp"
 
 
-void Game::Start(){
-    window_.create(sf::VideoMode(resolution_.first, resolution_.second), "Tower Defence");
-    while(window_.isOpen()){
+Game::Game():_game_resolution(800), _side_bar_width(200), _window(){}
 
-        sf::Event event;
-        while(window_.pollEvent(event)){
-            if(event.type == sf::Event::Closed){
-                window_.close();
-            }
+// window stuff
+void Game::open_window(){
+    _window.create(sf::VideoMode(_game_resolution + _side_bar_width, _game_resolution ), "Tower Defence");
+    _window.setPosition(sf::Vector2i(200, 0));
+}
+
+
+void Game::run(){
+
+    open_window();
+
+    while(_window.isOpen()){
+        process_events();
+        update();
+        render();
+    }
+
+}
+
+void Game::update(){
+
+}
+
+void Game::process_events(){
+
+    sf::Event event;
+    while(_window.pollEvent(event)){
+        if(event.type == sf::Event::Closed){
+            _window.close();
         }
     }
-}
-
-void Game::Update(){
 
 }
 
-void Game::Quit(){
+void Game::render(){
+    _window.clear();
+    // draw objects
+    _window.display();
 
 }
 
 
 int main(){
     Game game;
-    game.Start();
-    auto res = game.GetResolution();
-    std::cout << "resolution: " << res.first << "x" << res.second << std::endl;
+    game.run();
     return 1;
+    
 }
