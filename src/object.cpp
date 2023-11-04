@@ -70,45 +70,24 @@ void Object::lose_health(int amount) {
 
 void Object::attack() {}
 
-Object& Object::single() {
-    // // Calculate distances to all objects
-    // std::vector<std::pair<double, Object*>> distances;
-    // for (Object& obj : _objects) {
-    //     double dist = this->distance_to(obj.get_position());
-    //     distances.push_back(std::make_pair(dist, &obj));
-    // }
+std::vector<Object&> Object::distances() {
+    // Calculate distances to all objects
+    std::vector<std::pair<double, Object*>> distances;
+    for (Object& obj : _objects) {
+        double dist = this->distance_to(obj.get_position());
+        distances.push_back(std::make_pair(dist, &obj));
+    }
 
-    // // Sort the objects by distance in ascending order
-    // std::sort(distances.begin(), distances.end(), [](const auto& a, const auto& b) {
-    //     return a.first < b.first;
-    // });
+    // Sort the objects by distance in ascending order
+    std::sort(distances.begin(), distances.end(), [](const auto& a, const auto& b) {
+        return a.first < b.first;
+    });
 
-    // // Take the closest object
-    // if (!distances.empty()) {
-    //     return *distances[0].second;
-    // } else {
-    //     throw std::runtime_error("No objects to select from.");
-    // }
-}
+    // Extract the objects from the sorted vector
+    std::vector<Object> closestObjects;
+    for (const auto& pair : distances) {
+        closestObjects.push_back(*pair.second);
+    }
 
-std::vector<Object&> Object::multiple() {
-    // // Calculate distances to all objects
-    // std::vector<std::pair<double, Object*>> distances;
-    // for (Object& obj : _objects) {
-    //     double dist = this->distance_to(obj.get_position());
-    //     distances.push_back(std::make_pair(dist, &obj));
-    // }
-
-    // // Sort the objects by distance in ascending order
-    // std::sort(distances.begin(), distances.end(), [](const auto& a, const auto& b) {
-    //     return a.first < b.first;
-    // });
-
-    // // Extract the X closest objects (up to 'count' objects)
-    // std::vector<Object> closestObjects;
-    // for (int i = 0; i < std::min(3, static_cast<int>(distances.size())); ++i) {
-    //     closestObjects.push_back(*distances[i].second);
-    // }
-
-    // return closestObjects;
+    return closestObjects;
 }

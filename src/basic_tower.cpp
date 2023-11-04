@@ -6,14 +6,15 @@ Basic_Tower::Basic_Tower(int health, int damage, int range, int attack_speed, Ve
 
 void Basic_Tower::attack() {
     double multiplier;
-    if (_attack_type_single) {
-        Object& target = single();
-        multiplier = check_type_multiplier(this, target);
-        target.lose_health(this->get_damage() * multiplier);
-    } else {
-        for (Object& enemy : multiple()) {
-            multiplier = check_type_multiplier(this, enemy);
-            enemy.lose_health(this->get_damage()* multiplier);
+    if (!distances().empty()) {
+        if (_attack_type_single) {
+            multiplier = check_type_multiplier(this, distances()[0]);
+            distances()[0].lose_health(this->get_damage() * multiplier);
+        } else {
+            for (int i = 0; i < 3; ++i) {
+                multiplier = check_type_multiplier(this, distances()[i]);
+                distances()[i].lose_health(this->get_damage()* multiplier);
+            }
         }
     }
 }

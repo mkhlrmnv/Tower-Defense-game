@@ -4,6 +4,8 @@
 #include "vector2d.hpp"
 #include "attack_types.hpp"
 
+#include <vector>
+
 class Object {
 public:
     Object(int health, int damage, int range, int attack_speed, Vector2D& position, int type);
@@ -30,9 +32,7 @@ public:
 
     virtual void attack();
 
-    Object& single();
-
-    std::vector<Object&> multiple();
+    std::vector<Object&> distances();
 
 private:
     int _health_points;
