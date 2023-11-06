@@ -70,6 +70,14 @@ void Level::take_lives(int how_much){
     _lives -= how_much;
 }
 
+std::vector<Enemy*> Level::get_enemies() const{
+    return _enemies;
+}
+
+std::vector<Tower*> Level::get_towers() const{
+    return _towers;
+}
+
 // Initialize map from file
 int Level::read_file(const std::string& file_name){
     std::ifstream file(file_name);  // opens file

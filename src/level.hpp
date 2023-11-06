@@ -28,6 +28,16 @@ public:
             column.clear();
         }
         _grid.clear();
+
+        for(auto& e : _enemies){
+            delete e;
+        }
+        _enemies.clear();
+
+        for (auto* t : _towers){
+            delete t;
+        }
+        _towers.clear();
     }
 
     // Returns current round
@@ -60,6 +70,10 @@ public:
     // add lives
     void add_lives(int how_much);
 
+    std::vector<Enemy*> get_enemies() const;
+
+    std::vector<Tower*> get_towers() const;
+
     // Load level from file
     int read_file(const std::string& file_name);
 
@@ -77,6 +91,8 @@ private:
     int _square_size;
     int _round, _cash, _lives;
     std::vector<std::vector<Square*>> _grid;
+    std::vector<Enemy*> _enemies;
+    std::vector<Tower*> _towers;
 };
 
 
