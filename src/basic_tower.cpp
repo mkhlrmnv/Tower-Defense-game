@@ -4,7 +4,7 @@
 #include <thread>
 
 // Basic_Tower::Basic_Tower()
-//     : Tower(100, 20, 3, 100, Vector2D(0, 0), BASIC, 150, 1) {
+//     : Tower(100, 20, 3, 1000, Vector2D(0, 0), BASIC, 150, 1) {
 //     _attack_type_single = true;
 // }
 
@@ -28,6 +28,6 @@ void Basic_Tower::attack() {
                 }
             }
         }
-        std::this_thread::sleep_for(std::chrono::milliseconds(1000 - this->get_attack_speed()));
+        std::this_thread::sleep_for(std::chrono::milliseconds(this->get_attack_speed()));
     }
 }
