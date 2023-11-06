@@ -34,8 +34,6 @@ public:
 
     std::vector<std::pair<double, Object*>> distances();
 
-    std::vector<std::pair<double, Object*>> distances();
-
 private:
     int _health_points;
     int _damage;

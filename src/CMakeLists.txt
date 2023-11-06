@@ -2,11 +2,13 @@
 
 # Add all your source files in this directory
 set(SRC_FILES
-    enemy.cpp
+    enemy.hpp
+    basic_enemy.cpp
+    basic_tower.cpp
     level.cpp
     object.cpp
     square.cpp
-    tower.cpp
+    tower.hpp
     # Add all your source files here (excluding headers)
 )
 

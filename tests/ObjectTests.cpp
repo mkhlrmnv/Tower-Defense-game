@@ -1,17 +1,17 @@
-#include "../src/object.hpp"
-#include "../src/vector2D.hpp"
+#include "object.hpp"
+#include "vector2D.hpp"
 #include <iostream>
 
 bool testObjectHealth() {
     Vector2D position(0, 0);
-    Object obj(100, 10, 5, 2, position);
+    Object obj(100, 20, 10, 1000, position, BASIC);
     return obj.get_health() == 100;
 }
 
 bool testObjectPosition() {
     Vector2D initialPosition(0, 0);
     Vector2D newPosition(10, 20);
-    Object obj(100, 10, 5, 2, initialPosition);
+    Object obj(100, 10, 5, 2, initialPosition, BASIC);
 
     // Check the initial position
     if (obj.get_position() != initialPosition) {
@@ -39,21 +39,21 @@ bool testObjectPosition() {
 //     return target.get_health() < 100;
 // }
 
-int main() {
-    bool allTestsPass = true;
+static int object_tests() {
+    int testsFailed = 0;
 
     if (testObjectHealth()) {
         std::cout << "testObjectHealth: Passed" << std::endl;
     } else {
         std::cout << "testObjectHealth: Failed" << std::endl;
-        allTestsPass = false;
+        testsFailed++;
     }
 
     if (testObjectPosition()) {
         std::cout << "testObjectPosition: Passed" << std::endl;
     } else {
         std::cout << "testObjectPosition: Failed" << std::endl;
-        allTestsPass = false;
+        testsFailed++;
     }
 
     // if (testObjectAttack()) {
@@ -63,11 +63,11 @@ int main() {
     //     allTestsPass = false;
     // }
 
-    if (allTestsPass) {
+    if (testsFailed == 0) {
         std::cout << "All tests passed." << std::endl;
     } else {
         std::cout << "Some tests failed." << std::endl;
     }
 
-    return allTestsPass ? 0 : 1;
+    return testsFailed;
 }
