@@ -9,7 +9,7 @@ enum TOWERTYPE {
 };
 
 enum ENEMYTYPE {
-    BASIC,
+    NEUTRAL,
     HEAL,
     FOG,
     FAT,

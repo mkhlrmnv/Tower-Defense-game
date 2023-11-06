@@ -32,7 +32,7 @@ public:
 
     virtual void attack();
 
-    std::vector<Object&> distances();
+    std::vector<std::pair<double, Object*>> distances();
 
 private:
     int _health_points;

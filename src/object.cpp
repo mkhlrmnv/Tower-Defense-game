@@ -70,7 +70,7 @@ void Object::lose_health(int amount) {
 
 void Object::attack() {}
 
-std::vector<Object&> Object::distances() {
+std::vector<std::pair<double, Object*>> Object::distances() {
     // Calculate distances to all objects
     std::vector<std::pair<double, Object*>> distances;
     for (Object& obj : _objects) {
@@ -83,11 +83,5 @@ std::vector<Object&> Object::distances() {
         return a.first < b.first;
     });
 
-    // Extract the objects from the sorted vector
-    std::vector<Object> closestObjects;
-    for (const auto& pair : distances) {
-        closestObjects.push_back(*pair.second);
-    }
-
-    return closestObjects;
+    return distances;
 }
