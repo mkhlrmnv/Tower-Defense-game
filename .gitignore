@@ -35,6 +35,21 @@ build/**/*
 **/CMakeScripts
 **/compile_commands.json
 
+#built folder
+/build/
+build/**/*
+**/cmake-build-debug
+**/CMakeCache.txt
+**/cmake_install.cmake
+**/install_manifest.txt
+**/CMakeFiles/
+**/CTestTestfile.cmake
+**/Makefile
+**/*.cbp
+**/CMakeScripts
+**/compile_commands.json
+**/.DS_Store
+
 # Executables
 *.exe
 *.out
