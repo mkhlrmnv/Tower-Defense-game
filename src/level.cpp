@@ -70,12 +70,33 @@ void Level::take_lives(int how_much){
     _lives -= how_much;
 }
 
-std::vector<Enemy*> Level::get_enemies(){
+std::vector<Enemy*> Level::get_enemies() const{
     return _enemies;
 }
 
-std::vector<Tower*> Level::get_towers(){
+void Level::add_enemy(Enemy* enemy){
+    _enemies.push_back(enemy);
+}
+
+std::vector<Tower*> Level::get_towers() const{
     return _towers;
+}
+
+void Level::add_tower(Tower* tower){
+    int row = floor(tower->get_position().y / _square_size);
+    int col = floor(tower->get_position().x / _square_size);
+    if (_grid[col][row]->occupy_by_tower()){
+        _towers.push_back(tower);
+    }
+}
+
+void Level::print_objects(){
+    for (auto* e : _enemies){
+        std::cout << typeid(e).name() << " in point " << e->get_position() << std::endl;
+    }
+    for (auto* t : _towers){
+        std::cout << typeid(t).name() << " in point " << t->get_position() << std::endl;
+    }
 }
 
 // Initialize map from file
@@ -147,9 +168,11 @@ void Level::print_map(){
         for (size_t j = 0; j < _grid.size(); j++) 
         { // checks what every square is occupied by and prints charecter depending on that
             Square* sq = _grid[i][j]; 
-            if (sq->get_occupied() == grass || sq->get_occupied() == tower){
+            if (sq->get_occupied() == grass){
                 std::cout << "#";
-            } 
+            } else if (sq->get_occupied() == tower){
+                std::cout << "T";
+            }
             else if (sq->get_occupied() == road){
                 std::cout << "=";
             }

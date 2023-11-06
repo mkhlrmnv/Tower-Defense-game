@@ -12,6 +12,7 @@
 #include <sstream>
 #include <cstdlib>
 #include <ctime>
+#include <cmath>
 
 enum Direction{
     up, down, right, left
@@ -71,9 +72,15 @@ public:
     // add lives
     void add_lives(int how_much);
 
-    std::vector<Enemy*> get_enemies();
+    std::vector<Enemy*> get_enemies() const;
 
-    std::vector<Tower*> get_towers();
+    void add_enemy(Enemy* enemy);
+
+    std::vector<Tower*> get_towers() const;
+
+    void add_tower(Tower* tower);
+
+    void print_objects();
     
     // Load level from file
     int read_file(const std::string& file_name);

@@ -10,7 +10,7 @@
 #include <vector>
 
 enum occupied_type{
-    tower, grass, road
+    grass, road, tower
 };
 
 

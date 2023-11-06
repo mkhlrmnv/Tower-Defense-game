@@ -15,19 +15,8 @@ int Square::get_occupied() const{
 }
 
 void Square::print_info(){
-    std::cout << "Square with center point at " << _center.x << " " << _center.y << " is occupied " << get_occupied() << std::endl;
-    /*std::cout << "Has objects in it:\n";
-    for (auto* obj : _objects){
-        if (dynamic_cast<Tower*>(obj)){
-            std::cout << "Tower with HP: " << obj->get_health() << " damage: " << obj->get_damage()
-                << " range: " << obj->get_range() << " attack speed: " << obj->get_attack_speed()
-                << " position: " << obj->get_position().x << " " << obj->get_position().y << " price: " << std::endl; // TODO: get_price()
-        } else if(dynamic_cast<Enemy*>(obj)) {
-            std::cout << "Enemy with HP: " << obj->get_health() << " damage: " << obj->get_damage()
-                << " range: " << obj->get_range() << " attack speed: " << obj->get_attack_speed()
-                << " position: " << obj->get_position().x << " " << obj->get_position().y << " speed: " << std::endl; // TODO: get_speed()
-        }
-    }*/
+    std::cout << "Square with center point at " << _center.x << " " << _center.y 
+        << " is occupied " << get_occupied() << std::endl;
 }
 
 // occupies square by grass
@@ -41,7 +30,7 @@ bool Square::occupy_by_grass(){
 
 // occupies square by road
 bool Square::occupy_by_road(){ 
-    if (_occupied_by == tower && _occupied_by == grass) {
+    if (_occupied_by == tower) {
         return false;
     }
     _occupied_by = road;
@@ -50,7 +39,7 @@ bool Square::occupy_by_road(){
 
 // occupies square by tower
 bool Square::occupy_by_tower(){
-    if (_occupied_by == tower && _occupied_by == road) {
+    if (_occupied_by == tower || _occupied_by == road) {
         return false;   
     }
     _occupied_by = tower;
