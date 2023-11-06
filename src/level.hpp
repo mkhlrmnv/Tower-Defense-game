@@ -3,6 +3,7 @@
 
 #include "square.hpp"
 #include "vector2d.hpp"
+#include "object.hpp"
 
 #include <vector>
 #include <string>
