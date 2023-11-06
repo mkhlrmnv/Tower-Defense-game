@@ -74,8 +74,30 @@ std::vector<Enemy*> Level::get_enemies() const{
     return _enemies;
 }
 
+void Level::add_enemy(Enemy* enemy){
+    _enemies.push_back(enemy);
+}
+
 std::vector<Tower*> Level::get_towers() const{
     return _towers;
+}
+
+void Level::add_tower(Tower* tower){
+    _towers.push_back(tower);
+    Vector2D t_pos = tower->get_position();
+    int col = floor(t_pos.x / _square_size);
+    int row = floor(t_pos.y / _square_size);
+    _grid[col][row]->occupy_by_tower();
+}
+
+void Level::print_info(){
+    std::cout << "enemies are" << std::endl;
+    for (auto* e : _enemies){
+        std::cout << typeid(e).name() << " in pos " << e->get_position().x << " " << e->get_position().y << std::endl;
+    }
+    for (auto * t : _towers){
+        std::cout << typeid(t).name() << " in pos " << t->get_position().x << " " << t->get_position().y << std::endl;
+    }
 }
 
 // Initialize map from file

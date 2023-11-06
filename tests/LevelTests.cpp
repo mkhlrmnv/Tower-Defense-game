@@ -1,4 +1,6 @@
 #include "level.hpp"
+#include "tower.hpp"
+#include "enemy.hpp"
 #include <iostream>
 #include <cstdlib>
 #include <fstream>
@@ -139,6 +141,16 @@ bool testRandomMap(){
     bool res = lv.randomly_generate();
     lv.print_map();
     return res;
+}
+
+bool testEnemyList(){
+    Level lv(1000, 1000, 50); // new level
+    lv.make_grid();
+    bool res = lv.randomly_generate();
+    Vector2D pos(4, 5);
+    Tower t = new Basic_Tower(10, 10, 10, 10, pos, BASIC, 1, 1, false);
+    lv.add_tower(t);
+    lv.print_info();
 }
 
 /*bool testRandomHelp(){
