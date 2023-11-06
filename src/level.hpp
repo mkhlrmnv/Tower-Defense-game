@@ -73,7 +73,11 @@ public:
 
     std::vector<Enemy*> get_enemies() const;
 
+    void add_enemy(Enemy* enemy);
+
     std::vector<Tower*> get_towers() const;
+
+    void add_tower(Tower* tower);
 
     // Load level from file
     int read_file(const std::string& file_name);
@@ -96,6 +100,13 @@ private:
     std::vector<Tower*> _towers;
 };
 
+std::vector<Enemy*> Level::get_enemies() const{
+    return _enemies;
+}
+
+std::vector<Tower*> Level::get_towers() const{
+    return _towers;
+}
 
 
 #endif
