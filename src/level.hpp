@@ -31,12 +31,12 @@ public:
         }
         _grid.clear();
 
-        for(auto& e : _enemies){
+        for (Enemy* e : _enemies){
             delete e;
         }
         _enemies.clear();
 
-        for (auto* t : _towers){
+        for (Tower* t : _towers){
             delete t;
         }
         _towers.clear();
