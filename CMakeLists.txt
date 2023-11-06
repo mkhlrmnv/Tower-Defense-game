@@ -10,8 +10,8 @@ add_subdirectory(src)
 # Add the "tests" directory to the project for your test files
 add_subdirectory(tests)
 
-# uses SFML
-set(GAME_CLASS_SOURCE src/game.cpp)
+# uses files that use SFML
+set(SFML_CLASS_SOURCES src/game.cpp src/renderer.cpp) 
 
 set(BUILD_SHARED_LIBS FALSE)
 
@@ -26,8 +26,8 @@ set(CMAKE_BUILD_TYPE Debug) # this adds debug information and disables compiler 
 
 # Optionally, you can create an executable for running the tests
 # If main.cpp in the "tests" directory is used to run tests
-add_executable(TestRunner tests/main.cpp ${GAME_CLASS_SOURCE})
-add_executable(MainExec src/main.cpp ${GAME_CLASS_SOURCE})
+add_executable(TestRunner tests/main.cpp ${SFML_CLASS_SOURCES})
+add_executable(MainExec src/main.cpp ${SFML_CLASS_SOURCES})
 
 target_link_libraries(MainExec PRIVATE sfml-graphics sfml-window sfml-system)
 target_link_libraries(TestRunner PRIVATE sfml-graphics sfml-window sfml-system)

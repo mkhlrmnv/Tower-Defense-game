@@ -24,6 +24,11 @@ std::vector<std::vector<Square*>> Level::get_grid() const{
     return _grid;
 }
 
+// Returns square size
+int Level::get_square_size() const{
+    return _square_size;
+}
+
 // Adds one round
 void Level::plus_round() {
     _round++;

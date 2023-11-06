@@ -1,28 +1,31 @@
 #ifndef TOWER_DEFENCE_SRC_GAME
 #define TOWER_DEFENCE_SRC_GAME
 
-#include<level.hpp>
+#include <level.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <renderer.hpp>
 
+
+namespace LevelSelection{
+    enum Choice: int{
+        random, load
+    };
+}
 
 class Game{
 public:
     
     Game();
 
-    // 
+    // call from main
     void run();
     
-    // for testing display level
-    void print_lv();
-
-
 private: 
 
-    // draw the level grid according occupied type of square
-    void display_level();
+    // make the level from chosen style: random or load from file
+    int generate_chosen_level_style(int chosen_lv);
 
     // open window
     void open_window();
@@ -36,11 +39,13 @@ private:
     // render graphics
     void render();
 
-private:
+
     int _game_resolution;
     int _side_bar_width;
+
     sf::RenderWindow _window;
-    std::vector<sf::RectangleShape> _graphics;
+
+    Renderer _renderer;
     Level _level;
 
 }; 

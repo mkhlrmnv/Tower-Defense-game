@@ -82,6 +82,10 @@
     "numeric": "cpp",
     "random": "cpp",
     "utility": "cpp",
-    "stop_token": "cpp"
-  }
+    "stop_token": "cpp",
+    "map": "cpp",
+    "set": "cpp",
+    "cinttypes": "cpp"
+  },
+  "C_Cpp.errorSquiggles": "enabled"
 }
