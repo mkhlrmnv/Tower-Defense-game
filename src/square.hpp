@@ -3,6 +3,9 @@
 
 #include "vector2d.hpp"
 #include "object.hpp"
+#include <iostream>
+#include "tower.hpp"
+#include "enemy.hpp"
 
 #include <vector>
 
@@ -15,27 +18,15 @@ class Square {
 public:
     Square(Vector2D center);
 
-    ~Square() { 
-        for (Object* obj : _objects){
-            delete obj;
-        }
-        _objects.clear();
-    }
+    ~Square() { }
 
     // returns center cordinates of square
     Vector2D get_center() const;
 
-    // Returns list of objects that are in the square
-    std::vector<Object*> get_objects() const;
-
     // Returns what is occupuing square
     int get_occupied() const;
 
-    // Adds object to the square
-    void add_object(Object *object);
-
-    // TODO: removes object from list
-    void remove_object(Object *object);
+    void print_info();
 
     // Occupies square by something
     bool occupy_by_grass();
@@ -44,7 +35,6 @@ public:
 
 private:
     Vector2D _center;
-    std::vector<Object*> _objects;
     occupied_type _occupied_by;
 };
 

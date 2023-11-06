@@ -1,4 +1,5 @@
 #include "square.hpp"
+#include "tower.hpp"
 #include <iostream>
 
 bool testCenter(){
@@ -17,8 +18,16 @@ bool testOccupied(){
 }
 
 bool testObjectList(){
-    // TODO: when object class is complete
-    return true;
+    Vector2D cent(55, 75);
+    Square sq(cent);
+    Vector2D pos(50, 70);
+    Vector2D pos2(60, 70);
+    Tower* t = new Tower(100, 100, 1, 1, pos, 50);
+    Enemy* e = new Enemy(50, 50, 2, 3, pos2, 4, 7);
+    sq.add_object(t);
+    sq.add_object(e);
+    // sq.print_info();
+    return sq.get_occupied() == tower;
 }
 
 static int square_test() {
@@ -37,15 +46,13 @@ static int square_test() {
         std::cout << "testOccupied: Failed" << std::endl;
         fails++;
     }
-
-    /*
-    if (testObject()){
+    
+    if (testObjectList()){
         std::cout << "testObjectList: Passed" << std::endl;
     } else {
         std::cout << "testObjectList: Failed" << std::endl;
         fails++;
     }
-    */
 
     if (fails == 0){
         std::cout << "All Square test passed" << std::endl;
