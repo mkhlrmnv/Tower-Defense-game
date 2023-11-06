@@ -14,7 +14,7 @@ Basic_Tower::Basic_Tower(int health, int damage, int range, int attack_speed, Ve
 
 void Basic_Tower::attack() {
     double multiplier;
-    auto closestObjects = distances();
+    auto closestObjects = distances(false);
 
     if (!closestObjects.empty()) {
         if (_attack_type_single && closestObjects[0].first < this->get_range()) {

@@ -27,7 +27,7 @@ int Object::get_attack_speed() const {
     return _attack_speed;
 }
 
-Vector2D Object::get_position() const {
+const Vector2D Object::get_position() const {
     return _position;
 }
 
@@ -55,7 +55,7 @@ void Object::gain_attack_speed(int amount) {
     _attack_speed += amount;
 }
 
-double Object::distance_to(Vector2D& target_position) {
+double Object::distance_to(const Vector2D& target_position) {
     return sqrt(pow(target_position.x - this->get_position().x, 2) + pow(target_position.y - this->get_position().y, 2));
 }
 
@@ -70,16 +70,25 @@ void Object::lose_health(int amount) {
 
 void Object::attack() {}
 
-std::vector<std::pair<double, Object*>> Object::distances() {
-    // Calculate distances to all objects
+std::vector<std::pair<double, Object*>> Object::distances(bool enemies) {
     std::vector<std::pair<double, Object*>> distances;
-    for (Object& obj : _objects) {
-        double dist = this->distance_to(obj.get_position());
-        distances.push_back(std::make_pair(dist, &obj));
+
+    if (!enemies) {
+        std::vector<Enemy*> enemyList = _current_level->get_enemies();
+        for (Enemy* obj : enemyList) {
+            double dist = this->distance_to(obj->get_position());
+            distances.push_back(std::make_pair(dist, obj));
+        }
+    } else {
+        std::vector<Tower*> towerList = _current_level->get_towers();
+        for (Tower* obj : towerList) {
+            double dist = this->distance_to(obj->get_position());
+            distances.push_back(std::make_pair(dist, obj));
+        }
     }
 
     // Sort the objects by distance in ascending order
-    std::sort(distances.begin(), distances.end(), [](const auto& a, const auto& b) {
+    std::sort(distances.begin(), distances.end(), [](const std::pair<double, Object*> a, const std::pair<double, Object*> b) {
         return a.first < b.first;
     });
 

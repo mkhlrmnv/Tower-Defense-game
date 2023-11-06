@@ -3,6 +3,7 @@
 
 #include "vector2d.hpp"
 #include "attack_types.hpp"
+#include "level.hpp"
 
 #include <vector>
 
@@ -16,7 +17,7 @@ public:
     int get_health() const;
     int get_range() const;
     int get_attack_speed() const;
-    Vector2D get_position() const;
+    const Vector2D get_position() const;
     int get_type() const;
 
     void set_position(const Vector2D& position);
@@ -26,13 +27,13 @@ public:
     void gain_range(int amount);
     void gain_attack_speed(int amount);
 
-    double distance_to(Vector2D& target_position);
+    double distance_to(const Vector2D& target_position);
 
     void lose_health(int amount);
 
     virtual void attack();
 
-    std::vector<std::pair<double, Object*>> distances();
+    std::vector<std::pair<double, Object*>> distances(bool enemies);
 
 private:
     int _health_points;
@@ -41,6 +42,7 @@ private:
     int _attack_speed;
     Vector2D _position;
     int _type;
+    Level* _current_level;
 };
 
 #endif
