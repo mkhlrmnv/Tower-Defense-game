@@ -41,7 +41,8 @@ private:
     // render graphics
     void render();
 
-    
+    Vector2D some_pos;
+
     int _game_resolution;
     int _side_bar_width;
 

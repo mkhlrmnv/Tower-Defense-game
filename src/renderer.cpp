@@ -21,7 +21,8 @@ void Renderer::draw_object(sf::RenderWindow& rwindow, int type, int ongoing_acti
     }else if(type == tower){
         _drawable_object.setTexture(_tower_texture.getTexture());
     }
-    _drawable_object.setPosition(sf::Vector2f (position.x, position.y));
+    // offset the position according the size
+    _drawable_object.setPosition(sf::Vector2f (position.x - 20, position.y- 20));
     
     rwindow.draw(_drawable_object);
 
@@ -64,11 +65,14 @@ void Renderer::make_drawable_level(Level& lv){
             upper_left_corner_y  = center_coords.y - lv.get_square_size()/2;
             
             drawable_level_square.setPosition(upper_left_corner_y, upper_left_corner_x);
-            
+            drawable_level_square.setOutlineColor(grey);
+
             if(square_type == occupied_type::grass){
+                drawable_level_square.setOutlineThickness(-0.5);
                 drawable_level_square.setFillColor(green);
             }
             else if(square_type == occupied_type::road){
+                drawable_level_square.setOutlineThickness(0);
                 drawable_level_square.setFillColor(grey);
             }
             _level_texture.draw(drawable_level_square);
@@ -80,10 +84,18 @@ void Renderer::make_drawable_level(Level& lv){
 }
 
 void Renderer::make_drawable_object_textures(){
+
+    _tower_texture.create(40, 40);
+    _enemy_texture.create(40, 40);
+
     sf::ConvexShape triangle(3);
+    triangle.setPoint(0, sf::Vector2f(20, 0));
+    triangle.setPoint(1, sf::Vector2f(0, 40));
+    triangle.setPoint(2, sf::Vector2f(40, 40));
+    triangle.setPosition(sf::Vector2f(0, 0));
+
     sf::Color red(128,0,0);
     sf::Color blue(0,0,128);
-
     triangle.setFillColor(red);
     _enemy_texture.draw(triangle);
     _enemy_texture.display();

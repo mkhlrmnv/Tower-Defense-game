@@ -1,7 +1,7 @@
 #include "game.hpp"
 
 
-Game::Game(): _game_resolution(800), _side_bar_width(300), _window(), _level(800, 250, 50), _renderer(){
+Game::Game(): _game_resolution(800), _side_bar_width(300), _window(), _level(800, 250, 50), _renderer(), some_pos(200,200){
 }
 
 int Game::generate_chosen_level_style(int chosen_lv){
@@ -36,6 +36,7 @@ void Game::run(){
     open_window();
     generate_chosen_level_style(LevelSelection::load); 
     _renderer.make_drawable_level(_level);
+    _renderer.make_drawable_object_textures();
 
     while(_window.isOpen()){
         process_events();
@@ -64,6 +65,7 @@ void Game::render(){
 
     _window.clear(); 
     _renderer.draw_level(_window);
+    _renderer.draw_object(_window, 2, 0, some_pos);
     _window.display();
 
 }
