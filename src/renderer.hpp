@@ -2,7 +2,7 @@
 #define TOWER_DEFENCE_SRC_RENDERER_HPP
 
 
-
+#include <vector2d.hpp>
 #include <level.hpp>
 #include <object.hpp>
 #include <SFML/Window.hpp>
@@ -19,8 +19,8 @@ class Renderer{
 public:
     Renderer(){}
     // call at the beginning of the game
-    void make_drawable_level(const Level & lv);
-    //void make_drawable_enemies();
+    void make_drawable_level(Level & lv);
+    void make_drawable_object_textures(); // place holder, TODO: remove after handling textures
     //void make_drawable_towers(//);
     //void make_drawable_buttons()
 
@@ -29,9 +29,15 @@ public:
     // draw background
     void draw_level(sf::RenderWindow& rwindow);
 
-    //void draw_enemy(type, ongoing_action, location);
-    
-    //void draw_tower(type, ongoing_action, location);
+
+    /* 
+        TODO: choose correct texture with ongoing action and object type
+    */
+    void draw_object(sf::RenderWindow& rwindow, int type, int ongoing_action, Vector2D location);
+
+    void draw_objects(sf::RenderWindow& rwindow, std::vector<Object*> objs, int road_or_tower);
+
+    void draw_objects_from_level(sf::RenderWindow& rwindow, Level& lv);
 
     //void draw_hp(hp);
     //void draw_cash(cash);
@@ -41,10 +47,18 @@ public:
 private:
 
 // 
-sf::Sprite _drawable_level; 
+sf::Sprite _drawable_level;
+
+// a sprite for drawing objects 
+sf::Sprite _drawable_object; 
 
 // grids connected as a one RenderedTexture
-sf::RenderTexture _level_texture;  
+sf::RenderTexture _level_texture; 
+
+sf::RenderTexture _tower_texture; // place holder 
+sf::RenderTexture _enemy_texture; // place holder
+
+
 
 // Textures _textures //  some tree like data structure for different attacks of objects
 

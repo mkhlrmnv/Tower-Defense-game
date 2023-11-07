@@ -8,7 +8,6 @@ int Game::generate_chosen_level_style(int chosen_lv){
     // TODO: maybe do this on level class?
     // TODO: add choosing feature
      _level.make_grid();
-    // TODO: throw error
     if(chosen_lv == LevelSelection::random){
         if(!_level.randomly_generate()){
         std::cout << "random level generation failed" <<std::endl;

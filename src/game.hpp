@@ -2,6 +2,8 @@
 #define TOWER_DEFENCE_SRC_GAME
 
 #include <level.hpp>
+#include <enemy.hpp>
+#include <tower.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include <iostream>
@@ -39,7 +41,7 @@ private:
     // render graphics
     void render();
 
-
+    
     int _game_resolution;
     int _side_bar_width;
 
