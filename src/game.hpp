@@ -20,6 +20,9 @@ class Game{
 public:
     
     Game();
+    ~Game(){}
+    Game(const Game& ) = delete;
+    Game operator=(const Game&) = delete;
 
     // call from main
     void run();

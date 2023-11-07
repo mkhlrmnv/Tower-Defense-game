@@ -6,35 +6,43 @@ void Renderer::draw_level(sf::RenderWindow& rwindow){
 }
 
 
-void Renderer::draw_object(sf::RenderWindow& rwindow, int type, int ongoing_action, Vector2D position){
+void Renderer::draw_tower(sf::RenderWindow& rwindow, int type, int ongoing_action, Vector2D position){
 
+     //  just to avoid warning, for now
+    int _ = type;
+        _ = ongoing_action;
 
-    // choose texture based on type, for no just use the square.occupied_by() 
-    int tower = 0;
-    int enemy = 2;
-
-    // just to avoid warning, for now
-    int  _ = ongoing_action;
-
-    if(type == enemy){
-        _drawable_object.setTexture(_enemy_texture.getTexture());
-    }else if(type == tower){
-        _drawable_object.setTexture(_tower_texture.getTexture());
-    }
-    // offset the position according the size
-    _drawable_object.setPosition(sf::Vector2f (position.x - 20, position.y- 20));
+    _drawable_tower.setTexture(_tower_texture.getTexture());
+    _drawable_tower.setPosition(sf::Vector2f (position.x - 20, position.y - 20)); // TODO: set off set according to the real texture / img size
     
-    rwindow.draw(_drawable_object);
+    rwindow.draw(_drawable_tower);
 
 }
 
-//TODO:: for now call this with homogeneous list of enemies or towers with occupied: tower = tower, enemy = road, later use type from objects, 
-void Renderer::draw_objects(sf::RenderWindow& rwindow, std::vector<Object*> objs, int enemy_or_tower){
-    for(Object* obj_ptr : objs){
-        draw_object(rwindow, enemy_or_tower, 0, obj_ptr->get_position());
+void Renderer::draw_enemy(sf::RenderWindow& rwindow, int type, int ongoing_action, Vector2D position){
+
+    //  just to avoid warning, for now
+    int _ = type;
+        _ = ongoing_action;
+
+    _drawable_enemy.setTexture(_enemy_texture.getTexture());
+    _drawable_enemy.setPosition(sf::Vector2f (position.x - 20, position.y - 20)); // TODO: set off set according to the real texture / img size
+    
+    rwindow.draw(_drawable_enemy);
+
+}
+
+void Renderer::draw_towers(sf::RenderWindow& rwindow, std::vector<Tower*> towers){
+    for(Tower* t_ptr : towers){
+        draw_tower(rwindow, 0, 0, t_ptr->get_position());
     }
 }
 
+void Renderer::draw_enemies(sf::RenderWindow& rwindow, std::vector<Enemy*> enemies){
+    for(Enemy* e_ptr : enemies){
+        draw_enemy(rwindow, 0, 0, e_ptr->get_position());
+    }
+}
 
 void Renderer::make_drawable_level(Level& lv){
     // pass the level argument with existing grid, either from random generation or loaded from file
@@ -95,12 +103,13 @@ void Renderer::make_drawable_object_textures(){
     triangle.setPosition(sf::Vector2f(0, 0));
 
     sf::Color red(128,0,0);
-    sf::Color blue(0,0,128);
     triangle.setFillColor(red);
     _enemy_texture.draw(triangle);
     _enemy_texture.display();
 
+    sf::Color blue(0,0,128);
     triangle.setFillColor(blue);
     _tower_texture.draw(triangle);
     _tower_texture.display();
+
 }

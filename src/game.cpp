@@ -35,6 +35,21 @@ void Game::run(){
 
     open_window();
     generate_chosen_level_style(LevelSelection::load); 
+
+
+    auto e1_pos = Vector2D(80*4 + 40, 1*80 + 40);
+    auto e2_pos = Vector2D(80*5 + 40, 1*80 + 40);
+
+    auto t1_pos = Vector2D(80*5 + 40, 2*80 + 40);
+    auto t2_pos = Vector2D(80*6 + 40, 2*80 + 40);
+    
+    _level.add_enemy(new Enemy(1, 1, 1, 1, e1_pos, 1, 1));
+    _level.add_enemy(new Enemy(1, 1, 1, 1, e2_pos, 1, 1));
+
+    _level.add_tower(new Tower(1, 1, 1, 1, t1_pos, 1));
+    _level.add_tower(new Tower(1, 1, 1, 1, t2_pos, 1));
+
+
     _renderer.make_drawable_level(_level);
     _renderer.make_drawable_object_textures();
 
@@ -53,7 +68,7 @@ void Game::update(){
 void Game::process_events(){
 
     sf::Event event;
-    
+
     while(_window.pollEvent(event)){
         if(event.type == sf::Event::Closed){
             _window.close();
@@ -64,8 +79,11 @@ void Game::process_events(){
 void Game::render(){
 
     _window.clear(); 
+
     _renderer.draw_level(_window);
-    _renderer.draw_object(_window, 2, 0, some_pos);
+    _renderer.draw_enemies(_window, _level.get_enemies());
+    _renderer.draw_towers(_window, _level.get_towers());
+
     _window.display();
 
 }

@@ -10,39 +10,43 @@
 #include <iostream>
 
 
-/* Class for creating drawable game objects for window.draw([DRAWABLE GAME OBJECT]) in game class.
-    TODO: Make another class for loading and storing textures, in some data structure, for example 2d array or similar: 
-    texture = Textures.get_texture(object_type, object_state)
-*/
+/* Class for creating drawable game objects for window.draw([DRAWABLE GAME OBJECT]) in game class.*/
+/* TODO: Make another class for loading and storing textures, in some data structure, for example 2d array or similar: 
+    texture = Textures.get_texture(object_type, object_state) */
+
 class Renderer{
-
-
 public:
-    Renderer(){}
 
+    Renderer(){}
+    ~Renderer(){}
+    Renderer(const Renderer& ) = delete;
+    Renderer operator=(const Renderer&) = delete;
 
     // call at the beginning of the game
     void make_drawable_level(Level & lv);
     void make_drawable_object_textures(); // place holder, TODO: remove after handling textures
-    //void make_drawable_towers(//);
-    //void make_drawable_buttons()
 
+    //void make_drawable_buttons()
     
     // draw background
     void draw_level(sf::RenderWindow& rwindow);
 
 
-    // draw single object   
-    void draw_object(sf::RenderWindow& rwindow, int object_type, int object_state, Vector2D location); // TODO: implement the choice of correct texture with ongoing action and object type
+    // draw single enemy  
+    void draw_enemy(sf::RenderWindow& rwindow, int object_type, int object_state, Vector2D location); // TODO: implement the choice of correct texture with ongoing action and object type
     
-    // draw objects on from a list
-    void draw_objects(sf::RenderWindow& rwindow, std::vector<Object*> objs, int enemy_or_tower); // TODO: Test this, remove last argument with real textures 
+    // draw enemies on from a list
+    void draw_enemies(sf::RenderWindow& rwindow, std::vector< Enemy * > enemies); // TODO: Test this, remove last argument with real textures 
 
+    // draw single enemy 
+    void draw_tower(sf::RenderWindow& rwindow, int object_type, int object_state, Vector2D location); // TODO: implement the choice of correct texture with ongoing action and object type
+    
+    // draw towers on from a list
+    void draw_towers(sf::RenderWindow& rwindow, std::vector< Tower * > towers); // TODO: Test this, remove last argument with real textures 
 
     //void draw_hp(hp);
     //void draw_cash(cash);
     //void draw_round_count(round_count);
-    //void draw_();
 
 private:
 
@@ -50,7 +54,8 @@ private:
 sf::Sprite _drawable_level;
 
 // a sprite for drawing objects 
-sf::Sprite _drawable_object; 
+sf::Sprite _drawable_enemy;
+sf::Sprite _drawable_tower; 
 
 // grids connected as a one RenderedTexture
 sf::RenderTexture _level_texture; 
