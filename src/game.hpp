@@ -9,12 +9,21 @@
 #include <iostream>
 #include <renderer.hpp>
 
-
 namespace LevelSelection{
     enum Choice: int{
         random, load
     };
 }
+
+
+/* 
+
+A class for running the game. Opens a window in which a game loop handles user input key, updates game state and draws game entities. 
+Currently only draws place holder game entities. 
+
+check SFML Game Development.pdf from google.
+
+*/
 
 class Game{
 public:
@@ -27,26 +36,26 @@ public:
     int get_side_bar_width() const;
     int get_game_resolution() const;
 
-    // call from main
+    // call from main, runs the game loop until a the window is closed, 
     void run();
 
     
     
 private: 
 
-    // make the level from chosen style: random or load from file
+    // makes the grid for the level and then fills it according to the chosen style: random or load from file
     int generate_chosen_level_style(int chosen_lv);
 
     // open window
     void open_window();
 
-    // process events:  clicks, button presses
+    // process events in loop:  clicks, button presses
     void process_events();
 
-    // update game state: attacks, movement
+    // update game state in loop: attacks, movement
     void update();
 
-    // render graphics
+    // draws a frame in loop,
     void render();
 
     // for testing only

@@ -8,7 +8,7 @@ void Renderer::draw_level(sf::RenderWindow& rwindow){
 
 void Renderer::draw_tower(sf::RenderWindow& rwindow, int type, int ongoing_action, Vector2D position){
 
-     //  just to avoid warning, for now
+    //  just to avoid warning for now, later use type and object state to select correct texture
     int _ = type;
         _ = ongoing_action;
 
@@ -21,7 +21,7 @@ void Renderer::draw_tower(sf::RenderWindow& rwindow, int type, int ongoing_actio
 
 void Renderer::draw_enemy(sf::RenderWindow& rwindow, int type, int ongoing_action, Vector2D position){
 
-    //  just to avoid warning, for now
+    // just to avoid warning for now, later use type and object state to select correct texture
     int _ = type;
         _ = ongoing_action;
 
@@ -34,13 +34,13 @@ void Renderer::draw_enemy(sf::RenderWindow& rwindow, int type, int ongoing_actio
 
 void Renderer::draw_towers(sf::RenderWindow& rwindow, std::vector<Tower*> towers){
     for(Tower* t_ptr : towers){
-        draw_tower(rwindow, 0, 0, t_ptr->get_position());
+        draw_tower(rwindow, 0, 0, t_ptr->get_position()); // zeros are placeholders
     }
 }
 
 void Renderer::draw_enemies(sf::RenderWindow& rwindow, std::vector<Enemy*> enemies){
     for(Enemy* e_ptr : enemies){
-        draw_enemy(rwindow, 0, 0, e_ptr->get_position());
+        draw_enemy(rwindow, 0, 0, e_ptr->get_position()); // zeros are placeholders
     }
 }
 
@@ -65,6 +65,7 @@ void Renderer::draw_round_count(sf::RenderWindow& rwindow, int round_count){
     rwindow.draw(_round_count_text);
 }
 
+// draws a grid with the rectangle to a rendertexture and sets this as the texture for the drawable level
 void Renderer::make_drawable_level(Level& lv){
     // pass the level argument with existing grid, either from random generation or loaded from file
 
@@ -77,19 +78,18 @@ void Renderer::make_drawable_level(Level& lv){
     int upper_left_corner_x; 
     int upper_left_corner_y;
 
-    // TODO: change colors to textures
+    // TODO: change colors and RectangleShape to textures
     sf::Color green = sf::Color(0, 128, 0);
     sf::Color grey = sf::Color(128, 128, 128);
     
     sf::RectangleShape drawable_level_square = sf::RectangleShape(sf::Vector2f(lv.get_square_size(),lv.get_square_size()));
-
-
     std::vector<std::vector<Square *>> level_grid = lv.get_grid();
+
     for(auto column : level_grid){
         for(auto square : column){
             square_type = square->get_occupied();
             center_coords = square->get_center();
-            // position of the graphic objects is taken from the upper left corner
+            // get the upper left corner position of a level grid, position of the graphic objects is taken from the upper left corner
             upper_left_corner_x  = center_coords.x - lv.get_square_size()/2;
             upper_left_corner_y  = center_coords.y - lv.get_square_size()/2;
             
@@ -112,6 +112,7 @@ void Renderer::make_drawable_level(Level& lv){
     _drawable_level.setTexture(_level_texture.getTexture());
 }
 
+// Uses same triangle to set a place holder texture for both enemy and tower class
 void Renderer::make_drawable_object_textures(){
 
     _tower_texture.create(40, 40);

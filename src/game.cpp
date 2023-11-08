@@ -14,7 +14,7 @@ int Game::get_side_bar_width() const {
 
 int Game::generate_chosen_level_style(int chosen_lv){
     // TODO: maybe do this on level class?
-    // TODO: add choosing feature
+    // TODO: add choosing feature, in a game start menu
      _level.make_grid();
     if(chosen_lv == LevelSelection::random){
         if(!_level.randomly_generate()){
@@ -56,7 +56,8 @@ void Game::run(){
 
     _level.add_tower(new Tower(1, 1, 1, 1, t1_pos, 1));
     _level.add_tower(new Tower(1, 1, 1, 1, t2_pos, 1));
-
+    
+    //***************
 
     _renderer.make_drawable_level(_level);
     _renderer.make_drawable_object_textures();
@@ -82,14 +83,15 @@ void Game::process_events(){
         if(event.type == sf::Event::Closed){
             _window.close();
         }
-        // add events here
+        // TODO: add events here, like button presses, dragging towers to map
     }
 }
 
 void Game::render(){
 
-    _window.clear(); 
+    _window.clear(); // clear all drawn entities
 
+    // draw entities, every function calls _window.draw([DRAWABLE OBJECT])
     _renderer.draw_level(_window);
     _renderer.draw_enemies(_window, _level.get_enemies());
     _renderer.draw_towers(_window, _level.get_towers());
@@ -97,6 +99,6 @@ void Game::render(){
     _renderer.draw_lives(_window, _level.get_lives());
     _renderer.draw_round_count(_window, _level.get_round());
 
-    _window.display();
+    _window.display(); // display the drawn entities
 
 }
