@@ -42,26 +42,11 @@ bool testLives(){
 bool testObjectList(){
     Level lv(1000, 1000, 50); // new level
     lv.make_grid();
-    lv.randomly_generate();
-    for (int i = 0; i < 10; i++)
-    {
-        int x = rand() % 1000;
-        int y = rand() % 1000;
-        Vector2D pos = Vector2D(x, y);
-        Tower* t = new Tower(10, 10, 10, 10, pos, 10);
-        lv.add_tower(t);
-    }
-    for (int i = 0; i < 10; i++)
-    {
-        int x = rand() % 1000;
-        int y = rand() % 1000;
-        Vector2D pos = Vector2D(x, y);
-        Enemy* e = new Enemy(10, 10, 10, 10, pos, 10, 1);
-        lv.add_enemy(e);
-    }
-    lv.print_objects();
-    lv.print_map();
-    return true;
+    lv.read_file("maps/example_map.txt");
+    Tower* t = new Tower(10, 10, 10, 10, Vector2D(15, 15), 0, 10, 1);
+    bool res = lv.add_tower(t);
+    std::vector<std::vector<Square*>> grid = lv.get_grid();
+    return grid[1][1]->occupy_by_tower() && res;
 }
 
 // test that makeGrid function makes grid that is 10 x 10

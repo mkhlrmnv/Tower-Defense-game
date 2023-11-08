@@ -74,20 +74,28 @@ std::vector<Enemy*> Level::get_enemies() const{
     return _enemies;
 }
 
-void Level::add_enemy(Enemy* enemy){
-    _enemies.push_back(enemy);
+bool Level::add_enemy(Enemy* enemy){
+    int row = floor(enemy->get_position().y / _square_size);
+    int col = floor(enemy->get_position().x / _square_size);
+    if (_grid[col][row]->get_occupied() == road){
+        _enemies.push_back(enemy);
+        return true;
+    }
+    return false;
 }
 
 std::vector<Tower*> Level::get_towers() const{
     return _towers;
 }
 
-void Level::add_tower(Tower* tower){
+bool Level::add_tower(Tower* tower){
     int row = floor(tower->get_position().y / _square_size);
     int col = floor(tower->get_position().x / _square_size);
     if (_grid[col][row]->occupy_by_tower()){
         _towers.push_back(tower);
+        return true;
     }
+    return false;
 }
 
 void Level::print_objects(){
@@ -97,6 +105,12 @@ void Level::print_objects(){
     for (auto* t : _towers){
         std::cout << typeid(t).name() << " in point " << t->get_position() << std::endl;
     }
+}
+
+std::pair<int, int> Level::what_square(int x, int y){
+    int row = floor(y / _square_size);
+    int col = floor(x / _square_size);
+    return std::make_pair(col, row);
 }
 
 // Initialize map from file
