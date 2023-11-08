@@ -31,12 +31,12 @@ public:
         }
         _grid.clear();
 
-        for (Enemy* e : _enemies){
+        for (auto* e : _enemies){
             delete e;
         }
         _enemies.clear();
 
-        for (Tower* t : _towers){
+        for (auto* t : _towers){
             delete t;
         }
         _towers.clear();
@@ -80,8 +80,8 @@ public:
 
     void add_tower(Tower* tower);
 
-    void print_info();
-
+    void print_objects();
+    
     // Load level from file
     int read_file(const std::string& file_name);
 
@@ -102,5 +102,7 @@ private:
     std::vector<Enemy*> _enemies;
     std::vector<Tower*> _towers;
 };
+
+
 
 #endif

@@ -1,6 +1,5 @@
 #include "level.hpp"
-#include "tower.hpp"
-#include "enemy.hpp"
+#include "object.hpp"
 #include <iostream>
 #include <cstdlib>
 #include <fstream>
@@ -38,6 +37,31 @@ bool testLives(){
     int random_int2 = rand() % 10;
     lv.add_lives(random_int2); // add random amount of money
     return lv.get_lives() == (50 - random_int + random_int2); // checks if lives count 
+}
+
+bool testObjectList(){
+    Level lv(1000, 1000, 50); // new level
+    lv.make_grid();
+    lv.randomly_generate();
+    for (int i = 0; i < 10; i++)
+    {
+        int x = rand() % 1000;
+        int y = rand() % 1000;
+        Vector2D pos = Vector2D(x, y);
+        Tower* t = new Tower(10, 10, 10, 10, pos, 10);
+        lv.add_tower(t);
+    }
+    for (int i = 0; i < 10; i++)
+    {
+        int x = rand() % 1000;
+        int y = rand() % 1000;
+        Vector2D pos = Vector2D(x, y);
+        Enemy* e = new Enemy(10, 10, 10, 10, pos, 10, 1);
+        lv.add_enemy(e);
+    }
+    lv.print_objects();
+    lv.print_map();
+    return true;
 }
 
 // test that makeGrid function makes grid that is 10 x 10
@@ -141,16 +165,6 @@ bool testRandomMap(){
     bool res = lv.randomly_generate();
     lv.print_map();
     return res;
-}
-
-bool testEnemyList(){
-    Level lv(1000, 1000, 50); // new level
-    lv.make_grid();
-    bool res = lv.randomly_generate();
-    Vector2D pos(4, 5);
-    Tower t = new Basic_Tower(10, 10, 10, 10, pos, BASIC, 1, 1, false);
-    lv.add_tower(t);
-    lv.print_info();
 }
 
 /*bool testRandomHelp(){
@@ -283,6 +297,12 @@ static int level_test(){
         fails++;
     }
 
+    if (testObjectList()){
+        std::cout << "testObjectList: Passed" << std::endl;
+    } else {
+        std::cout << "testObjectList: Failed" << std::endl;
+        fails++;
+    }
     
     std::cout << "Making random map:" << std::endl;    
     if (testRandomMap()){

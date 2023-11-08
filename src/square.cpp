@@ -14,6 +14,10 @@ int Square::get_occupied() const{
     return _occupied_by;
 }
 
+void Square::print_info(){
+    std::cout << "Square with center point at " << _center.x << " " << _center.y 
+        << " is occupied " << get_occupied() << std::endl;
+}
 
 // occupies square by grass
 bool Square::occupy_by_grass(){ 
@@ -26,7 +30,7 @@ bool Square::occupy_by_grass(){
 
 // occupies square by road
 bool Square::occupy_by_road(){ 
-    if (_occupied_by == tower && _occupied_by == grass) {
+    if (_occupied_by == tower) {
         return false;
     }
     _occupied_by = road;
@@ -35,7 +39,7 @@ bool Square::occupy_by_road(){
 
 // occupies square by tower
 bool Square::occupy_by_tower(){
-    if (_occupied_by == tower && _occupied_by == road) {
+    if (_occupied_by == tower || _occupied_by == road) {
         return false;   
     }
     _occupied_by = tower;

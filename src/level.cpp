@@ -83,20 +83,19 @@ std::vector<Tower*> Level::get_towers() const{
 }
 
 void Level::add_tower(Tower* tower){
-    _towers.push_back(tower);
-    Vector2D t_pos = tower->get_position();
-    int col = floor(t_pos.x / _square_size);
-    int row = floor(t_pos.y / _square_size);
-    _grid[col][row]->occupy_by_tower();
+    int row = floor(tower->get_position().y / _square_size);
+    int col = floor(tower->get_position().x / _square_size);
+    if (_grid[col][row]->occupy_by_tower()){
+        _towers.push_back(tower);
+    }
 }
 
-void Level::print_info(){
-    std::cout << "enemies are" << std::endl;
+void Level::print_objects(){
     for (auto* e : _enemies){
-        std::cout << typeid(e).name() << " in pos " << e->get_position().x << " " << e->get_position().y << std::endl;
+        std::cout << typeid(e).name() << " in point " << e->get_position() << std::endl;
     }
-    for (auto * t : _towers){
-        std::cout << typeid(t).name() << " in pos " << t->get_position().x << " " << t->get_position().y << std::endl;
+    for (auto* t : _towers){
+        std::cout << typeid(t).name() << " in point " << t->get_position() << std::endl;
     }
 }
 
@@ -169,9 +168,11 @@ void Level::print_map(){
         for (size_t j = 0; j < _grid.size(); j++) 
         { // checks what every square is occupied by and prints charecter depending on that
             Square* sq = _grid[i][j]; 
-            if (sq->get_occupied() == grass || sq->get_occupied() == tower){
+            if (sq->get_occupied() == grass){
                 std::cout << "#";
-            } 
+            } else if (sq->get_occupied() == tower){
+                std::cout << "T";
+            }
             else if (sq->get_occupied() == road){
                 std::cout << "=";
             }
