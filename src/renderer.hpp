@@ -2,12 +2,13 @@
 #define TOWER_DEFENCE_SRC_RENDERER_HPP
 
 
-#include <vector2d.hpp>
-#include <level.hpp>
-#include <object.hpp>
+#include "vector2d.hpp"
+#include "level.hpp"
+#include "object.hpp"
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <string>
 
 
 /* Class for creating drawable game objects for window.draw([DRAWABLE GAME OBJECT]) in game class.*/
@@ -44,9 +45,15 @@ public:
     // draw towers on from a list
     void draw_towers(sf::RenderWindow& rwindow, std::vector< Tower * > towers); // TODO: Test this, remove last argument with real textures 
 
-    //void draw_hp(hp);
+    void draw_cash(sf::RenderWindow& rwindow, int cash);
+    void draw_lives(sf::RenderWindow& rwindow, int lives);
+    void draw_round_count(sf::RenderWindow& rwindow, int round_count);
+
     //void draw_cash(cash);
     //void draw_round_count(round_count);
+
+    void load_font(); // TODO: move this to asset handler / loader
+    void make_level_info_texts(int game_resolution, int side_bar_width);
 
 private:
 
@@ -64,6 +71,10 @@ sf::RenderTexture _level_texture;
 sf::RenderTexture _tower_texture; 
 sf::RenderTexture _enemy_texture; 
 
+sf::Font _font;
+sf::Text _round_count_text;
+sf::Text _cash_text;
+sf::Text _lives_text;
 
 
 // Textures _textures //  some tree like data structure for different attacks of objects

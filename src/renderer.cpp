@@ -13,7 +13,7 @@ void Renderer::draw_tower(sf::RenderWindow& rwindow, int type, int ongoing_actio
         _ = ongoing_action;
 
     _drawable_tower.setTexture(_tower_texture.getTexture());
-    _drawable_tower.setPosition(sf::Vector2f (position.x - 20, position.y - 20)); // TODO: set off set according to the real texture / img size
+    _drawable_tower.setPosition(sf::Vector2f (position.x - 20, position.y - 20)); // TODO: set offset according to the real texture / img size
     
     rwindow.draw(_drawable_tower);
 
@@ -26,7 +26,7 @@ void Renderer::draw_enemy(sf::RenderWindow& rwindow, int type, int ongoing_actio
         _ = ongoing_action;
 
     _drawable_enemy.setTexture(_enemy_texture.getTexture());
-    _drawable_enemy.setPosition(sf::Vector2f (position.x - 20, position.y - 20)); // TODO: set off set according to the real texture / img size
+    _drawable_enemy.setPosition(sf::Vector2f (position.x - 20, position.y - 20)); // TODO: set offset according to the real texture / img size
     
     rwindow.draw(_drawable_enemy);
 
@@ -42,6 +42,27 @@ void Renderer::draw_enemies(sf::RenderWindow& rwindow, std::vector<Enemy*> enemi
     for(Enemy* e_ptr : enemies){
         draw_enemy(rwindow, 0, 0, e_ptr->get_position());
     }
+}
+
+void Renderer::draw_cash(sf::RenderWindow& rwindow, int cash){
+
+    std::string text_to_be_displayed = "$" + std::to_string(cash);
+    _cash_text.setString(text_to_be_displayed);
+    rwindow.draw(_cash_text);
+}
+
+void Renderer::draw_lives(sf::RenderWindow& rwindow, int lives){
+
+    std::string text_to_be_displayed = "Lives: " + std::to_string(lives);
+    _lives_text.setString(text_to_be_displayed);
+    rwindow.draw(_lives_text);
+}
+
+void Renderer::draw_round_count(sf::RenderWindow& rwindow, int round_count){
+
+    std::string text_to_be_displayed = "Round: " + std::to_string(round_count);
+    _round_count_text.setString(text_to_be_displayed);
+    rwindow.draw(_round_count_text);
 }
 
 void Renderer::make_drawable_level(Level& lv){
@@ -113,3 +134,45 @@ void Renderer::make_drawable_object_textures(){
     _tower_texture.display();
 
 }
+
+void Renderer::load_font(){
+    if(!_font.loadFromFile("../assets/fonts/Ubuntu-R.ttf")){
+        std::cout << "font load failed" << std::endl;
+    }else{
+        std::cout << "font load success" << std::endl;
+
+    }
+}
+
+void Renderer::make_level_info_texts(int game_resolution, int side_bar_width){
+
+    load_font();
+
+    _cash_text.setFont(_font);
+    _lives_text.setFont(_font);
+    _round_count_text.setFont(_font);
+
+    int info_display_height = 20;
+    int info_display_width = side_bar_width / 3;
+
+    int cash_x = game_resolution;
+    int cash_y = game_resolution - info_display_height;
+
+    _cash_text.setPosition(sf::Vector2f(cash_x, cash_y));
+    _cash_text.setFillColor(sf::Color::White);
+    _cash_text.setCharacterSize(20);
+
+    int lives_x = cash_x + info_display_width;
+    int lives_y = game_resolution - info_display_height;
+
+    _lives_text.setPosition(sf::Vector2f(lives_x, lives_y));
+    _lives_text.setFillColor(sf::Color::White);
+    _lives_text.setCharacterSize(20);
+
+    int round_count_x = lives_x + info_display_width;
+    int round_count_y = game_resolution - info_display_height;
+
+    _round_count_text.setPosition(sf::Vector2f(round_count_x, round_count_y));
+    _round_count_text.setFillColor(sf::Color::White);
+    _round_count_text.setCharacterSize(20);
+}   

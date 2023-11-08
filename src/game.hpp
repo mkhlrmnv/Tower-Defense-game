@@ -24,8 +24,13 @@ public:
     Game(const Game& ) = delete;
     Game operator=(const Game&) = delete;
 
+    int get_side_bar_width() const;
+    int get_game_resolution() const;
+
     // call from main
     void run();
+
+    
     
 private: 
 
@@ -35,7 +40,7 @@ private:
     // open window
     void open_window();
 
-    // process events:  clicks, button presses, key
+    // process events:  clicks, button presses
     void process_events();
 
     // update game state: attacks, movement
@@ -44,7 +49,8 @@ private:
     // render graphics
     void render();
 
-    Vector2D some_pos;
+    // for testing only
+    Vector2D some_pos; 
 
     int _game_resolution;
     int _side_bar_width;
@@ -53,6 +59,8 @@ private:
 
     Renderer _renderer;
     Level _level;
+
+    
 
 }; 
 #endif

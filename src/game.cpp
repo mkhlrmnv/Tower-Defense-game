@@ -4,6 +4,14 @@
 Game::Game(): _game_resolution(800), _side_bar_width(300), _window(), _level(800, 250, 50), _renderer(), some_pos(200,200){
 }
 
+int Game::get_game_resolution() const {
+    return _game_resolution;
+}
+
+int Game::get_side_bar_width() const {
+    return _side_bar_width;
+}
+
 int Game::generate_chosen_level_style(int chosen_lv){
     // TODO: maybe do this on level class?
     // TODO: add choosing feature
@@ -36,7 +44,7 @@ void Game::run(){
     open_window();
     generate_chosen_level_style(LevelSelection::load); 
 
-
+    // test drawing objects
     auto e1_pos = Vector2D(80*4 + 40, 1*80 + 40);
     auto e2_pos = Vector2D(80*5 + 40, 1*80 + 40);
 
@@ -52,6 +60,7 @@ void Game::run(){
 
     _renderer.make_drawable_level(_level);
     _renderer.make_drawable_object_textures();
+    _renderer.make_level_info_texts(_game_resolution, _side_bar_width);
 
     while(_window.isOpen()){
         process_events();
@@ -73,6 +82,7 @@ void Game::process_events(){
         if(event.type == sf::Event::Closed){
             _window.close();
         }
+        // add events here
     }
 }
 
@@ -83,6 +93,9 @@ void Game::render(){
     _renderer.draw_level(_window);
     _renderer.draw_enemies(_window, _level.get_enemies());
     _renderer.draw_towers(_window, _level.get_towers());
+    _renderer.draw_cash(_window, _level.get_cash());
+    _renderer.draw_lives(_window, _level.get_lives());
+    _renderer.draw_round_count(_window, _level.get_round());
 
     _window.display();
 
