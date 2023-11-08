@@ -34,6 +34,8 @@ Planning is complete, starting work on object and level classes. Also looking in
 2. Get to know sfml library
 3. Graphics
 
+### ------------------------------------------------------------------------------------------------------
+
 # Meeting 1.11.2023 14::00
 
 **Participants**:
@@ -84,6 +86,64 @@ Under work
 1. GUI
 2. object class
 3. charrecters textures
+
+### ------------------------------------------------------------------------------------------------------
+
+# Meeting 08.11.2023 14::00
+
+**Participants**:
+
+1. Mikhail Romanov
+2. Kalle Lindgren
+3. Aki Oura
+4. Leo Teodosin
+
+## Summary of works
+
+1. Mikhail Romanov
+
+   Modified Level and square classes that level stores all information of objects
+   Helped Leo with object classes
+
+2. Leo Teodosin
+
+   Made subclasses to object for different towers and enemies
+
+3. Aki Oura
+
+   Made four new graphics for towers and enemies
+
+4. Kalle Lindgren
+
+   Made game class for GUI, and for future control of whole game
+
+## Challenges
+
+1. Attack function in object
+2. In square class occupied_by enum was done first wrong
+
+## Actions
+
+1. Mikhail will update level if needed and will help leo with object class
+2. Leo will continue with object class
+3. Aki will do rest of the graphics
+4. Kalle will continue with gui and ui
+
+> Please reflect these action decisions in your git commit messages so that
+> your group members and advisor can follow the progress.
+
+## Project status
+
+Under work
+
+### TODOs
+
+1. Mikhail: level and object classes
+2. Leo: Object class
+3. Aki: Graphics
+4. Kalle: GUI
+
+### ------------------------------------------------------------------------------------------------------
 
 # Meeting dd.mm.2021 HH::MM
 
