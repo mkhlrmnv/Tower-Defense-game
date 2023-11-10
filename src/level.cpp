@@ -74,20 +74,28 @@ std::vector<Enemy*> Level::get_enemies() const{
     return _enemies;
 }
 
-void Level::add_enemy(Enemy* enemy){
-    _enemies.push_back(enemy);
+bool Level::add_enemy(Enemy* enemy){
+    int row = floor(enemy->get_position().y / _square_size);
+    int col = floor(enemy->get_position().x / _square_size);
+    if (_grid[col][row]->get_occupied() == road){
+        _enemies.push_back(enemy);
+        return true;
+    }
+    return false;
 }
 
 std::vector<Tower*> Level::get_towers() const{
     return _towers;
 }
 
-void Level::add_tower(Tower* tower){
+bool Level::add_tower(Tower* tower){
     int row = floor(tower->get_position().y / _square_size);
     int col = floor(tower->get_position().x / _square_size);
     if (_grid[col][row]->occupy_by_tower()){
         _towers.push_back(tower);
+        return true;
     }
+    return false;
 }
 
 void Level::print_objects(){
