@@ -18,10 +18,10 @@ int Game::generate_chosen_level_style(int chosen_lv){
      _level.make_grid();
     if(chosen_lv == LevelSelection::random){
         if(!_level.randomly_generate()){
-        std::cout << "random level generation failed" <<std::endl;
-        return 0;
-    }else{
-        std::cout << "random level generation successful" <<std::endl;
+            std::cout << "random level generation failed" <<std::endl;
+            return 0;
+        }else{
+            std::cout << "random level generation successful" <<std::endl;
         }
     }else if(chosen_lv == LevelSelection::load){
         if(_level.read_file("../maps/example_map.txt")==-1){

@@ -3,10 +3,13 @@
 # Add all your source files in this directory
 set(SRC_FILES
     enemy.cpp
+    game.cpp
     level.cpp
     object.cpp
     square.cpp
     tower.cpp
+    renderer.cpp
+    vector2d.hpp
     # Add all your source files here (excluding headers)
 )
 

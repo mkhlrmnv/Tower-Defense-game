@@ -323,7 +323,7 @@ bool Level::randomly_generate(){
             }
         } else if (currentRow == 9){
             if (prev_dirs[prev_dirs.size() - 1] == down || prev_dirs[prev_dirs.size() - 2]){
-                dir == right;
+                dir = right;
             } else {
                 dir = up;
             }
