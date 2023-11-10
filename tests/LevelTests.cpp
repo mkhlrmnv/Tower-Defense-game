@@ -123,7 +123,7 @@ bool testRead(){
         std::vector<Square*> column = grid[i];
         for (size_t j = 0; j < column.size(); j++)
         {
-            if (line[j] == '#' && column[j]->get_occupied() == grass){
+            if (line[j] == '#' && column[j]->get_occupied() == road){
                 return false;
             }
         }
