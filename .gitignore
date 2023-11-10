@@ -19,6 +19,10 @@
 # Libraries
 
 
+# xcode folder for buildin on mac
+xcode/
+
+
 # Shared objects (inc. Windows DLLs)
 
 #built / cmake
