@@ -18,6 +18,9 @@
 
 # Libraries
 
+# xcode folder for building gui on mac
+xcode/
+
 
 # Shared objects (inc. Windows DLLs)
 
