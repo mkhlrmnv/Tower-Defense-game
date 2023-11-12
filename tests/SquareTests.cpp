@@ -12,7 +12,7 @@ bool testOccupied(){
     Square sq(cent), sq2(cent2), sq3(cent3);
     sq.occupy_by_grass();
     sq2.occupy_by_road();
-    sq3.occupy_by_tower()
+    sq3.occupy_by_tower();
     return sq.get_occupied() == grass && sq2.get_occupied() == road && sq3.get_occupied() == tower;
 }
 

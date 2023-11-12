@@ -1,6 +1,8 @@
 #ifndef VECTOR2D_HPP
 #define VECTOR2D_HPP
 
+#include <iostream>
+
 class Vector2D {
 public:
     int x;
@@ -15,6 +17,11 @@ public:
 
     bool operator!=(const Vector2D& other) const {
         return !(*this == other);
+    }
+
+    friend std::ostream& operator<<(std::ostream& os, const Vector2D& vec) {
+        os << vec.x << " " << vec.y;
+        return os;
     }
 };
 
