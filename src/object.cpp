@@ -1,9 +1,4 @@
 #include "object.hpp"
-#include "attack_types.hpp"
-
-#include <math.h>
-#include <algorithm>
-#include <stdexcept>
 
 Object::Object(int health, int damage, int range, int attack_speed, Vector2D& position, int type)
     : _health_points(health), _damage(damage), _range(range), _attack_speed(attack_speed), _position(position), _type(type) {
@@ -69,28 +64,3 @@ void Object::lose_health(int amount) {
 }
 
 void Object::attack() {}
-
-std::vector<std::pair<double, Object*>> Object::distances(bool enemies) {
-    std::vector<std::pair<double, Object*>> distances;
-
-    if (!enemies) {
-        std::vector<Enemy*> enemyList = _current_level->get_enemies();
-        for (Enemy* obj : enemyList) {
-            double dist = this->distance_to(obj->get_position());
-            distances.push_back(std::make_pair(dist, obj));
-        }
-    } else {
-        std::vector<Tower*> towerList = _current_level->get_towers();
-        for (Tower* obj : towerList) {
-            double dist = this->distance_to(obj->get_position());
-            distances.push_back(std::make_pair(dist, obj));
-        }
-    }
-
-    // Sort the objects by distance in ascending order
-    std::sort(distances.begin(), distances.end(), [](const std::pair<double, Object*> a, const std::pair<double, Object*> b) {
-        return a.first < b.first;
-    });
-
-    return distances;
-}

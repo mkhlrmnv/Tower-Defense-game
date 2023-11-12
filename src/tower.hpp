@@ -14,6 +14,23 @@ public:
         gain_range(5 * _level);
         gain_attack_speed(150 * _level);
     }
+    
+    // std::vector<std::pair<double, Enemy*>> enemy_distances() {
+    //     std::vector<std::pair<double, Enemy*>> distances;
+
+    //     for (auto it = _enemy_list->begin(); it != _enemy_list->end(); ++it) {
+    //         Enemy* obj = *it;
+    //         double dist = this->distance_to(obj->get_position());
+    //         distances.push_back(std::make_pair(dist, obj));
+    //     }
+
+    //     // Sort the objects by distance in ascending order
+    //     std::sort(distances.begin(), distances.end(), [](const std::pair<double, Enemy*> a, const std::pair<double, Enemy*> b) {
+    //         return a.first < b.first;
+    //     });
+
+    //     return distances;
+    // }
 
 private:
     int _price;

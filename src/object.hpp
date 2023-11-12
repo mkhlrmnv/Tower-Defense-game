@@ -2,10 +2,11 @@
 #define OBJECT_HPP
 
 #include "vector2d.hpp"
-#include "attack_types.hpp"
-#include "level.hpp"
 
 #include <vector>
+#include <math.h>
+#include <algorithm>
+#include <stdexcept>
 
 class Object {
 public:
@@ -33,8 +34,6 @@ public:
 
     virtual void attack();
 
-    std::vector<std::pair<double, Object*>> distances(bool enemies);
-
 private:
     int _health_points;
     int _damage;
@@ -42,7 +41,6 @@ private:
     int _attack_speed;
     Vector2D _position;
     int _type;
-    Level* _current_level;
 };
 
 #endif

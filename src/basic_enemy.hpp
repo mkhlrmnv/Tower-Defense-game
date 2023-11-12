@@ -2,6 +2,10 @@
 #define BASIC_ENEMY_HPP
 
 #include "enemy.hpp"
+#include "attack_types.hpp"
+
+#include <chrono>
+#include <thread>
 
 class Basic_Enemy: public Enemy {
 public:

@@ -9,6 +9,8 @@ set(SRC_FILES
     object.cpp
     square.cpp
     tower.hpp
+    attack_types.hpp
+    vector2d.hpp
     # Add all your source files here (excluding headers)
 )
 

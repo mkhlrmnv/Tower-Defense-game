@@ -2,6 +2,10 @@
 #define BASIC_TOWER_HPP
 
 #include "tower.hpp"
+#include "attack_types.hpp"
+
+#include <chrono>
+#include <thread>
 
 class Basic_Tower: public Tower {
 public:
