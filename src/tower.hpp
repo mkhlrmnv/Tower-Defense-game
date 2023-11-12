@@ -5,7 +5,7 @@
 
 class Tower: public Object {
 public:
-    Tower(int health, int damage, int range, int attack_speed, Vector2D& position, int type, int price, int level) : 
+    Tower(int health, int damage, int range, int attack_speed, Vector2D position, int type, int price, int level) : 
             Object(health, damage, range, attack_speed, position, type), _price(price), _level(level) {}
 
     void level_up() {
