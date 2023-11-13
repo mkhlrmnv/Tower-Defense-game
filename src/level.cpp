@@ -135,6 +135,7 @@ int Level::read_file(const std::string& file_name){
             }
         } 
     }
+    file.close();
     return 1;
 }
 
@@ -162,6 +163,7 @@ int Level::save_to_file(const std::string& file_name){
             file << std::endl;
         }
     }
+    file.close();
     return 1;
 }
 
