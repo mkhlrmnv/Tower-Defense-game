@@ -35,9 +35,15 @@ int Game::generate_chosen_level_style(int chosen_lv){
 }
 
 void Game::open_window(){
-    _window.create(sf::VideoMode(_game_resolution + _side_bar_width, _game_resolution ), "Tower Defence");
+    sf::ContextSettings settings;
+    settings.antialiasingLevel = 8; // You can adjust this value
+    settings.depthBits = 24;
+    settings.stencilBits = 8;
+    
+    _window.create(sf::VideoMode(_game_resolution + _side_bar_width, _game_resolution), "Tower Defence", sf::Style::Default, settings);
     _window.setPosition(sf::Vector2i(200, 0));
 }
+
 
 void Game::run(){
 

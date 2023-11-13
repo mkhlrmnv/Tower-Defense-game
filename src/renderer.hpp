@@ -71,6 +71,10 @@ sf::RenderTexture _level_texture;
 sf::RenderTexture _tower_texture; 
 sf::RenderTexture _enemy_texture; 
 
+float scale_factor; // number that scales textures to right size
+
+sf::Texture _tower_pic; // for tower texture
+
 sf::Font _font;
 sf::Text _round_count_text;
 sf::Text _cash_text;
