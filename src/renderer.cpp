@@ -13,14 +13,14 @@ void Renderer::draw_tower(sf::RenderWindow& rwindow, int type, int ongoing_actio
         _ = ongoing_action;
 
     // For some reason opens file only with full path
-    _tower_pic.loadFromFile("/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/assets/textures/ArcherTowerFacingLeft.PNG");
+    _tower_pic.loadFromFile("/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/assets/textures/ArcherTower/ArcherTower_Left_Attack_1.png");
 
     _drawable_tower.setTexture(_tower_pic);
 
     float scale_factor = 0.05;  // Adjust this value as needed
     _drawable_tower.setScale(scale_factor, scale_factor);
 
-    _drawable_tower.setPosition(sf::Vector2f (position.x-30, position.y-30)); // TODO: set offset according to the real texture / img size
+    _drawable_tower.setPosition(sf::Vector2f (position.x-40, position.y-40)); // TODO: set offset according to the real texture / img size
     
     rwindow.draw(_drawable_tower);
 
