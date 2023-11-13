@@ -81,8 +81,6 @@ public:
     bool add_tower(Tower* tower);
 
     void print_objects();
-
-    std::pair<int, int> what_square(int x, int y);
     
     // Load level from file
     int read_file(const std::string& file_name);
@@ -92,7 +90,6 @@ public:
 
     void print_map();
 
-    // help function for randomly generate
     std::pair<int, int> can_go_notstart(Direction dir, std::vector<Direction> prev_dirs, int row, int col, bool can_go_left);
     std::pair<int, int> can_go_start(Direction dir, std::vector<Direction> dir_list, int row, int col);
 
@@ -105,7 +102,5 @@ private:
     std::vector<Enemy*> _enemies;
     std::vector<Tower*> _towers;
 };
-
-
 
 #endif

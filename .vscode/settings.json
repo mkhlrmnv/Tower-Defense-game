@@ -80,6 +80,9 @@
     "queue": "cpp",
     "span": "cpp",
     "stack": "cpp",
-    "variant": "cpp"
+    "variant": "cpp",
+    "__tree": "cpp",
+    "map": "cpp",
+    "set": "cpp"
   }
 }

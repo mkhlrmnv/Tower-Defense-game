@@ -40,13 +40,24 @@ bool testLives(){
 }
 
 bool testObjectList(){
+    std::string file_name = "maps/example_map.txt"; // file name of the map test map
     Level lv(1000, 1000, 50); // new level
-    lv.make_grid();
-    lv.read_file("maps/example_map.txt");
-    Tower* t = new Tower(10, 10, 10, 10, Vector2D(15, 15), 0, 10, 1);
-    bool res = lv.add_tower(t);
-    std::vector<std::vector<Square*>> grid = lv.get_grid();
-    return grid[1][1]->occupy_by_tower() && res;
+    lv.make_grid(); 
+    lv.read_file(file_name);
+
+    Vector2D pos = Vector2D(150, 450); // should fail
+    Tower* t = new Tower(10, 10, 10, 1, pos, 1, 10, 1);
+
+    Vector2D pos2 = Vector2D(50, 50); // should pass
+    Tower* t2 = new Tower(10, 10, 10, 1, pos2, 1, 10, 1);
+
+    Vector2D pos3 = Vector2D(350, 350); // should fail
+    Enemy* e = new Enemy(10, 10, 10, 10, pos3, 1, 10, 1);
+
+    Vector2D pos4 = Vector2D(150, 455); // should pass
+    Enemy* e2 = new Enemy(10, 10, 10, 10, pos4, 1, 10, 1);   
+
+    return !lv.add_tower(t) && lv.add_tower(t2) && !lv.add_enemy(e) && lv.add_enemy(e2);
 }
 
 // test that makeGrid function makes grid that is 10 x 10
@@ -108,7 +119,7 @@ bool testRead(){
         std::vector<Square*> column = grid[i];
         for (size_t j = 0; j < column.size(); j++)
         {
-            if (line[j] == '#' && column[j]->get_occupied() == grass){
+            if (line[j] == '#' && column[j]->get_occupied() == road){
                 return false;
             }
         }
