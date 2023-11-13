@@ -7,10 +7,14 @@
 #include <math.h>
 #include <algorithm>
 #include <stdexcept>
+#include <chrono>
+#include <thread>
+
+class Level;
 
 class Object {
 public:
-    Object(int health, int damage, int range, int attack_speed, Vector2D& position, int type);
+    Object(Level& level, int health, int damage, int range, int attack_speed, Vector2D& position, int type);
 
     virtual ~Object();
 
@@ -35,6 +39,7 @@ public:
     virtual void attack();
 
 private:
+    Level& _level;
     int _health_points;
     int _damage;
     int _range;

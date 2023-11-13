@@ -46,16 +46,16 @@ bool testObjectList(){
     lv.read_file(file_name);
 
     Vector2D pos = Vector2D(150, 450); // should fail
-    Tower* t = new Tower(10, 10, 10, 1, pos, 1, 10, 1);
+    Tower* t = new Tower(lv, 10, 10, 10, 10, pos, 10, 10, 10);
 
     Vector2D pos2 = Vector2D(50, 50); // should pass
-    Tower* t2 = new Tower(10, 10, 10, 1, pos2, 1, 10, 1);
+    Tower* t2 = new Tower(lv, 10, 10, 10, 10, pos2, 10, 10, 10);
 
     Vector2D pos3 = Vector2D(350, 350); // should fail
-    Enemy* e = new Enemy(10, 10, 10, 10, pos3, 1, 10, 1);
+    Enemy* e = new Enemy(lv, 10, 10, 10, 10, pos3, 10, 1, 10);
 
     Vector2D pos4 = Vector2D(150, 455); // should pass
-    Enemy* e2 = new Enemy(10, 10, 10, 10, pos4, 1, 10, 1);   
+    Enemy* e2 = new Enemy(lv, 10, 10, 10, 10, pos4, 10, 1, 10);   
 
     return !lv.add_tower(t) && lv.add_tower(t2) && !lv.add_enemy(e) && lv.add_enemy(e2);
 }

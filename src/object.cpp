@@ -1,7 +1,8 @@
 #include "object.hpp"
+#include "level.hpp"
 
-Object::Object(int health, int damage, int range, int attack_speed, Vector2D& position, int type)
-    : _health_points(health), _damage(damage), _range(range), _attack_speed(attack_speed), _position(position), _type(type) {
+Object::Object(Level& level, int health, int damage, int range, int attack_speed, Vector2D& position, int type)
+    : _level(level), _health_points(health), _damage(damage), _range(range), _attack_speed(attack_speed), _position(position), _type(type) {
 }
 
 Object::~Object() {}
