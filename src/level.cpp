@@ -107,12 +107,6 @@ void Level::print_objects(){
     }
 }
 
-std::pair<int, int> Level::what_square(int x, int y){
-    int row = floor(y / _square_size);
-    int col = floor(x / _square_size);
-    return std::make_pair(col, row);
-}
-
 // Initialize map from file
 int Level::read_file(const std::string& file_name){
     std::ifstream file(file_name);  // opens file
