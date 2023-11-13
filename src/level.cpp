@@ -95,6 +95,7 @@ bool Level::add_tower(Tower* tower){
         _towers.push_back(tower);
         return true;
     }
+    std::cout << row << col << _grid[col][row]->occupy_by_tower() << std::endl;
     return false;
 }
 

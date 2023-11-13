@@ -43,7 +43,10 @@ bool testObjectList(){
     std::string file_name = "maps/example_map.txt"; // file name of the map test map
     Level lv(1000, 1000, 50); // new level
     lv.make_grid(); 
-    lv.read_file(file_name);
+    if (lv.read_file(file_name) == -1){  // reads new map from test map file
+        std::cout << "File reading failed" << std::endl;
+        return false;
+    }
 
     Vector2D pos = Vector2D(150, 450); // should fail
     Tower* t = new Tower(lv, 10, 10, 10, 10, pos, 10, 10, 10);
@@ -56,6 +59,8 @@ bool testObjectList(){
 
     Vector2D pos4 = Vector2D(150, 455); // should pass
     Enemy* e2 = new Enemy(lv, 10, 10, 10, 10, pos4, 10, 1, 10);   
+
+    // std::cout << !lv.add_tower(t) << lv.add_tower(t2) << !lv.add_enemy(e) << lv.add_enemy(e2) << std::endl;
 
     return !lv.add_tower(t) && lv.add_tower(t2) && !lv.add_enemy(e) && lv.add_enemy(e2);
 }
@@ -109,7 +114,10 @@ bool testRead(){
     std::string file_name = "maps/example_map.txt"; // file name of the map test map
     Level lv(1000, 1000, 50); // new level
     lv.make_grid(); 
-    lv.read_file(file_name); // reads new map from test map file
+    if (lv.read_file(file_name) == -1){  // reads new map from test map file
+        std::cout << "File reading failed" << std::endl;
+        return false;
+    }
     std::vector<std::vector<Square*>> grid = lv.get_grid(); 
     std::ifstream file(file_name);
     for (size_t i = 0; i < grid.size(); i++) // compares grid to test map file
