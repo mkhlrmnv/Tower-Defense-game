@@ -54,7 +54,6 @@ public:
     // Returns grid
     std::vector<std::vector<Square*>> get_grid() const;
 
-    // Returns square size
     int get_square_size() const;
 
     // Makes new grid
@@ -77,11 +76,11 @@ public:
 
     std::vector<Enemy*> get_enemies() const;
 
-    void add_enemy(Enemy* enemy);
+    bool add_enemy(Enemy* enemy);
 
     std::vector<Tower*> get_towers() const;
 
-    void add_tower(Tower* tower);
+    bool add_tower(Tower* tower);
 
     void print_objects();
     

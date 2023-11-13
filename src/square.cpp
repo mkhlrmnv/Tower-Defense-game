@@ -2,7 +2,7 @@
 
 // Initialize new square
 Square::Square(Vector2D center):
-    _center(center), _occupied_by(grass){}
+    _center(center), _occupied_by(){}
 
 // Returns center of the square
 Vector2D Square::get_center() const {

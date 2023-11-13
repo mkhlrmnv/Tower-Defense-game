@@ -40,28 +40,24 @@ bool testLives(){
 }
 
 bool testObjectList(){
+    std::string file_name = "maps/example_map.txt"; // file name of the map test map
     Level lv(1000, 1000, 50); // new level
-    lv.make_grid();
-    lv.randomly_generate();
-    for (int i = 0; i < 10; i++)
-    {
-        int x = rand() % 1000;
-        int y = rand() % 1000;
-        Vector2D pos = Vector2D(x, y);
-        Tower* t = new Tower(10, 10, 10, 10, pos, 10);
-        lv.add_tower(t);
-    }
-    for (int i = 0; i < 10; i++)
-    {
-        int x = rand() % 1000;
-        int y = rand() % 1000;
-        Vector2D pos = Vector2D(x, y);
-        Enemy* e = new Enemy(10, 10, 10, 10, pos, 10, 1);
-        lv.add_enemy(e);
-    }
-    lv.print_objects();
-    lv.print_map();
-    return true;
+    lv.make_grid(); 
+    lv.read_file(file_name);
+
+    Vector2D pos = Vector2D(150, 450); // should fail
+    Tower* t = new Tower(10, 10, 10, 10, pos, 10);
+
+    Vector2D pos2 = Vector2D(50, 50); // should pass
+    Tower* t2 = new Tower(10, 10, 10, 10, pos2, 10);
+
+    Vector2D pos3 = Vector2D(350, 350); // should fail
+    Enemy* e = new Enemy(10, 10, 10, 10, pos3, 10, 1);
+
+    Vector2D pos4 = Vector2D(150, 455); // should pass
+    Enemy* e2 = new Enemy(10, 10, 10, 10, pos4, 10, 1);   
+
+    return !lv.add_tower(t) && lv.add_tower(t2) && !lv.add_enemy(e) && lv.add_enemy(e2);
 }
 
 // test that makeGrid function makes grid that is 10 x 10
@@ -123,7 +119,7 @@ bool testRead(){
         std::vector<Square*> column = grid[i];
         for (size_t j = 0; j < column.size(); j++)
         {
-            if (line[j] == '#' && column[j]->get_occupied() == grass){
+            if (line[j] == '#' && column[j]->get_occupied() == road){
                 return false;
             }
         }
@@ -132,12 +128,11 @@ bool testRead(){
 }
 
 bool testWrite(){
-    std::string file_name = "../maps/example_map.txt"; // file name for reading
-    std::string file_name_w = "../maps/example_map_w.txt"; // file name for writing
+    std::string file_name = "maps/example_map.txt"; // file name for reading
+    std::string file_name_w = "maps/example_map_w.txt"; // file name for writing
     Level lv(1000, 1000, 50); // new level
     lv.make_grid();
     lv.read_file(file_name); // reads maps from file
-    lv.print_map();
     lv.save_to_file(file_name_w); // writes current map to file
     
     // compares two two files 
