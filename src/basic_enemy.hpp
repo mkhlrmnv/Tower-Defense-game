@@ -3,6 +3,7 @@
 
 #include "enemy.hpp"
 #include "attack_types.hpp"
+#include "level.hpp"
 
 class Basic_Enemy: public Enemy {
 public:

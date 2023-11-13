@@ -24,6 +24,7 @@ public:
     int get_attack_speed() const;
     const Vector2D get_position() const;
     int get_type() const;
+    Level& get_level_reference() const;
 
     void set_position(const Vector2D& position);
 

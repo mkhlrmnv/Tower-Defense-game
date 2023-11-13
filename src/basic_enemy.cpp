@@ -8,13 +8,14 @@ Basic_Enemy::Basic_Enemy(Level& level, int health, int damage, int range, int at
 
 void Basic_Enemy::attack() {
     double multiplier;
-    // Level current_level = 
+    Level& level_reference = get_level_reference();
 
-    // if (!get_towers().empty()) {
-    //     if (closestObjects[0].first < this->get_range()) {
-    //         multiplier = check_type_multiplier(closestObjects[0].second, this);
-    //         closestObjects[0].second->lose_health(this->get_damage() * multiplier);
-    //     }
-    //     std::this_thread::sleep_for(std::chrono::milliseconds(this->get_attack_speed()));
-    // }
+    if (!level_reference.get_towers().empty()) {
+        double dist = this->distance_to(level_reference.get_towers()[0]->get_position());
+        if (dist <= this->get_range()) {
+            multiplier = check_type_multiplier(level_reference.get_towers()[0], this);
+            level_reference.get_towers()[0]->lose_health(this->get_damage() * multiplier);
+        }
+        std::this_thread::sleep_for(std::chrono::milliseconds(this->get_attack_speed()));
+    }
 }

@@ -31,6 +31,10 @@ int Object::get_type() const {
     return _type;
 }
 
+Level& Object::get_level_reference() const {
+    return _level;
+}
+
 void Object::set_position(const Vector2D& position) {
     _position = position;
 }

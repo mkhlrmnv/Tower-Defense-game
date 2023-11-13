@@ -3,6 +3,7 @@
 
 #include "tower.hpp"
 #include "attack_types.hpp"
+#include "level.hpp"
 
 class Basic_Tower: public Tower {
 public:
