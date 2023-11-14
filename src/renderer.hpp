@@ -74,6 +74,14 @@ sf::RenderTexture _enemy_texture;
 float scale_factor; // number that scales textures to right size
 
 sf::Texture _tower_pic; // for tower texture
+sf::Texture _enemy_pic; // for enemy texture
+
+int _position_align = 40;
+
+float _scale_factor = 0.05; // Adjust this value as needed
+
+std::string _archer_tower_file = "/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/assets/textures/ArcherTower/ArcherTower_Right.png";
+std::string _tank_orc_file = "/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/assets/textures/TankOrc/TankOrc.png";
 
 sf::Font _font;
 sf::Text _round_count_text;

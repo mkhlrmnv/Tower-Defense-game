@@ -8,6 +8,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <renderer.hpp>
+#include <random>
 
 namespace LevelSelection{
     enum Choice: int{
