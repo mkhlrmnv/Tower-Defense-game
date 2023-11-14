@@ -7,7 +7,6 @@
 
 class Basic_Enemy: public Enemy {
 public:
-    // Basic_Enemy();
 
     Basic_Enemy(Level& current_level, int health, int damage, int range, int attack_speed, Vector2D& position, int type, int speed, int defense);
 
