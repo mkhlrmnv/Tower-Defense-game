@@ -80,6 +80,12 @@ public:
 
     bool add_tower(Tower* tower);
 
+    std::pair<int, int> current_row_col(Object* obj); // <col, row>
+
+    Square* current_square(Object* obj);
+
+    std::vector<Direction> next_road(Enemy* enemy);
+
     void print_objects();
     
     // Load level from file

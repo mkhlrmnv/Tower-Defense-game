@@ -75,8 +75,8 @@ std::vector<Enemy*> Level::get_enemies() const{
 }
 
 bool Level::add_enemy(Enemy* enemy){
-    int row = floor(enemy->get_position().y / _square_size);
     int col = floor(enemy->get_position().x / _square_size);
+    int row = floor(enemy->get_position().y / _square_size);
     if (_grid[col][row]->get_occupied() == road){
         _enemies.push_back(enemy);
         return true;
@@ -95,8 +95,42 @@ bool Level::add_tower(Tower* tower){
         _towers.push_back(tower);
         return true;
     }
-    std::cout << row << col << _grid[col][row]->occupy_by_tower() << std::endl;
     return false;
+}
+
+// returns pair where first is current column and second is current row
+std::pair<int, int> Level::current_row_col(Object* obj){
+    int col = floor(obj->get_position().x / _square_size);
+    int row = floor(obj->get_position().y / _square_size);
+    return std::make_pair(col, row);
+}
+
+// returns square where is object
+Square* Level::current_square(Object* obj){
+    std::pair<int, int> row_col = current_row_col(obj);
+    return _grid[row_col.first][row_col.second];
+}
+
+/* returns vector with directions in which are road squares
+Usually size of vector is 2 because if enemy isn't in first or last road square
+there are always two ways to go
+*/ 
+std::vector<Direction> Level::next_road(Enemy* enemy){
+    std::pair<int, int> row_col = current_row_col(enemy);
+    std::vector<Direction> list_of_road_squares;
+    if (_grid[row_col.first + 1][row_col.second]->get_occupied() == road){
+        list_of_road_squares.push_back(right);
+    }
+    if (_grid[row_col.first - 1][row_col.second]->get_occupied() == road){
+        list_of_road_squares.push_back(left);
+    }
+    if (_grid[row_col.first][row_col.second + 1]->get_occupied() == road){
+        list_of_road_squares.push_back(up);
+    }
+    if (_grid[row_col.first][row_col.second - 1]->get_occupied() == road){
+        list_of_road_squares.push_back(down);
+    }
+    return list_of_road_squares;
 }
 
 void Level::print_objects(){
