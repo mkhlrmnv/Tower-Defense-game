@@ -164,7 +164,7 @@ bool testNextRoad(){
 
     std::vector<Direction> res = lv.next_road(e);
     
-    std::cout << res.size() << res[0] << res[1] << std::endl;
+    // std::cout << res.size() << res[0] << res[1] << std::endl;
 
     return res[0] == right && res[1]== up && res.size() == 2;
 }
