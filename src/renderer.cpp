@@ -5,7 +5,6 @@ void Renderer::draw_level(sf::RenderWindow& rwindow){
     rwindow.draw(_drawable_level);
 }
 
-
 void Renderer::draw_tower(sf::RenderWindow& rwindow, Tower* t_ptr){
 
     //  just to avoid warning for now, later use type and object state to select correct texture
@@ -48,7 +47,6 @@ void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr){
     _drawable_enemy.setPosition(sf::Vector2f (sq->get_center().y - (l.get_square_size() / 2), sq->get_center().x - (l.get_square_size() / 2))); // TODO: set offset according to the real texture / img size
     
     rwindow.draw(_drawable_enemy);
-
 }
 
 void Renderer::draw_towers(sf::RenderWindow& rwindow, std::vector<Tower*> towers){
