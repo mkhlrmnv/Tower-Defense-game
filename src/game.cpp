@@ -64,12 +64,12 @@ void Game::run(){
         auto pos2 = Vector2D(rand() % 800, rand() % 800);
         _level.add_tower(new Tower(_level, 1, 1, 1, 1, pos2, 1, 1, 1));
     }*/
+    
+    auto e1_pos = Vector2D(85*4, 1*80);
+    auto e2_pos = Vector2D(85*4, 2*80);
 
-    auto e1_pos = Vector2D(80*4, 1*80);
-    auto e2_pos = Vector2D(80*4, 2*80);
-
-    auto t1_pos = Vector2D(80*5, 2*80);
-    auto t2_pos = Vector2D(80*6, 2*80);
+    auto t1_pos = Vector2D(82*5, 2*80);
+    auto t2_pos = Vector2D(82*6, 2*80);
     
     bool res = _level.add_enemy(new Enemy(_level, 1, 1, 1, 1, e1_pos, 1, 1, 1));
     bool res2 = _level.add_enemy(new Enemy(_level, 1, 1, 1, 1, e2_pos, 1, 1, 1));
@@ -85,7 +85,11 @@ void Game::run(){
     _renderer.make_drawable_object_textures();
     _renderer.make_level_info_texts(_game_resolution, _side_bar_width);
 
+    sf::Clock timer;
+    sf::Time tickRate;
+
     while(_window.isOpen()){
+        tickRate = timer.restart();
         process_events();
         update();
         render();
@@ -95,6 +99,9 @@ void Game::run(){
 
 void Game::update(){
     // update game state: buys, attacks, movements,  etc here
+    for (Enemy* e : _level.get_enemies()){
+        e->move(Vector2D(e->get_position().x + 10, e->get_position().y));
+    }
 }
 
 void Game::process_events(){
