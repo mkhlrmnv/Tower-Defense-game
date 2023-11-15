@@ -108,6 +108,67 @@ bool testGridSquareCenters(){
     return true;
 }
 
+bool testCurrentRowCol(){
+    std::string file_name = "maps/example_map.txt"; // file name of the map test map
+    Level lv(1000, 1000, 50); // new level
+    lv.make_grid(); 
+    if (lv.read_file(file_name) == -1){  // reads new map from test map file
+        std::cout << "File reading failed" << std::endl;
+        return false;
+    }
+    Vector2D pos = Vector2D(50, 50); // should be <0, 0>
+    Tower* t = new Tower(lv, 10, 10, 10, 10, pos, 10, 10, 10);
+
+    Vector2D pos2 = Vector2D(150, 455); // should be <1, 4>
+    Enemy* e = new Enemy(lv, 10, 10, 10, 10, pos2, 10, 1, 10);
+
+    // std::cout << lv.current_row_col(t).first << lv.current_row_col(t).second
+    //    << lv.current_row_col(e).first << lv.current_row_col(e).second << std::endl;
+
+    return lv.current_row_col(t) == std::make_pair(0, 0) && lv.current_row_col(e) == std::make_pair(1, 4);
+}
+
+bool testCurrentSquare(){
+    std::string file_name = "maps/example_map.txt"; // file name of the map test map
+    Level lv(1000, 1000, 50); // new level
+    lv.make_grid(); 
+    if (lv.read_file(file_name) == -1){  // reads new map from test map file
+        std::cout << "File reading failed" << std::endl;
+        return false;
+    }
+    Vector2D pos = Vector2D(50, 50); // should be <0, 0>
+    Tower* t = new Tower(lv, 10, 10, 10, 10, pos, 10, 10, 10);
+
+    Vector2D pos2 = Vector2D(150, 450); // should be <2, 5>
+    Enemy* e = new Enemy(lv, 10, 10, 10, 10, pos2, 10, 1, 10);
+
+    std::vector<std::vector<Square*>> grid = lv.get_grid();
+
+    // std::cout << lv.current_square(t)->get_center() << " - " << grid[0][0]->get_center() << " - "
+    //    << lv.current_square(e)->get_center() << " - " << grid[1][4]->get_center() << std::endl;
+
+    return lv.current_square(t)->get_center() == grid[0][0]->get_center() 
+        && lv.current_square(e)->get_center() == grid[1][4]->get_center();
+}
+
+bool testNextRoad(){
+    std::string file_name = "maps/example_map.txt"; // file name of the map test map
+    Level lv(1000, 1000, 50); // new level
+    lv.make_grid(); 
+    if (lv.read_file(file_name) == -1){  // reads new map from test map file
+        std::cout << "File reading failed" << std::endl;
+        return false;
+    }
+    Vector2D pos2 = Vector2D(150, 450); // should be <1, 4>
+    Enemy* e = new Enemy(lv, 10, 10, 10, 10, pos2, 10, 1, 10);
+
+    std::vector<Direction> res = lv.next_road(e);
+    
+    // std::cout << res.size() << res[0] << res[1] << std::endl;
+
+    return res[0] == right && res[1]== up && res.size() == 2;
+}
+
 // Test for read and write to file
 
 bool testRead(){
@@ -284,6 +345,27 @@ static int level_test(){
         std::cout << "testGridSquareCenters: Passed" << std::endl;
     } else {
         std::cout << "testGridSquareCenters: Failed" << std::endl;
+        fails++;
+    }
+
+    if (testCurrentRowCol()){
+        std::cout << "testCurrentRowCol: Passed" << std::endl;
+    } else {
+        std::cout << "testCurrentRowCol: Failed" << std::endl; 
+        fails++;
+    }
+
+    if (testCurrentSquare()){
+        std::cout << "testCurrentSquare: Passed" << std::endl;
+    } else {
+        std::cout << "testCurrentSquare: Failed" << std::endl; 
+        fails++;
+    }
+
+    if (testNextRoad()){
+        std::cout << "testNextRoad: Passed" << std::endl;
+    } else {
+        std::cout << "testNextRoad: Failed" << std::endl; 
         fails++;
     }
 
