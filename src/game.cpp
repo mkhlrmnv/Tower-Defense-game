@@ -85,16 +85,11 @@ void Game::run(){
     _renderer.make_drawable_object_textures();
     _renderer.make_level_info_texts(_game_resolution, _side_bar_width);
 
-    sf::Clock timer;
-    sf::Time tickRate;
-
     while(_window.isOpen()){
-        tickRate = timer.restart();
         process_events();
         update();
         render();
     }
-
 }
 
 void Game::update(){
