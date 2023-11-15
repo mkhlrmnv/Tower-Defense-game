@@ -16,7 +16,7 @@ void Basic_Tower::attack() {
 
                 if (dist <= this->get_range()) {
                     multiplier = check_type_multiplier(this, enemy);
-                    enemy->lose_health(this->get_damage() * multiplier);
+                    enemy->lose_health(this->get_damage() * multiplier - enemy->get_defense());
                     break;
                 }
             }
