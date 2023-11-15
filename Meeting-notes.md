@@ -145,6 +145,61 @@ Under work
 
 ### ------------------------------------------------------------------------------------------------------
 
+# Meeting 14.11.2023 14::00
+
+**Participants**:
+
+1. Mikhail Romanov
+2. Kalle Lindgren
+3. Aki Oura
+4. Leo Teodosin
+
+## Summary of works
+
+1. Mikhail Romanov
+
+   Made sfml to show textures of enemies and towers. Connecterd level to game class better
+
+2. Kalle Lindgren
+
+   Continues with GUI
+
+3. Aki Oura
+
+   Made five new charrecters
+
+4. Leo Teodosin
+
+   Made working object class with basic towers and enemies
+
+## Challenges
+
+1. Object class in general
+2. Showing grid from level
+
+## Actions
+
+1. Mikhail will continue with connecting objects to game class
+2. Aki will do textures for road, grass and all other charecters
+3. Leo will continue with object and will do classes for every object type
+4. Kalle will do finnish with gui
+
+> Please reflect these action decisions in your git commit messages so that
+> your group members and advisor can follow the progress.
+
+## Project status
+
+Under work
+
+### TODOs
+
+1. Mikhail will continue with sfml and level
+2. Aki textures
+3. Leo will continue with objects
+4. Kalle will continue with gui
+
+### ------------------------------------------------------------------------------------------------------
+
 # Meeting dd.mm.2021 HH::MM
 
 **Participants**:
