@@ -86,6 +86,8 @@ public:
 
     Square* current_square(Object* obj);
 
+    Square* get_square_by_pos(Vector2D pos);
+
     std::vector<Direction> next_road(Enemy* enemy);
 
     void print_objects();
