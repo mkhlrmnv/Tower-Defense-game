@@ -12,7 +12,7 @@ public:
 
     void attack();
 
-    bool move();
+    void move();
 };
 
 #endif

@@ -16,16 +16,16 @@ public:
         return _defense;
     }
 
-    void set_target_position(Vector2D target_position) {
-
-        _route.push_back(get_position());
-        set_position(target_position);
-    }
+    virtual void move() {}
 
     std::vector<Vector2D> get_route() const {
         return _route;
     }
     
+    void set_route_position(Vector2D position) {
+        _route.push_back(position);
+    }
+
 private:
     int _speed;
     int _defense;
