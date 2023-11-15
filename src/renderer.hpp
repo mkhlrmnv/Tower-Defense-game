@@ -35,13 +35,13 @@ public:
 
 
     // draw single enemy  
-    void draw_enemy(sf::RenderWindow& rwindow, int object_type, int object_state, Vector2D location); // TODO: implement the choice of correct texture with obn and object type
+    void draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr); // TODO: implement the choice of correct texture with obn and object type
     
     // draw enemies on from a list
     void draw_enemies(sf::RenderWindow& rwindow, std::vector< Enemy * > enemies); // TODO: remove last argument with real textures 
 
     // draw single enemy 
-    void draw_tower(sf::RenderWindow& rwindow, int object_type, int object_state, Vector2D location); // TODO: implement the choice of correct texture with object state and object type
+    void draw_tower(sf::RenderWindow& rwindow, Tower* t_ptr); // TODO: implement the choice of correct texture with object state and object type
     
     // draw towers on from a list
     void draw_towers(sf::RenderWindow& rwindow, std::vector< Tower * > towers); // TODO: remove last argument with real textures 

@@ -6,11 +6,11 @@ void Renderer::draw_level(sf::RenderWindow& rwindow){
 }
 
 
-void Renderer::draw_tower(sf::RenderWindow& rwindow, int type, int ongoing_action, Vector2D position){
+void Renderer::draw_tower(sf::RenderWindow& rwindow, Tower* t_ptr){
 
     //  just to avoid warning for now, later use type and object state to select correct texture
-    int _ = type;
-        _ = ongoing_action;
+    // int _ = type;
+    //    _ = ongoing_action;
 
     // For some reason opens file only with full path
     _tower_pic.loadFromFile(_archer_tower_file);
@@ -19,17 +19,20 @@ void Renderer::draw_tower(sf::RenderWindow& rwindow, int type, int ongoing_actio
 
     _drawable_tower.setScale(_scale_factor, _scale_factor);
 
-    _drawable_tower.setPosition(sf::Vector2f (position.y-_position_align, position.x-_position_align)); // TODO: set offset according to the real texture / img size
+    Level& l = t_ptr->get_level_reference();
+
+    Square* sq = l.current_square(t_ptr);
+
+    _drawable_tower.setPosition(sf::Vector2f (sq->get_center().y - (l.get_square_size() / 2), sq->get_center().x - (l.get_square_size() / 2))); // TODO: set offset according to the real texture / img size
     
     rwindow.draw(_drawable_tower);
-
 }
 
-void Renderer::draw_enemy(sf::RenderWindow& rwindow, int type, int ongoing_action, Vector2D position){
+void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr){
 
     // just to avoid warning for now, later use type and object state to select correct texture
-    int _ = type;
-        _ = ongoing_action;
+    // int _ = type;
+    //    _ = ongoing_action;
 
     _enemy_pic.loadFromFile(_tank_orc_file);
 
@@ -37,8 +40,12 @@ void Renderer::draw_enemy(sf::RenderWindow& rwindow, int type, int ongoing_actio
 
     _drawable_enemy.setScale(_scale_factor, _scale_factor);
 
+    Level& l = e_ptr->get_level_reference();
+
+    Square* sq = l.current_square(e_ptr);
+
     //_drawable_enemy.setTexture(_enemy_texture.getTexture());
-    _drawable_enemy.setPosition(sf::Vector2f (position.y - _position_align, position.x - _position_align)); // TODO: set offset according to the real texture / img size
+    _drawable_enemy.setPosition(sf::Vector2f (sq->get_center().y - (l.get_square_size() / 2), sq->get_center().x - (l.get_square_size() / 2))); // TODO: set offset according to the real texture / img size
     
     rwindow.draw(_drawable_enemy);
 
@@ -46,13 +53,13 @@ void Renderer::draw_enemy(sf::RenderWindow& rwindow, int type, int ongoing_actio
 
 void Renderer::draw_towers(sf::RenderWindow& rwindow, std::vector<Tower*> towers){
     for(Tower* t_ptr : towers){
-        draw_tower(rwindow, 0, 0, t_ptr->get_position()); // zeros are placeholders
+        draw_tower(rwindow, t_ptr); // zeros are placeholders
     }
 }
 
 void Renderer::draw_enemies(sf::RenderWindow& rwindow, std::vector<Enemy*> enemies){
     for(Enemy* e_ptr : enemies){
-        draw_enemy(rwindow, 0, 0, e_ptr->get_position()); // zeros are placeholders
+        draw_enemy(rwindow, e_ptr); // zeros are placeholders
     }
 }
 

@@ -56,20 +56,20 @@ void Game::run(){
     // test drawing objects
 
     /*for (int i = 0; i < 5; i++){
-        auto pos = Vector2D(rand() % 1000, rand() % 1000);
-        _level.add_enemy(new Enemy(1, 1, 1, 1, pos, 1, 1));
+        auto pos = Vector2D(rand() % 800, rand() % 800);
+        _level.add_enemy(new Enemy(_level, 1, 1, 1, 1, pos, 1, 1, 1));
     }
 
     for (int j = 0; j < 5; j++){
-        auto pos2 = Vector2D(rand() % 1000, rand() % 1000);
-        _level.add_tower(new Tower(1, 1, 1, 1, pos2, 1));
+        auto pos2 = Vector2D(rand() % 800, rand() % 800);
+        _level.add_tower(new Tower(_level, 1, 1, 1, 1, pos2, 1, 1, 1));
     }*/
 
-    auto e1_pos = Vector2D(80*4 + 40, 1*80 + 40);
-    auto e2_pos = Vector2D(80*4 + 40, 2*80 + 40);
+    auto e1_pos = Vector2D(80*4, 1*80);
+    auto e2_pos = Vector2D(80*4, 2*80);
 
-    auto t1_pos = Vector2D(80*5 + 40, 2*80 + 40);
-    auto t2_pos = Vector2D(80*6 + 40, 2*80 + 40);
+    auto t1_pos = Vector2D(80*5, 2*80);
+    auto t2_pos = Vector2D(80*6, 2*80);
     
     bool res = _level.add_enemy(new Enemy(_level, 1, 1, 1, 1, e1_pos, 1, 1, 1));
     bool res2 = _level.add_enemy(new Enemy(_level, 1, 1, 1, 1, e2_pos, 1, 1, 1));
@@ -77,7 +77,7 @@ void Game::run(){
     bool res3 = _level.add_tower(new Tower(_level, 1, 1, 1, 1, t1_pos, 1, 1, 1));
     bool res4 = _level.add_tower(new Tower(_level, 1, 1, 1, 1, t2_pos, 1, 1, 1));
 
-    std::cout << res << res2 << res3 << res4 << std::endl;
+    // std::cout << res << res2 << res3 << res4 << std::endl;
     
     //***************
 
