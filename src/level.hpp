@@ -54,6 +54,8 @@ public:
     // Returns grid
     std::vector<std::vector<Square*>> get_grid() const;
 
+    int get_square_size() const;
+
     // Makes new grid
     void make_grid();
 
