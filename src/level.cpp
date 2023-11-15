@@ -29,6 +29,10 @@ void Level::plus_round() {
     _round++;
 }
 
+int Level::get_square_size() const{
+    return _square_size;
+}
+
 // Makes new grid
 void Level::make_grid() {
     if (!_grid.empty()){ // Deletes current grid if its not empty
