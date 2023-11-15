@@ -54,8 +54,6 @@ public:
     // Returns grid
     std::vector<std::vector<Square*>> get_grid() const;
 
-    int get_square_size() const;
-
     // Makes new grid
     void make_grid();
 
@@ -82,6 +80,12 @@ public:
 
     bool add_tower(Tower* tower);
 
+    std::pair<int, int> current_row_col(Object* obj); // <col, row>
+
+    Square* current_square(Object* obj);
+
+    std::vector<Direction> next_road(Enemy* enemy);
+
     void print_objects();
     
     // Load level from file
@@ -104,7 +108,5 @@ private:
     std::vector<Enemy*> _enemies;
     std::vector<Tower*> _towers;
 };
-
-
 
 #endif

@@ -1,29 +1,38 @@
 #include "object.hpp"
+#include "level.hpp"
 
-Object::Object(int health, int damage, int range, int attack_speed, Vector2D& position)
-    : _health_points(health), _damage(damage), _range(range), _attack_speed(attack_speed), _position(position) {
+Object::Object(Level& level, int health, int damage, int range, int attack_speed, Vector2D& position, int type)
+    : _level(level), _health_points(health), _damage(damage), _range(range), _attack_speed(attack_speed), _position(position), _type(type) {
 }
 
 Object::~Object() {}
 
-const int Object::get_damage() const {
+int Object::get_damage() const {
     return _damage;
 }
 
-const int Object::get_health() const {
+int Object::get_health() const {
     return _health_points;
 }
 
-const int Object::get_range() const {
+int Object::get_range() const {
     return _range;
 }
 
-const int Object::get_attack_speed() const {
+int Object::get_attack_speed() const {
     return _attack_speed;
 }
 
-Vector2D Object::get_position() const {
+const Vector2D Object::get_position() const {
     return _position;
+}
+
+int Object::get_type() const {
+    return _type;
+}
+
+Level& Object::get_level_reference() const {
+    return _level;
 }
 
 void Object::set_position(const Vector2D& position) {
@@ -46,6 +55,10 @@ void Object::gain_attack_speed(int amount) {
     _attack_speed += amount;
 }
 
+double Object::distance_to(const Vector2D& target_position) {
+    return sqrt(pow(target_position.x - this->get_position().x, 2) + pow(target_position.y - this->get_position().y, 2));
+}
+
 void Object::lose_health(int amount) {
     if (amount > 0) {
         _health_points -= amount;
@@ -55,6 +68,4 @@ void Object::lose_health(int amount) {
     }
 }
 
-void Object::attack(Object target) {
-    target.lose_health(_damage);
-}
+void Object::attack() {}

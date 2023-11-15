@@ -1,5 +1,4 @@
 #include "square.hpp"
-#include "tower.hpp"
 #include <iostream>
 
 bool testCenter(){
