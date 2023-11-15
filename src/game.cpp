@@ -71,11 +71,11 @@ void Game::run(){
     auto t1_pos = Vector2D(82*5, 2*80);
     auto t2_pos = Vector2D(82*6, 2*80);
     
-    bool res = _level.add_enemy(new Enemy(_level, 1, 1, 1, 1, e1_pos, 1, 1, 1));
-    bool res2 = _level.add_enemy(new Enemy(_level, 1, 1, 1, 1, e2_pos, 1, 1, 1));
+    _level.add_enemy(new Basic_Enemy(_level, 1, 1, 1, 1, e1_pos, 1, 1, 1));
+    // _level.add_enemy(new Enemy(_level, 1, 1, 1, 1, e2_pos, 1, 1, 1));
 
-    bool res3 = _level.add_tower(new Tower(_level, 1, 1, 1, 1, t1_pos, 1, 1, 1));
-    bool res4 = _level.add_tower(new Tower(_level, 1, 1, 1, 1, t2_pos, 1, 1, 1));
+    _level.add_tower(new Tower(_level, 1, 1, 1, 1, t1_pos, 1, 1, 1));
+    _level.add_tower(new Tower(_level, 1, 1, 1, 1, t2_pos, 1, 1, 1));
 
     // std::cout << res << res2 << res3 << res4 << std::endl;
     
@@ -95,7 +95,7 @@ void Game::run(){
 void Game::update(){
     // update game state: buys, attacks, movements,  etc here
     for (Enemy* e : _level.get_enemies()){
-        e->move(Vector2D(e->get_position().x + 1, e->get_position().y));
+        e->move();
     }
 }
 
