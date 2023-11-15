@@ -95,7 +95,7 @@ void Game::run(){
 void Game::update(){
     // update game state: buys, attacks, movements,  etc here
     for (Enemy* e : _level.get_enemies()){
-        e->move(Vector2D(e->get_position().x + 10, e->get_position().y));
+        e->move(Vector2D(e->get_position().x + 100, e->get_position().y));
     }
 }
 
