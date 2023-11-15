@@ -6,7 +6,7 @@
       "type": "cppdbg",
       "request": "launch",
       // Resolved by CMake Tools:
-      "program": "${command:cmake.launchTargetPath}",
+      "program": "${workspaceFolder}/build/MainExec",
       "args": [],
       "stopAtEntry": true,
       "stopAtConnect": true,
