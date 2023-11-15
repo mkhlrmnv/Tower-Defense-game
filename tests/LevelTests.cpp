@@ -151,6 +151,21 @@ bool testCurrentSquare(){
         && lv.current_square(e)->get_center() == grid[1][4]->get_center();
 }
 
+bool testGetSquareByPos(){
+    std::string file_name = "maps/example_map.txt"; // file name of the map test map
+    Level lv(1000, 1000, 50); // new level
+    lv.make_grid(); 
+    if (lv.read_file(file_name) == -1){  // reads new map from test map file
+        std::cout << "File reading failed" << std::endl;
+        return false;
+    }
+    Vector2D pos = Vector2D(50, 50); // should be <0, 0>
+
+    std::vector<std::vector<Square*>> grid = lv.get_grid();
+
+    return grid[0][0] == lv.get_square_by_pos(pos);
+}
+
 bool testNextRoad(){
     std::string file_name = "maps/example_map.txt"; // file name of the map test map
     Level lv(1000, 1000, 50); // new level
@@ -359,6 +374,13 @@ static int level_test(){
         std::cout << "testCurrentSquare: Passed" << std::endl;
     } else {
         std::cout << "testCurrentSquare: Failed" << std::endl; 
+        fails++;
+    }
+
+    if (testGetSquareByPos()){
+        std::cout << "testGetSquareByPos: Passed" << std::endl;
+    } else {
+        std::cout << "testGetSquareByPos: Failed" << std::endl; 
         fails++;
     }
 

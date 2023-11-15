@@ -115,6 +115,12 @@ Square* Level::current_square(Object* obj){
     return _grid[row_col.first][row_col.second];
 }
 
+Square* Level::get_square_by_pos(Vector2D pos){
+    int col = floor(pos.x / _square_size);
+    int row = floor(pos.y / _square_size);
+    return _grid[col][row];
+}
+
 /* returns vector with directions in which are road squares
 Usually size of vector is 2 because if enemy isn't in first or last road square
 there are always two ways to go
