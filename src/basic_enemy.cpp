@@ -22,44 +22,42 @@ void Basic_Enemy::attack() {
     }
 }
 
-bool Basic_Enemy::move() {
+void Basic_Enemy::move() {
     Vector2D next_position;
     for (Direction direction : get_level_reference().next_road(this)) {
         if (direction == up) {
-            next_position = get_level_reference().get_grid()[get_position().x][get_position().y - get_level_reference().get_square_size()]->get_center();
-            for (auto pos : get_route()) {
-                if (pos != next_position) {
-                    set_target_position(next_position);
-                    return true;
+            Vector2D pos = get_level_reference().get_grid()[get_position().x][get_position().y - get_level_reference().get_square_size()]->get_center();
+            for (auto route_pos : get_route()) {
+                if (route_pos != next_position) {
+                    next_position = pos;
                 }
             }
             
         } else if (direction == down) {
-            next_position = get_level_reference().get_grid()[get_position().x][get_position().y + get_level_reference().get_square_size()]->get_center();
-            for (auto pos : get_route()) {
-                if (pos != next_position) {
-                    set_target_position(next_position);
-                    return true;
+            Vector2D pos = get_level_reference().get_grid()[get_position().x][get_position().y + get_level_reference().get_square_size()]->get_center();
+            for (auto route_pos : get_route()) {
+                if (route_pos != next_position) {
+                    next_position = pos;
                 }
             }
         } else if (direction == right) {
-            next_position = get_level_reference().get_grid()[get_position().x + get_level_reference().get_square_size()][get_position().y]->get_center();
-            for (auto pos : get_route()) {
-                if (pos != next_position) {
-                    set_target_position(next_position);
-                    return true;
+            Vector2D pos = get_level_reference().get_grid()[get_position().x + get_level_reference().get_square_size()][get_position().y]->get_center();
+            for (auto route_pos : get_route()) {
+                if (route_pos != next_position) {
+                    next_position = pos;
                 }
             }
             
         } else if (direction == left) {
-            next_position = get_level_reference().get_grid()[get_position().x - get_level_reference().get_square_size()][get_position().y]->get_center();
-            for (auto pos : get_route()) {
-                if (pos != next_position) {
-                    set_target_position(next_position);
-                    return true;
+            Vector2D pos = get_level_reference().get_grid()[get_position().x - get_level_reference().get_square_size()][get_position().y]->get_center();
+            for (auto route_pos : get_route()) {
+                if (route_pos != next_position) {
+                    next_position = pos;
                 }
             }
         }
     }
-    return false;
+
+    set_route_position(get_position());
+    set_position(next_position);
 }

@@ -71,7 +71,7 @@ void Game::run(){
     auto t1_pos = Vector2D(82*5, 2*80);
     auto t2_pos = Vector2D(82*6, 2*80);
     
-    _level.add_enemy(new Basic_Enemy(_level, 1, 1, 1, 1, e1_pos, 1, 1, 1));
+    _level.add_enemy(new Enemy(_level, 1, 1, 1, 1, e1_pos, 1, 1, 1));
     // _level.add_enemy(new Enemy(_level, 1, 1, 1, 1, e2_pos, 1, 1, 1));
 
     _level.add_tower(new Tower(_level, 1, 1, 1, 1, t1_pos, 1, 1, 1));

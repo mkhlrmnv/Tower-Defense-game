@@ -2,8 +2,7 @@
 #define TOWER_DEFENCE_SRC_GAME
 
 #include <level.hpp>
-#include <enemy.hpp>
-#include <tower.hpp>
+#include "object.hpp"
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include <iostream>
