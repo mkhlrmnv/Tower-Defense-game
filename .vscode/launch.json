@@ -2,7 +2,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "(gdb) Launch",
+      "name": "(gdb) MainExec",
       "type": "cppdbg",
       "request": "launch",
       // Resolved by CMake Tools:
@@ -37,11 +37,11 @@
       }
     },
     {
-      "name": "(lldb) Launch",
+      "name": "(lldb) MainExec",
       "type": "lldb",
       "request": "launch",
       // Resolved by CMake Tools:
-      "program": "${command:cmake.launchTargetPath}",
+      "program": "${workspaceFolder}/build/MainExec",
       "args": [],
       "sourceLanguages": ["c", "cpp"],
       "terminal": "integrated",

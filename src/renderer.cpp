@@ -19,7 +19,7 @@ void Renderer::draw_tower(sf::RenderWindow& rwindow, int type, int ongoing_actio
 
     _drawable_tower.setScale(_scale_factor, _scale_factor);
 
-    _drawable_tower.setPosition(sf::Vector2f (position.x-_position_align, position.y-_position_align)); // TODO: set offset according to the real texture / img size
+    _drawable_tower.setPosition(sf::Vector2f (position.y-_position_align, position.x-_position_align)); // TODO: set offset according to the real texture / img size
     
     rwindow.draw(_drawable_tower);
 
@@ -38,7 +38,7 @@ void Renderer::draw_enemy(sf::RenderWindow& rwindow, int type, int ongoing_actio
     _drawable_enemy.setScale(_scale_factor, _scale_factor);
 
     //_drawable_enemy.setTexture(_enemy_texture.getTexture());
-    _drawable_enemy.setPosition(sf::Vector2f (position.x - _position_align, position.y - _position_align)); // TODO: set offset according to the real texture / img size
+    _drawable_enemy.setPosition(sf::Vector2f (position.y - _position_align, position.x - _position_align)); // TODO: set offset according to the real texture / img size
     
     rwindow.draw(_drawable_enemy);
 

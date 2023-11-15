@@ -24,7 +24,7 @@ int Game::generate_chosen_level_style(int chosen_lv){
             std::cout << "random level generation successful" <<std::endl;
         }
     }else if(chosen_lv == LevelSelection::load){
-        if(_level.read_file("../maps/example_map.txt")==-1){
+        if(_level.read_file("/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/maps/example_map.txt")==-1){
             std::cout << "level file read failed" <<std::endl;
             return 0;
         }else{
@@ -49,9 +49,9 @@ void Game::run(){
 
     open_window();
 
-    int choice = rand() % 2; // chose randomly to load level or to randomly generate
+    // int choice = rand() % 2; // chose randomly to load level or to randomly generate
 
-    generate_chosen_level_style(choice); 
+    generate_chosen_level_style(LevelSelection::load); 
 
     // test drawing objects
 
@@ -66,7 +66,7 @@ void Game::run(){
     }*/
 
     auto e1_pos = Vector2D(80*4 + 40, 1*80 + 40);
-    auto e2_pos = Vector2D(80*5 + 40, 1*80 + 40);
+    auto e2_pos = Vector2D(80*4 + 40, 2*80 + 40);
 
     auto t1_pos = Vector2D(80*5 + 40, 2*80 + 40);
     auto t2_pos = Vector2D(80*6 + 40, 2*80 + 40);
