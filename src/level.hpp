@@ -78,13 +78,19 @@ public:
 
     bool add_enemy(Enemy* enemy);
 
+    bool remove_enemy(Enemy* enemy);
+
     std::vector<Tower*> get_towers() const;
 
     bool add_tower(Tower* tower);
 
+    bool remove_tower(Tower* tower);
+
     std::pair<int, int> current_row_col(Object* obj); // <col, row>
 
     Square* current_square(Object* obj);
+
+    Square* get_square_by_pos(Vector2D pos);
 
     std::vector<Direction> next_road(Enemy* enemy);
 

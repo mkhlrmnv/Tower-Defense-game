@@ -1,5 +1,7 @@
-#include "level.hpp"
-#include "object.hpp"
+#include "level.cpp"
+//#include "object.cpp"
+#include "tower.hpp"
+#include "enemy.hpp"
 #include <iostream>
 #include <cstdlib>
 #include <fstream>
@@ -49,7 +51,7 @@ bool testObjectList(){
     }
 
     Vector2D pos = Vector2D(150, 450); // should fail
-    Tower* t = new Tower(lv, 10, 10, 10, 10, pos, 10, 10, 10);
+    Tower* t = new Tower(lv, 1, 1, 1, 1, pos, 1, 1, 1);
 
     Vector2D pos2 = Vector2D(50, 50); // should pass
     Tower* t2 = new Tower(lv, 10, 10, 10, 10, pos2, 10, 10, 10);

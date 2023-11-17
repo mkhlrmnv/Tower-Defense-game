@@ -45,7 +45,17 @@ void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr){
 
     //_drawable_enemy.setTexture(_enemy_texture.getTexture());
 
-    _drawable_enemy.setPosition(e_ptr->get_position().y, e_ptr->get_position().x);
+    float new_x = e_ptr->get_position().y - (l.get_square_size() / 2);
+    float new_y = e_ptr->get_position().x - (l.get_square_size() / 2);
+
+    if (new_x < 0){
+        new_x = 0;
+    }
+    if (new_y < 0){
+        new_y = 0;
+    }
+
+    _drawable_enemy.setPosition(new_x, new_y);
     
     // _drawable_enemy.setPosition(sf::Vector2f (sq->get_center().y - (l.get_square_size() / 2), sq->get_center().x - (l.get_square_size() / 2))); // TODO: set offset according to the real texture / img size
     

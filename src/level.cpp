@@ -88,6 +88,17 @@ bool Level::add_enemy(Enemy* enemy){
     return false;
 }
 
+bool Level::remove_enemy(Enemy* enemy){
+    for (size_t i = 0; i < _enemies.size(); i++)
+    {
+        if (_enemies[i]->get_position() == enemy->get_position() && _enemies[i]->get_health() == enemy->get_health()){
+            _enemies.erase(_enemies.begin() + i);
+            return true;
+        }
+    }
+    return false;
+}
+
 std::vector<Tower*> Level::get_towers() const{
     return _towers;
 }
@@ -98,6 +109,17 @@ bool Level::add_tower(Tower* tower){
     if (_grid[col][row]->occupy_by_tower()){
         _towers.push_back(tower);
         return true;
+    }
+    return false;
+}
+
+bool Level::remove_tower(Tower* tower){
+    for (size_t i = 0; i < _towers.size(); i++)
+    {
+        if (_towers[i]->get_position() == tower->get_position()){
+            _towers.erase(_towers.begin() + i);
+            return true;
+        }
     }
     return false;
 }
@@ -115,6 +137,12 @@ Square* Level::current_square(Object* obj){
     return _grid[row_col.first][row_col.second];
 }
 
+Square* Level::get_square_by_pos(Vector2D pos){
+    int col = floor(pos.x / _square_size);
+    int row = floor(pos.y / _square_size);
+    return _grid[col][row];
+}
+
 /* returns vector with directions in which are road squares
 Usually size of vector is 2 because if enemy isn't in first or last road square
 there are always two ways to go
@@ -122,17 +150,17 @@ there are always two ways to go
 std::vector<Direction> Level::next_road(Enemy* enemy){
     std::pair<int, int> row_col = current_row_col(enemy);
     std::vector<Direction> list_of_road_squares;
-    if (_grid[row_col.first + 1][row_col.second]->get_occupied() == road){
+    if ((row_col.first + 1) < 10 && _grid[row_col.first + 1][row_col.second]->get_occupied() == road){
         list_of_road_squares.push_back(right);
     }
-    if (_grid[row_col.first - 1][row_col.second]->get_occupied() == road){
+    if ((row_col.first - 1) >= 0 && _grid[row_col.first - 1][row_col.second]->get_occupied() == road){
         list_of_road_squares.push_back(left);
     }
-    if (_grid[row_col.first][row_col.second + 1]->get_occupied() == road){
-        list_of_road_squares.push_back(up);
-    }
-    if (_grid[row_col.first][row_col.second - 1]->get_occupied() == road){
+    if ((row_col.second - 1) >= 0  && _grid[row_col.first][row_col.second + 1]->get_occupied() == road){
         list_of_road_squares.push_back(down);
+    }
+    if ((row_col.second + 1) >= 10 && _grid[row_col.first][row_col.second - 1]->get_occupied() == road){
+        list_of_road_squares.push_back(up);
     }
     return list_of_road_squares;
 }
@@ -245,7 +273,7 @@ std::pair<int, int> Level::can_go_notstart(Direction dir, std::vector<Direction>
     {
     case up:
         if (prev != down && sec_prev != down && row != 0){
-            /* 
+            /*
             if direction is up and previous and next to previous
             isn't down and if we are not on top row we can move up
             */
