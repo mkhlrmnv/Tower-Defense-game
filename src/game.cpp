@@ -65,17 +65,15 @@ void Game::run(){
         _level.add_tower(new Tower(_level, 1, 1, 1, 1, pos2, 1, 1, 1));
     }*/
     
-    auto e1_pos = Vector2D(80*4, 80);
+    auto e1_pos = Vector2D(80*4, 1*80);
     auto e2_pos = Vector2D(80*4, 2*80);
 
-    auto t1_pos = Vector2D(82*5, 2*80);
-    auto t2_pos = Vector2D(82*6, 2*80);
-    
-    _level.add_enemy(new Basic_Enemy(_level, 1, 1, 1, 1, e1_pos, 1, 20, 1));
-    // _level.add_enemy(new Basic_Enemy(_level, 1, 1, 1, 1, e2_pos, 1, 10, 1));
+    auto t1_pos = Vector2D(82*5, 3*80);
+    auto t2_pos = Vector2D(82*5, 4*80);
 
-    _level.add_tower(new Basic_Tower(_level, 1, 1, 1, 1, t1_pos, 1, 1, 1, true));
-    _level.add_tower(new Basic_Tower(_level, 1, 1, 1, 1, t2_pos, 1, 1, 1, true));
+    // Tower(level, healt, damage, range, attack_speed, pos, type, price, level, single or not)
+    _level.add_tower(new Basic_Tower(_level, 30, 10, 100, 1, t1_pos, 1, 10, 1, true));
+    _level.add_tower(new Basic_Tower(_level, 30, 10, 100, 1, t2_pos, 1, 10, 1, true));
 
     // std::cout << res << res2 << res3 << res4 << std::endl;
     
@@ -94,9 +92,29 @@ void Game::run(){
 
 void Game::update(){
     // update game state: buys, attacks, movements,  etc here
-    for (Enemy* e : _level.get_enemies()){
-        e->move();
+    if (!_level.get_enemies().empty()) {
+        for (Enemy* e : _level.get_enemies()){
+            e->move();
+            e->attack();
+            if (e->get_health() <= 0){
+                _level.remove_enemy(e);
+            }
+        }
+    } else if (!round_over) {
+        _level.plus_round();
+        round_over = true;
+        start_round();
     }
+    if (!_level.get_towers().empty()){ 
+        for (Tower* t : _level.get_towers()){
+            t->attack();
+            if (t->get_health() <= 0){
+                _level.remove_tower(t);
+            }
+        }
+    }
+    // _level.print_objects();
+    // std::cout << std::endl;
 }
 
 void Game::process_events(){
@@ -125,4 +143,18 @@ void Game::render(){
 
     _window.display(); // display the drawn entities
 
+}
+
+void Game::start_round(){
+    round_over = false;
+    for (int i = 0; i < (1 * _level.get_round()); i++)
+    {
+        int x = rand() % 80 + 320;
+        Vector2D rand_pos = Vector2D(x, 80+(i*5));
+        _level.add_enemy(new Basic_Enemy(_level, 20, 5, 100, 1, rand_pos, 1, 20, 1));
+    }
+    
+    // Enemy(level, healt, damage, range, attack_speed, pos, type, speed, defense)
+    // _level.add_enemy(new Basic_Enemy(_level, 20, 5, 100, 1, e1_pos, 1, 20, 1));
+    //_level.add_enemy(new Basic_Enemy(_level, 20, 5, 100, 1, e2_pos, 1, 10, 1));   
 }

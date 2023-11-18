@@ -159,7 +159,7 @@ std::vector<Direction> Level::next_road(Enemy* enemy){
     if ((row_col.second - 1) >= 0  && _grid[row_col.first][row_col.second + 1]->get_occupied() == road){
         list_of_road_squares.push_back(down);
     }
-    if ((row_col.second + 1) >= 10 && _grid[row_col.first][row_col.second - 1]->get_occupied() == road){
+    if ((row_col.second + 1) < 10 && _grid[row_col.first][row_col.second - 1]->get_occupied() == road){
         list_of_road_squares.push_back(up);
     }
     return list_of_road_squares;
@@ -167,10 +167,10 @@ std::vector<Direction> Level::next_road(Enemy* enemy){
 
 void Level::print_objects(){
     for (auto* e : _enemies){
-        std::cout << typeid(e).name() << " in point " << e->get_position() << std::endl;
+        std::cout << typeid(e).name() << " in point " << e->get_position() << " health: " << e->get_health() << std::endl;
     }
     for (auto* t : _towers){
-        std::cout << typeid(t).name() << " in point " << t->get_position() << std::endl;
+        std::cout << typeid(t).name() << " in point " << t->get_position()<< " health: " << t->get_health() << std::endl;
     }
 }
 

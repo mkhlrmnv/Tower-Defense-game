@@ -48,11 +48,11 @@ void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr){
     float new_x = e_ptr->get_position().y - (l.get_square_size() / 2);
     float new_y = e_ptr->get_position().x - (l.get_square_size() / 2);
 
-    if (new_x < 0){
-        new_x = 0;
+    if (new_x <= 0){
+        new_x = 1;
     }
-    if (new_y < 0){
-        new_y = 0;
+    if (new_y <= 0){
+        new_y = 1;
     }
 
     _drawable_enemy.setPosition(new_x, new_y);

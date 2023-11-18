@@ -11,7 +11,13 @@ public:
 
     int get_defense() const;
 
-    virtual void move() {}
+    void move();
+
+    Vector2D move_straight();
+
+    Vector2D move_corner();
+
+    // void attack();
 
     std::vector<Vector2D> get_route() const;
 

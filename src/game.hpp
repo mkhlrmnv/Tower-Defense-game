@@ -62,6 +62,8 @@ private:
     // draws a frame in loop,
     void render();
 
+    void start_round();
+
     // for testing only
     Vector2D some_pos; 
 
@@ -72,6 +74,8 @@ private:
 
     Renderer _renderer;
     Level _level;
+
+    bool round_over = false;
 
     
 
