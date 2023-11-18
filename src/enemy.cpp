@@ -48,14 +48,14 @@ void Enemy::move() {
                 If all this is true enemy gets new position and variable moved is switched to true, so enemy doesn't change direction on this call
                 */
                 if (get_route().back() != pos && !moved && get_prev_pos().y >= get_position().y){
-                    next_position = Vector2D(get_level_reference().get_square_by_pos(get_position())->get_center().x, get_position().y - get_speed());
+                    next_position = Vector2D(get_position().x, get_position().y - get_speed());
                     moved = true;
                 }
             } else {
                 // Checks that enemy hasn't moved on this call, if true 
                 // enemy gets new position and variable moved is switched to true, so enemy doesn't change direction on this call
                 if (!moved){
-                    next_position = Vector2D(get_level_reference().get_square_by_pos(get_position())->get_center().x, get_position().y - get_speed());
+                    next_position = Vector2D(get_position().x, get_position().y - get_speed());
                     moved = true;
                 }
             }
@@ -65,12 +65,12 @@ void Enemy::move() {
             pos = get_level_reference().get_square_by_pos(Vector2D(get_position().x, get_position().y + get_level_reference().get_square_size()))->get_center();
             if (!get_route().empty()){
                 if (get_route().back() != pos && !moved && get_prev_pos().y <= get_position().y){
-                    next_position = Vector2D(get_level_reference().get_square_by_pos(get_position())->get_center().x, get_position().y + get_speed());
+                    next_position = Vector2D(get_position().x, get_position().y + get_speed());
                     moved = true;
                 }
             } else {
                 if (!moved){
-                    next_position = Vector2D(get_level_reference().get_square_by_pos(get_position())->get_center().x, get_position().y + get_speed());
+                    next_position = Vector2D(get_position().x, get_position().y + get_speed());
                     moved = true;
                 }
             }
@@ -95,12 +95,12 @@ void Enemy::move() {
             pos = get_level_reference().get_square_by_pos(Vector2D(get_position().x - get_level_reference().get_square_size(), get_position().y))->get_center();
             if (!get_route().empty()){
                 if (get_route().back() != pos && !moved && get_prev_pos().x >= get_position().x){
-                    next_position = Vector2D(get_position().x - get_speed(), get_level_reference().get_square_by_pos(get_position())->get_center().y); // get_level_reference().get_square_by_pos(get_position())->get_center().y
+                    next_position = Vector2D(get_position().x - get_speed(), get_position().y); // get_level_reference().get_square_by_pos(get_position())->get_center().y
                     moved = true;
                 }
             } else {
                 if (!moved){
-                    next_position = Vector2D(get_position().x - get_speed(), get_level_reference().get_square_by_pos(get_position())->get_center().y);
+                    next_position = Vector2D(get_position().x - get_speed(), get_position().y);
                     moved = true;
                 }
             }

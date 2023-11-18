@@ -156,10 +156,10 @@ std::vector<Direction> Level::next_road(Enemy* enemy){
     if ((row_col.first - 1) >= 0 && _grid[row_col.first - 1][row_col.second]->get_occupied() == road){
         list_of_road_squares.push_back(left);
     }
-    if ((row_col.second - 1) >= 0  && _grid[row_col.first][row_col.second + 1]->get_occupied() == road){
+    if ((row_col.second + 1) < 10  && _grid[row_col.first][row_col.second + 1]->get_occupied() == road){
         list_of_road_squares.push_back(down);
     }
-    if ((row_col.second + 1) < 10 && _grid[row_col.first][row_col.second - 1]->get_occupied() == road){
+    if ((row_col.second - 1) >= 10 && _grid[row_col.first][row_col.second - 1]->get_occupied() == road){
         list_of_road_squares.push_back(up);
     }
     return list_of_road_squares;

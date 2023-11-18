@@ -149,8 +149,9 @@ void Game::start_round(){
     round_over = false;
     for (int i = 0; i < (1 * _level.get_round()); i++)
     {
+        srand (time(0));
         int x = rand() % 80 + 320;
-        Vector2D rand_pos = Vector2D(x, 80+(i*5));
+        Vector2D rand_pos = Vector2D(x, 1 +(i * 5));
         _level.add_enemy(new Basic_Enemy(_level, 20, 5, 100, 1, rand_pos, 1, 20, 1));
     }
     

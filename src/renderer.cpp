@@ -40,9 +40,7 @@ void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr){
     _drawable_enemy.setScale(_scale_factor, _scale_factor);
 
     Level& l = e_ptr->get_level_reference();
-
-    Square* sq = l.current_square(e_ptr);
-
+    
     //_drawable_enemy.setTexture(_enemy_texture.getTexture());
 
     float new_x = e_ptr->get_position().y - (l.get_square_size() / 2);
