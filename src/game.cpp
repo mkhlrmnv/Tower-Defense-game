@@ -72,8 +72,8 @@ void Game::run(){
     auto t2_pos = Vector2D(82*5, 4*80);
 
     // Tower(level, healt, damage, range, attack_speed, pos, type, price, level, single or not)
-    _level.add_tower(new Basic_Tower(_level, 30, 10, 100, 1, t1_pos, 1, 10, 1, true));
-    _level.add_tower(new Basic_Tower(_level, 30, 10, 100, 1, t2_pos, 1, 10, 1, true));
+    _level.add_tower(new Basic_Tower(_level, 30, 10, 100, 1, t1_pos, 0, 10, 1, true));
+    _level.add_tower(new Basic_Tower(_level, 30, 10, 100, 1, t2_pos, 0, 10, 1, true));
 
     // std::cout << res << res2 << res3 << res4 << std::endl;
     
@@ -153,7 +153,7 @@ void Game::start_round(){
         Square* spawn_sq = _level.get_first_road();
         int x = rand() % 80;
         Vector2D rand_pos = Vector2D(spawn_sq->get_center().x - (_level.get_square_size() / 2) + x, 1 +(i * 5));
-        _level.add_enemy(new Basic_Enemy(_level, 20, 5, 100, 1, rand_pos, 1, 20, 1));
+        _level.add_enemy(new Basic_Enemy(_level, 20, 5, 100, 1, rand_pos, 0, 20, 1));
     }
     
     // Enemy(level, healt, damage, range, attack_speed, pos, type, speed, defense)

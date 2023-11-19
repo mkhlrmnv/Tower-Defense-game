@@ -12,11 +12,11 @@ void Renderer::draw_tower(sf::RenderWindow& rwindow, Tower* t_ptr){
     //    _ = ongoing_action;
 
     // For some reason opens file only with full path
-    _tower_pic.loadFromFile(_archer_tower_file);
+    _tower_pic.loadFromFile(path_to_project + get_file_tower(t_ptr));
 
     _drawable_tower.setTexture(_tower_pic);
 
-    _drawable_tower.setScale(_scale_factor, _scale_factor);
+    _drawable_tower.setScale(_scale_factor_tower, _scale_factor_tower);
 
     Level& l = t_ptr->get_level_reference();
 
@@ -33,18 +33,22 @@ void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr){
     // int _ = type;
     //    _ = ongoing_action;
 
-    _enemy_pic.loadFromFile(_tank_orc_file);
+    _enemy_pic.loadFromFile(path_to_project + get_file_enemy(e_ptr));
 
     _drawable_enemy.setTexture(_enemy_pic);
 
-    _drawable_enemy.setScale(_scale_factor, _scale_factor);
+    _drawable_enemy.setScale(_scale_factor_enemy, _scale_factor_enemy);
 
     Level& l = e_ptr->get_level_reference();
+
+    std::cout << _drawable_enemy.getTexture()->getSize().x << " " << _drawable_enemy.getTexture()->getSize().y << std::endl;
     
     //_drawable_enemy.setTexture(_enemy_texture.getTexture());
 
-    float new_x = e_ptr->get_position().y - (l.get_square_size() / 2);
-    float new_y = e_ptr->get_position().x - (l.get_square_size() / 2);
+    // aligns enemies feet with their in game coordinates
+    // Made so, enemy always looks like enemy is walking on the road
+    float new_x = e_ptr->get_position().y - (_scale_factor_enemy * _drawable_enemy.getTexture()->getSize().x);
+    float new_y = e_ptr->get_position().x - (_scale_factor_enemy * _drawable_enemy.getTexture()->getSize().y);
 
     if (new_x <= 0){
         new_x = 1;

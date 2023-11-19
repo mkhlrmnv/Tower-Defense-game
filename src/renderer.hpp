@@ -10,6 +10,8 @@
 #include <iostream>
 #include <string>
 
+#include "attack_types.hpp"
+
 
 /* Class for creating drawable game objects for window.draw([DRAWABLE GAME OBJECT]) .*/
 /* TODO: Make another class for loading and storing textures, in some data structure, for example 2d array or similar: 
@@ -76,15 +78,17 @@ float scale_factor; // number that scales textures to right size
 sf::Texture _tower_pic; // for tower texture
 sf::Texture _enemy_pic; // for enemy texture
 
-float _scale_factor = 0.05; // Adjust this value as needed
-
-std::string _archer_tower_file = "/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/assets/textures/ArcherTower/ArcherTower_Right.png";
-std::string _tank_orc_file = "/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/assets/textures/TankOrc/TankOrc.png";
+float _scale_factor_tower = 0.05; // Adjust this value as needed
+float _scale_factor_enemy = 0.02;
 
 sf::Font _font;
 sf::Text _round_count_text;
 sf::Text _cash_text;
 sf::Text _lives_text;
+
+// if there are problems to open textures without full path to it 
+// add path to you project folder here
+std::string path_to_project = "/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/";
 
 
 // Textures _textures //  some tree like data structure for different object state of objects

@@ -27,3 +27,29 @@ double check_type_multiplier(Tower* tower, Enemy* enemy){
 
     return neutral;
 }
+
+// TODO: Finish when textures are fully done;
+std::string get_file_enemy(Enemy* enemy){
+    switch (enemy->get_type())
+    {
+    case BOSS:
+        return "assets/textures/BossKnight/BossKnight_Right.png";
+    case NEUTRAL:
+        return "assets/textures/TankOrc/TankOrc.png";
+    default:
+        break;
+    }
+    return "";
+}
+std::string get_file_tower(Tower* tower){
+    switch (tower->get_type())
+    {
+    case BASIC: 
+        return "assets/textures/ArcherTower/ArcherTower_Right.png";
+    case SNIPER:
+        return "assets/textures/SniperTower/SniperTower_Right.png";
+    default:
+        break;
+    }
+    return "";
+}
