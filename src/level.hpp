@@ -109,7 +109,10 @@ public:
 
     bool randomly_generate();
 
+    Square* get_first_road();
+
 private:
+    Square* _first_road;
     int _square_size;
     int _round, _cash, _lives;
     std::vector<std::vector<Square*>> _grid;

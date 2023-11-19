@@ -30,6 +30,20 @@ void Enemy::set_prev_pos(Vector2D pos){
 }
 
 void Enemy::move() {
+
+    std::vector<Vector2D> route = get_route();
+    // if current square center is different then previous center of previous position square
+    // previous gets added to route list
+    if (!route.empty()){
+        if (get_level_reference().get_square_by_pos(get_position())->get_center() !=  get_level_reference().get_square_by_pos(get_prev_pos())->get_center()){
+            set_route_position(get_level_reference().get_square_by_pos(get_prev_pos())->get_center());
+        }
+    } else {
+        if (get_level_reference().get_square_by_pos(get_position())->get_center() != get_level_reference().get_first_road()->get_center()){
+            set_route_position(get_level_reference().get_first_road()->get_center());
+        }
+    }
+
     Vector2D next_position; // variable for storing new position
     Vector2D pos; // variable for calculating next square position
     bool moved = false; // variable, that not allows to move in two directions at the same time
@@ -80,12 +94,12 @@ void Enemy::move() {
             pos = get_level_reference().get_square_by_pos(Vector2D(get_position().x + get_level_reference().get_square_size(), get_position().y))->get_center();
             if (!get_route().empty()){
                 if (get_route().back() != pos && !moved && get_prev_pos().x <= get_position().x){
-                    next_position = Vector2D(get_position().x + get_speed(), get_level_reference().get_square_by_pos(get_position())->get_center().y);
+                    next_position = Vector2D(get_position().x + get_speed(), get_position().y);
                     moved = true;
                 }
             } else {
                 if (!moved){
-                    next_position = Vector2D(get_position().x + get_speed(), get_level_reference().get_square_by_pos(get_position())->get_center().y);
+                    next_position = Vector2D(get_position().x + get_speed(), get_position().y);
                     moved = true;
                 }
             }
@@ -113,17 +127,6 @@ void Enemy::move() {
     // previous one
     if ((get_position() != next_position && next_position.x != 0 && next_position.y != 0)){
         set_prev_pos(get_position());
-    }
-
-    std::vector<Vector2D> route = get_route();
-    // If current square center isn't found in route of enemy
-    // current square center is added to route
-    if (!route.empty()){
-        if (route.back() !=  get_level_reference().get_square_by_pos(get_position())->get_center()){
-            set_route_position(get_level_reference().get_square_by_pos(get_position())->get_center());
-        }
-    } else {
-        set_route_position(get_level_reference().get_square_by_pos(get_position())->get_center());
     }
 
     // if next position is out of the bounds, enemy gets deleted and one live is taken away from player

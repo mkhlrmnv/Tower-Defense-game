@@ -192,6 +192,12 @@ int Level::read_file(const std::string& file_name){
                 c = file.get();
             }
 
+            // sets variable first road to represent square where is first peace
+            // of road
+            if (c == '=' && j == 0){
+                _first_road = _grid[i][j];
+            }
+
             if (c == '#'){
                 _grid[i][j]->occupy_by_grass(); // if char is # occupy square with grass
             } 
@@ -321,12 +327,7 @@ std::pair<int, int> Level::can_go_start(Direction dir, std::vector<Direction> pr
         switch (dir) // switch case for direction
         {
         case up:
-            if (prev_dirs.empty() && row != 0){
-                /*
-                If its fist move and its not top row, can move up
-                */
-                pair.first--;
-            } else if (!prev_dirs.empty() && prev_dirs[0] != down && row != 0){
+            if (!prev_dirs.empty() && prev_dirs[0] != down && row != 0){
                 /*
                 If its not first move, previous direction isn't down
                 and its not top row we can move up
@@ -337,12 +338,7 @@ std::pair<int, int> Level::can_go_start(Direction dir, std::vector<Direction> pr
             }
             break;
         case down:
-            if (prev_dirs.empty() && row != 9){
-                /*
-                If its fist move and its not bottom row, can move down
-                */
-                pair.first++;
-            } else if (!prev_dirs.empty() && prev_dirs[0] != up && row != 9){
+            if (!prev_dirs.empty() && prev_dirs[0] != up && row != 9){
                 /*
                 If its not first move, previous direction isn't up
                 and its not bottom row we can move down
@@ -361,7 +357,7 @@ std::pair<int, int> Level::can_go_start(Direction dir, std::vector<Direction> pr
         default:
             break;
         }
-        return pair;
+    return pair;
 }
 
 bool Level::randomly_generate(){
@@ -373,6 +369,10 @@ bool Level::randomly_generate(){
     
     int cout_left = 0;
     int max_left = 4;
+
+    // sets variable first road to represent square where is first peace
+    // of road
+    _first_road = _grid[currentRow][0];
 
     Direction dir;
     std::vector<Direction> prev_dirs;
@@ -422,4 +422,8 @@ bool Level::randomly_generate(){
         //std::cout << dir << " " << roadLength << std::endl;
         }
     return false;
+}
+
+Square* Level::get_first_road(){
+    return _first_road;
 }

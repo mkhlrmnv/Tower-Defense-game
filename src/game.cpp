@@ -51,7 +51,7 @@ void Game::run(){
 
     // int choice = rand() % 2; // chose randomly to load level or to randomly generate
 
-    generate_chosen_level_style(LevelSelection::load); 
+    generate_chosen_level_style(LevelSelection::random); 
 
     // test drawing objects
 
@@ -150,8 +150,9 @@ void Game::start_round(){
     for (int i = 0; i < (1 * _level.get_round()); i++)
     {
         srand (time(0));
-        int x = rand() % 80 + 320;
-        Vector2D rand_pos = Vector2D(x, 1 +(i * 5));
+        Square* spawn_sq = _level.get_first_road();
+        int x = rand() % 80;
+        Vector2D rand_pos = Vector2D(spawn_sq->get_center().x - (_level.get_square_size() / 2) + x, 1 +(i * 5));
         _level.add_enemy(new Basic_Enemy(_level, 20, 5, 100, 1, rand_pos, 1, 20, 1));
     }
     
