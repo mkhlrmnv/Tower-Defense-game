@@ -28,7 +28,7 @@ int Game::generate_chosen_level_style(int chosen_lv){
             std::cout << "random level generation successful" <<std::endl;
         }
     }else if(chosen_lv == LevelSelection::load){
-        if(_level.read_file("/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/maps/example_map.txt")==-1){
+        if(_level.read_file("../maps/example_map.txt")==-1){
             std::cout << "level file read failed" <<std::endl;
             return 0;
         }else{

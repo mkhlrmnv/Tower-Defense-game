@@ -84,8 +84,10 @@ sf::Texture _enemy_sprite; // for enemy texture
 sf::Texture _grass_pic;
 sf::Texture _road_pic;
 
-float _scale_factor_tower = 0.05; // Adjust this value as needed
-float _scale_factor_enemy = 0.02;
+float _scale_factor = 0.05; // Adjust this value as needed
+
+std::string _archer_tower_file = "../assets/textures/ArcherTower/ArcherTower_Right.png";
+std::string _tank_orc_file = "../assets/textures/TankOrc/TankOrc.png";
 
 sf::Font _font;
 sf::Text _round_count_text;
