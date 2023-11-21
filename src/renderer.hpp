@@ -78,6 +78,9 @@ float scale_factor; // number that scales textures to right size
 sf::Texture _tower_pic; // for tower texture
 sf::Texture _enemy_pic; // for enemy texture
 
+sf::Texture _grass_pic;
+sf::Texture _road_pic;
+
 float _scale_factor_tower = 0.05; // Adjust this value as needed
 float _scale_factor_enemy = 0.02;
 

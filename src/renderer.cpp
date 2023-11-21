@@ -114,7 +114,14 @@ void Renderer::make_drawable_level(Level& lv){
     sf::Color green = sf::Color(0, 128, 0);
     sf::Color grey = sf::Color(128, 128, 128);
     
-    sf::RectangleShape drawable_level_square = sf::RectangleShape(sf::Vector2f(lv.get_square_size(),lv.get_square_size()));
+    sf::Sprite drawable_level_square;
+
+
+    _road_pic.loadFromFile(path_to_project + "assets/textures/RoadTile.png");
+    _grass_pic.loadFromFile(path_to_project + "assets/textures/GrassTile.png");
+            
+
+    // sf::RectangleShape drawable_level_square = sf::RectangleShape(sf::Vector2f(lv.get_square_size(),lv.get_square_size()));
     std::vector<std::vector<Square *>> level_grid = lv.get_grid();
 
     for(auto column : level_grid){
@@ -124,18 +131,19 @@ void Renderer::make_drawable_level(Level& lv){
             // get the upper left corner position of a level grid, position of the graphic objects is taken from the upper left corner
             upper_left_corner_x  = center_coords.x - lv.get_square_size()/2;
             upper_left_corner_y  = center_coords.y - lv.get_square_size()/2;
-            
-            drawable_level_square.setPosition(upper_left_corner_y, upper_left_corner_x);
-            drawable_level_square.setOutlineColor(grey);
+            // drawable_level_square.setOutlineColor(grey);
 
             if(square_type == occupied_type::grass){
-                drawable_level_square.setOutlineThickness(-0.5);
-                drawable_level_square.setFillColor(green);
+                drawable_level_square.setTexture(_grass_pic);
             }
             else if(square_type == occupied_type::road){
-                drawable_level_square.setOutlineThickness(0);
-                drawable_level_square.setFillColor(grey);
+                drawable_level_square.setTexture(_road_pic);
             }
+
+            drawable_level_square.setPosition(upper_left_corner_y, upper_left_corner_x);
+
+            drawable_level_square.setScale(0.01 , 0.01);
+
             _level_texture.draw(drawable_level_square);
         }
     }
@@ -143,6 +151,7 @@ void Renderer::make_drawable_level(Level& lv){
     _level_texture.display();
     _drawable_level.setTexture(_level_texture.getTexture());
 }
+
 
 // Uses same triangle to set a place holder texture for both enemy and tower class
 void Renderer::make_drawable_object_textures(){
