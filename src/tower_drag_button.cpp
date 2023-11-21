@@ -4,11 +4,10 @@
 TowerDragButton::TowerDragButton(const std::string& price, sf::Vector2f size, sf::Vector2f position, sf::Color color,  sf::Texture obj_texture, int tower_type) : 
 Button(price, size, position, color), _texture(obj_texture), _tower_type(tower_type), _drag_flag(false){
 
-    // TODO: set according the menu
     
     _drawable_dragging_tower.setTexture(_texture);
     _drawable_dragging_tower.setScale({_scale, _scale});
-    _drawable_dragging_tower.setPosition(_position + _position);
+    _drawable_dragging_tower.setPosition(_position);
 
     _drawable_tower.setTexture(_texture);
     _drawable_tower.setScale({_scale, _scale});
@@ -23,18 +22,15 @@ Button(price, size, position, color), _texture(obj_texture), _tower_type(tower_t
     _button.setSize({tx, ty + text_size});
     _size = sf::Vector2f(tx, ty + text_size);
 
-    std::cout << _size.x << " " << _size.y << std::endl;
-    std::cout << _button.getSize().x << " " << _button.getSize().y << std::endl;
+    // sets text couple pixels higher
+    float buffer = 5;
 
-    float additional_distance_to_bottom = 5;
-
-    float text_x = _button.getPosition().x + _button.getGlobalBounds().width / 2 - _text.getGlobalBounds().width/2;
-    float text_y = _button.getPosition().y + _button.getGlobalBounds().height - _text.getCharacterSize() - additional_distance_to_bottom;
+    // TODO: fix text centering
+    float text_x = _drawable_tower.getPosition().x + _button.getGlobalBounds().width / 2 ; - _text.getLocalBounds().width/2;
+    std::cout << _text.getLocalBounds().width << std::endl;
+    float text_y = _drawable_tower.getPosition().y + _drawable_tower.getGlobalBounds().height ; // - _text.getCharacterSize() - buffer;
 
     _text.setPosition({text_x, text_y});
-
-    //set text below the image on the button
-
 
 }
 
@@ -92,7 +88,6 @@ void TowerDragButton::handle_events(sf::RenderWindow& window, const sf::Event& e
                     set_drag_flag();
                     set_dragging_drawable_offset(window);
                     set_dragging_drawable_pos(window);
-                    std::cout << "on button, no flag" << std::endl;
                 }
             }
     if(event.type == sf::Event::MouseMoved){
@@ -103,6 +98,7 @@ void TowerDragButton::handle_events(sf::RenderWindow& window, const sf::Event& e
 
     if(event.type == sf::Event::MouseButtonReleased){
         if(get_drag_flag()){
+            // TODO: Add functionality here
             reset_drag_flag();
         }
     }

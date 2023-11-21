@@ -2,9 +2,10 @@
 #include <SFML/Window.hpp>
 #include <button.hpp>
 #include <tower_drag_button.hpp>
+#include <side_menu.hpp>
 #include <level.hpp>
 #include <iostream>
-
+#include <resource_handler.hpp>
 
 
 int test_button(){
@@ -82,6 +83,48 @@ int test_drag_button(){
     return 0;
 }
 
+int test_menu(){
+    
+    sf::Font font;
+    if(!font.loadFromFile("/home/klind/tower_defence/assets/fonts/Ubuntu-R.ttf")){std::cout << "succesfull font load" << std::endl;};
+    sf::RenderWindow window(sf::VideoMode(1100, 800), "My window");
+    window.setPosition({100, 0});
+    
+    Level lv(20,20,20); // just to run test 
+
+    sf::Texture tower_texture; 
+    tower_texture.loadFromFile("/home/klind/tower_defence/assets/textures/ArcherTower/ArcherTower_Right.png");
+    ResourceHandler rh;
+
+
+    SideMenu sm(800, 300, rh,  lv);
+
+
+    // run the program as long as the window is open
+    while (window.isOpen())
+    {
+        // check all the window's events that were triggered since the last iteration of the loop
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            // "close requested" event: we close the window
+            if (event.type == sf::Event::Closed){
+                window.close();
+            }
+            sm.handle_events(window, event);
+        }
+
+        
+        sm.update_displays();
+        window.clear();
+        window.draw(sm);
+        window.display();
+
+    }
+
+    return 0;
+}
+
 int main(){
-    return test_drag_button();
+    return test_menu();
 }

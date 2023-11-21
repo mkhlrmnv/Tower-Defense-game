@@ -1,5 +1,6 @@
 #include "game.hpp"
 #include <thread>
+#include <mutex>
 
 std::mutex enemiesMutex;
 std::mutex enemiesMutex_2;

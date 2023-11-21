@@ -7,7 +7,7 @@
 
 class TowerDragButton : public Button{
 public:
-
+    TowerDragButton(){}
     TowerDragButton(const std::string& price, sf::Vector2f size, sf::Vector2f position, sf::Color color, sf::Texture obj_texture, int tower_type);
 
     /* 
@@ -28,14 +28,11 @@ public:
 
     void set_dragging_drawable_pos(sf::RenderWindow& window);
     
-    virtual void place_object_on_square(); 
-    
+    // define to create object to place in mouse release pos
+    virtual void some_action_from_level(Level &lv){} 
+
     // implements the operation of the drag trough events
-    void handle_events(sf::RenderWindow& window, const sf::Event& event, Level& lv);
-
-    
-
-    
+    void handle_events(sf::RenderWindow& window, const sf::Event& event, Level& lv);    
 
 protected:
 

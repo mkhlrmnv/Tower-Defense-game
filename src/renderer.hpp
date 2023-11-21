@@ -84,7 +84,8 @@ sf::Texture _enemy_sprite; // for enemy texture
 sf::Texture _grass_pic;
 sf::Texture _road_pic;
 
-float _scale_factor = 0.05; // Adjust this value as needed
+float _scale_factor_tower = 0.05; // Adjust this value as needed
+float _scale_factor_enemy = 0.02;
 
 std::string _archer_tower_file = "../assets/textures/ArcherTower/ArcherTower_Right.png";
 std::string _tank_orc_file = "../assets/textures/TankOrc/TankOrc.png";
@@ -96,7 +97,7 @@ sf::Text _lives_text;
 
 // if there are problems to open textures without full path to it 
 // add path to you project folder here
-std::string path_to_project = "/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/";
+std::string path_to_project = "/home/klind/tower_defence/";
 
 
 // Textures _textures //  some tree like data structure for different object state of objects

@@ -11,7 +11,7 @@ class Button : public sf::Drawable{
 
 public:
     Button(){}
-    Button(const std::string& str, sf::Vector2f size, sf::Vector2f position, sf::Color color);
+    Button(const std::string& label, sf::Vector2f size, sf::Vector2f position, sf::Color color);
 
     void set_font(sf::Font& font);
     
@@ -21,14 +21,15 @@ public:
     void set_position_text_down(sf::Vector2f pos);
 
     void set_color(sf::Color color);
-    void set_text_string(const std::string& str);
+    void set_text_string(const std::string& label);
 
     bool is_mouse_over(sf::RenderWindow& window);
 
     virtual void handle_events(sf::RenderWindow& window, const sf::Event& event, Level& lv);
 
-    // TODO: define in child class, maybe need to define in cpp file
+    // TODO: define in child class 
     virtual void some_action_from_level(Level &lv){} 
+
 
 protected: 
 
