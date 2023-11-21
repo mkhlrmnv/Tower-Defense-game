@@ -92,6 +92,7 @@ bool Level::remove_enemy(Enemy* enemy){
     for (size_t i = 0; i < _enemies.size(); i++)
     {
         if (_enemies[i]->get_position() == enemy->get_position() && _enemies[i]->get_health() == enemy->get_health()){
+            delete _enemies[i];
             _enemies.erase(_enemies.begin() + i);
             return true;
         }
@@ -117,6 +118,7 @@ bool Level::remove_tower(Tower* tower){
     for (size_t i = 0; i < _towers.size(); i++)
     {
         if (_towers[i]->get_position() == tower->get_position()){
+            delete _towers[i];
             _towers.erase(_towers.begin() + i);
             return true;
         }

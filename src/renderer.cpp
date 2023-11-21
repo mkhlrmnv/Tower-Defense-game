@@ -41,7 +41,7 @@ void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr){
 
     Level& l = e_ptr->get_level_reference();
 
-    std::cout << _drawable_enemy.getTexture()->getSize().x << " " << _drawable_enemy.getTexture()->getSize().y << std::endl;
+    // std::cout << _drawable_enemy.getTexture()->getSize().x << " " << _drawable_enemy.getTexture()->getSize().y << std::endl;
     
     //_drawable_enemy.setTexture(_enemy_texture.getTexture());
 
@@ -169,7 +169,7 @@ void Renderer::make_drawable_object_textures(){
 }
 
 void Renderer::load_font(){
-    if(!_font.loadFromFile("../assets/fonts/Ubuntu-R.ttf")){
+    if(!_font.loadFromFile(path_to_project + "/assets/fonts/Ubuntu-R.ttf")){
         std::cout << "font load failed" << std::endl;
     }else{
         std::cout << "font load success" << std::endl;

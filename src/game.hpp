@@ -64,6 +64,10 @@ private:
 
     void start_round();
 
+    void update_enemies();
+
+    void update_towers();
+
     // for testing only
     Vector2D some_pos; 
 

@@ -51,22 +51,7 @@ void Game::run(){
 
     // int choice = rand() % 2; // chose randomly to load level or to randomly generate
 
-    generate_chosen_level_style(LevelSelection::random); 
-
-    // test drawing objects
-
-    /*for (int i = 0; i < 5; i++){
-        auto pos = Vector2D(rand() % 800, rand() % 800);
-        _level.add_enemy(new Enemy(_level, 1, 1, 1, 1, pos, 1, 1, 1));
-    }
-
-    for (int j = 0; j < 5; j++){
-        auto pos2 = Vector2D(rand() % 800, rand() % 800);
-        _level.add_tower(new Tower(_level, 1, 1, 1, 1, pos2, 1, 1, 1));
-    }*/
-    
-    auto e1_pos = Vector2D(80*4, 1*80);
-    auto e2_pos = Vector2D(80*4, 2*80);
+    generate_chosen_level_style(LevelSelection::load); 
 
     auto t1_pos = Vector2D(82*5, 3*80);
     auto t2_pos = Vector2D(82*5, 4*80);
@@ -74,10 +59,6 @@ void Game::run(){
     // Tower(level, healt, damage, range, attack_speed, pos, type, price, level, single or not)
     _level.add_tower(new Basic_Tower(_level, 30, 10, 100, 1, t1_pos, 0, 10, 1, true));
     _level.add_tower(new Basic_Tower(_level, 30, 10, 100, 1, t2_pos, 0, 10, 1, true));
-
-    // std::cout << res << res2 << res3 << res4 << std::endl;
-    
-    //***************
 
     _renderer.make_drawable_level(_level);
     _renderer.make_drawable_object_textures();
@@ -93,25 +74,14 @@ void Game::run(){
 void Game::update(){
     // update game state: buys, attacks, movements,  etc here
     if (!_level.get_enemies().empty()) {
-        for (Enemy* e : _level.get_enemies()){
-            e->move();
-            e->attack();
-            if (e->get_health() <= 0){
-                _level.remove_enemy(e);
-            }
-        }
+        update_enemies();
     } else if (!round_over) {
         _level.plus_round();
         round_over = true;
         start_round();
     }
     if (!_level.get_towers().empty()){ 
-        for (Tower* t : _level.get_towers()){
-            t->attack();
-            if (t->get_health() <= 0){
-                _level.remove_tower(t);
-            }
-        }
+        update_towers();
     }
     // _level.print_objects();
     // std::cout << std::endl;
@@ -159,4 +129,24 @@ void Game::start_round(){
     // Enemy(level, healt, damage, range, attack_speed, pos, type, speed, defense)
     // _level.add_enemy(new Basic_Enemy(_level, 20, 5, 100, 1, e1_pos, 1, 20, 1));
     //_level.add_enemy(new Basic_Enemy(_level, 20, 5, 100, 1, e2_pos, 1, 10, 1));   
+}
+
+void Game::update_enemies(){
+    for (Enemy* e : _level.get_enemies()){
+        if (e->get_health() <= 0){
+            _level.remove_enemy(e);
+        } else {
+            e->attack();
+            e->move();
+        }
+    }
+}
+
+void Game::update_towers(){
+    for (Tower* t : _level.get_towers()){
+        t->attack();
+        if (t->get_health() <= 0){
+            _level.remove_tower(t);
+        }
+    }
 }

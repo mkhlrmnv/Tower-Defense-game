@@ -7,15 +7,13 @@ class Enemy: public Object {
 public:
     Enemy(Level& level, int health, int damage, int range, int attack_speed, Vector2D position, int type, int speed, int defense);
 
+    ~Enemy() { }
+
     int get_speed() const;
 
     int get_defense() const;
 
     void move();
-
-    Vector2D move_straight();
-
-    Vector2D move_corner();
 
     // void attack();
 
