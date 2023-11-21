@@ -1,5 +1,9 @@
 #include "game.hpp"
+#include <thread>
 
+std::mutex enemiesMutex;
+std::mutex enemiesMutex_2;
+std::mutex towersMutex;
 
 Game::Game(): _game_resolution(800), _side_bar_width(300), _window(), _level(800, 250, 50), _renderer(), some_pos(200,200){
 }
@@ -64,6 +68,8 @@ void Game::run(){
     _renderer.make_drawable_object_textures();
     _renderer.make_level_info_texts(_game_resolution, _side_bar_width);
 
+
+
     while(_window.isOpen()){
         process_events();
         update();
@@ -72,19 +78,23 @@ void Game::run(){
 }
 
 void Game::update(){
-    // update game state: buys, attacks, movements,  etc here
-    if (!_level.get_enemies().empty()) {
-        update_enemies();
-    } else if (!round_over) {
+
+    std::thread enemiesThread(&Game::move_enemies, this);
+    std::thread enemiesThread_2(&Game::attack_enemies, this);
+    std::thread towersThread(&Game::update_towers, this);
+
+    // if there are not enemies and round over variable hasn't been updates
+    // new round starts
+    if (_level.get_enemies().empty() && !round_over) {
         _level.plus_round();
         round_over = true;
         start_round();
+        
     }
-    if (!_level.get_towers().empty()){ 
-        update_towers();
-    }
-    // _level.print_objects();
-    // std::cout << std::endl;
+
+    enemiesThread.join();
+    enemiesThread_2.join();
+    towersThread.join();
 }
 
 void Game::process_events(){
@@ -131,18 +141,33 @@ void Game::start_round(){
     //_level.add_enemy(new Basic_Enemy(_level, 20, 5, 100, 1, e2_pos, 1, 10, 1));   
 }
 
-void Game::update_enemies(){
+void Game::move_enemies(){
+    std::lock_guard<std::mutex> lock(enemiesMutex);
+
     for (Enemy* e : _level.get_enemies()){
         if (e->get_health() <= 0){
             _level.remove_enemy(e);
         } else {
-            e->attack();
             e->move();
         }
     }
 }
 
+void Game::attack_enemies(){
+    std::lock_guard<std::mutex> lock(enemiesMutex_2);
+
+    for (Enemy* e : _level.get_enemies()){
+        if (e->get_health() <= 0){
+            _level.remove_enemy(e);
+        } else {
+            e->attack();
+        }
+    }
+}
+
 void Game::update_towers(){
+    std::lock_guard<std::mutex> lock(towersMutex);
+
     for (Tower* t : _level.get_towers()){
         t->attack();
         if (t->get_health() <= 0){
