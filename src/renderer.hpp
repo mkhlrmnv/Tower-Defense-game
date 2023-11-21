@@ -35,6 +35,9 @@ public:
     // draw background
     void draw_level(sf::RenderWindow& rwindow);
 
+    void attack_animation(Object* obj);
+
+    void dying_animatio(Object* obj);
 
     // draw single enemy  
     void draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr); // TODO: implement the choice of correct texture with obn and object type
@@ -75,8 +78,8 @@ sf::RenderTexture _enemy_texture;
 
 float scale_factor; // number that scales textures to right size
 
-sf::Texture _tower_pic; // for tower texture
-sf::Texture _enemy_pic; // for enemy texture
+sf::Texture _tower_sprite; // for tower texture
+sf::Texture _enemy_sprite; // for enemy texture
 
 sf::Texture _grass_pic;
 sf::Texture _road_pic;

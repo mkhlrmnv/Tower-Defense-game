@@ -12,7 +12,7 @@ public:
 
     ~Basic_Tower() { }
 
-    void attack();
+    bool attack();
 
 private:
     bool _attack_type_single;

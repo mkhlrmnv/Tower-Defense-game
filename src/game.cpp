@@ -79,8 +79,7 @@ void Game::run(){
 
 void Game::update(){
 
-    std::thread enemiesThread(&Game::move_enemies, this);
-    std::thread enemiesThread_2(&Game::attack_enemies, this);
+    std::thread enemiesThread(&Game::update_enemies, this);
     std::thread towersThread(&Game::update_towers, this);
 
     // if there are not enemies and round over variable hasn't been updates
@@ -89,11 +88,9 @@ void Game::update(){
         _level.plus_round();
         round_over = true;
         start_round();
-        
     }
 
     enemiesThread.join();
-    enemiesThread_2.join();
     towersThread.join();
 }
 
@@ -141,26 +138,16 @@ void Game::start_round(){
     //_level.add_enemy(new Basic_Enemy(_level, 20, 5, 100, 1, e2_pos, 1, 10, 1));   
 }
 
-void Game::move_enemies(){
+void Game::update_enemies(){
     std::lock_guard<std::mutex> lock(enemiesMutex);
 
     for (Enemy* e : _level.get_enemies()){
         if (e->get_health() <= 0){
             _level.remove_enemy(e);
         } else {
-            e->move();
-        }
-    }
-}
-
-void Game::attack_enemies(){
-    std::lock_guard<std::mutex> lock(enemiesMutex_2);
-
-    for (Enemy* e : _level.get_enemies()){
-        if (e->get_health() <= 0){
-            _level.remove_enemy(e);
-        } else {
-            e->attack();
+            if (!e->attack()){
+                e->move();
+            }
         }
     }
 }

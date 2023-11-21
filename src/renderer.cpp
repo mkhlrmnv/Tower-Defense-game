@@ -12,9 +12,10 @@ void Renderer::draw_tower(sf::RenderWindow& rwindow, Tower* t_ptr){
     //    _ = ongoing_action;
 
     // For some reason opens file only with full path
-    _tower_pic.loadFromFile(path_to_project + get_file_tower(t_ptr));
+    _tower_sprite.loadFromFile(path_to_project + get_file_tower(t_ptr));
+    
 
-    _drawable_tower.setTexture(_tower_pic);
+    _drawable_tower.setTexture(_tower_sprite);
 
     _drawable_tower.setScale(_scale_factor_tower, _scale_factor_tower);
 
@@ -33,9 +34,9 @@ void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr){
     // int _ = type;
     //    _ = ongoing_action;
 
-    _enemy_pic.loadFromFile(path_to_project + get_file_enemy(e_ptr));
+    _enemy_sprite.loadFromFile(path_to_project + get_file_enemy(e_ptr));
 
-    _drawable_enemy.setTexture(_enemy_pic);
+    _drawable_enemy.setTexture(_enemy_sprite);
 
     _drawable_enemy.setScale(_scale_factor_enemy, _scale_factor_enemy);
 

@@ -12,7 +12,7 @@ public:
 
     ~Basic_Enemy() { }
 
-    void attack();
+    bool attack();
 
     // void move();
 };

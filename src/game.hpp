@@ -64,9 +64,7 @@ private:
 
     void start_round();
 
-    void move_enemies();
-
-    void attack_enemies();
+    void update_enemies();
 
     void update_towers();
 

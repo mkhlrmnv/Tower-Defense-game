@@ -15,5 +15,4 @@ private:
     int _price;
     int _level;
 };
-
 #endif

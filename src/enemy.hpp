@@ -15,7 +15,9 @@ public:
 
     void move();
 
-    // void attack();
+    // void State get_state();
+
+    // bool attack();
 
     std::vector<Vector2D> get_route() const;
 
