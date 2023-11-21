@@ -77,10 +77,6 @@ void TowerDragButton::set_dragging_drawable_offset(sf::RenderWindow& window){
     }
 }
 
-void TowerDragButton::place_object_on_square(){
-
-}
-
 void TowerDragButton::handle_events(sf::RenderWindow& window, const sf::Event& event, Level& level){
 
      if(event.type == sf::Event::MouseButtonPressed){
