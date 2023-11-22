@@ -1,0 +1,60 @@
+{
+  "buildCommand" : {
+    "command" : "prepareForIndexing",
+    "enableIndexBuildArena" : false,
+    "targets" : null
+  },
+  "configuredTargets" : [
+    {
+      "guid" : "c591120e88344518e54653235fbe98b18eeaa79d75789d41dfaef8ab70001984"
+    },
+    {
+      "guid" : "c591120e88344518e54653235fbe98b1c5f71c5cdbff443e497e90dedfce5f80"
+    }
+  ],
+  "containerPath" : "/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/Tower-Defence.xcodeproj",
+  "continueBuildingAfterErrors" : true,
+  "enableIndexBuildArena" : false,
+  "hideShellScriptEnvironment" : false,
+  "parameters" : {
+    "action" : "build",
+    "activeArchitecture" : "arm64",
+    "activeRunDestination" : {
+      "disableOnlyActiveArch" : false,
+      "platform" : "macosx",
+      "sdk" : "macosx14.0",
+      "sdkVariant" : "macos",
+      "supportedArchitectures" : [
+        "arm64e",
+        "arm64",
+        "x86_64"
+      ],
+      "targetArchitecture" : "arm64"
+    },
+    "arenaInfo" : {
+      "buildIntermediatesPath" : "",
+      "buildProductsPath" : "",
+      "derivedDataPath" : "/Users/mkhlrmnv/Library/Developer/Xcode/DerivedData",
+      "indexDataStoreFolderPath" : "/Users/mkhlrmnv/Library/Developer/Xcode/DerivedData/Tower-Defence-fulgeyqywhzvorbuiqmckzmqvhsh/Index.noindex/DataStore",
+      "indexEnableDataStore" : true,
+      "indexPCHPath" : "/Users/mkhlrmnv/Library/Developer/Xcode/DerivedData/Tower-Defence-fulgeyqywhzvorbuiqmckzmqvhsh/Index.noindex/PrecompiledHeaders",
+      "pchPath" : ""
+    },
+    "configurationName" : "Debug",
+    "overrides" : {
+      "synthesized" : {
+        "table" : {
+          "ENABLE_PREVIEWS" : "NO",
+          "ENABLE_XOJIT_PREVIEWS" : "NO"
+        }
+      }
+    }
+  },
+  "qos" : "default",
+  "schemeCommand" : "launch",
+  "showNonLoggedProgress" : true,
+  "useDryRun" : true,
+  "useImplicitDependencies" : true,
+  "useLegacyBuildLocations" : false,
+  "useParallelTargets" : true
+}

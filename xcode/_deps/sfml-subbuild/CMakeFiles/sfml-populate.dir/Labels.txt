@@ -1,0 +1,14 @@
+# Target labels
+ sfml-populate
+# Source files and their labels
+/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/CMakeFiles/sfml-populate
+/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/CMakeFiles/sfml-populate.rule
+/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/CMakeFiles/(CONFIG)/sfml-populate-complete.rule
+/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/(CONFIG)/sfml-populate-build.rule
+/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/(CONFIG)/sfml-populate-configure.rule
+/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/(CONFIG)/sfml-populate-download.rule
+/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/(CONFIG)/sfml-populate-install.rule
+/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/(CONFIG)/sfml-populate-mkdir.rule
+/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/(CONFIG)/sfml-populate-patch.rule
+/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/(CONFIG)/sfml-populate-test.rule
+/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/(CONFIG)/sfml-populate-update.rule

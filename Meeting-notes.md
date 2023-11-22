@@ -204,6 +204,61 @@ Under work
 
 **Participants**:
 
+1. Mikhail Romanov
+2. Kalle Lindgren
+3. Aki Oura
+4. Leo Teodosin
+
+## Summary of works
+
+1. Mikhail Romanov
+
+   Connected object and its subclasses, modified move() function
+
+2. Leo Teodosin
+
+   Continued with object
+
+3. Aki Oura
+
+   Continued with textures, made then smaller and added textures for grass and road
+
+4. Kalle Lindgren
+
+   Developed sidemenu and started source handler.
+
+## Challenges
+
+1. Include mess in object class
+2. Move function
+
+## Actions
+
+1. Mikhail will continue with animation and multithreading
+2. Leo will finnish object subclasses
+3. Aki will do UI
+4. Kalle will continue with side menu UI and GUI
+
+> Please reflect these action decisions in your git commit messages so that
+> your group members and advisor can follow the progress.
+
+## Project status
+
+Under work
+
+### TODOs
+
+1. Mikhail animation and multithreading
+2. Leo object subclasses
+3. Aki UI
+4. Kalle UI and GUI
+
+### ------------------------------------------------------------------------------------------------------
+
+# Meeting dd.mm.2021 HH::MM
+
+**Participants**:
+
 1. Member 1
 2. Member 2
 3. Member 3
