@@ -63,8 +63,8 @@ void Game::run(){
     auto t2_pos = Vector2D(82*5, 4*80);
 
     // Tower(level, health, damage, range, attack_speed, pos, type, price, level, single or not)
-    _level.add_tower(new Basic_Tower(_level, 30, 10, 100, 1, t1_pos, 0, 10, 1, true));
-    _level.add_tower(new Basic_Tower(_level, 30, 10, 100, 1, t2_pos, 0, 10, 1, true));
+    _level.add_tower(new Basic_Tower(_level, t1_pos));
+    _level.add_tower(new Basic_Tower(_level, t2_pos));
 
     _renderer.make_drawable_level(_level);
     _renderer.make_drawable_object_textures();
@@ -80,9 +80,9 @@ void Game::run(){
     {
         process_events();
         timeSinceLastUpdate += clock.restart();
-        while (timeSinceLastUpdate > sf::seconds(1.f / 30.f))
+        while (timeSinceLastUpdate > sf::seconds(1.f / 60.f))
         {
-            timeSinceLastUpdate -= sf::seconds(1.f / 30.f);
+            timeSinceLastUpdate -= sf::seconds(1.f / 60.f);
             process_events();
             update();
             render();
@@ -155,7 +155,7 @@ void Game::start_round(){
         int x = rand() % 80;
         int y = rand() % 40;
         Vector2D rand_pos = Vector2D(spawn_sq->get_center().x - (_level.get_square_size() / 2) + x, 1 + y);
-        _level.add_enemy(new Basic_Enemy(_level, 20, 5, 100, 1, rand_pos, 0, 5, 1));
+        _level.add_enemy(new Basic_Enemy(_level, rand_pos));
     }
     // Enemy(level, health, damage, range, attack_speed, pos, type, speed, defense)
 }
