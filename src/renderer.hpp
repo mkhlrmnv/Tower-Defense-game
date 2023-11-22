@@ -95,10 +95,6 @@ sf::Text _round_count_text;
 sf::Text _cash_text;
 sf::Text _lives_text;
 
-// if there are problems to open textures without full path to it 
-// add path to you project folder here
-std::string path_to_project = "/home/klind/tower_defence/";
-
 
 // Textures _textures //  some tree like data structure for different object state of objects
 

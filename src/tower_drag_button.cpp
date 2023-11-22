@@ -26,7 +26,7 @@ Button(price, size, position, color), _texture(obj_texture), _tower_type(tower_t
     float buffer = 5;
 
     // TODO: fix text centering
-    float text_x = _drawable_tower.getPosition().x + _button.getGlobalBounds().width / 2 ; - _text.getLocalBounds().width/2;
+    float text_x = _drawable_tower.getPosition().x + _button.getGlobalBounds().width / 2 ; // - _text.getLocalBounds().width/2;
     std::cout << _text.getLocalBounds().width << std::endl;
     float text_y = _drawable_tower.getPosition().y + _drawable_tower.getGlobalBounds().height ; // - _text.getCharacterSize() - buffer;
 

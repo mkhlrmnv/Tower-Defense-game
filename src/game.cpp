@@ -1,6 +1,7 @@
 #include "game.hpp"
 #include <thread>
 #include <mutex>
+#include "constants.hpp"
 
 std::mutex enemiesMutex;
 std::mutex enemiesMutex_2;
@@ -29,7 +30,7 @@ int Game::generate_chosen_level_style(int chosen_lv){
             std::cout << "random level generation successful" <<std::endl;
         }
     }else if(chosen_lv == LevelSelection::load){
-        if(_level.read_file("../maps/example_map.txt")==-1){
+        if(_level.read_file(Constants::path_to_project + "maps/example_map.txt")==-1){
             std::cout << "level file read failed" <<std::endl;
             return 0;
         }else{

@@ -1,5 +1,5 @@
 #include "resource_handler.hpp"
-
+#include "constants.hpp"
 
 
 
@@ -20,9 +20,9 @@ void ResourceHandler::load_texture(int object_type, int object_state, const std:
 }
 
 void ResourceHandler::load_font(){
-    _font.loadFromFile("/home/klind/tower_defence/assets/fonts/Ubuntu-R.ttf");
+    _font.loadFromFile(Constants::path_to_project + "assets/fonts/Ubuntu-R.ttf");
 }
 
 void ResourceHandler::load_all_textures(){
-    load_texture(ObjectTextureTypes::ArcherTower, 0, "/home/klind/tower_defence/assets/textures/ArcherTower/ArcherTower_Right.png");
+    load_texture(ObjectTextureTypes::ArcherTower, 0, Constants::path_to_project + "assets/textures/ArcherTower/ArcherTower_Right.png");
 }

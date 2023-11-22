@@ -1,4 +1,5 @@
 #include <renderer.hpp>
+#include "constants.hpp"
 
 
 void Renderer::draw_level(sf::RenderWindow& rwindow){
@@ -12,7 +13,7 @@ void Renderer::draw_tower(sf::RenderWindow& rwindow, Tower* t_ptr){
     //    _ = ongoing_action;
 
     // For some reason opens file only with full path
-    _tower_sprite.loadFromFile(path_to_project + get_file_tower(t_ptr));
+    _tower_sprite.loadFromFile(Constants::path_to_project + get_file_tower(t_ptr));
     
 
     _drawable_tower.setTexture(_tower_sprite);
@@ -34,7 +35,7 @@ void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr){
     // int _ = type;
     //    _ = ongoing_action;
 
-    _enemy_sprite.loadFromFile(path_to_project + get_file_enemy(e_ptr));
+    _enemy_sprite.loadFromFile(Constants::path_to_project + get_file_enemy(e_ptr));
 
     _drawable_enemy.setTexture(_enemy_sprite);
 
@@ -118,8 +119,8 @@ void Renderer::make_drawable_level(Level& lv){
     sf::Sprite drawable_level_square;
 
 
-    _road_pic.loadFromFile(path_to_project + "assets/textures/RoadTile.png");
-    _grass_pic.loadFromFile(path_to_project + "assets/textures/GrassTile.png");
+    _road_pic.loadFromFile(Constants::path_to_project + "assets/textures/RoadTile.png");
+    _grass_pic.loadFromFile(Constants::path_to_project + "assets/textures/GrassTile.png");
             
 
     // sf::RectangleShape drawable_level_square = sf::RectangleShape(sf::Vector2f(lv.get_square_size(),lv.get_square_size()));
@@ -179,7 +180,7 @@ void Renderer::make_drawable_object_textures(){
 }
 
 void Renderer::load_font(){
-    if(!_font.loadFromFile(path_to_project + "/assets/fonts/Ubuntu-R.ttf")){
+    if(!_font.loadFromFile(Constants::path_to_project + "/assets/fonts/Ubuntu-R.ttf")){
         std::cout << "font load failed" << std::endl;
     }else{
         std::cout << "font load success" << std::endl;
