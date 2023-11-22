@@ -33,10 +33,10 @@ std::string get_file_enemy(Enemy* enemy){
     switch (enemy->get_type())
     {
     case BOSS:
-        return "assets/textures/VERY_LITTLE_ENEMIES/VERY_LITTLE_BossKnight.png";
+        return "assets/textures/BossKnight/BossKnight_Right.png";
     case NEUTRAL:
         // return "assets/textures/NoobDemon_CanAttack/NoobDemon_SpriteSheet.png";
-        return "assets/textures/VERY_LITTLE_ENEMIES/VERY_LITTLE_NoobDemon.png";
+        return "assets/textures/NoobDemon_CanAttack/NoobDemon_Walk_1.png";
         break;
     default:
         break;
@@ -49,10 +49,10 @@ std::string get_file_tower(Tower* tower){
     {
     case BASIC: 
         // return "assets/textures/ArcherTower/ArcherTower_SpriteSheet.png";
-        return "assets/textures/VERY_LITTLE_TOWERS/VERY_LITTLE_ArcherTower.png";
+        return "assets/textures/ArcherTower/ArcherTower_Left.png";
         break;
     case SNIPER:
-        return "assets/textures/VERY_LITTLE_TOWERS/VERY_LITTLE_SniperTower.png";
+        return "assets/textures/SniperTower/SniperTower_Right.png";
     default:
         break;
     }

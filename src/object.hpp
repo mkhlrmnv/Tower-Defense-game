@@ -16,7 +16,7 @@ enum State{none, walking_right, walking_left, attacking_right, attacking_left, d
 
 class Object {
 public:
-    Object(Level& level, int health, int damage, int range, int attack_speed, Vector2D& position, int type);
+    Object(Level& level, Vector2D& position, int health, int damage, int range, int attack_speed, int type);
 
     virtual ~Object();
 
