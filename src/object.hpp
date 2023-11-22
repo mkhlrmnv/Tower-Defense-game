@@ -12,6 +12,8 @@
 
 class Level;
 
+enum State{none, walking_right, walking_left, attacking_right, attacking_left, dying};
+
 class Object {
 public:
     Object(Level& level, int health, int damage, int range, int attack_speed, Vector2D& position, int type);
@@ -37,7 +39,11 @@ public:
 
     void lose_health(int amount);
 
-    virtual void attack();
+    State get_state();
+
+    void set_state(State state);
+
+    virtual bool attack();
 
 private:
     Level& _level;
@@ -47,6 +53,7 @@ private:
     int _attack_speed;
     Vector2D _position;
     int _type;
+    State _state;
 };
 
 #endif

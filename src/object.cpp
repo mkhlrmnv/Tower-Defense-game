@@ -68,4 +68,12 @@ void Object::lose_health(int amount) {
     }
 }
 
-void Object::attack() {}
+State Object::get_state(){
+    return _state;
+}
+
+void Object::set_state(State state){
+    _state = state;
+}
+
+bool Object::attack() { return true;}

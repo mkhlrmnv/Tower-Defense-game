@@ -78,9 +78,13 @@ public:
 
     bool add_enemy(Enemy* enemy);
 
+    bool remove_enemy(Enemy* enemy);
+
     std::vector<Tower*> get_towers() const;
 
     bool add_tower(Tower* tower);
+
+    bool remove_tower(Tower* tower);
 
     std::pair<int, int> current_row_col(Object* obj); // <col, row>
 
@@ -105,7 +109,10 @@ public:
 
     bool randomly_generate();
 
+    Square* get_first_road();
+
 private:
+    Square* _first_road;
     int _square_size;
     int _round, _cash, _lives;
     std::vector<std::vector<Square*>> _grid;

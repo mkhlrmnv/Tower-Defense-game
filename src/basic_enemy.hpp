@@ -3,16 +3,18 @@
 
 #include "enemy.hpp"
 #include "attack_types.hpp"
-#include "level.hpp"
+// #include "level.hpp"
 
 class Basic_Enemy: public Enemy {
 public:
 
     Basic_Enemy(Level& current_level, int health, int damage, int range, int attack_speed, Vector2D& position, int type, int speed, int defense);
 
-    void attack();
+    ~Basic_Enemy() { }
 
-    void move();
+    bool attack();
+
+    // void move();
 };
 
 #endif

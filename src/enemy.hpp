@@ -5,28 +5,30 @@
 
 class Enemy: public Object {
 public:
-    Enemy(Level& level, int health, int damage, int range, int attack_speed, Vector2D position, int type, int speed, int defense) : 
-            Object(level, health, damage, range, attack_speed, position, type), _speed(speed), _defense(defense) {}
+    Enemy(Level& level, int health, int damage, int range, int attack_speed, Vector2D position, int type, int speed, int defense);
 
-    int get_speed() const {
-        return _speed;
-    }
+    ~Enemy() { }
 
-    int get_defense() const {
-        return _defense;
-    }
+    int get_speed() const;
 
-    virtual void move() {}
+    int get_defense() const;
 
-    std::vector<Vector2D> get_route() const {
-        return _route;
-    }
-    
-    void set_route_position(Vector2D position) {
-        _route.push_back(position);
-    }
+    void move();
+
+    // void State get_state();
+
+    // bool attack();
+
+    std::vector<Vector2D> get_route() const;
+
+    void set_route_position(Vector2D position);
+
+    Vector2D get_prev_pos();
+
+    void set_prev_pos(Vector2D pos);
 
 private:
+    Vector2D _prev_pos;
     int _speed;
     int _defense;
     std::vector<Vector2D> _route;

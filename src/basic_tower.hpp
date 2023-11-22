@@ -10,7 +10,9 @@ public:
 
     Basic_Tower(Level& current_level, int health, int damage, int range, int attack_speed, Vector2D& position, int type, int price, int level, bool attack_type_single);
 
-    void attack();
+    ~Basic_Tower() { }
+
+    bool attack();
 
 private:
     bool _attack_type_single;
