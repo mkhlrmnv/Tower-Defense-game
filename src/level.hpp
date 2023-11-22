@@ -64,26 +64,20 @@ public:
 
     // Add cash
     void add_cash(int how_much);
-
     // take cash from player
     void take_cash(int how_much);
 
     // take lives from player
     void take_lives(int how_much);
-
     // add lives
     void add_lives(int how_much);
 
     std::vector<Enemy*> get_enemies() const;
-
     bool add_enemy(Enemy* enemy);
-
     bool remove_enemy(Enemy* enemy);
 
     std::vector<Tower*> get_towers() const;
-
     bool add_tower(Tower* tower);
-
     bool remove_tower(Tower* tower);
 
     std::pair<int, int> current_row_col(Object* obj); // <col, row>
@@ -118,6 +112,8 @@ private:
     std::vector<std::vector<Square*>> _grid;
     std::vector<Enemy*> _enemies;
     std::vector<Tower*> _towers;
+
+    
 };
 
 #endif

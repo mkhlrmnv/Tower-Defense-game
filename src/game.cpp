@@ -119,7 +119,6 @@ void Game::render(){
     _renderer.draw_cash(_window, _level.get_cash());
     _renderer.draw_lives(_window, _level.get_lives());
     _renderer.draw_round_count(_window, _level.get_round());
-
     _window.display(); // display the drawn entities
 
 }
@@ -135,7 +134,7 @@ void Game::start_round(){
         _level.add_enemy(new Basic_Enemy(_level, 20, 5, 100, 1, rand_pos, 0, 20, 1));
     }
     
-    // Enemy(level, healt, damage, range, attack_speed, pos, type, speed, defense)
+    // Enemy(level, health, damage, range, attack_speed, pos, type, speed, defense)
     // _level.add_enemy(new Basic_Enemy(_level, 20, 5, 100, 1, e1_pos, 1, 20, 1));
     //_level.add_enemy(new Basic_Enemy(_level, 20, 5, 100, 1, e2_pos, 1, 10, 1));   
 }
@@ -145,7 +144,7 @@ void Game::update_enemies(){
 
     for (Enemy* e : _level.get_enemies()){
         if (e->get_health() <= 0){
-            _level.remove_enemy(e);
+            e->set_state(State::dying);
         } else {
             if (!e->attack()){
                 e->move();
@@ -158,9 +157,11 @@ void Game::update_towers(){
     std::lock_guard<std::mutex> lock(towersMutex);
 
     for (Tower* t : _level.get_towers()){
-        t->attack();
         if (t->get_health() <= 0){
-            _level.remove_tower(t);
+            t->set_state(State::dying);
+            //_level.remove_tower(t);
+        } else {
+            t->attack();
         }
     }
 }
