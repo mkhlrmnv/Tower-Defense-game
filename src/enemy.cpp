@@ -2,8 +2,8 @@
 #include "level.hpp"
 #include "attack_types.hpp"
 
-Enemy::Enemy(Level& level, int health, int damage, int range, int attack_speed, Vector2D position, int type, int speed, int defense) : 
-            Object(level, health, damage, range, attack_speed, position, type), _speed(speed), _defense(defense) {}
+Enemy::Enemy(Level& level, Vector2D& position, int health, int damage, int range, int attack_speed, int type, int speed, int defense) : 
+            Object(level, position, health, damage, range, attack_speed, type), _speed(speed), _defense(defense) {}
 
 int Enemy::get_speed() const {
     return _speed;

@@ -1,8 +1,9 @@
 #include "basic_tower.hpp"
 
-Basic_Tower::Basic_Tower(Level& current_level, int health, int damage, int range, int attack_speed, Vector2D& position,
-        int type, int price, int level, bool attack_type_single) :
-        Tower(current_level, health, damage, range, attack_speed, position, type, price, level), _attack_type_single(attack_type_single) {}
+Basic_Tower::Basic_Tower(Level& current_level, Vector2D& position, int health, int damage, int range,
+        int attack_speed, int type, int price, int level, bool attack_type_single) :
+
+        Tower(current_level, position, health, damage, range, attack_speed, type, price, level), _attack_type_single(attack_type_single) {}
 
 bool Basic_Tower::attack() {
     double multiplier;
