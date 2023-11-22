@@ -127,7 +127,7 @@ void Game::start_round(){
     round_over = false;
     for (int i = 0; i < (1 * _level.get_round()); i++)
     {
-        srand (time(0));
+        srand (time());
         Square* spawn_sq = _level.get_first_road();
         int x = rand() % 80;
         Vector2D rand_pos = Vector2D(spawn_sq->get_center().x - (_level.get_square_size() / 2) + x, 1 +(i * 5));
@@ -145,6 +145,7 @@ void Game::update_enemies(){
     for (Enemy* e : _level.get_enemies()){
         if (e->get_health() <= 0){
             e->set_state(State::dying);
+            _level.remove_enemy(e);
         } else {
             if (!e->attack()){
                 e->move();
@@ -159,7 +160,7 @@ void Game::update_towers(){
     for (Tower* t : _level.get_towers()){
         if (t->get_health() <= 0){
             t->set_state(State::dying);
-            //_level.remove_tower(t);
+            _level.remove_tower(t);
         } else {
             t->attack();
         }
