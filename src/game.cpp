@@ -80,9 +80,9 @@ void Game::run(){
     {
         process_events();
         timeSinceLastUpdate += clock.restart();
-        while (timeSinceLastUpdate > sf::seconds(1.f / 60.f))
+        while (timeSinceLastUpdate > sf::seconds(1.f / 30.f))
         {
-            timeSinceLastUpdate -= sf::seconds(1.f / 60.f);
+            timeSinceLastUpdate -= sf::seconds(1.f / 30.f);
             process_events();
             update();
             render();
@@ -120,22 +120,18 @@ void Game::process_events(){
 }
 
 void Game::render(){
-
-    // _window.clear(); // clear all drawn entities
-
-    // draw entities, every function calls _window.draw([DRAWABLE OBJECT])
-    //_renderer.draw_level(_window);
     for (int i = 0; i < 5; i++)
     {
         _window.clear();
         _renderer.draw_level(_window);
         _renderer.draw_enemies(_window, _level.get_enemies(), i);
         _renderer.draw_towers(_window, _level.get_towers(), i);
-        // std::this_thread::sleep_for(std::chrono::milliseconds(5));
          _renderer.draw_cash(_window, _level.get_cash());
         _renderer.draw_lives(_window, _level.get_lives());
         _renderer.draw_round_count(_window, _level.get_round());
         _window.display(); // display the drawn entities
+
+        // std::this_thread::sleep_for(std::chrono::milliseconds(5));
     }
 
     for (auto* t : _level.get_towers()){
@@ -152,24 +148,16 @@ void Game::render(){
 
 void Game::start_round(){
     round_over = false;
-    /*for (int i = 0; i < (1 * _level.get_round()); i++)
+    for (int i = 0; i < (1 * _level.get_round()); i++)
     {
-        srand (time(0)+1);
+        // srand (time(0)+1);
         Square* spawn_sq = _level.get_first_road();
         int x = rand() % 80;
-        Vector2D rand_pos = Vector2D(spawn_sq->get_center().x - (_level.get_square_size() / 2) + x, 1 +(i * 10));
+        int y = rand() % 40;
+        Vector2D rand_pos = Vector2D(spawn_sq->get_center().x - (_level.get_square_size() / 2) + x, 1 + y);
         _level.add_enemy(new Basic_Enemy(_level, 20, 5, 100, 1, rand_pos, 0, 5, 1));
-    }*/
-
-    srand (time(0)+1);
-        Square* spawn_sq = _level.get_first_road();
-        int x = rand() % 80;
-        Vector2D rand_pos = Vector2D(spawn_sq->get_center().x - (_level.get_square_size() / 2) + x, 1 +(1 * 10));
-        _level.add_enemy(new Basic_Enemy(_level, 20, 5, 100, 1, rand_pos, 0, 5, 1));
-    
+    }
     // Enemy(level, health, damage, range, attack_speed, pos, type, speed, defense)
-    // _level.add_enemy(new Basic_Enemy(_level, 20, 5, 100, 1, e1_pos, 1, 20, 1));
-    //_level.add_enemy(new Basic_Enemy(_level, 20, 5, 100, 1, e2_pos, 1, 10, 1));   
 }
 
 void Game::update_enemies(){
