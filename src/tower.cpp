@@ -8,4 +8,9 @@ void Tower::level_up() {
     gain_health(50 * _level);
     gain_range(5 * _level);
     gain_attack_speed(150 * _level);
+    _level++;
+}
+
+int Tower::get_price() {
+    return _price;
 }

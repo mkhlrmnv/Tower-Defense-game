@@ -11,6 +11,8 @@ public:
 
     void level_up();
 
+    int get_price();
+
 private:
     int _price;
     int _level;
