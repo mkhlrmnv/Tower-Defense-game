@@ -119,8 +119,8 @@ void Renderer::make_drawable_level(Level& lv){
     sf::Sprite drawable_level_square;
 
 
-    _road_pic.loadFromFile(Constants::path_to_project + "assets/textures/RoadTile.png");
-    _grass_pic.loadFromFile(Constants::path_to_project + "assets/textures/GrassTile.png");
+    _road_pic.loadFromFile(Constants::path_to_project + "assets/textures/VERY_LITTLE_ROADTILE.png");
+    _grass_pic.loadFromFile(Constants::path_to_project + "assets/textures/VERY_LITTLE_GRASSTILE.png");
             
 
     // sf::RectangleShape drawable_level_square = sf::RectangleShape(sf::Vector2f(lv.get_square_size(),lv.get_square_size()));
@@ -144,7 +144,7 @@ void Renderer::make_drawable_level(Level& lv){
 
             drawable_level_square.setPosition(upper_left_corner_y, upper_left_corner_x);
 
-            drawable_level_square.setScale(0.01 , 0.01);
+            drawable_level_square.setScale(2.45 , 2.45);
 
             _level_texture.draw(drawable_level_square);
         }

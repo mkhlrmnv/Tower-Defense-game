@@ -62,7 +62,7 @@ void Game::run(){
     auto t1_pos = Vector2D(82*5, 3*80);
     auto t2_pos = Vector2D(82*5, 4*80);
 
-    // Tower(level, healt, damage, range, attack_speed, pos, type, price, level, single or not)
+    // Tower(level, health, damage, range, attack_speed, pos, type, price, level, single or not)
     _level.add_tower(new Basic_Tower(_level, 30, 10, 100, 1, t1_pos, 0, 10, 1, true));
     _level.add_tower(new Basic_Tower(_level, 30, 10, 100, 1, t2_pos, 0, 10, 1, true));
 
@@ -127,7 +127,7 @@ void Game::start_round(){
     round_over = false;
     for (int i = 0; i < (1 * _level.get_round()); i++)
     {
-        srand (time());
+        srand (time(0));
         Square* spawn_sq = _level.get_first_road();
         int x = rand() % 80;
         Vector2D rand_pos = Vector2D(spawn_sq->get_center().x - (_level.get_square_size() / 2) + x, 1 +(i * 5));
@@ -141,7 +141,6 @@ void Game::start_round(){
 
 void Game::update_enemies(){
     std::lock_guard<std::mutex> lock(enemiesMutex);
-
     for (Enemy* e : _level.get_enemies()){
         if (e->get_health() <= 0){
             e->set_state(State::dying);
@@ -156,7 +155,6 @@ void Game::update_enemies(){
 
 void Game::update_towers(){
     std::lock_guard<std::mutex> lock(towersMutex);
-
     for (Tower* t : _level.get_towers()){
         if (t->get_health() <= 0){
             t->set_state(State::dying);
