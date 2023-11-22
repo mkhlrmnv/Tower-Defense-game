@@ -8,7 +8,7 @@
 class Basic_Enemy: public Enemy {
 public:
 
-    Basic_Enemy(Level& current_level, int health, int damage, int range, int attack_speed, Vector2D& position, int type, int speed, int defense);
+    Basic_Enemy(Level& level, Vector2D& position, int health = 20, int damage = 5, int range = 100, int attack_speed = 1, int type = ObjectTypes::NoobDemon_CanAttack, int speed = 20, int defense = 5);
 
     ~Basic_Enemy() { }
 

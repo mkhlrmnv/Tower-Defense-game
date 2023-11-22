@@ -11,7 +11,6 @@ set(SRC_FILES
     tower.cpp
     attack_types.cpp
     vector2d.hpp
-    constants.cpp
     # Add all your source files here (excluding headers)
 )
 

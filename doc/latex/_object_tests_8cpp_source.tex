@@ -1,0 +1,212 @@
+\doxysection{Object\+Tests.\+cpp}
+\hypertarget{_object_tests_8cpp_source}{}\label{_object_tests_8cpp_source}\index{tests/ObjectTests.cpp@{tests/ObjectTests.cpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ \#include\ "{}object.hpp"{}}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ \#include\ "{}vector2d.hpp"{}}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//\ \#include\ "{}attack\_types.hpp"{}}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ \#include\ "{}level.hpp"{}}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//\ \#include\ <iostream>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ bool\ testObjectHealth()\ \{}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//\ \ \ \ \ Vector2D\ position(0,\ 0);}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ \ \ \ \ Level\ level(1000,\ 100,\ 3);}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ \ \ \ \ Object\ obj(level,\ 100,\ 20,\ 10,\ 1000,\ position,\ BASIC);}}
+\DoxyCodeLine{00011\ \textcolor{comment}{//\ \ \ \ \ return\ obj.get\_health()\ ==\ 100;}}
+\DoxyCodeLine{00012\ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ bool\ testObjectPosition()\ \{}}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ \ \ \ \ Vector2D\ position(0,\ 0);}}
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ \ \ \ \ Vector2D\ newPosition(10,\ 20);}}
+\DoxyCodeLine{00017\ \textcolor{comment}{//\ \ \ \ \ Level\ level(1000,\ 100,\ 3);}}
+\DoxyCodeLine{00018\ \textcolor{comment}{//\ \ \ \ \ Object\ obj(level,\ 100,\ 20,\ 10,\ 1000,\ position,\ BASIC);}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{comment}{//\ \ \ \ \ //\ Check\ the\ initial\ position}}
+\DoxyCodeLine{00021\ \textcolor{comment}{//\ \ \ \ \ if\ (obj.get\_position()\ !=\ position)\ \{}}
+\DoxyCodeLine{00022\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ return\ false;}}
+\DoxyCodeLine{00023\ \textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{comment}{//\ \ \ \ \ //\ Set\ a\ new\ position\ and\ check\ if\ it's\ updated}}
+\DoxyCodeLine{00026\ \textcolor{comment}{//\ \ \ \ \ obj.set\_position(newPosition);}}
+\DoxyCodeLine{00027\ \textcolor{comment}{//\ \ \ \ \ if\ (obj.get\_position()\ !=\ newPosition)\ \{}}
+\DoxyCodeLine{00028\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ return\ false;}}
+\DoxyCodeLine{00029\ \textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{comment}{//\ \ \ \ \ return\ true;}}
+\DoxyCodeLine{00032\ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{comment}{//\ bool\ testObjectDamage()\ \{}}
+\DoxyCodeLine{00035\ \textcolor{comment}{//\ \ \ \ \ Vector2D\ position(0,\ 0);}}
+\DoxyCodeLine{00036\ \textcolor{comment}{//\ \ \ \ \ Level\ level(1000,\ 100,\ 3);}}
+\DoxyCodeLine{00037\ \textcolor{comment}{//\ \ \ \ \ Object\ obj(level,\ 100,\ 20,\ 10,\ 1000,\ position,\ BASIC);}}
+\DoxyCodeLine{00038\ \textcolor{comment}{//\ \ \ \ \ return\ obj.get\_damage()\ ==\ 20;}}
+\DoxyCodeLine{00039\ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{comment}{//\ bool\ testObjectRange()\ \{}}
+\DoxyCodeLine{00042\ \textcolor{comment}{//\ \ \ \ \ Vector2D\ position(0,\ 0);}}
+\DoxyCodeLine{00043\ \textcolor{comment}{//\ \ \ \ \ Level\ level(1000,\ 100,\ 3);}}
+\DoxyCodeLine{00044\ \textcolor{comment}{//\ \ \ \ \ Object\ obj(level,\ 100,\ 20,\ 10,\ 1000,\ position,\ BASIC);}}
+\DoxyCodeLine{00045\ \textcolor{comment}{//\ \ \ \ \ return\ obj.get\_range()\ ==\ 10;}}
+\DoxyCodeLine{00046\ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \textcolor{comment}{//\ bool\ testObjectAttackSpeed()\ \{}}
+\DoxyCodeLine{00049\ \textcolor{comment}{//\ \ \ \ \ Vector2D\ position(0,\ 0);}}
+\DoxyCodeLine{00050\ \textcolor{comment}{//\ \ \ \ \ Level\ level(1000,\ 100,\ 3);}}
+\DoxyCodeLine{00051\ \textcolor{comment}{//\ \ \ \ \ Object\ obj(level,\ 100,\ 20,\ 10,\ 1000,\ position,\ BASIC);}}
+\DoxyCodeLine{00052\ \textcolor{comment}{//\ \ \ \ \ return\ obj.get\_attack\_speed()\ ==\ 1000;}}
+\DoxyCodeLine{00053\ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \textcolor{comment}{//\ bool\ testObjectGetType()\ \{}}
+\DoxyCodeLine{00056\ \textcolor{comment}{//\ \ \ \ \ Vector2D\ position(0,\ 0);}}
+\DoxyCodeLine{00057\ \textcolor{comment}{//\ \ \ \ \ Level\ level(1000,\ 100,\ 3);}}
+\DoxyCodeLine{00058\ \textcolor{comment}{//\ \ \ \ \ Object\ obj(level,\ 100,\ 20,\ 10,\ 1000,\ position,\ BASIC);}}
+\DoxyCodeLine{00059\ \textcolor{comment}{//\ \ \ \ \ return\ obj.get\_type()\ ==\ BASIC;}}
+\DoxyCodeLine{00060\ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \textcolor{comment}{//\ bool\ testObjectGainDamage()\ \{}}
+\DoxyCodeLine{00063\ \textcolor{comment}{//\ \ \ \ \ Vector2D\ position(0,\ 0);}}
+\DoxyCodeLine{00064\ \textcolor{comment}{//\ \ \ \ \ Level\ level(1000,\ 100,\ 3);}}
+\DoxyCodeLine{00065\ \textcolor{comment}{//\ \ \ \ \ Object\ obj(level,\ 100,\ 20,\ 10,\ 1000,\ position,\ BASIC);}}
+\DoxyCodeLine{00066\ \textcolor{comment}{//\ \ \ \ \ obj.gain\_damage(5);}}
+\DoxyCodeLine{00067\ \textcolor{comment}{//\ \ \ \ \ return\ obj.get\_damage()\ ==\ 25;}}
+\DoxyCodeLine{00068\ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \textcolor{comment}{//\ bool\ testObjectGainHealth()\ \{}}
+\DoxyCodeLine{00071\ \textcolor{comment}{//\ \ \ \ \ Vector2D\ position(0,\ 0);}}
+\DoxyCodeLine{00072\ \textcolor{comment}{//\ \ \ \ \ Level\ level(1000,\ 100,\ 3);}}
+\DoxyCodeLine{00073\ \textcolor{comment}{//\ \ \ \ \ Object\ obj(level,\ 100,\ 20,\ 10,\ 1000,\ position,\ BASIC);}}
+\DoxyCodeLine{00074\ \textcolor{comment}{//\ \ \ \ \ obj.gain\_health(10);}}
+\DoxyCodeLine{00075\ \textcolor{comment}{//\ \ \ \ \ return\ obj.get\_health()\ ==\ 110;}}
+\DoxyCodeLine{00076\ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \textcolor{comment}{//\ bool\ testObjectGainRange()\ \{}}
+\DoxyCodeLine{00079\ \textcolor{comment}{//\ \ \ \ \ Vector2D\ position(0,\ 0);}}
+\DoxyCodeLine{00080\ \textcolor{comment}{//\ \ \ \ \ Level\ level(1000,\ 100,\ 3);}}
+\DoxyCodeLine{00081\ \textcolor{comment}{//\ \ \ \ \ Object\ obj(level,\ 100,\ 20,\ 10,\ 1000,\ position,\ BASIC);}}
+\DoxyCodeLine{00082\ \textcolor{comment}{//\ \ \ \ \ obj.gain\_range(2);}}
+\DoxyCodeLine{00083\ \textcolor{comment}{//\ \ \ \ \ return\ obj.get\_range()\ ==\ 12;}}
+\DoxyCodeLine{00084\ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \textcolor{comment}{//\ bool\ testObjectGainAttackSpeed()\ \{}}
+\DoxyCodeLine{00087\ \textcolor{comment}{//\ \ \ \ \ Vector2D\ position(0,\ 0);}}
+\DoxyCodeLine{00088\ \textcolor{comment}{//\ \ \ \ \ Level\ level(1000,\ 100,\ 3);}}
+\DoxyCodeLine{00089\ \textcolor{comment}{//\ \ \ \ \ Object\ obj(level,\ 100,\ 20,\ 10,\ 1000,\ position,\ BASIC);}}
+\DoxyCodeLine{00090\ \textcolor{comment}{//\ \ \ \ \ obj.gain\_attack\_speed(200);}}
+\DoxyCodeLine{00091\ \textcolor{comment}{//\ \ \ \ \ return\ obj.get\_attack\_speed()\ ==\ 1200;}}
+\DoxyCodeLine{00092\ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \textcolor{comment}{//\ bool\ testObjectDistanceTo()\ \{}}
+\DoxyCodeLine{00095\ \textcolor{comment}{//\ \ \ \ \ Vector2D\ position(0,\ 0);}}
+\DoxyCodeLine{00096\ \textcolor{comment}{//\ \ \ \ \ Level\ level(1000,\ 100,\ 3);}}
+\DoxyCodeLine{00097\ \textcolor{comment}{//\ \ \ \ \ Object\ obj(level,\ 100,\ 20,\ 10,\ 1000,\ position,\ BASIC);}}
+\DoxyCodeLine{00098\ \textcolor{comment}{//\ \ \ \ \ Vector2D\ targetPosition(3,\ 4);}}
+\DoxyCodeLine{00099\ \textcolor{comment}{//\ \ \ \ \ double\ distance\ =\ obj.distance\_to(targetPosition);}}
+\DoxyCodeLine{00100\ \textcolor{comment}{//\ \ \ \ \ //\ Check\ if\ the\ distance\ is\ calculated\ correctly\ (considering\ the\ distance\ formula)}}
+\DoxyCodeLine{00101\ \textcolor{comment}{//\ \ \ \ \ return\ distance\ ==\ 5.0;}}
+\DoxyCodeLine{00102\ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \textcolor{comment}{//\ bool\ testObjectLoseHealth()\ \{}}
+\DoxyCodeLine{00105\ \textcolor{comment}{//\ \ \ \ \ Vector2D\ position(0,\ 0);}}
+\DoxyCodeLine{00106\ \textcolor{comment}{//\ \ \ \ \ Level\ level(1000,\ 100,\ 3);}}
+\DoxyCodeLine{00107\ \textcolor{comment}{//\ \ \ \ \ Object\ obj(level,\ 100,\ 20,\ 10,\ 1000,\ position,\ BASIC);}}
+\DoxyCodeLine{00108\ \textcolor{comment}{//\ \ \ \ \ obj.lose\_health(30);}}
+\DoxyCodeLine{00109\ \textcolor{comment}{//\ \ \ \ \ return\ obj.get\_health()\ ==\ 70;}}
+\DoxyCodeLine{00110\ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00112\ \textcolor{comment}{//\ static\ int\ object\_tests()\ \{}}
+\DoxyCodeLine{00113\ \textcolor{comment}{//\ \ \ \ \ int\ testsFailed\ =\ 0;}}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \textcolor{comment}{//\ \ \ \ \ if\ (testObjectHealth())\ \{}}
+\DoxyCodeLine{00116\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ std::cout\ <<\ "{}testObjectHealth:\ Passed"{}\ <<\ std::endl;}}
+\DoxyCodeLine{00117\ \textcolor{comment}{//\ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00118\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ std::cout\ <<\ "{}testObjectHealth:\ Failed"{}\ <<\ std::endl;}}
+\DoxyCodeLine{00119\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ testsFailed++;}}
+\DoxyCodeLine{00120\ \textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ \textcolor{comment}{//\ \ \ \ \ if\ (testObjectPosition())\ \{}}
+\DoxyCodeLine{00123\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ std::cout\ <<\ "{}testObjectPosition:\ Passed"{}\ <<\ std::endl;}}
+\DoxyCodeLine{00124\ \textcolor{comment}{//\ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00125\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ std::cout\ <<\ "{}testObjectPosition:\ Failed"{}\ <<\ std::endl;}}
+\DoxyCodeLine{00126\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ testsFailed++;}}
+\DoxyCodeLine{00127\ \textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00129\ \textcolor{comment}{//\ \ \ \ \ if\ (testObjectDamage())\ \{}}
+\DoxyCodeLine{00130\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ std::cout\ <<\ "{}testObjectDamage:\ Passed"{}\ <<\ std::endl;}}
+\DoxyCodeLine{00131\ \textcolor{comment}{//\ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00132\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ std::cout\ <<\ "{}testObjectDamage:\ Failed"{}\ <<\ std::endl;}}
+\DoxyCodeLine{00133\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ testsFailed++;}}
+\DoxyCodeLine{00134\ \textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00136\ \textcolor{comment}{//\ \ \ \ \ if\ (testObjectRange())\ \{}}
+\DoxyCodeLine{00137\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ std::cout\ <<\ "{}testObjectRange:\ Passed"{}\ <<\ std::endl;}}
+\DoxyCodeLine{00138\ \textcolor{comment}{//\ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00139\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ std::cout\ <<\ "{}testObjectRange:\ Failed"{}\ <<\ std::endl;}}
+\DoxyCodeLine{00140\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ testsFailed++;}}
+\DoxyCodeLine{00141\ \textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ \textcolor{comment}{//\ \ \ \ \ if\ (testObjectAttackSpeed())\ \{}}
+\DoxyCodeLine{00144\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ std::cout\ <<\ "{}testObjectAttackSpeed:\ Passed"{}\ <<\ std::endl;}}
+\DoxyCodeLine{00145\ \textcolor{comment}{//\ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00146\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ std::cout\ <<\ "{}testObjectAttackSpeed:\ Failed"{}\ <<\ std::endl;}}
+\DoxyCodeLine{00147\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ testsFailed++;}}
+\DoxyCodeLine{00148\ \textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00150\ \textcolor{comment}{//\ \ \ \ \ if\ (testObjectGetType())\ \{}}
+\DoxyCodeLine{00151\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ std::cout\ <<\ "{}testObjectGetType:\ Passed"{}\ <<\ std::endl;}}
+\DoxyCodeLine{00152\ \textcolor{comment}{//\ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00153\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ std::cout\ <<\ "{}testObjectGetType:\ Failed"{}\ <<\ std::endl;}}
+\DoxyCodeLine{00154\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ testsFailed++;}}
+\DoxyCodeLine{00155\ \textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00157\ \textcolor{comment}{//\ \ \ \ \ if\ (testObjectGainDamage())\ \{}}
+\DoxyCodeLine{00158\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ std::cout\ <<\ "{}testObjectGainDamage:\ Passed"{}\ <<\ std::endl;}}
+\DoxyCodeLine{00159\ \textcolor{comment}{//\ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00160\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ std::cout\ <<\ "{}testObjectGainDamage:\ Failed"{}\ <<\ std::endl;}}
+\DoxyCodeLine{00161\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ testsFailed++;}}
+\DoxyCodeLine{00162\ \textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00164\ \textcolor{comment}{//\ \ \ \ \ if\ (testObjectGainHealth())\ \{}}
+\DoxyCodeLine{00165\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ std::cout\ <<\ "{}testObjectGainHealth:\ Passed"{}\ <<\ std::endl;}}
+\DoxyCodeLine{00166\ \textcolor{comment}{//\ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00167\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ std::cout\ <<\ "{}testObjectGainHealth:\ Failed"{}\ <<\ std::endl;}}
+\DoxyCodeLine{00168\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ testsFailed++;}}
+\DoxyCodeLine{00169\ \textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00171\ \textcolor{comment}{//\ \ \ \ \ if\ (testObjectGainRange())\ \{}}
+\DoxyCodeLine{00172\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ std::cout\ <<\ "{}testObjectGainRange:\ Passed"{}\ <<\ std::endl;}}
+\DoxyCodeLine{00173\ \textcolor{comment}{//\ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00174\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ std::cout\ <<\ "{}testObjectGainRange:\ Failed"{}\ <<\ std::endl;}}
+\DoxyCodeLine{00175\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ testsFailed++;}}
+\DoxyCodeLine{00176\ \textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00178\ \textcolor{comment}{//\ \ \ \ \ if\ (testObjectGainAttackSpeed())\ \{}}
+\DoxyCodeLine{00179\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ std::cout\ <<\ "{}testObjectGainAttackSpeed:\ Passed"{}\ <<\ std::endl;}}
+\DoxyCodeLine{00180\ \textcolor{comment}{//\ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00181\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ std::cout\ <<\ "{}testObjectGainAttackSpeed:\ Failed"{}\ <<\ std::endl;}}
+\DoxyCodeLine{00182\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ testsFailed++;}}
+\DoxyCodeLine{00183\ \textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{00184\ }
+\DoxyCodeLine{00185\ \textcolor{comment}{//\ \ \ \ \ if\ (testObjectDistanceTo())\ \{}}
+\DoxyCodeLine{00186\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ std::cout\ <<\ "{}testObjectDistanceTo:\ Passed"{}\ <<\ std::endl;}}
+\DoxyCodeLine{00187\ \textcolor{comment}{//\ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00188\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ std::cout\ <<\ "{}testObjectDistanceTo:\ Failed"{}\ <<\ std::endl;}}
+\DoxyCodeLine{00189\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ testsFailed++;}}
+\DoxyCodeLine{00190\ \textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{00191\ }
+\DoxyCodeLine{00192\ \textcolor{comment}{//\ \ \ \ \ if\ (testObjectLoseHealth())\ \{}}
+\DoxyCodeLine{00193\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ std::cout\ <<\ "{}testObjectLoseHealth:\ Passed"{}\ <<\ std::endl;}}
+\DoxyCodeLine{00194\ \textcolor{comment}{//\ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00195\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ std::cout\ <<\ "{}testObjectLoseHealth:\ Failed"{}\ <<\ std::endl;}}
+\DoxyCodeLine{00196\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ testsFailed++;}}
+\DoxyCodeLine{00197\ \textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{00198\ }
+\DoxyCodeLine{00199\ \textcolor{comment}{//\ \ \ \ \ if\ (testsFailed\ ==\ 0)\ \{}}
+\DoxyCodeLine{00200\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ std::cout\ <<\ "{}All\ tests\ passed."{}\ <<\ std::endl;}}
+\DoxyCodeLine{00201\ \textcolor{comment}{//\ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00202\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ std::cout\ <<\ "{}Some\ tests\ failed."{}\ <<\ std::endl;}}
+\DoxyCodeLine{00203\ \textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{00204\ }
+\DoxyCodeLine{00205\ \textcolor{comment}{//\ \ \ \ \ return\ testsFailed;}}
+\DoxyCodeLine{00206\ \textcolor{comment}{//\ \}}}
+
+\end{DoxyCode}

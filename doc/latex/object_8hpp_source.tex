@@ -1,0 +1,65 @@
+\doxysection{object.\+hpp}
+\hypertarget{object_8hpp_source}{}\label{object_8hpp_source}\index{src/object.hpp@{src/object.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ OBJECT\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ OBJECT\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}vector2d.hpp"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <math.h>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <stdexcept>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <thread>}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_level}{Level}};}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{enum}\ State\{none,\ walking\_right,\ walking\_left,\ attacking\_right,\ attacking\_left,\ dying\};}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_object}{Object}}\ \{}
+\DoxyCodeLine{00018\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{class_object}{Object}}(\mbox{\hyperlink{class_level}{Level}}\&\ level,\ \mbox{\hyperlink{class_vector2_d}{Vector2D}}\&\ position,\ \textcolor{keywordtype}{int}\ health,\ \textcolor{keywordtype}{int}\ damage,\ \textcolor{keywordtype}{int}\ range,\ \textcolor{keywordtype}{int}\ attack\_speed,\ \textcolor{keywordtype}{int}\ type);}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_object}{\string~Object}}();}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{int}\ get\_damage()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{int}\ get\_health()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{int}\ get\_range()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{int}\ get\_attack\_speed()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_vector2_d}{Vector2D}}\ get\_position()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{int}\ get\_type()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{class_level}{Level}}\&\ get\_level\_reference()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{void}\ set\_position(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_vector2_d}{Vector2D}}\&\ position);}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{void}\ gain\_damage(\textcolor{keywordtype}{int}\ amount);}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{void}\ gain\_health(\textcolor{keywordtype}{int}\ amount);}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{void}\ gain\_range(\textcolor{keywordtype}{int}\ amount);}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{void}\ gain\_attack\_speed(\textcolor{keywordtype}{int}\ amount);}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{double}\ distance\_to(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_vector2_d}{Vector2D}}\&\ target\_position);}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{void}\ lose\_health(\textcolor{keywordtype}{int}\ amount);}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ State\ get\_state();}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{void}\ set\_state(State\ state);}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ attack();}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00049\ \ \ \ \ \mbox{\hyperlink{class_level}{Level}}\&\ \_level;}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{int}\ \_health\_points;}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{int}\ \_damage;}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{int}\ \_range;}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{int}\ \_attack\_speed;}
+\DoxyCodeLine{00054\ \ \ \ \ \mbox{\hyperlink{class_vector2_d}{Vector2D}}\ \_position;}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{int}\ \_type;}
+\DoxyCodeLine{00056\ \ \ \ \ State\ \_state;}
+\DoxyCodeLine{00057\ \};}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

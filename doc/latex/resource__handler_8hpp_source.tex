@@ -1,0 +1,50 @@
+\doxysection{resource\+\_\+handler.\+hpp}
+\hypertarget{resource__handler_8hpp_source}{}\label{resource__handler_8hpp_source}\index{src/resource\_handler.hpp@{src/resource\_handler.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ TOWER\_DEFENCE\_SRC\_RESOURCE\_HANDLER}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ TOWER\_DEFENCE\_SRC\_RESOURCE\_HANDLER}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include<SFML/Graphics.hpp>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include<memory>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}attack\_types.hpp"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{comment}{/*\ }}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ \ \ \ loads\ ALL\ textures\ and\ gives\ them\ as\ pointers.}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ \ \ \ needs\ to\ be\ created\ in\ game\ class,\ pass\ as\ reference}}
+\DoxyCodeLine{00011\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_resource_handler}{ResourceHandler}}\{}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{class_resource_handler}{ResourceHandler}}()\{load\_all\_textures();\ load\_font();\}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{comment}{//\ functions\ to\ get\ pointers\ to\ textures\ by\ type\ of\ object}}
+\DoxyCodeLine{00019\ \ \ \ \ sf::Texture\&\ get\_texture\_tower(\textcolor{keywordtype}{int}\ type);}
+\DoxyCodeLine{00020\ \ \ \ \ sf::Texture\&\ get\_texture\_enemy(\textcolor{keywordtype}{int}\ type);}
+\DoxyCodeLine{00021\ \ \ \ \ sf::Texture\&\ get\_texture\_tile(\textcolor{keywordtype}{int}\ type);}
+\DoxyCodeLine{00022\ \ \ \ \ sf::Font\&\ get\_font();}
+\DoxyCodeLine{00023\ \ \ \ \ }
+\DoxyCodeLine{00024\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{void}\ load\_all\_textures();}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{comment}{//\ load\ functions\ for\ all\ textures}}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{comment}{//\ someimage.png\ -\/>\ sf::Texture}}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{void}\ load\_texture\_tower(\textcolor{keywordtype}{int}\ type,\ \textcolor{keyword}{const}\ std::string\&\ filename);}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{void}\ load\_texture\_enemy(\textcolor{keywordtype}{int}\ type,\ \textcolor{keyword}{const}\ std::string\&\ filename);}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{void}\ load\_texture\_tile(\textcolor{keywordtype}{int}\ type,\ \textcolor{keyword}{const}\ std::string\&\ filename);}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{void}\ load\_font();}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{comment}{//\ place\ holders\ for\ all\ textures}}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{comment}{//\ object\_type\ -\/-\/>\ \ texture\_ptr}}
+\DoxyCodeLine{00037\ \ \ \ \ std::map<int,\ std::shared\_ptr<sf::Texture>>\ \_towers\_textures\_ptr\_map;}
+\DoxyCodeLine{00038\ \ \ \ \ std::map<int,\ std::shared\_ptr<sf::Texture>>\ \_enemies\_textures\_ptr\_map;}
+\DoxyCodeLine{00039\ \ \ \ \ std::map<int,\ std::shared\_ptr<sf::Texture>>\ \_tiles\_textures\_ptr\_map;}
+\DoxyCodeLine{00040\ \ \ \ \ sf::Font\ \_font;}
+\DoxyCodeLine{00041\ \};}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

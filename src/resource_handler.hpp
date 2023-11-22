@@ -3,61 +3,41 @@
 
 #include<SFML/Graphics.hpp>
 #include<memory>
+#include "attack_types.hpp"
 
 /* 
     loads ALL textures and gives them as pointers.
     needs to be created in game class, pass as reference
 */
 
-// 1. TODO: How to manage state
-// 2. TODO: Automate loading somehow
-// 3. TODO: Load rest of textures.
-
-
-namespace ObjectTextureTypes
-{ 
-    enum{
-        AoeTower,
-        ArcherTower,
-        BossKnight,
-        FastBoy,
-        FogMage,
-        HealerPriest,
-        MudMageTower,
-        InfernoMage,
-        NoobSkeleton_NoAttack,
-        NoobDemon_CanAttack,
-        RepelMageTower,
-        SniperTower,
-        TankOrc,
-        WaterMageTower,
-    };
-}
-
-
 class ResourceHandler{
 
 public:
-    
     ResourceHandler(){load_all_textures(); load_font();}
-    sf::Texture& get_texture(int object_type, int object_state);
+
+    // functions to get pointers to textures by type of object
+    sf::Texture& get_texture_tower(int type);
+    sf::Texture& get_texture_enemy(int type);
+    sf::Texture& get_texture_tile(int type);
     sf::Font& get_font();
     
 private:
 
     void load_all_textures();
 
+    // load functions for all textures
     // someimage.png -> sf::Texture
-    void load_texture(int object_type, int object_state, const std::string& filename);
-
+    void load_texture_tower(int type, const std::string& filename);
+    void load_texture_enemy(int type, const std::string& filename);
+    void load_texture_tile(int type, const std::string& filename);
     void load_font();
 
+    // place holders for all textures
+    // object_type -->  texture_ptr
+    std::map<int, std::shared_ptr<sf::Texture>> _towers_textures_ptr_map;
+    std::map<int, std::shared_ptr<sf::Texture>> _enemies_textures_ptr_map;
+    std::map<int, std::shared_ptr<sf::Texture>> _tiles_textures_ptr_map;
     sf::Font _font;
-
-    // object_type, state, -->  texture_ptr
-    std::map<std::pair<int, int>, std::shared_ptr<sf::Texture>> _texture_ptr_map;
-
-    //
 };
 
 
