@@ -37,7 +37,7 @@ void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr){
 
     _enemy_sprite.loadFromFile(Constants::path_to_project + get_file_enemy(e_ptr));
 
-    _drawable_enemy.setTexture(_enemy_sprite);
+    _drawable_enemy.setTextureRect(sf::IntRect());
 
     _drawable_enemy.setScale(_scale_factor_enemy, _scale_factor_enemy);
 
