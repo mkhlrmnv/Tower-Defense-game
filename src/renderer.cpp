@@ -6,17 +6,33 @@ void Renderer::draw_level(sf::RenderWindow& rwindow){
     rwindow.draw(_drawable_level);
 }
 
-void Renderer::draw_tower(sf::RenderWindow& rwindow, Tower* t_ptr){
+void Renderer::draw_tower(sf::RenderWindow& rwindow, Tower* t_ptr, int frame){
 
-    //  just to avoid warning for now, later use type and object state to select correct texture
-    // int _ = type;
-    //    _ = ongoing_action;
-
-    // For some reason opens file only with full path
     _tower_sprite.loadFromFile(Constants::path_to_project + get_file_tower(t_ptr));
     
-
     _drawable_tower.setTexture(_tower_sprite);
+
+    int idk = 0;
+
+    if (t_ptr->get_state() == State::none) {
+        idk = 0;
+    } else if (t_ptr->get_state() == State::attacking_right || t_ptr->get_state() == State::attacking_left){
+        idk = 1;
+        if (frame > 2){
+            frame = 2;
+        }
+    } else if (t_ptr->get_state() == State::dying){
+        idk = 4;
+        if (frame > 4){
+            frame = 4;
+        }
+    }
+
+    if (idk == 0){
+        frame = 0;
+    }
+
+    _drawable_tower.setTextureRect(sf::IntRect((frame + idk) * 32, 0 * 32, 32, 32));
 
     _drawable_tower.setScale(_scale_factor_tower, _scale_factor_tower);
 
@@ -29,15 +45,37 @@ void Renderer::draw_tower(sf::RenderWindow& rwindow, Tower* t_ptr){
     rwindow.draw(_drawable_tower);
 }
 
-void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr){
-
-    // just to avoid warning for now, later use type and object state to select correct texture
-    // int _ = type;
-    //    _ = ongoing_action;
-
+void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr, int frame){
     _enemy_sprite.loadFromFile(Constants::path_to_project + get_file_enemy(e_ptr));
 
-    _drawable_enemy.setTextureRect(sf::IntRect());
+    _drawable_enemy.setTexture(_enemy_sprite);
+
+    int idk;
+
+    if (e_ptr->get_state() == State::none) {
+        idk = 0;
+    } else if (e_ptr->get_state() == State::attacking_right || e_ptr->get_state() == State::attacking_left){
+        idk = 1;
+        if (frame > 2){
+            frame = 2;
+        }
+    } else if (e_ptr->get_state() == State::walking_left || e_ptr->get_state() == State::walking_right){
+        idk = 4;
+        if (frame > 3){
+            frame = 3;
+        }
+    } else if (e_ptr->get_state() == State::dying){
+        idk = 8;
+        if (frame > 4){
+            frame = 4;
+        }
+    }
+
+    if (idk == 0){
+        frame = 0;
+    }
+
+    _drawable_enemy.setTextureRect(sf::IntRect((frame + idk) * 32, 0 * 32, 32, 32));
 
     _drawable_enemy.setScale(_scale_factor_enemy, _scale_factor_enemy);
 
@@ -49,8 +87,9 @@ void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr){
 
     // aligns enemies feet with their in game coordinates
     // Made so, enemy always looks like enemy is walking on the road
-    float new_x = e_ptr->get_position().y - (_scale_factor_enemy * _drawable_enemy.getTexture()->getSize().x);
-    float new_y = e_ptr->get_position().x - (_scale_factor_enemy * _drawable_enemy.getTexture()->getSize().y);
+    // TODO: Scaling
+    float new_x = e_ptr->get_position().y + 20; // - _drawable_enemy.getTexture()->getSize().y;// + (_scale_factor_enemy * _drawable_enemy.getTexture()->getSize().x);
+    float new_y = e_ptr->get_position().x - _drawable_enemy.getTexture()->getSize().y;// + (_scale_factor_enemy * _drawable_enemy.getTexture()->getSize().y);
 
     if (new_x <= 0){
         new_x = 1;
@@ -66,15 +105,15 @@ void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr){
     rwindow.draw(_drawable_enemy);
 }
 
-void Renderer::draw_towers(sf::RenderWindow& rwindow, std::vector<Tower*> towers){
+void Renderer::draw_towers(sf::RenderWindow& rwindow, std::vector<Tower*> towers, int frame){
     for(Tower* t_ptr : towers){
-        draw_tower(rwindow, t_ptr); // zeros are placeholders
+        draw_tower(rwindow, t_ptr, frame); // zeros are placeholders
     }
 }
 
-void Renderer::draw_enemies(sf::RenderWindow& rwindow, std::vector<Enemy*> enemies){
+void Renderer::draw_enemies(sf::RenderWindow& rwindow, std::vector<Enemy*> enemies, int frame){
     for(Enemy* e_ptr : enemies){
-        draw_enemy(rwindow, e_ptr); // zeros are placeholders
+        draw_enemy(rwindow, e_ptr, frame); // zeros are placeholders
     }
 }
 

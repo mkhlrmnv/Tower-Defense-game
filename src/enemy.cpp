@@ -137,7 +137,7 @@ void Enemy::move() {
     }
 
     // if next position is out of the bounds, enemy gets deleted and one live is taken away from player
-    if (next_position.x >= get_level_reference().get_square_size()*10 || next_position.y >= get_level_reference().get_square_size()*10 || next_position.y <= 0 || next_position.x <= 0){
+    if (next_position.x >= 800 || next_position.y >= 800 || next_position.y <= 0 || next_position.x <= 0){
         get_level_reference().take_lives(1);
         get_level_reference().remove_enemy(this);
         // std::cout << "uda buga" << std::endl;
