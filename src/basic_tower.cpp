@@ -55,3 +55,7 @@ bool Basic_Tower::attack() {
     set_state(State::none);
     return false;
 }
+
+void Basic_Tower::set_multiple_target() {
+    _attack_type_single = false;
+}

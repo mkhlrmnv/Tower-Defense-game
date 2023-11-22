@@ -15,6 +15,8 @@ public:
 
     bool attack();
 
+    void set_multiple_target();
+
 private:
     bool _attack_type_single;
 };
