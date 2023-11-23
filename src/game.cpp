@@ -75,7 +75,6 @@ void Game::run(){
     _level.add_tower(new Basic_Tower(_level, t6_pos, 30, 10, 100, 1, 5, 100, 1, true));
 
     _renderer.make_drawable_level(_level);
-    _renderer.make_drawable_object_textures();
     _renderer.make_level_info_texts(_game_resolution, _side_bar_width);
 
 
