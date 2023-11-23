@@ -5,13 +5,13 @@
 #include "attack_types.hpp"
 // #include "level.hpp"
 
-class Basic_Enemy: public Enemy {
+class Healer: public Enemy {
 public:
 
-    Basic_Enemy(Level& level, Vector2D& position, int health = 30, int damage = 0, int range = 40, int attack_speed = 1, 
+    Healer(Level& level, Vector2D& position, int health = 30, int damage = 0, int range = 40, int attack_speed = 1, 
         int type = ObjectTypes::HealerPriest, int speed = 1, int defense = 5);
 
-    ~Basic_Enemy() { }
+    ~Healer() { }
 
     bool attack();
 

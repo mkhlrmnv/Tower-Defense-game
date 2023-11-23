@@ -5,13 +5,13 @@
 #include "attack_types.hpp"
 // #include "level.hpp"
 
-class Basic_Enemy: public Enemy {
+class Tank: public Enemy {
 public:
 
-    Basic_Enemy(Level& level, Vector2D& position, int health = 100, int damage = 5, int range = 80, int attack_speed = 1, 
+    Tank(Level& level, Vector2D& position, int health = 100, int damage = 5, int range = 80, int attack_speed = 1, 
         int type = ObjectTypes::TankOrc, int speed = 1, int defense = 100);
 
-    ~Basic_Enemy() { }
+    ~Tank() { }
 
     bool attack();
 

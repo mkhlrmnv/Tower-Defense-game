@@ -5,14 +5,14 @@
 #include "attack_types.hpp"
 // #include "level.hpp"
 
-class Basic_Enemy: public Enemy {
+class Sceleton: public Enemy {
 public:
 
-    Basic_Enemy(Level& level, Vector2D& position, int health = 20, int damage = 0, 
+    Sceleton(Level& level, Vector2D& position, int health = 20, int damage = 0, 
         int range = 0, int attack_speed = 0, int type = ObjectTypes::NoobSkeleton_NoAttack, 
         int speed = 3, int defense = 5);
 
-    ~Basic_Enemy() { }
+    ~Sceleton() { }
 
     bool attack();
 };
