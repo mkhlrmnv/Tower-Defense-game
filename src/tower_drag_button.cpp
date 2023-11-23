@@ -52,186 +52,29 @@ void TowerDragButton::setup_tower_images(){
     _img_background.setPosition({img_x, img_y});
     auto sky_blue = sf::Color(195, 234, 252);
 
-    _img_background.setFillColor(sky_blue);
-    _img_background.setOutlineThickness(2);
-    _img_background.setOutlineColor(_button_outline_color);
-    _img_background.setSize({_img_size, _img_size});
+    _drawable_tower.setTexture(_texture);
+    _drawable_tower.setScale({_scale, _scale});
+    _drawable_tower.setPosition(_position);
+
+
+    // make the button as big as the image and so that text fits in side
+    float tx = _drawable_tower.getGlobalBounds().getSize().x;
+    float ty = _drawable_tower.getGlobalBounds().getSize().y;
     
-    // same for the dragging tower image
+    float text_size = _text.getCharacterSize();
+    _button.setSize({tx, ty + text_size});
+    _size = sf::Vector2f(tx, ty + text_size);
 
-    _drawable_dragging_tower.setTexture(_rh.get_texture_tower(_tower_type));
-    _drawable_dragging_tower.setTextureRect(sf::IntRect(0, 0, 32,32));
-    _drawable_dragging_tower.setScale({-scale, scale});
+    // sets text couple pixels higher
+    float buffer = 5;
 
-    // position corrected in set_dragging_drawable_pos
-}
+    // TODO: fix text centering
+    float text_x = _drawable_tower.getPosition().x + _button.getGlobalBounds().width / 2 ; - _text.getLocalBounds().width/2;
+    float text_y = _drawable_tower.getPosition().y + _drawable_tower.getGlobalBounds().height ; // - _text.getCharacterSize() - buffer;
 
-void TowerDragButton::setup_button_texts(){
-    
-    auto brown = sf::Color(121, 85, 72);
-
-    // tower name - use inherited button text
-    auto pos = _button.getPosition();
-
-   
-    _text.setFillColor(brown);
-    _text.setCharacterSize(12);
-
-    float title_x = pos.x  + _button.getGlobalBounds().width / 2 - _text.getGlobalBounds().width / 2.f;
-    float title_y = pos.y;
-
-    // std::cout << "x"<<title_x << "" << title_y << std::endl; 
-
-    //_text.setOrigin(_text.getGlobalBounds().getSize() / 2.f + _text.getGlobalBounds().getPosition());
-    _text.setPosition({title_x, title_y});
-
-    
-    _price_text.setPosition({0,0});
-    float price_char_size = 20; 
-    
-    
-    _price_text.setCharacterSize(price_char_size);
-    _price_text.setFillColor(sf::Color::White);
-    _price_text.setOutlineColor(sf::Color::Black);
-    _price_text.setOutlineThickness(1);
-    _price_text.setString("$" + std::to_string(_tower_price));  
-
-    _price_text.setOrigin(_price_text.getGlobalBounds().width / 2.f, _price_text.getGlobalBounds().height / 2.f);
-
-    float price_x = _img_background.getPosition().x + _img_background.getGlobalBounds().width/2;
-    float price_y = _img_background.getPosition().y + _img_background.getGlobalBounds().height - price_char_size;
-    
-    _price_text.setPosition({price_x, price_y});
-
-    // modify these
-    float start_x_offset = 4;
-    float char_size = 12;
-    float line_spacing = 10;
-    float img_text_space = 2;
-
-    float center_point = _img_background.getGlobalBounds().width/2;
-
-    // assemble texts in 2x2 matrix
-
-    float x_1 = start_x_offset + _button.getGlobalBounds().left + _attr_img_size + img_text_space;
-    float y_1 = _drawable_tower.getGlobalBounds().top + _drawable_tower.getGlobalBounds().height + line_spacing;
-
-    float x_2 =  _img_background.getPosition().x + center_point + _attr_img_size + img_text_space;
-    float y_2 =  y_1 + char_size + line_spacing;
-
-
-    // first column
-
-    float hp_x = x_1;
-    float hp_y = y_1;
-
-    _hp_text.setCharacterSize(char_size);
-    _hp_text.setFillColor(brown);
-    _hp_text.setString(std::to_string(_rh.get_tower_info(_tower_type, TowerAttributes::HP)));
-    _hp_text.setPosition({hp_x, hp_y});
-
-
-
-    float dmg_x = x_1;
-    float dmg_y = y_2;
-
-    _dmg_text.setCharacterSize(char_size);
-    _dmg_text.setFillColor(brown);
-    _dmg_text.setString(std::to_string(_rh.get_tower_info(_tower_type, TowerAttributes::DMG))); 
-
-    _dmg_text.setPosition({dmg_x, dmg_y});
-
-
-
-    // second column
-
-    float rng_x = x_2;
-    float rng_y = y_1;
-
-    _rng_text.setCharacterSize(char_size);
-    _rng_text.setFillColor(brown);
-    _rng_text.setString(std::to_string(_rh.get_tower_info(_tower_type, TowerAttributes::RNG)));
-
-    _rng_text.setPosition({rng_x, rng_y});
-
-    float atkspd_x = x_2;
-    float atkspd_y = y_2;  
-
-    _atkspd_text.setCharacterSize(char_size);
-    _atkspd_text.setFillColor(brown);
-    _atkspd_text.setString(std::to_string(_rh.get_tower_info(_tower_type, TowerAttributes::ATKSPD)));
-    
-    _atkspd_text.setPosition({atkspd_x, atkspd_y});
-}
-
-void TowerDragButton::setup_font(){
-    _price_text.setFont(_rh.get_font());
-    _hp_text.setFont(_rh.get_font());
-    _dmg_text.setFont(_rh.get_font());
-    _rng_text.setFont(_rh.get_font());
-    _atkspd_text.setFont(_rh.get_font());
+    _text.setPosition({text_x, text_y});
 
 }
-
-void TowerDragButton::setup_attribute_images(){
-
-
-    // modify these
-
-    float tweak_x = 0;
-    float tweak_y = 2;
-
-    float start_x_offset = 4;
-    float char_size = 10;
-    float line_spacing = 10;
-
-    float center_point = _img_background.getGlobalBounds().width/2;
-
-    // assemble images in 2x2 matrix
-
-    float x_1 = tweak_x + start_x_offset + _button.getGlobalBounds().left ;
-    float y_1 = tweak_y + _drawable_tower.getGlobalBounds().top + _drawable_tower.getGlobalBounds().height + line_spacing;
-
-    float x_2 =  tweak_x + _img_background.getPosition().x + center_point;
-    float y_2 =  y_1 + char_size + line_spacing;
-    
-    // first column
-    float hp_x = x_1;
-    float hp_y = y_1;
-
-    setup_attribute_image(TowerAttributes::HP, _hp_img, {hp_x, hp_y});
-
-    float dmg_x = x_1;
-    float dmg_y = y_2;
-
-    setup_attribute_image(TowerAttributes::DMG, _dmg_img, {dmg_x, dmg_y}); // TODO: get image 
-
-    // second column
-
-    float rng_x = x_2;
-    float rng_y = y_1;
-
-    setup_attribute_image(TowerAttributes::RNG, _rng_img, {rng_x, rng_y});
-
-    float atkspd_x = x_2;
-    float atkspd_y = y_2;
-
-    setup_attribute_image(TowerAttributes::ATKSPD, _atkspd_img, {atkspd_x, atkspd_y});
-
-
-
-}
-
-void TowerDragButton::setup_attribute_image(int type, sf::Sprite& sprite, sf::Vector2f pos ){
-    
-    sprite.setTexture(_rh.get_texture_attribute(type));
-    sprite.setPosition(pos);
-
-    float og_image_size = 16;
-    float scale = _attr_img_size / og_image_size;
-    sprite.setScale(scale, scale);
-}
-
 
 void TowerDragButton::set_drag_flag(){
     _drag_flag = true;
