@@ -1,6 +1,18 @@
 #include "level.hpp"
 #include "basic_enemy.hpp"
 #include "basic_tower.hpp"
+#include "aoe_tower.hpp"
+#include "archer_tower.hpp"
+#include "boss_enemy.hpp"
+#include "demon_enemy.hpp"
+#include "fastboy_enemy.hpp"
+#include "fogmage_enemy.hpp"
+#include "healer_enemy.hpp"
+#include "inferno_enemy.hpp"
+#include "repel_tower.hpp"
+#include "sceleton_enemy.hpp"
+#include "sniper_tower.hpp"
+#include "tank_enemy.hpp"
 
 // Initialize new level
 Level::Level(int resolution, int cash, int lives):
@@ -125,6 +137,7 @@ bool Level::add_tower(Tower* tower){
 
 bool Level::add_tower_by_type(int type, Vector2D pos){
     Vector2D center = Vector2D(get_square_by_pos(pos)->get_center().x, get_square_by_pos(pos)->get_center().y);
+
     return add_tower(new Basic_Tower(*this, center));
 }
 
