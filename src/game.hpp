@@ -78,5 +78,8 @@ private:
     Level _level;
 
     bool round_over = false;
+
+    int _difficulty_multiplier = 2;
+    int idk = 1;
 }; 
 #endif

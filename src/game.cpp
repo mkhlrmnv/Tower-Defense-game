@@ -70,12 +70,12 @@ void Game::run(){
     auto t6_pos = Vector2D(82*3, 3*80);
 
     // Tower(level, health, damage, range, attack_speed, pos, type, price, level, single or not)
-    _level.add_tower(new Basic_Tower(_level, t1_pos, 30, 10, 100, 1, 0, 100, 1, true));
-    _level.add_tower(new Basic_Tower(_level, t2_pos, 30, 10, 100, 1, 1, 100, 1, true));
-    _level.add_tower(new Basic_Tower(_level, t3_pos, 30, 10, 100, 1, 2, 100, 1, true));
-    _level.add_tower(new Basic_Tower(_level, t4_pos, 30, 10, 100, 1, 3, 100, 1, true));
-    _level.add_tower(new Basic_Tower(_level, t5_pos, 30, 10, 100, 1, 4, 100, 1, true));
-    _level.add_tower(new Basic_Tower(_level, t6_pos, 30, 10, 100, 1, 5, 100, 1, true));
+    _level.add_tower(new Basic_Tower(_level, t1_pos, 30, 10, 200, 1, 0, 100, 1, true));
+    _level.add_tower(new Basic_Tower(_level, t2_pos, 30, 10, 200, 1, 1, 100, 1, true));
+    _level.add_tower(new Basic_Tower(_level, t3_pos, 30, 10, 200, 1, 2, 100, 1, true));
+    _level.add_tower(new Basic_Tower(_level, t4_pos, 30, 10, 200, 1, 3, 100, 1, true));
+    _level.add_tower(new Basic_Tower(_level, t5_pos, 30, 10, 200, 1, 4, 100, 1, true));
+    _level.add_tower(new Basic_Tower(_level, t6_pos, 30, 10, 200, 1, 5, 100, 1, true));
 
     _renderer.make_drawable_level(_level);
     _renderer.make_level_info_texts(_game_resolution, _side_bar_width);
@@ -93,7 +93,9 @@ void Game::run(){
         {
             timeSinceLastUpdate -= sf::seconds(1.f / 60.f);
             process_events();
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));
             update();
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));
             render();
         }
     }
@@ -134,7 +136,7 @@ void Game::process_events(){
 void Game::render(){
     // because animation are at most five pictures
     // there is for loop until five
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 6; i++)
     {
         _window.clear();
         _renderer.draw_level(_window);
@@ -146,7 +148,7 @@ void Game::render(){
         _window.display(); // display the drawn entities
 
         // delay if needed to slow down game
-        // std::this_thread::sleep_for(std::chrono::milliseconds(5));
+        std::this_thread::sleep_for(std::chrono::milliseconds(5));
     }
 
     // removes all towers and enemies with 0 hp, if their dying animation was already played
@@ -163,17 +165,23 @@ void Game::render(){
 }
 
 // starts new round
-// TODO: Some smart way
 void Game::start_round(){
     round_over = false;
-    for (int i = 0; i < (1 * _level.get_round()); i++)
+    for (int i = 0; i < (_difficulty_multiplier * _level.get_round()); i++)
     {
         Square* spawn_sq = _level.get_first_road();
+        int rand_types = rand() % idk;
         int x = rand() % 80;
         int y = rand() % 40;
         Vector2D rand_pos = Vector2D(spawn_sq->get_center().x - (_level.get_square_size() / 2) + x, 1 + y);
-        _level.add_enemy_by_type(0, rand_pos);
+        _level.add_enemy_by_type(rand_types, rand_pos);
     }
+    if (idk < 7){
+        idk++;
+    }
+
+    // waits 3sec to start new round
+    std::this_thread::sleep_for(std::chrono::milliseconds(3000));
 }
 
 // updates all enemies

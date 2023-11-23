@@ -27,31 +27,36 @@ void Renderer::draw_tower(sf::RenderWindow& rwindow, Tower* t_ptr, int frame){
         // because attacking animation is only 3 frames
         // it stops on third picture
         if (frame > 2){
-            frame = 2;
+            animation_pos = 0;
+            frame = 0;
         }
     } else if (t_ptr->get_state() == State::dying){
         animation_pos = 4;
         if (frame > 4){ // stops animation in right place
-            frame = 4;
+            animation_pos = 0;
+            frame = 0;
         }
     }
 
     // picks right picture from spread sheet
     _drawable_tower.setTextureRect(sf::IntRect((frame + animation_pos) * 32, 0 * 32, 32, 32));
 
-    // if attacking left use normal sprite and if right mirror is horizontally
-    if (t_ptr->get_state() == State::attacking_left){
-        _drawable_tower.setScale(_scale_factor_tower, _scale_factor_tower);
-    } else {
-        _drawable_tower.setScale(-_scale_factor_tower, _scale_factor_tower);
-    }
-
     // pointers for level and square
     Level& l = t_ptr->get_level_reference();
     Square* sq = l.current_square(t_ptr);
 
+    // if attacking left use normal sprite and if right mirror is horizontally
+    if (t_ptr->get_state() == State::attacking_right){
+        _drawable_tower.setScale(_scale_factor_tower, _scale_factor_tower);
+        _drawable_tower.setPosition(sf::Vector2f (sq->get_center().y - (l.get_square_size() / 2), sq->get_center().x - (l.get_square_size() / 2)));
+    } else {
+        _drawable_tower.setScale(-_scale_factor_tower, _scale_factor_tower);
+        _drawable_tower.setPosition(sf::Vector2f (sq->get_center().y - (l.get_square_size() / 2) + l.get_square_size(), sq->get_center().x - (l.get_square_size() / 2)));
+
+        
+    }
+
     // Sets tower position to center of the square and draws it
-    _drawable_tower.setPosition(sf::Vector2f (sq->get_center().y - (l.get_square_size() / 2), sq->get_center().x - (l.get_square_size() / 2)));
     rwindow.draw(_drawable_tower);
 }
 
@@ -73,12 +78,14 @@ void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr, int frame){
     } else if (e_ptr->get_state() == State::attacking_right || e_ptr->get_state() == State::attacking_left){
         animation_pos = 1;
         if (frame > 2){ // stops animation if its over
-            frame = 2;
+            animation_pos = 0;
+            frame = 0;
         }
     } else if (e_ptr->get_state() == State::walking_left || e_ptr->get_state() == State::walking_right){
         animation_pos = 4;
         if (frame > 3){ // stops animation if its over
-            frame = 3;
+            animation_pos = 0;
+            frame = 0;
         }
     } else if (e_ptr->get_state() == State::dying){
         animation_pos = 8;
