@@ -59,12 +59,20 @@ void Game::run(){
 
     generate_chosen_level_style(LevelSelection::load); 
 
-    auto t1_pos = Vector2D(82*5, 3*80);
-    auto t2_pos = Vector2D(82*5, 4*80);
+    auto t1_pos = Vector2D(82*5, 1*80);
+    auto t2_pos = Vector2D(82*5, 2*80);
+    auto t3_pos = Vector2D(82*5, 3*80);
+    auto t4_pos = Vector2D(82*3, 1*80);
+    auto t5_pos = Vector2D(82*3, 2*80);
+    auto t6_pos = Vector2D(82*3, 3*80);
 
     // Tower(level, health, damage, range, attack_speed, pos, type, price, level, single or not)
-    _level.add_tower(new Basic_Tower(_level, t1_pos));
-    _level.add_tower(new Basic_Tower(_level, t2_pos));
+    _level.add_tower(new Basic_Tower(_level, t1_pos, 30, 10, 100, 1, 0, 100, 1, true));
+    _level.add_tower(new Basic_Tower(_level, t2_pos, 30, 10, 100, 1, 1, 100, 1, true));
+    _level.add_tower(new Basic_Tower(_level, t3_pos, 30, 10, 100, 1, 2, 100, 1, true));
+    _level.add_tower(new Basic_Tower(_level, t4_pos, 30, 10, 100, 1, 3, 100, 1, true));
+    _level.add_tower(new Basic_Tower(_level, t5_pos, 30, 10, 100, 1, 4, 100, 1, true));
+    _level.add_tower(new Basic_Tower(_level, t6_pos, 30, 10, 100, 1, 5, 100, 1, true));
 
     _renderer.make_drawable_level(_level);
     _renderer.make_drawable_object_textures();

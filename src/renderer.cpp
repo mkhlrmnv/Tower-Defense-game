@@ -1,6 +1,8 @@
 #include <renderer.hpp>
 #include "constants.hpp"
 
+Renderer::Renderer():
+    _rh(ResourceHandler()){};
 
 void Renderer::draw_level(sf::RenderWindow& rwindow){
     rwindow.draw(_drawable_level);
@@ -8,7 +10,7 @@ void Renderer::draw_level(sf::RenderWindow& rwindow){
 
 void Renderer::draw_tower(sf::RenderWindow& rwindow, Tower* t_ptr, int frame){
 
-    _tower_sprite.loadFromFile(Constants::path_to_project + get_file_tower(t_ptr));
+    _tower_sprite = _rh.get_texture_tower(t_ptr->get_type());
     
     _drawable_tower.setTexture(_tower_sprite);
 
@@ -46,7 +48,8 @@ void Renderer::draw_tower(sf::RenderWindow& rwindow, Tower* t_ptr, int frame){
 }
 
 void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr, int frame){
-    _enemy_sprite.loadFromFile(Constants::path_to_project + get_file_enemy(e_ptr));
+
+    _enemy_sprite = _rh.get_texture_enemy(e_ptr->get_type());
 
     _drawable_enemy.setTexture(_enemy_sprite);
 
@@ -157,12 +160,9 @@ void Renderer::make_drawable_level(Level& lv){
     
     sf::Sprite drawable_level_square;
 
-
-    _road_pic.loadFromFile(Constants::path_to_project + "assets/textures/VERY_LITTLE_ROADTILE.png");
-    _grass_pic.loadFromFile(Constants::path_to_project + "assets/textures/VERY_LITTLE_GRASSTILE.png");
+    _grass_pic = _rh.get_texture_tile(0);
+    _road_pic = _rh.get_texture_tile(1);
             
-
-    // sf::RectangleShape drawable_level_square = sf::RectangleShape(sf::Vector2f(lv.get_square_size(),lv.get_square_size()));
     std::vector<std::vector<Square *>> level_grid = lv.get_grid();
 
     for(auto column : level_grid){
@@ -219,7 +219,7 @@ void Renderer::make_drawable_object_textures(){
 }
 
 void Renderer::load_font(){
-    if(!_font.loadFromFile(Constants::path_to_project + "/assets/fonts/Ubuntu-R.ttf")){
+    if(!_font.loadFromFile("../assets/fonts/Ubuntu-R.ttf")){
         std::cout << "font load failed" << std::endl;
     }else{
         std::cout << "font load success" << std::endl;

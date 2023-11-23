@@ -9,6 +9,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <string>
+#include "resource_handler.hpp"
 
 #include "attack_types.hpp"
 
@@ -20,7 +21,7 @@
 class Renderer{
 public:
 
-    Renderer(){}
+    Renderer();
     ~Renderer(){}
     Renderer(const Renderer& ) = delete;
     Renderer operator=(const Renderer&) = delete;
@@ -34,10 +35,6 @@ public:
     
     // draw background
     void draw_level(sf::RenderWindow& rwindow);
-
-    void attack_animation(Object* obj);
-
-    void dying_animatio(Object* obj);
 
     // draw single enemy  
     void draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr, int frame); // TODO: implement the choice of correct texture with obn and object type
@@ -87,13 +84,12 @@ sf::Texture _road_pic;
 float _scale_factor_tower = 2.5; // Adjust this value as needed
 float _scale_factor_enemy = 1;
 
-std::string _archer_tower_file = "../assets/textures/ArcherTower/ArcherTower_Right.png";
-std::string _tank_orc_file = "../assets/textures/TankOrc/TankOrc.png";
-
 sf::Font _font;
 sf::Text _round_count_text;
 sf::Text _cash_text;
 sf::Text _lives_text;
+
+ResourceHandler _rh;
 
 
 // Textures _textures //  some tree like data structure for different object state of objects

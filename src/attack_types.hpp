@@ -12,27 +12,29 @@ class Enemy;
 
 
 // TODO: WaterMage and MudMage
-enum TOWERTYPE {
-    BASIC,
-    SNIPER,
-    WATER,
-    MAGE,
-    REPEL
-};
-
-enum ENEMYTYPE {
-    NEUTRAL,
-    HEAL,
-    FOG,
-    FAT,
-    BOSS,
-    RPG
-};
+namespace ObjectTypes
+{ 
+    enum Enemies{
+        NoobSkeleton_NoAttack,
+        NoobDemon_CanAttack,
+        FastBoy,
+        FogMage,
+        HealerPriest,
+        InfernoMage,
+        TankOrc,
+        BossKnight,
+    };
+    enum Towers{
+        AoeTower,
+        ArcherTower,
+        MudMageTower,
+        RepelMageTower,
+        SniperTower,
+        WaterMageTower,
+    };
+}
 
 double check_type_multiplier(Tower* tower, Enemy* enemy);
 
-std::string get_file_enemy(Enemy* enemy);
-
-std::string get_file_tower(Tower* tower);
 
 #endif
