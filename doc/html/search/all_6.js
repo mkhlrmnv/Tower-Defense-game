@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['myclass_0',['Test of MyClass',['../md_tests_2readme.html#autotoc_md3',1,'']]]
+  ['level_0',['level',['../class_level.html',1,'Level'],['../class_level.html#af556d3f1e08b13e27c4204ad297bb6d0',1,'Level::Level()']]]
 ];
