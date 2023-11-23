@@ -1,5 +1,4 @@
 #include "resource_handler.hpp"
-#include "constants.hpp"
 
 
 // returns pointer to spread sheet
@@ -45,7 +44,7 @@ void ResourceHandler::load_texture_tile(int type, const std::string& filename){
 
 // load font and puts it into placeholder
 void ResourceHandler::load_font(){
-    _font.loadFromFile(Constants::path_to_project + "assets/fonts/Ubuntu-R.ttf");
+    _font.loadFromFile("../assets/fonts/Ubuntu-R.ttf");
 }
 
 // loads all textures that game will use

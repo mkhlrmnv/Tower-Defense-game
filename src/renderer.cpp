@@ -1,5 +1,4 @@
 #include <renderer.hpp>
-#include "constants.hpp"
 
 Renderer::Renderer():
     _rh(ResourceHandler()){};
