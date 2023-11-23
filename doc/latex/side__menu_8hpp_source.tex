@@ -1,0 +1,65 @@
+\doxysection{side\+\_\+menu.\+hpp}
+\hypertarget{side__menu_8hpp_source}{}\label{side__menu_8hpp_source}\index{src/side\_menu.hpp@{src/side\_menu.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ TOWER\_DEFENCE\_SRC\_SIDEMENU}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ TOWER\_DEFENCE\_SRC\_SIDEMENU}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <SFML/Window.hpp>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <SFML/Graphics.hpp>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}tower\_drag\_button.hpp"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}level.hpp"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}resource\_handler.hpp"{}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}iostream"{}}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_side_menu}{SideMenu}}\ :\ \textcolor{keyword}{public}\ sf::Drawable\ \{}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{class_side_menu}{SideMenu}}(\textcolor{keywordtype}{float}\ game\_resolution,\ \textcolor{keywordtype}{float}\ sidebar\_width,\ \mbox{\hyperlink{class_resource_handler}{ResourceHandler}}\&\ rh,\ \ \ \mbox{\hyperlink{class_level}{Level}}\&\ level);}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{class_side_menu}{\string~SideMenu}}()\{}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ button\ :\ \_drag\_buttons)\{}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ button;}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00021\ \ \ \ \ \}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{void}\ update\_displays();}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{void}\ handle\_events(sf::RenderWindow\&\ window,\ \textcolor{keyword}{const}\ sf::Event\&\ event);}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00027\ \ \ \ \ }
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{void}\ setup\_background();}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{void}\ setup\_buttons();}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{void}\ setup\_info\_displays();}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{void}\ setup\_menu\_title();}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{comment}{//\ derived\ from\ drawable;}}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ draw(\ sf::RenderTarget\&\ target,\ sf::RenderStates\ states)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{comment}{//TODO:\ freeze\ buttons\ during\ gameplay?}}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{bool}\ is\_paused;}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{float}\ \_game\_resolution;}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{float}\ \_side\_menu\_width;}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ sf::Text\ \_title;\ }
+\DoxyCodeLine{00043\ \ \ \ \ sf::RectangleShape\ \_background;}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ sf::Text\ \_round\_count\_text;}
+\DoxyCodeLine{00046\ \ \ \ \ sf::Text\ \_cash\_text;}
+\DoxyCodeLine{00047\ \ \ \ \ sf::Text\ \_lives\_text;}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ std::vector<\ TowerDragButton\ *>\ \_drag\_buttons;}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \ \ \mbox{\hyperlink{class_level}{Level}}\&\ \_level;}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{comment}{//\ to\ get\ textures}}
+\DoxyCodeLine{00055\ \ \ \ \ \mbox{\hyperlink{class_resource_handler}{ResourceHandler}}\ \_rh;}
+\DoxyCodeLine{00056\ \};}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

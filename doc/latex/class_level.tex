@@ -1,0 +1,132 @@
+\doxysection{Level Class Reference}
+\hypertarget{class_level}{}\label{class_level}\index{Level@{Level}}
+
+
+Class that controls level of the game.  
+
+
+
+
+{\ttfamily \#include $<$level.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_level_af556d3f1e08b13e27c4204ad297bb6d0}\label{class_level_af556d3f1e08b13e27c4204ad297bb6d0} 
+{\bfseries Level} (int resolution, int cash, int lives)
+\item 
+\Hypertarget{class_level_ab646b2f9ae0c53bf1150d92d06067293}\label{class_level_ab646b2f9ae0c53bf1150d92d06067293} 
+int {\bfseries get\+\_\+round} () const
+\item 
+\Hypertarget{class_level_a07356b1128280de8c12ac31958026c9b}\label{class_level_a07356b1128280de8c12ac31958026c9b} 
+int {\bfseries get\+\_\+cash} () const
+\item 
+\Hypertarget{class_level_ac1ff7a21c297e572236cc2bb340c92c7}\label{class_level_ac1ff7a21c297e572236cc2bb340c92c7} 
+int {\bfseries get\+\_\+lives} () const
+\item 
+\Hypertarget{class_level_ac7f3317a5fd2304a1446600b0a3cd98e}\label{class_level_ac7f3317a5fd2304a1446600b0a3cd98e} 
+std\+::vector$<$ std\+::vector$<$ \mbox{\hyperlink{class_square}{Square}} \texorpdfstring{$\ast$}{*} $>$ $>$ {\bfseries get\+\_\+grid} () const
+\item 
+\Hypertarget{class_level_a8b593fd7e80a1ca411306ca49d677481}\label{class_level_a8b593fd7e80a1ca411306ca49d677481} 
+int {\bfseries get\+\_\+square\+\_\+size} () const
+\item 
+\Hypertarget{class_level_a2f668648513e15fc904d3b761a6a626a}\label{class_level_a2f668648513e15fc904d3b761a6a626a} 
+void {\bfseries make\+\_\+grid} ()
+\item 
+\Hypertarget{class_level_a268b93231dbc2c4c9fa4fc1832985f9f}\label{class_level_a268b93231dbc2c4c9fa4fc1832985f9f} 
+void {\bfseries plus\+\_\+round} ()
+\item 
+\Hypertarget{class_level_a216f32a5306dd619eb7f8b682869c437}\label{class_level_a216f32a5306dd619eb7f8b682869c437} 
+void {\bfseries add\+\_\+cash} (int how\+\_\+much)
+\item 
+\Hypertarget{class_level_a4ead7e421d3816aca29eda0a84d0a33f}\label{class_level_a4ead7e421d3816aca29eda0a84d0a33f} 
+void {\bfseries take\+\_\+cash} (int how\+\_\+much)
+\item 
+\Hypertarget{class_level_a9e2d9cd9c84e212aa10a44f50c1dec42}\label{class_level_a9e2d9cd9c84e212aa10a44f50c1dec42} 
+void {\bfseries take\+\_\+lives} (int how\+\_\+much)
+\item 
+\Hypertarget{class_level_a0e613d67c755e405aa6faa3ddf261927}\label{class_level_a0e613d67c755e405aa6faa3ddf261927} 
+void {\bfseries add\+\_\+lives} (int how\+\_\+much)
+\item 
+\Hypertarget{class_level_a6ac563991228edab7e9f293421b223b6}\label{class_level_a6ac563991228edab7e9f293421b223b6} 
+std\+::vector$<$ \mbox{\hyperlink{class_enemy}{Enemy}} \texorpdfstring{$\ast$}{*} $>$ {\bfseries get\+\_\+enemies} () const
+\item 
+\Hypertarget{class_level_a12136a881411baf98f8f4447ad128145}\label{class_level_a12136a881411baf98f8f4447ad128145} 
+bool {\bfseries add\+\_\+enemy} (\mbox{\hyperlink{class_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}enemy)
+\item 
+\Hypertarget{class_level_a07f0659876b443c0f5466c9c16aee996}\label{class_level_a07f0659876b443c0f5466c9c16aee996} 
+bool {\bfseries remove\+\_\+enemy} (\mbox{\hyperlink{class_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}enemy)
+\item 
+\Hypertarget{class_level_acab4665c3514bbdd7c2bc6ebc1d05d3d}\label{class_level_acab4665c3514bbdd7c2bc6ebc1d05d3d} 
+bool {\bfseries add\+\_\+enemy\+\_\+by\+\_\+type} (int type, \mbox{\hyperlink{class_vector2_d}{Vector2D}} pos)
+\item 
+\Hypertarget{class_level_ab7e3303774cec1c20ec0eb3e9fbfc3f6}\label{class_level_ab7e3303774cec1c20ec0eb3e9fbfc3f6} 
+std\+::vector$<$ \mbox{\hyperlink{class_tower}{Tower}} \texorpdfstring{$\ast$}{*} $>$ {\bfseries get\+\_\+towers} () const
+\item 
+\Hypertarget{class_level_a465496310003be750d7c0d38425bde1d}\label{class_level_a465496310003be750d7c0d38425bde1d} 
+bool {\bfseries add\+\_\+tower} (\mbox{\hyperlink{class_tower}{Tower}} \texorpdfstring{$\ast$}{*}tower)
+\item 
+\Hypertarget{class_level_af99bcac0b0b7844cbe9d196e38c81cb6}\label{class_level_af99bcac0b0b7844cbe9d196e38c81cb6} 
+bool {\bfseries remove\+\_\+tower} (\mbox{\hyperlink{class_tower}{Tower}} \texorpdfstring{$\ast$}{*}tower)
+\item 
+\Hypertarget{class_level_a30910cee89a4ea8b78ac4c1923bacdc9}\label{class_level_a30910cee89a4ea8b78ac4c1923bacdc9} 
+bool {\bfseries add\+\_\+tower\+\_\+by\+\_\+type} (int type, \mbox{\hyperlink{class_vector2_d}{Vector2D}} pos)
+\item 
+\Hypertarget{class_level_ade024d775ebc3fea439b358a11a0a5d6}\label{class_level_ade024d775ebc3fea439b358a11a0a5d6} 
+std\+::pair$<$ int, int $>$ {\bfseries current\+\_\+row\+\_\+col} (\mbox{\hyperlink{class_object}{Object}} \texorpdfstring{$\ast$}{*}obj)
+\item 
+\Hypertarget{class_level_a82b8e660cfa0f0791e972e6eb613d1f1}\label{class_level_a82b8e660cfa0f0791e972e6eb613d1f1} 
+\mbox{\hyperlink{class_square}{Square}} \texorpdfstring{$\ast$}{*} {\bfseries current\+\_\+square} (\mbox{\hyperlink{class_object}{Object}} \texorpdfstring{$\ast$}{*}obj)
+\item 
+\Hypertarget{class_level_a74c0626335a5d0db998944303012ac81}\label{class_level_a74c0626335a5d0db998944303012ac81} 
+\mbox{\hyperlink{class_square}{Square}} \texorpdfstring{$\ast$}{*} {\bfseries get\+\_\+square\+\_\+by\+\_\+pos} (\mbox{\hyperlink{class_vector2_d}{Vector2D}} pos)
+\item 
+\Hypertarget{class_level_a3db9288817069c0a741e30c8b883899e}\label{class_level_a3db9288817069c0a741e30c8b883899e} 
+std\+::vector$<$ Direction $>$ {\bfseries next\+\_\+road} (\mbox{\hyperlink{class_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}enemy)
+\item 
+\Hypertarget{class_level_a6bb9dd43cf9f0fe430d91591f86cc47c}\label{class_level_a6bb9dd43cf9f0fe430d91591f86cc47c} 
+void {\bfseries print\+\_\+objects} ()
+\item 
+\Hypertarget{class_level_a7b256779b4f5f81a7bb73de5cf8416a5}\label{class_level_a7b256779b4f5f81a7bb73de5cf8416a5} 
+int {\bfseries read\+\_\+file} (const std\+::string \&file\+\_\+name)
+\item 
+\Hypertarget{class_level_ac9042c6d2621250b98ccebf1c1f86463}\label{class_level_ac9042c6d2621250b98ccebf1c1f86463} 
+int {\bfseries save\+\_\+to\+\_\+file} (const std\+::string \&file\+\_\+name)
+\item 
+\Hypertarget{class_level_a81a2a7833d6e7b8f302787916ffa7f7b}\label{class_level_a81a2a7833d6e7b8f302787916ffa7f7b} 
+void {\bfseries print\+\_\+map} ()
+\item 
+\Hypertarget{class_level_af7c71e2e9f9a37b4fd6573597f40b583}\label{class_level_af7c71e2e9f9a37b4fd6573597f40b583} 
+std\+::pair$<$ int, int $>$ {\bfseries can\+\_\+go\+\_\+notstart} (Direction dir, std\+::vector$<$ Direction $>$ prev\+\_\+dirs, int row, int col, bool can\+\_\+go\+\_\+left)
+\item 
+\Hypertarget{class_level_ac64ddafc617942a4a4fdcebbeb05d40a}\label{class_level_ac64ddafc617942a4a4fdcebbeb05d40a} 
+std\+::pair$<$ int, int $>$ {\bfseries can\+\_\+go\+\_\+start} (Direction dir, std\+::vector$<$ Direction $>$ dir\+\_\+list, int row, int col)
+\item 
+\Hypertarget{class_level_adaa029c4b47de08b733d86f6e0e75093}\label{class_level_adaa029c4b47de08b733d86f6e0e75093} 
+bool {\bfseries randomly\+\_\+generate} ()
+\item 
+\Hypertarget{class_level_a73959597241fbd486eb5bbeb6a4737e3}\label{class_level_a73959597241fbd486eb5bbeb6a4737e3} 
+\mbox{\hyperlink{class_square}{Square}} \texorpdfstring{$\ast$}{*} {\bfseries get\+\_\+first\+\_\+road} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class that controls level of the game. 
+
+Class holds current grid, all enemies and tower. Also it keeps track of round, money and live situation \doxylink{class_level}{Level} can load hard coded maps from files, save current levels to files or randomly generate fully new one
+
+
+\begin{DoxyParams}{Parameters}
+{\em resolution} & of window \\
+\hline
+{\em cash} & starting cash \\
+\hline
+{\em lives} & starting lives \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/level.\+hpp\item 
+src/level.\+cpp\end{DoxyCompactItemize}

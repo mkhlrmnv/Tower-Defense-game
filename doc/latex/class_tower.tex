@@ -1,0 +1,65 @@
+\doxysection{Tower Class Reference}
+\hypertarget{class_tower}{}\label{class_tower}\index{Tower@{Tower}}
+Inheritance diagram for Tower\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_tower}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_tower_a919c5a359c2a7c01c93d851bd8453ced}\label{class_tower_a919c5a359c2a7c01c93d851bd8453ced} 
+{\bfseries Tower} (\mbox{\hyperlink{class_level}{Level}} \&current\+\_\+level, \mbox{\hyperlink{class_vector2_d}{Vector2D}} \&position, int health, int damage, int range, int attack\+\_\+speed, int type, int price, int level)
+\item 
+\Hypertarget{class_tower_af660ef9fde9b86d285d3b0bdbaef6772}\label{class_tower_af660ef9fde9b86d285d3b0bdbaef6772} 
+void {\bfseries level\+\_\+up} ()
+\item 
+\Hypertarget{class_tower_adc43dae7bb1c82ecd2ee05b484dd4b44}\label{class_tower_adc43dae7bb1c82ecd2ee05b484dd4b44} 
+int {\bfseries get\+\_\+price} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_object}{Object}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Object} (\mbox{\hyperlink{class_level}{Level}} \&level, \mbox{\hyperlink{class_vector2_d}{Vector2D}} \&position, int health, int damage, int range, int attack\+\_\+speed, int type)
+\item 
+int {\bfseries get\+\_\+damage} () const
+\item 
+int {\bfseries get\+\_\+health} () const
+\item 
+int {\bfseries get\+\_\+range} () const
+\item 
+int {\bfseries get\+\_\+attack\+\_\+speed} () const
+\item 
+const \mbox{\hyperlink{class_vector2_d}{Vector2D}} {\bfseries get\+\_\+position} () const
+\item 
+int {\bfseries get\+\_\+type} () const
+\item 
+\mbox{\hyperlink{class_level}{Level}} \& {\bfseries get\+\_\+level\+\_\+reference} () const
+\item 
+void {\bfseries set\+\_\+position} (const \mbox{\hyperlink{class_vector2_d}{Vector2D}} \&position)
+\item 
+void {\bfseries gain\+\_\+damage} (int amount)
+\item 
+void {\bfseries gain\+\_\+health} (int amount)
+\item 
+void {\bfseries gain\+\_\+range} (int amount)
+\item 
+void {\bfseries gain\+\_\+attack\+\_\+speed} (int amount)
+\item 
+double {\bfseries distance\+\_\+to} (const \mbox{\hyperlink{class_vector2_d}{Vector2D}} \&target\+\_\+position)
+\item 
+void {\bfseries lose\+\_\+health} (int amount)
+\item 
+State {\bfseries get\+\_\+state} ()
+\item 
+void {\bfseries set\+\_\+state} (State state)
+\item 
+virtual bool {\bfseries attack} ()
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/tower.\+hpp\item 
+src/tower.\+cpp\end{DoxyCompactItemize}

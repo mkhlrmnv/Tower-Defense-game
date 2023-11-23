@@ -14,10 +14,28 @@
 #include <ctime>
 #include <cmath>
 
+
+/**
+ * @brief Enum for directions
+ * 
+ * Enum used by randomly_generate, move and etc functions to determine direction where something
+ * is going 
+ * */
 enum Direction{
     up, down, right, left
 };
 
+
+/**
+ * @brief Class that controls level of the game
+ * 
+ * Class holds current grid, all enemies and tower. Also it keeps track of round, money and live situation
+ * Level can load hard coded maps from files, save current levels to files or randomly generate fully new one
+ * 
+ * @param resolution of window
+ * @param cash starting cash
+ * @param lives starting lives
+ */
 class Level {
 public:
     Level(int resolution, int cash, int lives);
