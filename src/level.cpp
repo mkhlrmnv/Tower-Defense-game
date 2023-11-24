@@ -1,7 +1,7 @@
 #include "level.hpp"
 #include "basic_enemy.hpp"
 #include "basic_tower.hpp"
-/*#include "aoe_tower.hpp"
+#include "aoe_tower.hpp"
 #include "archer_tower.hpp"
 #include "boss_enemy.hpp"
 #include "demon_enemy.hpp"
@@ -12,7 +12,7 @@
 #include "repel_tower.hpp"
 #include "sceleton_enemy.hpp"
 #include "sniper_tower.hpp"
-#include "tank_enemy.hpp"*/
+#include "tank_enemy.hpp"
 
 // Initialize new level
 Level::Level(int resolution, int cash, int lives):

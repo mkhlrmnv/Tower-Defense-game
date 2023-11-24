@@ -10,6 +10,18 @@
 
 #include "basic_enemy.hpp"
 #include "basic_tower.hpp"
+#include "aoe_tower.hpp"
+#include "archer_tower.hpp"
+#include "boss_enemy.hpp"
+#include "demon_enemy.hpp"
+#include "fastboy_enemy.hpp"
+#include "fogmage_enemy.hpp"
+#include "healer_enemy.hpp"
+#include "inferno_enemy.hpp"
+#include "repel_tower.hpp"
+#include "sceleton_enemy.hpp"
+#include "sniper_tower.hpp"
+#include "tank_enemy.hpp"
 
 namespace LevelSelection{
     enum Choice: int{
