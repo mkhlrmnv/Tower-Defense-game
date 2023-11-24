@@ -1,0 +1,70 @@
+\doxysection{Enemy\+Tests.\+cpp}
+\hypertarget{_enemy_tests_8cpp_source}{}\label{_enemy_tests_8cpp_source}\index{tests/EnemyTests.cpp@{tests/EnemyTests.cpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ \#include\ "{}enemy.hpp"{}}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ \#include\ <iostream>}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ bool\ testEnemySpeed()\ \{}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//\ \ \ \ \ Vector2D\ position(0,\ 0);}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ \ \ \ \ Level\ level(1000,\ 100,\ 3);}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ \ \ \ \ Enemy\ enemy(level,\ 100,\ 20,\ 5,\ 3,\ position,\ 1,\ 8,\ 10);}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//\ \ \ \ \ return\ enemy.get\_speed()\ ==\ 8;}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{comment}{//\ bool\ testEnemyDefense()\ \{}}
+\DoxyCodeLine{00012\ \textcolor{comment}{//\ \ \ \ \ Vector2D\ position(0,\ 0);}}
+\DoxyCodeLine{00013\ \textcolor{comment}{//\ \ \ \ \ Level\ level(1000,\ 100,\ 3);}}
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ \ \ \ \ Enemy\ enemy(level,\ 100,\ 20,\ 5,\ 3,\ position,\ 1,\ 8,\ 10);}}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ \ \ \ \ return\ enemy.get\_defense()\ ==\ 10;}}
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{comment}{//\ bool\ testEnemySetTargetPositionAndGetRoute()\ \{}}
+\DoxyCodeLine{00019\ \textcolor{comment}{//\ \ \ \ \ Vector2D\ position(0,\ 0);}}
+\DoxyCodeLine{00020\ \textcolor{comment}{//\ \ \ \ \ Level\ level(1000,\ 100,\ 3);}}
+\DoxyCodeLine{00021\ \textcolor{comment}{//\ \ \ \ \ Enemy\ enemy(level,\ 100,\ 20,\ 5,\ 3,\ position,\ 1,\ 8,\ 10);}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{comment}{//\ \ \ \ \ Vector2D\ targetPosition(10,\ 10);}}
+\DoxyCodeLine{00024\ \textcolor{comment}{//\ \ \ \ \ enemy.set\_route\_position(targetPosition);}}
+\DoxyCodeLine{00025\ \textcolor{comment}{//\ \ \ \ \ std::vector<Vector2D>\ route\ =\ enemy.get\_route();}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{comment}{//\ \ \ \ \ return\ route.size()\ ==\ 2\ \&\&}}
+\DoxyCodeLine{00028\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ route[0]\ ==\ Vector2D(0,\ 0)\ \&\&}}
+\DoxyCodeLine{00029\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ route[1]\ ==\ targetPosition\ \&\&}}
+\DoxyCodeLine{00030\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ enemy.get\_position()\ ==\ targetPosition;}}
+\DoxyCodeLine{00031\ \textcolor{comment}{//\ \}}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{comment}{//\ int\ enemy\_tests()\ \{}}
+\DoxyCodeLine{00034\ \textcolor{comment}{//\ \ \ \ \ int\ testsFailed\ =\ 0;}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{comment}{//\ \ \ \ \ if\ (testEnemySpeed())\ \{}}
+\DoxyCodeLine{00037\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ std::cout\ <<\ "{}testEnemySpeed:\ Passed"{}\ <<\ std::endl;}}
+\DoxyCodeLine{00038\ \textcolor{comment}{//\ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00039\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ std::cout\ <<\ "{}testEnemySpeed:\ Failed"{}\ <<\ std::endl;}}
+\DoxyCodeLine{00040\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ testsFailed++;}}
+\DoxyCodeLine{00041\ \textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{comment}{//\ \ \ \ \ if\ (testEnemyDefense())\ \{}}
+\DoxyCodeLine{00044\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ std::cout\ <<\ "{}testEnemyDefense:\ Passed"{}\ <<\ std::endl;}}
+\DoxyCodeLine{00045\ \textcolor{comment}{//\ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00046\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ std::cout\ <<\ "{}testEnemyDefense:\ Failed"{}\ <<\ std::endl;}}
+\DoxyCodeLine{00047\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ testsFailed++;}}
+\DoxyCodeLine{00048\ \textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \textcolor{comment}{//\ \ \ \ \ if\ (testEnemySetTargetPositionAndGetRoute())\ \{}}
+\DoxyCodeLine{00051\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ std::cout\ <<\ "{}testEnemySetTargetPositionAndGetRoute:\ Passed"{}\ <<\ std::endl;}}
+\DoxyCodeLine{00052\ \textcolor{comment}{//\ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00053\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ std::cout\ <<\ "{}testEnemySetTargetPositionAndGetRoute:\ Failed"{}\ <<\ std::endl;}}
+\DoxyCodeLine{00054\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ testsFailed++;}}
+\DoxyCodeLine{00055\ \textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \textcolor{comment}{//\ \ \ \ \ if\ (testsFailed\ ==\ 0)\ \{}}
+\DoxyCodeLine{00058\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ std::cout\ <<\ "{}All\ tests\ passed."{}\ <<\ std::endl;}}
+\DoxyCodeLine{00059\ \textcolor{comment}{//\ \ \ \ \ \}\ else\ \{}}
+\DoxyCodeLine{00060\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ std::cout\ <<\ "{}Some\ tests\ failed."{}\ <<\ std::endl;}}
+\DoxyCodeLine{00061\ \textcolor{comment}{//\ \ \ \ \ \}}}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \textcolor{comment}{//\ \ \ \ \ return\ testsFailed;}}
+\DoxyCodeLine{00064\ \textcolor{comment}{//\ \}}}
+
+\end{DoxyCode}

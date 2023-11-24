@@ -1,0 +1,56 @@
+\doxysection{button.\+hpp}
+\hypertarget{button_8hpp_source}{}\label{button_8hpp_source}\index{src/button.hpp@{src/button.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ TOWER\_DEFENCE\_SRC\_BUTTON}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ TOWER\_DEFENCE\_SRC\_BUTTON}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <SFML/Window.hpp>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <SFML/Graphics.hpp>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}level.hpp"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_button}{Button}}\ :\ \textcolor{keyword}{public}\ sf::Drawable\{}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00013\ \ \ \ \ \mbox{\hyperlink{class_button}{Button}}()\{\}}
+\DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{class_button}{Button}}(\textcolor{keyword}{const}\ std::string\&\ label,\ sf::Vector2f\ size,\ sf::Vector2f\ position,\ sf::Color\ color);}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordtype}{void}\ set\_font(sf::Font\&\ font);}
+\DoxyCodeLine{00017\ \ \ \ \ }
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{comment}{//\ set\ the\ position\ of\ the\ button\ so\ that\ the\ text\ is\ in\ one\ of:\ }}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{void}\ set\_position\_text\_up(sf::Vector2f\ pos);}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{void}\ set\_position\_text\_middle(sf::Vector2f\ pos);}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{void}\ set\_position\_text\_down(sf::Vector2f\ pos);}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{void}\ set\_color(sf::Color\ color);}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{void}\ set\_text\_string(\textcolor{keyword}{const}\ std::string\&\ label);}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{bool}\ is\_mouse\_over(sf::RenderWindow\&\ window);}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ handle\_events(sf::RenderWindow\&\ window,\ \textcolor{keyword}{const}\ sf::Event\&\ event,\ \mbox{\hyperlink{class_level}{Level}}\&\ lv);}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{comment}{//\ TODO:\ define\ in\ child\ class\ }}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ some\_action\_from\_level(\mbox{\hyperlink{class_level}{Level}}\ \&lv)\{\}\ }
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{keyword}{protected}:\ }
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ draw(sf::RenderTarget\&\ target,\ sf::RenderStates)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ sf::RectangleShape\ \_button;}
+\DoxyCodeLine{00039\ \ \ \ \ sf::Color\ \_button\_color;}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ sf::Vector2f\ \_position;}
+\DoxyCodeLine{00042\ \ \ \ \ sf::Vector2f\ \_size;}
+\DoxyCodeLine{00043\ \ \ \ \ sf::Text\ \_text;}
+\DoxyCodeLine{00044\ \ \ \ \ }
+\DoxyCodeLine{00045\ \};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

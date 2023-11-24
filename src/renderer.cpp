@@ -1,5 +1,4 @@
 #include <renderer.hpp>
-#include "constants.hpp"
 
 Renderer::Renderer():
     _rh(ResourceHandler()){};
@@ -10,83 +9,102 @@ void Renderer::draw_level(sf::RenderWindow& rwindow){
 
 void Renderer::draw_tower(sf::RenderWindow& rwindow, Tower* t_ptr, int frame){
 
+    // from resource handler takes right spread sheet
     _tower_sprite = _rh.get_texture_tower(t_ptr->get_type());
     
+    // sets sprite as texture
     _drawable_tower.setTexture(_tower_sprite);
 
-    int idk = 0;
+    // variable for where animation is on spread sheet
+    int animation_pos;
 
+    // picks right animation value for current tower state
     if (t_ptr->get_state() == State::none) {
-        idk = 0;
+        animation_pos = 0;
+        frame = 0;
     } else if (t_ptr->get_state() == State::attacking_right || t_ptr->get_state() == State::attacking_left){
-        idk = 1;
+        animation_pos = 1;
+        // because attacking animation is only 3 frames
+        // it stops on third picture
         if (frame > 2){
-            frame = 2;
+            animation_pos = 0;
+            frame = 0;
         }
     } else if (t_ptr->get_state() == State::dying){
-        idk = 4;
-        if (frame > 4){
-            frame = 4;
+        animation_pos = 4;
+        if (frame > 4){ // stops animation in right place
+            animation_pos = 0;
+            frame = 0;
         }
     }
 
-    if (idk == 0){
-        frame = 0;
-    }
+    // picks right picture from spread sheet
+    _drawable_tower.setTextureRect(sf::IntRect((frame + animation_pos) * 32, 0 * 32, 32, 32));
 
-    _drawable_tower.setTextureRect(sf::IntRect((frame + idk) * 32, 0 * 32, 32, 32));
-
-    _drawable_tower.setScale(_scale_factor_tower, _scale_factor_tower);
-
+    // pointers for level and square
     Level& l = t_ptr->get_level_reference();
-
     Square* sq = l.current_square(t_ptr);
 
-    _drawable_tower.setPosition(sf::Vector2f (sq->get_center().y - (l.get_square_size() / 2), sq->get_center().x - (l.get_square_size() / 2))); // TODO: set offset according to the real texture / img size
-    
+    // if attacking left use normal sprite and if right mirror is horizontally
+    if (t_ptr->get_state() == State::attacking_right){
+        _drawable_tower.setScale(_scale_factor_tower, _scale_factor_tower);
+        _drawable_tower.setPosition(sf::Vector2f (sq->get_center().y - (l.get_square_size() / 2), sq->get_center().x - (l.get_square_size() / 2)));
+    } else {
+        _drawable_tower.setScale(-_scale_factor_tower, _scale_factor_tower);
+        _drawable_tower.setPosition(sf::Vector2f (sq->get_center().y - (l.get_square_size() / 2) + l.get_square_size(), sq->get_center().x - (l.get_square_size() / 2)));
+
+        
+    }
+
+    // Sets tower position to center of the square and draws it
     rwindow.draw(_drawable_tower);
 }
 
 void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr, int frame){
 
+    // from resource handler takes right spread sheet
     _enemy_sprite = _rh.get_texture_enemy(e_ptr->get_type());
 
+    // sets spread sheet as texture
     _drawable_enemy.setTexture(_enemy_sprite);
 
-    int idk;
+    // variable for where animation is on spread sheet
+    int animation_pos;
 
+    // picks right animation value for current tower state
     if (e_ptr->get_state() == State::none) {
-        idk = 0;
+        animation_pos = 0;
+        frame = 0;
     } else if (e_ptr->get_state() == State::attacking_right || e_ptr->get_state() == State::attacking_left){
-        idk = 1;
-        if (frame > 2){
-            frame = 2;
+        animation_pos = 1;
+        if (frame > 2){ // stops animation if its over
+            animation_pos = 0;
+            frame = 0;
         }
     } else if (e_ptr->get_state() == State::walking_left || e_ptr->get_state() == State::walking_right){
-        idk = 4;
-        if (frame > 3){
-            frame = 3;
+        animation_pos = 4;
+        if (frame > 3){ // stops animation if its over
+            animation_pos = 0;
+            frame = 0;
         }
     } else if (e_ptr->get_state() == State::dying){
-        idk = 8;
-        if (frame > 4){
+        animation_pos = 8;
+        if (frame > 4){ // stops animation if its over
             frame = 4;
         }
     }
 
-    if (idk == 0){
-        frame = 0;
+    // pics right picture from spread sheed
+    _drawable_enemy.setTextureRect(sf::IntRect((frame + animation_pos) * 32, 0 * 32, 32, 32));
+
+    // flips texture if enemy isn't attacking or moving to the left
+    if (e_ptr->get_state() == State::walking_left || e_ptr->get_state() == State::attacking_left){
+        _drawable_enemy.setScale(_scale_factor_enemy, _scale_factor_enemy);
+    } else {
+        _drawable_enemy.setScale(-_scale_factor_enemy, _scale_factor_enemy);
     }
 
-    _drawable_enemy.setTextureRect(sf::IntRect((frame + idk) * 32, 0 * 32, 32, 32));
-
-    _drawable_enemy.setScale(_scale_factor_enemy, _scale_factor_enemy);
-
     Level& l = e_ptr->get_level_reference();
-
-    // std::cout << _drawable_enemy.getTexture()->getSize().x << " " << _drawable_enemy.getTexture()->getSize().y << std::endl;
-    
-    //_drawable_enemy.setTexture(_enemy_texture.getTexture());
 
     // aligns enemies feet with their in game coordinates
     // Made so, enemy always looks like enemy is walking on the road
@@ -94,6 +112,7 @@ void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr, int frame){
     float new_x = e_ptr->get_position().y + 20; // - _drawable_enemy.getTexture()->getSize().y;// + (_scale_factor_enemy * _drawable_enemy.getTexture()->getSize().x);
     float new_y = e_ptr->get_position().x - _drawable_enemy.getTexture()->getSize().y;// + (_scale_factor_enemy * _drawable_enemy.getTexture()->getSize().y);
 
+    // make sure that enemy isn't drawn outside field
     if (new_x <= 0){
         new_x = 1;
     }
@@ -101,25 +120,25 @@ void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr, int frame){
         new_y = 1;
     }
 
+    // sets position and draws enemy
     _drawable_enemy.setPosition(new_x, new_y);
-    
-    // _drawable_enemy.setPosition(sf::Vector2f (sq->get_center().y - (l.get_square_size() / 2), sq->get_center().x - (l.get_square_size() / 2))); // TODO: set offset according to the real texture / img size
-    
     rwindow.draw(_drawable_enemy);
 }
 
+// function to draw multiple towers at once
 void Renderer::draw_towers(sf::RenderWindow& rwindow, std::vector<Tower*> towers, int frame){
     for(Tower* t_ptr : towers){
         draw_tower(rwindow, t_ptr, frame); // zeros are placeholders
     }
 }
-
+ // function to draw multiple enemies at once
 void Renderer::draw_enemies(sf::RenderWindow& rwindow, std::vector<Enemy*> enemies, int frame){
     for(Enemy* e_ptr : enemies){
         draw_enemy(rwindow, e_ptr, frame); // zeros are placeholders
     }
 }
 
+// displays current cash
 void Renderer::draw_cash(sf::RenderWindow& rwindow, int cash){
 
     std::string text_to_be_displayed = "$" + std::to_string(cash);
@@ -127,6 +146,7 @@ void Renderer::draw_cash(sf::RenderWindow& rwindow, int cash){
     rwindow.draw(_cash_text);
 }
 
+// displays current lives
 void Renderer::draw_lives(sf::RenderWindow& rwindow, int lives){
 
     std::string text_to_be_displayed = "Lives: " + std::to_string(lives);
@@ -134,6 +154,7 @@ void Renderer::draw_lives(sf::RenderWindow& rwindow, int lives){
     rwindow.draw(_lives_text);
 }
 
+// displays current round
 void Renderer::draw_round_count(sf::RenderWindow& rwindow, int round_count){
 
     std::string text_to_be_displayed = "Round: " + std::to_string(round_count);
@@ -149,22 +170,21 @@ void Renderer::make_drawable_level(Level& lv){
         std::cout << "RenderTexture creation failed for level" << std::endl;
     }    
     
+    // variables for drawing
     int square_type; 
     Vector2D center_coords;
     int upper_left_corner_x; 
     int upper_left_corner_y;
-
-    // TODO: change colors and RectangleShape to textures
-    sf::Color green = sf::Color(0, 128, 0);
-    sf::Color grey = sf::Color(128, 128, 128);
-    
     sf::Sprite drawable_level_square;
 
+    // from resource handler picks textures for grass and road
     _grass_pic = _rh.get_texture_tile(0);
     _road_pic = _rh.get_texture_tile(1);
             
+    // takes grid from level
     std::vector<std::vector<Square *>> level_grid = lv.get_grid();
 
+    // goes throw every square and draws road or grass depending on occupied value
     for(auto column : level_grid){
         for(auto square : column){
             square_type = square->get_occupied();
@@ -189,35 +209,12 @@ void Renderer::make_drawable_level(Level& lv){
         }
     }
 
+    // displays whole level
     _level_texture.display();
     _drawable_level.setTexture(_level_texture.getTexture());
 }
 
-
-// Uses same triangle to set a place holder texture for both enemy and tower class
-void Renderer::make_drawable_object_textures(){
-
-    _tower_texture.create(40, 40);
-    _enemy_texture.create(40, 40);
-
-    sf::ConvexShape triangle(3);
-    triangle.setPoint(0, sf::Vector2f(20, 0));
-    triangle.setPoint(1, sf::Vector2f(0, 40));
-    triangle.setPoint(2, sf::Vector2f(40, 40));
-    triangle.setPosition(sf::Vector2f(0, 0));
-
-    sf::Color red(128,0,0);
-    triangle.setFillColor(red);
-    _enemy_texture.draw(triangle);
-    _enemy_texture.display();
-
-    sf::Color blue(0,0,128);
-    triangle.setFillColor(blue);
-    _tower_texture.draw(triangle);
-    _tower_texture.display();
-
-}
-
+// loads font to use in level
 void Renderer::load_font(){
     if(!_font.loadFromFile("../assets/fonts/Ubuntu-R.ttf")){
         std::cout << "font load failed" << std::endl;
@@ -227,6 +224,7 @@ void Renderer::load_font(){
     }
 }
 
+// displays level on the screen 
 void Renderer::make_level_info_texts(int game_resolution, int side_bar_width){
 
     load_font();

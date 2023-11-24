@@ -27,8 +27,7 @@ public:
     Renderer operator=(const Renderer&) = delete;
 
     // call at the beginning of the game
-    void make_drawable_level(Level & lv); // TODO: add real textures for grid squares road and grass
-    void make_drawable_object_textures(); // place holder, TODO: remove after handling textures
+    void make_drawable_level(Level & lv); 
     void make_level_info_texts(int game_resolution, int side_bar_width);
 
     //void make_drawable_buttons()
@@ -54,46 +53,41 @@ public:
     void draw_lives(sf::RenderWindow& rwindow, int lives);
     void draw_round_count(sf::RenderWindow& rwindow, int round_count);
 
-
-    void load_font(); // TODO: move this to asset/texture handler
+    void load_font();
 
 private:
+    // a sprite for drawing grid
+    sf::Sprite _drawable_level;
 
-// a sprite for drawing grid
-sf::Sprite _drawable_level;
+    // a sprite for drawing objects 
+    sf::Sprite _drawable_enemy;
+    sf::Sprite _drawable_tower; 
 
-// a sprite for drawing objects 
-sf::Sprite _drawable_enemy;
-sf::Sprite _drawable_tower; 
+    // grids connected as a one RenderedTexture
+    sf::RenderTexture _level_texture; 
 
-// grids connected as a one RenderedTexture
-sf::RenderTexture _level_texture; 
+    // place holders
+    sf::RenderTexture _tower_texture; 
+    sf::RenderTexture _enemy_texture; 
 
-// place holders
-sf::RenderTexture _tower_texture; 
-sf::RenderTexture _enemy_texture; 
+    float scale_factor; // number that scales textures to right size
 
-float scale_factor; // number that scales textures to right size
+    sf::Texture _tower_sprite; // for tower texture
+    sf::Texture _enemy_sprite; // for enemy texture
 
-sf::Texture _tower_sprite; // for tower texture
-sf::Texture _enemy_sprite; // for enemy texture
+    sf::Texture _grass_pic;
+    sf::Texture _road_pic;
 
-sf::Texture _grass_pic;
-sf::Texture _road_pic;
+    float _scale_factor_tower = 2.5; // Adjust this value as needed
+    float _scale_factor_enemy = 1; // TODO: some enemy type depending value
 
-float _scale_factor_tower = 2.5; // Adjust this value as needed
-float _scale_factor_enemy = 1;
+    sf::Font _font;
+    sf::Text _round_count_text;
+    sf::Text _cash_text;
+    sf::Text _lives_text;
 
-sf::Font _font;
-sf::Text _round_count_text;
-sf::Text _cash_text;
-sf::Text _lives_text;
-
-ResourceHandler _rh;
-
-
-// Textures _textures //  some tree like data structure for different object state of objects
-
+    // Resource handler
+    ResourceHandler _rh;
 };
 
 #endif 

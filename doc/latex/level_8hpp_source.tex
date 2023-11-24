@@ -1,0 +1,127 @@
+\doxysection{level.\+hpp}
+\hypertarget{level_8hpp_source}{}\label{level_8hpp_source}\index{src/level.hpp@{src/level.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ Level\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ Level\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}square.hpp"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}vector2d.hpp"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}object.hpp"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <sstream>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <cstdlib>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <ctime>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00024\ \textcolor{keyword}{enum}\ Direction\{}
+\DoxyCodeLine{00025\ \ \ \ \ up,\ down,\ right,\ left}
+\DoxyCodeLine{00026\ \};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00039\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_level}{Level}}\ \{}
+\DoxyCodeLine{00040\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{class_level}{Level}}(\textcolor{keywordtype}{int}\ resolution,\ \textcolor{keywordtype}{int}\ cash,\ \textcolor{keywordtype}{int}\ lives);}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00053\ \ \ \ \ \mbox{\hyperlink{class_level_a249eac1e8f19ff44134efa5e986feaca}{\string~Level}}()\ \{}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (std::vector<Square*>\&\ column\ :\ \_grid)\{}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\mbox{\hyperlink{class_square}{Square}}*\ s\ :\ column)\{}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ s;}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ column.clear();}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \_grid.clear();}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}*\ e\ :\ \_enemies)\{}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ e;}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \_enemies.clear();}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}*\ t\ :\ \_towers)\{}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ t;}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \_towers.clear();}
+\DoxyCodeLine{00071\ \ \ \ \ \}}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_level_ab646b2f9ae0c53bf1150d92d06067293}{get\_round}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_level_a07356b1128280de8c12ac31958026c9b}{get\_cash}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_level_ac1ff7a21c297e572236cc2bb340c92c7}{get\_lives}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00095\ \ \ \ \ std::vector<std::vector<Square*>>\ \mbox{\hyperlink{class_level_ac7f3317a5fd2304a1446600b0a3cd98e}{get\_grid}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_level_a8b593fd7e80a1ca411306ca49d677481}{get\_square\_size}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_level_a2f668648513e15fc904d3b761a6a626a}{make\_grid}}();}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordtype}{void}\ plus\_round();}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_level_a216f32a5306dd619eb7f8b682869c437}{add\_cash}}(\textcolor{keywordtype}{int}\ how\_much);}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_level_a4ead7e421d3816aca29eda0a84d0a33f}{take\_cash}}(\textcolor{keywordtype}{int}\ how\_much);}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00129\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_level_a9e2d9cd9c84e212aa10a44f50c1dec42}{take\_lives}}(\textcolor{keywordtype}{int}\ how\_much);}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_level_a0e613d67c755e405aa6faa3ddf261927}{add\_lives}}(\textcolor{keywordtype}{int}\ how\_much);}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00141\ \ \ \ \ std::vector<Enemy*>\ \mbox{\hyperlink{class_level_a6ac563991228edab7e9f293421b223b6}{get\_enemies}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00149\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_level_a12136a881411baf98f8f4447ad128145}{add\_enemy}}(\mbox{\hyperlink{class_enemy}{Enemy}}*\ enemy);}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00157\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_level_a07f0659876b443c0f5466c9c16aee996}{remove\_enemy}}(\mbox{\hyperlink{class_enemy}{Enemy}}*\ enemy);}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00167\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_level_acab4665c3514bbdd7c2bc6ebc1d05d3d}{add\_enemy\_by\_type}}(\textcolor{keywordtype}{int}\ type,\ \mbox{\hyperlink{class_vector2_d}{Vector2D}}\ pos);}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00173\ \ \ \ \ std::vector<Tower*>\ \mbox{\hyperlink{class_level_ab7e3303774cec1c20ec0eb3e9fbfc3f6}{get\_towers}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00174\ }
+\DoxyCodeLine{00181\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_level_a465496310003be750d7c0d38425bde1d}{add\_tower}}(\mbox{\hyperlink{class_tower}{Tower}}*\ tower);}
+\DoxyCodeLine{00182\ }
+\DoxyCodeLine{00189\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_level_af99bcac0b0b7844cbe9d196e38c81cb6}{remove\_tower}}(\mbox{\hyperlink{class_tower}{Tower}}*\ tower);}
+\DoxyCodeLine{00190\ }
+\DoxyCodeLine{00198\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_level_a30910cee89a4ea8b78ac4c1923bacdc9}{add\_tower\_by\_type}}(\textcolor{keywordtype}{int}\ type,\ \mbox{\hyperlink{class_vector2_d}{Vector2D}}\ pos);}
+\DoxyCodeLine{00199\ }
+\DoxyCodeLine{00200\ \ \ \ \ \textcolor{comment}{//\ returns\ current\ column\ and\ row\ of\ object}}
+\DoxyCodeLine{00206\ \ \ \ \ std::pair<int,\ int>\ \mbox{\hyperlink{class_level_ade024d775ebc3fea439b358a11a0a5d6}{current\_row\_col}}(\mbox{\hyperlink{class_object}{Object}}*\ obj);}
+\DoxyCodeLine{00207\ }
+\DoxyCodeLine{00213\ \ \ \ \ \mbox{\hyperlink{class_square}{Square}}*\ \mbox{\hyperlink{class_level_a82b8e660cfa0f0791e972e6eb613d1f1}{current\_square}}(\mbox{\hyperlink{class_object}{Object}}*\ obj);}
+\DoxyCodeLine{00214\ }
+\DoxyCodeLine{00220\ \ \ \ \ \mbox{\hyperlink{class_square}{Square}}*\ \mbox{\hyperlink{class_level_a74c0626335a5d0db998944303012ac81}{get\_square\_by\_pos}}(\mbox{\hyperlink{class_vector2_d}{Vector2D}}\ pos);}
+\DoxyCodeLine{00221\ }
+\DoxyCodeLine{00227\ \ \ \ \ std::vector<Direction>\ \mbox{\hyperlink{class_level_a3db9288817069c0a741e30c8b883899e}{next\_road}}(\mbox{\hyperlink{class_enemy}{Enemy}}*\ enemy);}
+\DoxyCodeLine{00228\ }
+\DoxyCodeLine{00232\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_level_a6bb9dd43cf9f0fe430d91591f86cc47c}{print\_objects}}();}
+\DoxyCodeLine{00233\ \ \ \ \ }
+\DoxyCodeLine{00239\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_level_a7b256779b4f5f81a7bb73de5cf8416a5}{read\_file}}(\textcolor{keyword}{const}\ std::string\&\ file\_name);}
+\DoxyCodeLine{00240\ }
+\DoxyCodeLine{00246\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_level_ac9042c6d2621250b98ccebf1c1f86463}{save\_to\_file}}(\textcolor{keyword}{const}\ std::string\&\ file\_name);}
+\DoxyCodeLine{00247\ }
+\DoxyCodeLine{00251\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_level_a81a2a7833d6e7b8f302787916ffa7f7b}{print\_map}}();}
+\DoxyCodeLine{00252\ \ \ \ \ }
+\DoxyCodeLine{00253\ \ \ \ \ \textcolor{comment}{//\ Helper\ functions\ for\ randomly\ generate}}
+\DoxyCodeLine{00254\ \ \ \ \ \textcolor{comment}{//\ One\ handels\ situations\ of\ first\ few\ moves\ and\ other\ all\ the\ rest\ ones}}
+\DoxyCodeLine{00265\ \ \ \ \ std::pair<int,\ int>\ \mbox{\hyperlink{class_level_af7c71e2e9f9a37b4fd6573597f40b583}{can\_go\_notstart}}(Direction\ dir,\ std::vector<Direction>\ prev\_dirs,\ \textcolor{keywordtype}{int}\ row,\ \textcolor{keywordtype}{int}\ col,\ \textcolor{keywordtype}{bool}\ can\_go\_left);}
+\DoxyCodeLine{00266\ }
+\DoxyCodeLine{00276\ \ \ \ \ std::pair<int,\ int>\ \mbox{\hyperlink{class_level_ac64ddafc617942a4a4fdcebbeb05d40a}{can\_go\_start}}(Direction\ dir,\ std::vector<Direction>\ dir\_list,\ \textcolor{keywordtype}{int}\ row,\ \textcolor{keywordtype}{int}\ col);}
+\DoxyCodeLine{00277\ }
+\DoxyCodeLine{00283\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_level_adaa029c4b47de08b733d86f6e0e75093}{randomly\_generate}}();}
+\DoxyCodeLine{00284\ }
+\DoxyCodeLine{00290\ \ \ \ \ \mbox{\hyperlink{class_square}{Square}}*\ \mbox{\hyperlink{class_level_a73959597241fbd486eb5bbeb6a4737e3}{get\_first\_road}}();}
+\DoxyCodeLine{00291\ }
+\DoxyCodeLine{00292\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00293\ \ \ \ \ \mbox{\hyperlink{class_square}{Square}}*\ \_first\_road;}
+\DoxyCodeLine{00294\ \ \ \ \ \textcolor{keywordtype}{int}\ \_square\_size;}
+\DoxyCodeLine{00295\ \ \ \ \ \textcolor{keywordtype}{int}\ \_round,\ \_cash,\ \_lives;}
+\DoxyCodeLine{00296\ \ \ \ \ std::vector<std::vector<Square*>>\ \_grid;}
+\DoxyCodeLine{00297\ \ \ \ \ std::vector<Enemy*>\ \_enemies;}
+\DoxyCodeLine{00298\ \ \ \ \ std::vector<Tower*>\ \_towers;}
+\DoxyCodeLine{00299\ \};}
+\DoxyCodeLine{00300\ }
+\DoxyCodeLine{00301\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

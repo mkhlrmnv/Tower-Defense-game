@@ -1,0 +1,26 @@
+\doxysection{basic\+\_\+enemy.\+hpp}
+\hypertarget{basic__enemy_8hpp_source}{}\label{basic__enemy_8hpp_source}\index{src/basic\_enemy.hpp@{src/basic\_enemy.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ BASIC\_ENEMY\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ BASIC\_ENEMY\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}enemy.hpp"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}attack\_types.hpp"{}}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ \#include\ "{}level.hpp"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_basic___enemy}{Basic\_Enemy}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_enemy}{Enemy}}\ \{}
+\DoxyCodeLine{00009\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \ \ \ \ \mbox{\hyperlink{class_basic___enemy}{Basic\_Enemy}}(\mbox{\hyperlink{class_level}{Level}}\&\ level,\ \mbox{\hyperlink{class_vector2_d}{Vector2D}}\&\ position,\ \textcolor{keywordtype}{int}\ health\ =\ 20,\ \textcolor{keywordtype}{int}\ damage\ =\ 5,\ \textcolor{keywordtype}{int}\ range\ =\ 100,\ \textcolor{keywordtype}{int}\ attack\_speed\ =\ 1,\ \textcolor{keywordtype}{int}\ type\ =\ ObjectTypes::NoobDemon\_CanAttack,\ \textcolor{keywordtype}{int}\ speed\ =\ 20,\ \textcolor{keywordtype}{int}\ defense\ =\ 5);}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \ \ \ \ \mbox{\hyperlink{class_basic___enemy}{\string~Basic\_Enemy}}()\ \{\ \}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{bool}\ attack();}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{comment}{//\ void\ move();}}
+\DoxyCodeLine{00018\ \};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}
