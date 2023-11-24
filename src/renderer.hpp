@@ -9,6 +9,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <string>
+#include "resource_handler.hpp"
 
 #include "attack_types.hpp"
 
@@ -20,7 +21,7 @@
 class Renderer{
 public:
 
-    Renderer(){}
+    Renderer();
     ~Renderer(){}
     Renderer(const Renderer& ) = delete;
     Renderer operator=(const Renderer&) = delete;
@@ -35,21 +36,17 @@ public:
     // draw background
     void draw_level(sf::RenderWindow& rwindow);
 
-    void attack_animation(Object* obj);
-
-    void dying_animatio(Object* obj);
-
     // draw single enemy  
-    void draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr); // TODO: implement the choice of correct texture with obn and object type
+    void draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr, int frame); // TODO: implement the choice of correct texture with obn and object type
     
     // draw enemies on from a list
-    void draw_enemies(sf::RenderWindow& rwindow, std::vector< Enemy * > enemies); // TODO: remove last argument with real textures 
+    void draw_enemies(sf::RenderWindow& rwindow, std::vector< Enemy * > enemies, int frame); // TODO: remove last argument with real textures 
 
     // draw single enemy 
-    void draw_tower(sf::RenderWindow& rwindow, Tower* t_ptr); // TODO: implement the choice of correct texture with object state and object type
+    void draw_tower(sf::RenderWindow& rwindow, Tower* t_ptr, int frame); // TODO: implement the choice of correct texture with object state and object type
     
     // draw towers on from a list
-    void draw_towers(sf::RenderWindow& rwindow, std::vector< Tower * > towers); // TODO: remove last argument with real textures 
+    void draw_towers(sf::RenderWindow& rwindow, std::vector< Tower * > towers, int frame); // TODO: remove last argument with real textures 
 
 
     // draw texts 
@@ -84,16 +81,15 @@ sf::Texture _enemy_sprite; // for enemy texture
 sf::Texture _grass_pic;
 sf::Texture _road_pic;
 
-float _scale_factor_tower = 0.05; // Adjust this value as needed
-float _scale_factor_enemy = 0.02;
-
-std::string _archer_tower_file = "../assets/textures/ArcherTower/ArcherTower_Right.png";
-std::string _tank_orc_file = "../assets/textures/TankOrc/TankOrc.png";
+float _scale_factor_tower = 2.5; // Adjust this value as needed
+float _scale_factor_enemy = 1;
 
 sf::Font _font;
 sf::Text _round_count_text;
 sf::Text _cash_text;
 sf::Text _lives_text;
+
+ResourceHandler _rh;
 
 
 // Textures _textures //  some tree like data structure for different object state of objects

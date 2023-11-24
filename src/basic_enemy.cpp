@@ -1,8 +1,8 @@
 #include "basic_enemy.hpp"
 #include "level.hpp"
 
-Basic_Enemy::Basic_Enemy(Level& level, int health, int damage, int range, int attack_speed, Vector2D& position, int type, int speed, int defense) :
-    Enemy(level, health, damage, range, attack_speed, position, type, speed, defense) {}
+Basic_Enemy::Basic_Enemy(Level& level, Vector2D& position, int health, int damage, int range, int attack_speed, int type, int speed, int defense) :
+    Enemy(level, position, health, damage, range, attack_speed, type, speed, defense) {}
 
 bool Basic_Enemy::attack() {
     double multiplier;

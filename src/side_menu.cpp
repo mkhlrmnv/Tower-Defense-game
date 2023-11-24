@@ -58,7 +58,7 @@ void SideMenu::setup_buttons(){
 
 
     
-    _drag_buttons.push_back(new TowerDragButton("$200", {80,80}, {x1,y1}, sf::Color::Black, _rh.get_texture(ObjectTextureTypes::ArcherTower, 0), 1));
+    _drag_buttons.push_back(new TowerDragButton("$200", {80,80}, {x1,y1}, sf::Color::Black, _rh.get_texture_tower(ObjectTypes::ArcherTower), 1));
     _drag_buttons.at(0)->set_font(_rh.get_font());
     _drag_buttons.at(0)->set_color(ashgrey);
 

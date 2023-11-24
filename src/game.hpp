@@ -80,8 +80,5 @@ private:
     Level _level;
 
     bool round_over = false;
-
-    
-
 }; 
 #endif
