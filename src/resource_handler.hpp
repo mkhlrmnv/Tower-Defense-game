@@ -21,6 +21,10 @@ public:
     sf::Texture& get_texture_tile(int type);
     sf::Font& get_font();
     
+    // function to access tower attributes;
+    const std::array<int, 5>& get_tower_info(int type);
+    const std::string& get_tower_name(int type);
+    
 private:
 
     void load_all_textures();
@@ -32,11 +36,18 @@ private:
     void load_texture_tile(int type, const std::string& filename);
     void load_font();
 
+    void fill_tower_attributes();
+    void fill_tower_names();
+
     // place holders for all textures
     // object_type -->  texture_ptr
     std::map<int, std::shared_ptr<sf::Texture>> _towers_textures_ptr_map;
     std::map<int, std::shared_ptr<sf::Texture>> _enemies_textures_ptr_map;
     std::map<int, std::shared_ptr<sf::Texture>> _tiles_textures_ptr_map;
+
+    // holds info for towers
+    std::map<int, std::array<int, 5> > _tower_attributes;
+    std::map<int, const std::string> _tower_names;
     sf::Font _font;
 };
 

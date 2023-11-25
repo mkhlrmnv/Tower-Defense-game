@@ -46,8 +46,13 @@ private:
     sf::Text _cash_text;
     sf::Text _lives_text;
 
+    sf::Color _fill_color;
+    sf::Color _outline_color;
 
     std::vector< TowerDragButton *> _drag_buttons;
+
+    // for drawing the dragging image on top of everything
+    std::array< const sf::Sprite *, 6>  _drag_img_ptrs;
 
     Level& _level;
 
