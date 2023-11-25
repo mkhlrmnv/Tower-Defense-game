@@ -2,9 +2,17 @@
 
 
 SideMenu::SideMenu(float game_resolution, float side_menu_width, ResourceHandler& rh, Level& level) :
- _game_resolution(game_resolution), _side_menu_width(side_menu_width), _level(level), _rh(rh){
+ _game_resolution(game_resolution), _side_menu_width(side_menu_width), _level(level), _rh(rh), _fill_color(), _outline_color(), _drag_img_ptrs({}){
     
+    
+    auto beige = sf::Color(255, 204, 128);
+    auto light_brown = sf::Color(199, 140, 88);
+    auto brown = sf::Color(121, 85, 72);
 
+    _outline_color = light_brown;
+    _fill_color = beige;
+
+    
     setup_background();
     setup_info_displays();
     setup_buttons();
@@ -12,15 +20,11 @@ SideMenu::SideMenu(float game_resolution, float side_menu_width, ResourceHandler
 }
 
 void SideMenu::setup_background(){
-    
-    sf::Color charcoal(54, 69, 79);
-    sf::Color ashgrey(178, 190, 181); 
-    
-    
+        
     _background.setPosition({_game_resolution, 0});
     _background.setSize({_side_menu_width, _game_resolution});
-    _background.setFillColor(charcoal);
-    _background.setOutlineColor(ashgrey);
+    _background.setFillColor(_fill_color);
+    _background.setOutlineColor(_outline_color);
 
     // set outline inwards
     _background.setOutlineThickness(-2);
@@ -28,7 +32,7 @@ void SideMenu::setup_background(){
 
 void SideMenu::setup_menu_title(){
 
-    sf::Color ashgrey(178, 190, 181); 
+    auto brown = sf::Color(121, 85, 72);
 
     std::string title_text = "Drag towers to grids";
     
@@ -41,7 +45,7 @@ void SideMenu::setup_menu_title(){
     _title.setFont(_rh.get_font());
     _title.setString(title_text);
     _title.setCharacterSize(30);
-    _title.setFillColor(ashgrey);
+    _title.setFillColor(brown);
     _title.setPosition({x + buffer_x, y + buffer_y});
 
 }
@@ -55,12 +59,18 @@ void SideMenu::setup_buttons(){
     float y1 = y_wrt_bg + _background.getPosition().y;
 
     sf::Color ashgrey(178, 190, 181); 
-
-
     
-    _drag_buttons.push_back(new TowerDragButton("$200", {80,80}, {x1,y1}, sf::Color::Black, _rh.get_texture_tower(ObjectTypes::ArcherTower), 1));
-    _drag_buttons.at(0)->set_font(_rh.get_font());
-    _drag_buttons.at(0)->set_color(ashgrey);
+    // iterates trough tower types and creates buttons accordingly
+    for(int i = 0; i<6; i++){
+
+        auto tower_name = _rh.get_tower_name(i);
+        auto tower_texture = _rh.get_texture_tower(i);
+        auto attrs = _rh.get_tower_info(i);
+
+        _drag_buttons.push_back(new TowerDragButton(i, tower_name, {x1 +(130+20)*(i%2), y1 + (180 + 20)*(i%3)}, tower_texture, _outline_color, _fill_color, attrs));
+        _drag_buttons.at(i)->set_font(_rh.get_font());
+    }
+    
 
 }
 
@@ -119,12 +129,19 @@ void SideMenu::draw( sf::RenderTarget& target, sf::RenderStates states) const{
     for (auto drag_button: _drag_buttons){ 
         target.draw(*drag_button);
     }
+    for (auto drag_img_ptr : _drag_img_ptrs){
+        if(drag_img_ptr){
+            target.draw(*(drag_img_ptr));
+        }
+    }
 }
 
 
 void SideMenu::handle_events(sf::RenderWindow& window, const sf::Event& event){
     for(auto drag_button : _drag_buttons){
         drag_button->handle_events(window, event, _level);
+        std::cout <<"type:" << drag_button->get_type() << " dragging: " << drag_button->get_drag_flag() << std::endl; ;
+        _drag_img_ptrs[drag_button->get_type()] =  drag_button->get_dragging_image();
     }
 }
 
@@ -133,6 +150,7 @@ void SideMenu::update_displays(){
     std::string cash = "$" + std::to_string(_level.get_cash());
     std::string lives = "Lives: " + std::to_string(_level.get_lives());
     std::string round_count = "Round: " + std::to_string(_level.get_round());
+
 
 
     _cash_text.setString(cash);

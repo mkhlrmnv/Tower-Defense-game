@@ -21,6 +21,15 @@ sf::Font& ResourceHandler::get_font(){
     return _font;
 }
 
+const std::array<int, 5>& ResourceHandler::get_tower_info(int type){
+    return _tower_attributes[type];
+}
+
+const std::string& ResourceHandler::get_tower_name(int type){
+    return _tower_names[type];
+}
+
+
 // load towers spread sheet and puts it into placeholder
 void ResourceHandler::load_texture_tower(int type, const std::string& filename){
     std::shared_ptr<sf::Texture> tx = std::make_shared<sf::Texture>();
@@ -74,4 +83,22 @@ void ResourceHandler::load_all_textures(){
 
     // Font 
     load_font();
+}
+
+void ResourceHandler::fill_tower_attributes(){
+    
+    // hp, dmg, rng, atk_spd, price
+    _tower_attributes[ObjectTypes::AoeTower]= {30, 10, 100, 2, 100};
+    _tower_attributes[ObjectTypes::ArcherTower]= {30, 10, 100, 3, 100};
+    _tower_attributes[ObjectTypes::SniperTower]= {10, 30, 1000, 1, 150};
+    _tower_attributes[ObjectTypes::RepelMageTower]= {30, 5, 120, 1, 180};
+
+}
+
+void ResourceHandler::fill_tower_names(){
+    _tower_names.emplace(ObjectTypes::AoeTower, "Aoe") ;
+    _tower_names.emplace(ObjectTypes::ArcherTower , "Archer");
+    _tower_names.emplace(ObjectTypes::SniperTower , "Sniper");
+    _tower_names.emplace(ObjectTypes::RepelMageTower , "Repel Mage");
+
 }
