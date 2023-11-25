@@ -99,6 +99,14 @@ public:
      */
     sf::Texture& get_texture_attribute(int type);
     
+    // function to access tower attributes;
+    const std::array<int, 5>& get_tower_info(int type);
+    const std::string& get_tower_name(int type);
+    
+    // function to access tower attributes;
+    const std::array<int, 5>& get_tower_info(int type);
+    const std::string& get_tower_name(int type);
+    
 private:
 
     /**
@@ -155,6 +163,12 @@ private:
      */
     void load_font();
 
+    void fill_tower_attributes();
+    void fill_tower_names();
+
+    void fill_tower_attributes();
+    void fill_tower_names();
+
     /**
      * @brief Fills an attribute map pair with a the given attribute type as a key to a attribute value given in the list
      * 
@@ -194,32 +208,9 @@ private:
      */
     std::map<int, std::shared_ptr<sf::Texture>> _tiles_textures_ptr_map;
 
-    /**
-     * @brief Map for holding menu and end screen texture shared pointers
-     * 
-     */
-    std::map<int, std::shared_ptr<sf::Texture>> _menu_textures_ptr_map;
-
-
     // holds info for towers
-    // Tower_type --> attribute list
-
-    /**
-     * @brief a two dimensional map for getting attribute values from ObjectType and TowerAttribute
-     * 
-     */
-    std::map<int, std::shared_ptr<std::map<int, int>>> _tower_attributes;
-
-    /**
-     * @brief a map for getting tower name from tower type
-     * 
-     */
+    std::map<int, std::array<int, 5> > _tower_attributes;
     std::map<int, const std::string> _tower_names;
-
-    /**
-     * @brief a common font used in all sf::text objects of the game. Passed as a reference in the getter.
-     * 
-     */
     sf::Font _font;
 
     /**

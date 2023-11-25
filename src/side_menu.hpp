@@ -189,23 +189,16 @@ private:
      */
     sf::Text _lives_text;
 
-    /**
-     * @brief given as fill color to the drag buttons
-     * 
-     */
     sf::Color _fill_color;
-
-    /**
-     * @brief given as outline color to the drag buttons
-     * 
-     */
     sf::Color _outline_color;
 
-    /**
-     * @brief holds pointers to the allocated drag buttons. 
-     * 
-     */
     std::vector< TowerDragButton *> _drag_buttons;
+
+    // for drawing the dragging image on top of everything
+    std::array< const sf::Sprite *, 6>  _drag_img_ptrs;
+
+    // for drawing the dragging image on top of everything
+    std::array< const sf::Sprite *, 6>  _drag_img_ptrs;
 
     // button to start round
     /**

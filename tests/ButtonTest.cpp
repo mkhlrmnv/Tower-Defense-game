@@ -24,8 +24,10 @@ int test_button(){
     ResourceHandler rh;
     font = rh.get_font();
     Level lv(20,20,20); // just to run test 
-    Button btn("iaoai", {100, 100}, {100, 100}, sf::Color::Black, sf::Color::White, rh.get_font());
-    //btn.set_font(font);
+
+    Button btn("iaoai", {100, 100}, {100, 100}, sf::Color::Black, sf::Color::White);
+    btn.set_font(font);
+    btn.set_position_text_down({100, 100});
 
     // run the program as long as the window is open
     while (window.isOpen())
@@ -57,8 +59,15 @@ int test_drag_button(){
     sf::RenderWindow window(sf::VideoMode(1100, 800), "My window");
     
     ResourceHandler rh;
+    ResourceHandler rh;
     Level lv(20,20,20); // just to run test 
-    TowerDragButton dt_btn(ObjectTypes::AoeTower, {100,100}, sf::Color::White, sf::Color::Black,  rh);
+
+    auto tower_name = rh.get_tower_name(ObjectTypes::AoeTower);
+    auto tower_texture = rh.get_texture_tower(ObjectTypes::AoeTower);
+    auto attrs = rh.get_tower_info(ObjectTypes::AoeTower);
+
+    TowerDragButton dt_btn(ObjectTypes::AoeTower, tower_name, {100,100}, tower_texture, sf::Color::White, sf::Color::Black, attrs);
+    dt_btn.set_font(rh.get_font());
 
     // run the program as long as the window is open
     while (window.isOpen())
@@ -136,8 +145,10 @@ int test_menu(){
 int test_coordinate_and_indexes(){
     sf::RenderWindow window(sf::VideoMode(1100, 800), "My window");
     Level lv(800,20,20); // just to run test
+    Button btn("iaoai", {100, 100}, {100, 100}, sf::Color::Black, sf::Color::White);
     ResourceHandler rh;
-    Button btn("iaoai", {100, 100}, {100, 100}, sf::Color::Black, sf::Color::White, rh.get_font());
+
+
     
     auto func1_return1 = btn.window_coords_to_grid_index(sf::Vector2i(80*4 + 20, 80*2 + 45), lv);
     auto func2_return1 = btn.window_coords_to_level_coords(sf::Vector2i(80*4 + 20, 80*2 + 45));
@@ -170,288 +181,6 @@ int test_coordinate_and_indexes(){
 
 }
 
-int test_rh(){
-
-    ResourceHandler rh;
-
-    for(int i=0; i<6; i++){
-        for(int j=0; j<5; j++){
-            
-            std::cout << rh.get_tower_info(i, j) << std::endl;
-
-        }
-    }
-
-
-
-    return 1;
-}
-
-int test_text(){
-
-    
-    sf::RenderWindow window(sf::VideoMode(1100, 800), "My window");
-    window.setPosition({100, 0});
-    
-    /*
-    
-    sf::Font font;
-    if(!font.loadFromFile("/home/klind/tower_defence/assets/fonts/Ubuntu-R.ttf")){
-        std::cout << "font load failed" << std::endl;
-    }
-    */
-
-    ResourceHandler rh;
-   
-    sf::Text text("test text", rh.get_font());
-    text.setCharacterSize(30);
-    text.setPosition(100.f, 100.f);
-    text.setFillColor(sf::Color::White);
-
-    std::cout << "text.getGlobalBounds().height " << text.getGlobalBounds().height << std::endl;
-    std::cout << "text.getGlobalBounds().width " << text.getGlobalBounds().width << std::endl;
-    std::cout << "text.getGlobalBounds().left " << text.getGlobalBounds().left << std::endl;
-    std::cout << "text.getGlobalBounds().top " << text.getGlobalBounds().top << std::endl;
-
-    std::cout << "text.getLocalBounds().height " << text.getLocalBounds().height << std::endl;
-    std::cout << "text.getLocalBounds().width " << text.getLocalBounds().width << std::endl;
-    std::cout << "text.getLocalBounds().left " << text.getLocalBounds().left << std::endl;
-    std::cout << "text.getLocalBounds().top " << text.getLocalBounds().top << std::endl;
-
-    // run the program as long as the window is open
-    while (window.isOpen())
-    {
-        // check all the window's events that were triggered since the last iteration of the loop
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            // "close requested" event: we close the window
-            if (event.type == sf::Event::Closed){
-                window.close();
-            }
-        }
-
-        
-        window.clear();
-        window.draw(text);
-        window.display();
-
-    }
-
-    return 1;
-}
-
-int test_rh2(){
-
-    
-    sf::RenderWindow window(sf::VideoMode(1100, 800), "My window");
-    window.setPosition({100, 0});
-    
-    ResourceHandler rh;
-    
-    sf::Sprite spr;
-    spr.setPosition(0,0);
-    spr.setTexture(rh.get_texture_menu(4));
-
-
-    // run the program as long as the window is open
-    while (window.isOpen())
-    {
-        // check all the window's events that were triggered since the last iteration of the loop
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            // "close requested" event: we close the window
-            if (event.type == sf::Event::Closed){
-                window.close();
-            }
-        }
-
-        
-        window.clear();
-        window.draw(spr);
-        window.display();
-
-    }
-
-    return 1;
-}
-
-int test_upgrade(){
-
-    sf::RenderWindow window(sf::VideoMode(1100, 800), "My window");
-    window.setPosition({100, 0});
-    
-    ResourceHandler rh;
-    Level level(800,200,200);
-    Upgrade u(800, rh, level, 50, 20);
-
-    // run the program as long as the window is open
-    while (window.isOpen())
-    {
-        // check all the window's events that were triggered since the last iteration of the loop
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            // "close requested" event: we close the window
-            if (event.type == sf::Event::Closed){
-                window.close();
-            }
-            u.handle_events(window, event);
-        }
-
-        
-        window.clear();
-        window.draw(u);
-        window.display();
-
-    }
-
-    return 1;
-
-}
-
-int test_main_menu(){
-
-    sf::RenderWindow window(sf::VideoMode(1100, 800), "My window");
-    window.setPosition({100, 0});
-    
-    ResourceHandler rh;
-    Level level(800,200,200);
-    MainMenu mm( rh, level);
-    ChooseLevelMenu clm( rh, level);
-
-    int game_state = 0;
-    // run the program as long as the window is open
-    while (window.isOpen())
-    {   
-        // check all the window's events that were triggered since the last iteration of the loop
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            // "close requested" event: we close the window
-            if (event.type == sf::Event::Closed){
-                window.close();
-            }
-
-            switch (game_state)
-            {
-            case 0:
-                mm.handle_events(window, event);
-                game_state = mm.get_state();
-                if(game_state != 0){
-                    mm.disable_menu();
-                }
-                break;
-            
-            case 1:
-                clm.handle_events(window, event);
-                game_state = clm.get_state();
-                if(game_state != 1){
-                    clm.disable_menu();
-                }
-                break;
-
-            default:
-                std::cout << clm.get_level_to_load() << std::endl;
-                window.close();
-                break;
-            }
-
-        }
-        window.clear();
-        switch (game_state)
-                {
-                case 0:
-                    window.draw(mm);
-                    break;
-                
-                case 1:
-                    window.draw(clm);
-                    break;
-                
-             
-                }
-        window.display();
-
-    }
-
-    return 1;
-}
-
-int test_choose_level_menu(){
-
-    sf::RenderWindow window(sf::VideoMode(1100, 800), "My window");
-    window.setPosition({100, 0});
-    
-    ResourceHandler rh;
-    Level level(800,200,200);
-    ChooseLevelMenu clm(rh, level);
-
-    // run the program as long as the window is open
-    while (window.isOpen())
-    {
-        // check all the window's events that were triggered since the last iteration of the loop
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            // "close requested" event: we close the window
-            if (event.type == sf::Event::Closed){
-                window.close();
-            }
-
-            clm.handle_events(window, event);
-
-        }
-        
-        window.clear();
-        window.draw(clm);
-        window.display();
-
-    }
-
-    return 1;
-}
-
-int test_end_screen(){
-
-    sf::RenderWindow window(sf::VideoMode(1100, 800), "My window");
-    window.setPosition({100, 0});
-    
-    ResourceHandler rh;
-    Level level(800,200,200);
-    Renderer renderer(rh);
-
-    // run the program as long as the window is open
-    while (window.isOpen())
-    {
-        // check all the window's events that were triggered since the last iteration of the loop
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            // "close requested" event: we close the window
-            if (event.type == sf::Event::Closed){
-                window.close();
-            }
-        }
-        
-        window.clear();
-        renderer.draw_end_screen_lose(window);
-        window.display();
-
-    }
-
-    return 1;
-}
-
 int main(){
-    //test_button();
-    //test_drag_button();
-    //test_rh();
-    //test_rh2();
-    test_menu(); 
-    //test_upgrade();
-    //test_main_menu();
-    //test_choose_level_menu();
-    //test_end_screen();
-};   
+    test_menu();
+}

@@ -2,16 +2,7 @@
 
 
 SideMenu::SideMenu(float game_resolution, float side_menu_width, ResourceHandler& rh, Level& level) :
-    _game_resolution(game_resolution),
-    _side_menu_width(side_menu_width),
-    _level(level),
-    _rh(rh),
-    _fill_color(),
-    _outline_color(),
-    _drag_img_ptrs({}),
-    _disable_buttons(false),
-    _state(2) // pause
-    {
+ _game_resolution(game_resolution), _side_menu_width(side_menu_width), _level(level), _rh(rh), _fill_color(), _outline_color(), _drag_img_ptrs({}){
     
     
     auto beige = sf::Color(255, 204, 128);
@@ -21,6 +12,7 @@ SideMenu::SideMenu(float game_resolution, float side_menu_width, ResourceHandler
     _outline_color = light_brown;
     _fill_color = beige;
 
+    
     setup_background();
     setup_info_displays();
     setup_drag_buttons();
@@ -38,42 +30,21 @@ void SideMenu::enable_buttons(){
 
 
 void SideMenu::setup_background(){
-    _background_img.setTexture(_rh.get_texture_menu(2));
-    _background_img.setPosition({_game_resolution, 0});
-}
+        
+    _background.setPosition({_game_resolution, 0});
+    _background.setSize({_side_menu_width, _game_resolution});
+    _background.setFillColor(_fill_color);
+    _background.setOutlineColor(_outline_color);
 
-
-void SideMenu::setup_drag_buttons(){
-
-    float x_wrt_bg  = 35;
-    float y_wrt_bg  = 125;
-
-    float x1 = x_wrt_bg  + _background_img.getPosition().x; 
-    float y1 = y_wrt_bg + _background_img.getPosition().y;
-
-    sf::Color ashgrey(178, 190, 181); 
-    
-    // iterates trough tower types and creates buttons accordingly
-    for(int i = 0; i<6; i++){
-
-        _drag_buttons.push_back(new TowerDragButton(i, {x1 +(130+20)*(i%2), y1 + (193)*(i%3)}, _outline_color, _fill_color, _rh));
-    }   
-
-}
-
-void SideMenu::setup_round_button(){
-
-    // get position of the last button 
-    sf::Color red(220,0,0);
-   _round_button =  new Button("START ROUND", {242, 38}, {829, 701}, red, sf::Color::White, _rh.get_font());
-   _round_button->center_text();
-
+    // set outline inwards
+    _background.setOutlineThickness(-2);
 }
 
 void SideMenu::setup_info_display(int type, sf::Sprite& sprite, sf::Text& text_obj, sf::Vector2f pos, float char_size){
 
     auto brown = sf::Color(121, 85, 72);
-    auto color = brown;
+
+    std::string title_text = "Drag towers to grids";
     
     float image_size = 16;
     float scale = 30 / image_size;
@@ -81,19 +52,35 @@ void SideMenu::setup_info_display(int type, sf::Sprite& sprite, sf::Text& text_o
     sprite.setPosition(pos);
     sprite.setScale(scale, scale);
     
+    _title.setFont(_rh.get_font());
+    _title.setString(title_text);
+    _title.setCharacterSize(30);
+    _title.setFillColor(brown);
+    _title.setPosition({x + buffer_x, y + buffer_y});
 
-    text_obj.setFont(_rh.get_font());
-    text_obj.setCharacterSize(char_size);
-    text_obj.setFillColor(sf::Color::White);
-    text_obj.setOutlineThickness(2);
-    text_obj.setOutlineColor(brown);
+}
+
+void SideMenu::setup_buttons(){
+
+    float x_wrt_bg  = 10;
+    float y_wrt_bg  = 100;
+
+    float x1 = x_wrt_bg  + _background.getPosition().x; 
+    float y1 = y_wrt_bg + _background.getPosition().y;
+
+    sf::Color ashgrey(178, 190, 181); 
     
-    auto img_size = sprite.getGlobalBounds();
-    auto img_pos = sprite.getPosition();
-    float gap_to_image = 5;
-    float y_offset_to_image = 5;
+    // iterates trough tower types and creates buttons accordingly
+    for(int i = 0; i<6; i++){
 
-    text_obj.setPosition( img_pos.x + img_size.width + gap_to_image, img_pos.y - y_offset_to_image);
+        auto tower_name = _rh.get_tower_name(i);
+        auto tower_texture = _rh.get_texture_tower(i);
+        auto attrs = _rh.get_tower_info(i);
+
+        _drag_buttons.push_back(new TowerDragButton(i, tower_name, {x1 +(130+20)*(i%2), y1 + (180 + 20)*(i%3)}, tower_texture, _outline_color, _fill_color, attrs));
+        _drag_buttons.at(i)->set_font(_rh.get_font());
+    }
+    
 
 }
 
@@ -168,32 +155,20 @@ void SideMenu::draw( sf::RenderTarget& target, sf::RenderStates states) const{
 
 
 void SideMenu::handle_events(sf::RenderWindow& window, const sf::Event& event){
-
-    if(!_disable_buttons){
-
-        for(auto drag_button : _drag_buttons){
-
-            drag_button->handle_events(window, event, _level);
-            _drag_img_ptrs[drag_button->get_type()] =  drag_button->get_dragging_image();
-        }
-
-        _round_button->handle_events(window, event, _level);
-
-        if(_round_button->button_pressed()){
-            // set state to running
-            _state = 3;
-            _round_button->reset_button();
-        }
-
+    for(auto drag_button : _drag_buttons){
+        drag_button->handle_events(window, event, _level);
+        std::cout <<"type:" << drag_button->get_type() << " dragging: " << drag_button->get_drag_flag() << std::endl; ;
+        _drag_img_ptrs[drag_button->get_type()] =  drag_button->get_dragging_image();
     }
 }
-    
 
 void SideMenu::update(){
 
-    std::string cash = std::to_string(_level.get_cash());
-    std::string lives = std::to_string(_level.get_lives());
-    std::string round_count = std::to_string(_level.get_round());
+    std::string cash = "$" + std::to_string(_level.get_cash());
+    std::string lives = "Lives: " + std::to_string(_level.get_lives());
+    std::string round_count = "Round: " + std::to_string(_level.get_round());
+
+
 
     _cash_text.setString(cash);
     _lives_text.setString(lives);
