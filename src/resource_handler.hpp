@@ -5,21 +5,11 @@
 #include<memory>
 #include "attack_types.hpp"
 
+/* 
+    loads ALL textures and gives them as pointers.
+    needs to be created in game class, pass as reference
+*/
 
-/**
- * @brief An enumerator for the tower attributes
- * 
- */
-namespace TowerAttributes{
-    enum Atr{
-        HP, DMG, RNG, ATKSPD, MONEY, ROUND
-    };
-};
-
-/**
- * @brief A class to load all resources at one place; loads textures, fonts, tower attributes for the menu. Loads everything when it is constructed, distributes resources as references to shared pointers.
- * 
- */
 class ResourceHandler{
 
 public:
@@ -104,8 +94,12 @@ public:
     const std::string& get_tower_name(int type);
     
     // function to access tower attributes;
-    const std::array<int, 5>& get_tower_info(int type);
+    std::array<int, 5>& get_tower_info(int type);
     const std::string& get_tower_name(int type);
+
+    // function to access attribute textures
+    // use heart, and money in as cash and lives
+    sf::Texture& get_texture_attribute(int type);
     
 private:
 
@@ -115,13 +109,8 @@ private:
      */
     void load_all_textures();
 
-    
-    /**
-     * @brief Loads filename, creates a shared texture pointer and places it to the towers map with key being the given type. 
-     * 
-     * @param type 
-     * @param filename 
-     */
+    // load functions for all textures
+    // someimage.png -> sf::Texture
     void load_texture_tower(int type, const std::string& filename);
 
     
@@ -140,27 +129,6 @@ private:
      * @param filename 
      */
     void load_texture_tile(int type, const std::string& filename);
-
-     /**
-     * @brief Loads filename, creates a shared texture pointer and places it to the attributes map with key being the given type. 
-     * 
-     * @param type 
-     * @param filename 
-     */
-    void load_texture_attribute(int type, const std::string& filename);
-
-    /**
-     * @brief Loads filename, creates a shared texture pointer and places it to the menus map with key being the given type. 
-     * 
-     * @param type 
-     * @param filename 
-     */
-    void load_texture_menu(int type, const std::string& filename);
-
-    /**
-     * @brief Loads font to the variable
-     * 
-     */
     void load_font();
 
     void fill_tower_attributes();
@@ -209,14 +177,12 @@ private:
     std::map<int, std::shared_ptr<sf::Texture>> _tiles_textures_ptr_map;
 
     // holds info for towers
+    // Tower_type --> attribute list
     std::map<int, std::array<int, 5> > _tower_attributes;
     std::map<int, const std::string> _tower_names;
     sf::Font _font;
 
-    /**
-     * @brief a map for getting attribute textures with TowerAttributes. 
-     * 
-     */
+    //menu graphics;
     std::map<int, std::shared_ptr<sf::Texture>> _attr_textures_ptr_map;
 
 };

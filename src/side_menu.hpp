@@ -32,22 +32,10 @@ public:
             delete button;
         }
         delete _round_button;
+        delete _round_button;
     }
-    SideMenu(const SideMenu&) = delete; 
-    SideMenu& operator=(const SideMenu&) = delete;
-    
-    /**
-     * @brief updates the texts and buttons according to the cash, lives, rounds of level
-     * 
-     */
-    void update();
 
-    /**
-     * @brief distributes the window and event references to the buttons.
-     * 
-     * @param window 
-     * @param event 
-     */
+    void update();
     void handle_events(sf::RenderWindow& window, const sf::Event& event);
 
     /**
@@ -86,34 +74,11 @@ private:
      * 
      */
     void setup_background();
-
-    /**
-     * @brief make new drag buttons and put them on the list. 
-     * 
-     */
-    void setup_drag_buttons();
-    /**
-     * @brief make new button
-     * 
-     */
-    void setup_round_button();
-
-    /**
-     * @brief Setup the info displays
-     * 
-     */
+    void setup_buttons();
     void setup_info_displays();
-
-    /**
-     * @brief Set the up info display, called in the function above.
-     * 
-     * @param type 
-     * @param sprite 
-     * @param text_obj 
-     * @param pos 
-     * @param char_size 
-     */
     void setup_info_display(int type, sf::Sprite& sprite, sf::Text& text_obj, sf::Vector2f pos, float char_size);
+
+    void setup_menu_title();
 
     /**
      * @brief inherited from sf::Drawable, draws sidemenu as window.draw(SideMenu)
@@ -147,34 +112,14 @@ private:
      */
     float _side_menu_width;
 
-    /**
-     * @brief a sprite for the background image of the menu
-     * 
-     */
-    sf::Sprite _background_img;
+    sf::Text _title; 
+    sf::RectangleShape _background;
 
-    /**
-     * @brief a sprite for the cash icon
-     * 
-     */
     sf::Sprite _cash_drawable;
-
-    /**
-     * @brief a sprite for the health icon
-     * 
-     */
     sf::Sprite _lives_drawable;
-
-    /**
-     * @brief a sprite for the round icon
-     * 
-     */
     sf::Sprite _round_count_drawable;
 
-    /**
-     * @brief displays the round count as text
-     * 
-     */
+
     sf::Text _round_count_text;
 
     /**
@@ -193,6 +138,9 @@ private:
     sf::Color _outline_color;
 
     std::vector< TowerDragButton *> _drag_buttons;
+
+    // button to start round / maybe pause? 
+    Button* _round_button; 
 
     // for drawing the dragging image on top of everything
     std::array< const sf::Sprite *, 6>  _drag_img_ptrs;

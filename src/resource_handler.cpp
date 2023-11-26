@@ -2,6 +2,7 @@
 
 
 
+
 // returns pointer to spread sheet
 sf::Texture& ResourceHandler::get_texture_tower(int type){
     return *(_towers_textures_ptr_map[type]);
@@ -21,16 +22,12 @@ sf::Texture& ResourceHandler::get_texture_attribute(int type){
     return *(_attr_textures_ptr_map[type]);
 }
 
-sf::Texture& ResourceHandler::get_texture_menu(int type){
-    return *(_menu_textures_ptr_map[type]);
-}
-
 // returns pointer to font
 sf::Font& ResourceHandler::get_font(){
     return _font;
 }
 
-const std::array<int, 5>& ResourceHandler::get_tower_info(int type){
+std::array<int, 5>& ResourceHandler::get_tower_info(int type){
     return _tower_attributes[type];
 }
 
@@ -66,21 +63,10 @@ void ResourceHandler::load_texture_attribute(int type, const std::string& filena
     _attr_textures_ptr_map[type] = tx;
 };
 
-void ResourceHandler::load_texture_menu(int type, const std::string& filename){
-    std::shared_ptr<sf::Texture> tx = std::make_shared<sf::Texture>();
-    tx->loadFromFile(filename);
-    _menu_textures_ptr_map[type] = tx;
-}
-
 // load font and puts it into placeholder
 void ResourceHandler::load_font(){
-
-    //std::string filename = "../assets/fonts/Ubuntu-R.ttf";
-    std::string filename = "../assets/fonts/PixeloidMono-d94EV.ttf";
-
-
     
-    if(!_font.loadFromFile(filename)){
+    if(!_font.loadFromFile("/home/klind/tower_defence/assets/fonts/Ubuntu-R.ttf")){
         std::cout << "failed to load font" << std::endl;
     }
 }
@@ -106,86 +92,21 @@ void ResourceHandler::load_all_textures(){
     load_texture_tower(ObjectTypes::WaterMageTower, "../assets/textures/VerySmallSize_32x32/VerySmall_Towers_32x32/Right/WaterMage_Right.png");
 
     // Tiles
-    load_texture_tile(0, "../assets/textures/VerySmallSize_32x32/VerySmall_Tiles_32x32/VerySmall_GrassTile_32x32.png");
-    load_texture_tile(1, "../assets/textures/VerySmallSize_32x32/VerySmall_Tiles_32x32/VerySmall_RoadTile_32x32.png");
-    load_texture_tile(2, "../assets/textures/VerySmallSize_32x32/VerySmall_Tiles_32x32/House_32x32.png");
+    load_texture_tile(0, "../assets/textures/VERY_LITTLE_GRASSTILE.png");
+    load_texture_tile(1, "../assets/textures/VERY_LITTLE_ROADTILE.png");
 
     //Attributes 
-    load_texture_attribute(TowerAttributes::ATKSPD, "../assets/textures/Attributes/16x16/Attack_Speed.png");
-    load_texture_attribute(TowerAttributes::HP,    "../assets/textures/Attributes/16x16/Hitpoints.png");
-    load_texture_attribute(TowerAttributes::MONEY, "../assets/textures/Attributes/16x16/Money.png");
-    load_texture_attribute(TowerAttributes::RNG,   "../assets/textures/Attributes/16x16/Attack_Range.png");
-    load_texture_attribute(TowerAttributes::DMG,   "../assets/textures/Attributes/16x16/Attack_Damage.png");
-    load_texture_attribute(TowerAttributes::ROUND, "../assets/textures/Attributes/16x16/Round_Marker_New.png");
+    load_texture_attribute(TowerAttributes::ATKSPD, "../assets/textures/Attributes/Attack_Speed.png");
+    load_texture_attribute(TowerAttributes::HP,    "../assets/textures/Attributes/Health.png");
+    load_texture_attribute(TowerAttributes::MONEY, "../assets/textures/Attributes/Money.png");
+    load_texture_attribute(TowerAttributes::RNG,   "../assets/textures/Attributes/Range.png");
+    // load_texture_attributes(TowerAttributes::DMG,   "../assets/textures/Attributes/Attack_Speed.png"); TODO: make image for damge
 
-    //Menus
-    load_texture_menu(0, "../assets/textures/Menu/Start_Menu_1.png");
-    load_texture_menu(1, "../assets/textures/Menu/Start_Menu_2.png");
-    load_texture_menu(2, "../assets/textures/Menu/GUI_New.png");
-    load_texture_menu(3, "../assets/textures/Menu/Game_Over_Screen.png");
-    load_texture_menu(4, "../assets/textures/Menu/You_Won_Screen.png");
-    
 
     // Font 
     load_font();
-    fill_tower_attributes_map();
-    fill_tower_names_map();
-}
-
-
-void ResourceHandler::fill_attribute_map(int type, std::array<int, 5> attributes){
-    std::shared_ptr<std::map<int, int>> attr_map = std::make_shared<std::map<int, int>>();
-    attr_map->emplace(TowerAttributes::HP, attributes.at(0));
-    attr_map->emplace(TowerAttributes::DMG, attributes.at(1));
-    attr_map->emplace(TowerAttributes::RNG, attributes.at(2));
-    attr_map->emplace(TowerAttributes::ATKSPD, attributes.at(3));
-    attr_map->emplace(TowerAttributes::MONEY, attributes.at(4));
-    _tower_attributes[type] = attr_map;
-}
-
-
-void ResourceHandler::fill_tower_attributes_map(){
-    
-    // hp, dmg, rng, atk_spd, price
-
-
-    fill_attribute_map(ObjectTypes::AoeTower, {400, 50, 200, 25, 150});
-    fill_attribute_map(ObjectTypes::ArcherTower, {300, 25, 250, 20, 100});
-    fill_attribute_map(ObjectTypes::SniperTower, {200, 150, 999, 120, 200});
-    fill_attribute_map(ObjectTypes::RepelMageTower, {350, 0, 150, 50, 250});
-    // int health = 20, int damage = 15, int range = 100, int attack_speed = 3, int type = ObjectTypes::MudMageTower, int price = 140,
-    fill_attribute_map(ObjectTypes::MudMageTower, {400, 30, 180, 30, 200});
-    //  int health = 40, int damage = 40, int range = 80, int attack_speed = 2, int type = ObjectTypes::MudMageTower, int price = 250,
-    fill_attribute_map(ObjectTypes::WaterMageTower, {300, 40, 150, 25, 250});
-
-}
-
-void ResourceHandler::fill_tower_names_map(){
-    _tower_names.emplace(ObjectTypes::AoeTower, "Aoe") ;
-    _tower_names.emplace(ObjectTypes::ArcherTower , "Archer");
-    _tower_names.emplace(ObjectTypes::SniperTower , "Sniper");
-    _tower_names.emplace(ObjectTypes::RepelMageTower , "Repel Mage");
-    _tower_names.emplace(ObjectTypes::MudMageTower , "Mud Mage");
-    _tower_names.emplace(ObjectTypes::WaterMageTower , "Water Mage");
-
-}
-
-void ResourceHandler::fill_tower_attributes(){
-    
-    // hp, dmg, rng, atk_spd, price
-    _tower_attributes[ObjectTypes::AoeTower]= {30, 10, 100, 2, 100};
-    _tower_attributes[ObjectTypes::ArcherTower]= {30, 10, 100, 3, 100};
-    _tower_attributes[ObjectTypes::SniperTower]= {10, 30, 1000, 1, 150};
-    _tower_attributes[ObjectTypes::RepelMageTower]= {30, 5, 120, 1, 180};
-
-}
-
-void ResourceHandler::fill_tower_names(){
-    _tower_names.emplace(ObjectTypes::AoeTower, "Aoe") ;
-    _tower_names.emplace(ObjectTypes::ArcherTower , "Archer");
-    _tower_names.emplace(ObjectTypes::SniperTower , "Sniper");
-    _tower_names.emplace(ObjectTypes::RepelMageTower , "Repel Mage");
-
+    fill_tower_attributes();
+    fill_tower_names();
 }
 
 void ResourceHandler::fill_tower_attributes(){
