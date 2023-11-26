@@ -1,8 +1,8 @@
 #include "button.hpp"
 
 
-Button::Button(const std::string& label, sf::Vector2f size, sf::Vector2f position, sf::Color fill_color, sf::Color outline_color): 
-_size(size), _position(position), _button_fill_color(fill_color), _button_outline_color(outline_color){
+Button::Button(const std::string& label, sf::Vector2f size, sf::Vector2f position, sf::Color fill_color, sf::Color outline_color, const sf::Font* font): 
+_size(size), _position(position), _button_fill_color(fill_color), _button_outline_color(outline_color), _text(), _font(font){
     
     _button.setSize(_size);
     _button.setPosition(_position);    
@@ -10,55 +10,39 @@ _size(size), _position(position), _button_fill_color(fill_color), _button_outlin
     _button.setFillColor(_button_fill_color);
     _button.setOutlineColor(_button_outline_color); 
 
+    _text.setFont(*_font);
     _text.setCharacterSize(20);
-    set_position_text_middle(_position);
     _text.setFillColor(_button_outline_color); 
     _text.setString(label);
+    _text.setPosition(_button.getPosition());
+    
+    
+    /* 
+    std::cout << "_text.getGlobalBounds().height " << _text.getGlobalBounds().height << std::endl;
+    std::cout << "_text.getGlobalBounds().width " << _text.getGlobalBounds().width << std::endl;
+    std::cout << "_text.getGlobalBounds().left " << _text.getGlobalBounds().left << std::endl;
+    std::cout << "_text.getGlobalBounds().top " << _text.getGlobalBounds().top << std::endl;
 
+    std::cout << "_text.getLocalBounds().height " << _text.getLocalBounds().height << std::endl;
+    std::cout << "_text.getLocalBounds().width " << _text.getLocalBounds().width << std::endl;
+    std::cout << "_text.getLocalBounds().left " << _text.getLocalBounds().left << std::endl;
+    std::cout << "_text.getLocalBounds().top " << _text.getLocalBounds().top << std::endl;
+    */
+    
 }
 
-void Button::set_font(sf::Font& font){
-    _text.setFont(font);
-}
 
-void Button::set_position_text_up(sf::Vector2f pos){
+
+
+void Button::center_text(){
 
     //TODO: FIX CENTER TEXT HORIZONTALLY
-
-
-    _position = pos;
-    _button.setPosition(pos);
-    float text_x = pos.x + _button.getGlobalBounds().width / 2 - _text.getGlobalBounds().width/2;
-    float text_y = pos.y;
+    float text_x = _button.getPosition().x + _button.getGlobalBounds().width / 2 - _text.getGlobalBounds().width / 2;
+    float text_y = _button.getPosition().y + _button.getGlobalBounds().height / 2 - _text.getGlobalBounds().height / 2;
     _text.setPosition(text_x, text_y);
 }
 
-void Button::set_position_text_middle(sf::Vector2f pos){
 
-    //TODO: FIX CENTER TEXT HORIZONTALLY
-
-
-    _button.setPosition(pos);
-    float text_x = pos.x + _button.getGlobalBounds().width / 2 - _text.getGlobalBounds().width/2;
-    float text_y = pos.y + _button.getGlobalBounds().height / 2 - _text.getCharacterSize()/2;
-    _text.setPosition(text_x, text_y);
-}
-
-void Button::set_position_text_down(sf::Vector2f pos){
-
-    //TODO: FIX CENTER TEXT HORIZONTALLY
-
-    std::cout << _button.getGlobalBounds().width << std::endl;
-
-    float additional_distance_to_bottom = 5;
-
-    _button.setPosition(pos);
-
-    float text_x = _button.getPosition().x + _button.getGlobalBounds().width / 2 - _text.getLocalBounds().width/2;
-    float text_y = _button.getPosition().y + _button.getGlobalBounds().height - _text.getCharacterSize() - additional_distance_to_bottom;
-
-    _text.setPosition({text_x, text_y});
-}
 
 void Button::set_fill_color(sf::Color fill_color){
     _button_fill_color = fill_color;
@@ -185,7 +169,7 @@ void Button::handle_events(sf::RenderWindow& window, const sf::Event& event, Lev
     if(event.type == sf::Event::MouseButtonPressed){
         if(is_mouse_over(window)){
             set_fill_color(sf::Color::Green);
-            some_action_from_level(window, level); // TODO: ad some functoin to do something
+            some_action_from_level(window, level); // TODO: ad some function to do something
         }
     }
 }

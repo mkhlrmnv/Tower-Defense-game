@@ -9,16 +9,17 @@
 
 
 int test_button(){
-    
+
+
+
     sf::Font font;
     if(!font.loadFromFile("/home/klind/tower_defence/assets/fonts/Ubuntu-R.ttf")){std::cout << "succesfull font load" << std::endl;};
     sf::RenderWindow window(sf::VideoMode(1100, 800), "My window");
-    
+    ResourceHandler rh;
+    font = rh.get_font();
     Level lv(20,20,20); // just to run test 
-
-    Button btn("iaoai", {100, 100}, {100, 100}, sf::Color::Black, sf::Color::White);
-    btn.set_font(font);
-    btn.set_position_text_down({100, 100});
+    Button btn("iaoai", {100, 100}, {100, 100}, sf::Color::Black, sf::Color::White, &rh.get_font());
+    //btn.set_font(font);
 
     // run the program as long as the window is open
     while (window.isOpen())
@@ -56,8 +57,7 @@ int test_drag_button(){
     auto tower_texture = rh.get_texture_tower(ObjectTypes::AoeTower);
     auto attrs = rh.get_tower_info(ObjectTypes::AoeTower);
 
-    TowerDragButton dt_btn(ObjectTypes::AoeTower, tower_name, {100,100}, tower_texture, sf::Color::White, sf::Color::Black, attrs);
-    dt_btn.set_font(rh.get_font());
+    TowerDragButton dt_btn(ObjectTypes::AoeTower, tower_name, {100,100}, tower_texture, sf::Color::White, sf::Color::Black, attrs, &rh.get_font(), rh);
 
     // run the program as long as the window is open
     while (window.isOpen())
@@ -113,7 +113,8 @@ int test_menu(){
         }
 
         
-        sm.update_displays();
+        sm.update();
+
         window.clear();
         window.draw(sm);
         window.display();
@@ -126,10 +127,8 @@ int test_menu(){
 int test_coordinate_and_indexes(){
     sf::RenderWindow window(sf::VideoMode(1100, 800), "My window");
     Level lv(800,20,20); // just to run test
-    Button btn("iaoai", {100, 100}, {100, 100}, sf::Color::Black, sf::Color::White);
     ResourceHandler rh;
-
-
+    Button btn("iaoai", {100, 100}, {100, 100}, sf::Color::Black, sf::Color::White, &rh.get_font());
     
     auto func1_return1 = btn.window_coords_to_grid_index(sf::Vector2i(80*4 + 20, 80*2 + 45), lv);
     auto func2_return1 = btn.window_coords_to_level_coords(sf::Vector2i(80*4 + 20, 80*2 + 45));
@@ -162,6 +161,111 @@ int test_coordinate_and_indexes(){
 
 }
 
+int test_rh(){
+
+    ResourceHandler rh;
+
+    for(auto elem : rh.get_tower_info(ObjectTypes::AoeTower)){
+        std::cout << elem << std::endl;
+    }
+
+
+    
+    return 1;
+}
+
+int test_text(){
+
+    
+    sf::RenderWindow window(sf::VideoMode(1100, 800), "My window");
+    window.setPosition({100, 0});
+    
+    /*
+    
+    sf::Font font;
+    if(!font.loadFromFile("/home/klind/tower_defence/assets/fonts/Ubuntu-R.ttf")){
+        std::cout << "font load failed" << std::endl;
+    }
+    */
+
+    ResourceHandler rh;
+   
+    sf::Text text("test text", rh.get_font());
+    text.setCharacterSize(30);
+    text.setPosition(100.f, 100.f);
+    text.setFillColor(sf::Color::White);
+
+    std::cout << "text.getGlobalBounds().height " << text.getGlobalBounds().height << std::endl;
+    std::cout << "text.getGlobalBounds().width " << text.getGlobalBounds().width << std::endl;
+    std::cout << "text.getGlobalBounds().left " << text.getGlobalBounds().left << std::endl;
+    std::cout << "text.getGlobalBounds().top " << text.getGlobalBounds().top << std::endl;
+
+    std::cout << "text.getLocalBounds().height " << text.getLocalBounds().height << std::endl;
+    std::cout << "text.getLocalBounds().width " << text.getLocalBounds().width << std::endl;
+    std::cout << "text.getLocalBounds().left " << text.getLocalBounds().left << std::endl;
+    std::cout << "text.getLocalBounds().top " << text.getLocalBounds().top << std::endl;
+
+    // run the program as long as the window is open
+    while (window.isOpen())
+    {
+        // check all the window's events that were triggered since the last iteration of the loop
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            // "close requested" event: we close the window
+            if (event.type == sf::Event::Closed){
+                window.close();
+            }
+        }
+
+        
+        window.clear();
+        window.draw(text);
+        window.display();
+
+    }
+
+    return 1;
+}
+
+int test_rh2(){
+
+    
+    sf::RenderWindow window(sf::VideoMode(1100, 800), "My window");
+    window.setPosition({100, 0});
+    
+    ResourceHandler rh;
+    
+    sf::Sprite spr;
+    spr.setPosition(100,100);
+    spr.setTexture(rh.get_texture_attribute(TowerAttributes::HP));
+
+
+    // run the program as long as the window is open
+    while (window.isOpen())
+    {
+        // check all the window's events that were triggered since the last iteration of the loop
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            // "close requested" event: we close the window
+            if (event.type == sf::Event::Closed){
+                window.close();
+            }
+        }
+
+        
+        window.clear();
+        window.draw(spr);
+        window.display();
+
+    }
+
+    return 1;
+}
+
 int main(){
+    //test_button();
     test_menu();
+    //test_rh2();
 }

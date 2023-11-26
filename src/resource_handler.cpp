@@ -1,6 +1,7 @@
 #include "resource_handler.hpp"
 
 
+
 // returns pointer to spread sheet
 sf::Texture& ResourceHandler::get_texture_tower(int type){
     return *(_towers_textures_ptr_map[type]);
@@ -16,12 +17,16 @@ sf::Texture& ResourceHandler::get_texture_tile(int type){
     return *(_tiles_textures_ptr_map[type]);
 }
 
+sf::Texture& ResourceHandler::get_texture_attribute(int type){
+    return *(_attr_textures_ptr_map[type]);
+}
+
 // returns pointer to font
 sf::Font& ResourceHandler::get_font(){
     return _font;
 }
 
-const std::array<int, 5>& ResourceHandler::get_tower_info(int type){
+std::array<int, 5>& ResourceHandler::get_tower_info(int type){
     return _tower_attributes[type];
 }
 
@@ -51,9 +56,18 @@ void ResourceHandler::load_texture_tile(int type, const std::string& filename){
     _tiles_textures_ptr_map[type] = tx;
 }
 
+void ResourceHandler::load_texture_attribute(int type, const std::string& filename){
+    std::shared_ptr<sf::Texture> tx = std::make_shared<sf::Texture>();
+    tx->loadFromFile(filename);
+    _attr_textures_ptr_map[type] = tx;
+};
+
 // load font and puts it into placeholder
 void ResourceHandler::load_font(){
-    _font.loadFromFile("../assets/fonts/Ubuntu-R.ttf");
+    
+    if(!_font.loadFromFile("/home/klind/tower_defence/assets/fonts/Ubuntu-R.ttf")){
+        std::cout << "failed to load font" << std::endl;
+    }
 }
 
 // loads all textures that game will use
@@ -81,8 +95,18 @@ void ResourceHandler::load_all_textures(){
     load_texture_tile(1, "../assets/textures/VERY_LITTLE_ROADTILE.png");
     load_texture_tile(2, "../assets/textures/VerySmallSize_32x32/VerySmall_Tiles_32x32/House_32x32.png");
 
+    //Attributes 
+    load_texture_attribute(TowerAttributes::ATKSPD, "../assets/textures/Attributes/Attack_Speed.png");
+    load_texture_attribute(TowerAttributes::HP,    "../assets/textures/Attributes/Health.png");
+    load_texture_attribute(TowerAttributes::MONEY, "../assets/textures/Attributes/Money.png");
+    load_texture_attribute(TowerAttributes::RNG,   "../assets/textures/Attributes/Range.png");
+    // load_texture_attributes(TowerAttributes::DMG,   "../assets/textures/Attributes/Attack_Speed.png"); TODO: make image for damge
+
+
     // Font 
     load_font();
+    fill_tower_attributes();
+    fill_tower_names();
 }
 
 void ResourceHandler::fill_tower_attributes(){

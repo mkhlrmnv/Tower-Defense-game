@@ -10,10 +10,16 @@
     needs to be created in game class, pass as reference
 */
 
+namespace TowerAttributes{
+    enum Atr{
+        HP, DMG, RNG, ATKSPD, MONEY,
+    };
+};
+
 class ResourceHandler{
 
 public:
-    ResourceHandler(){load_all_textures(); load_font();}
+    ResourceHandler(){load_all_textures();}
 
     // functions to get pointers to textures by type of object
     sf::Texture& get_texture_tower(int type);
@@ -22,18 +28,23 @@ public:
     sf::Font& get_font();
     
     // function to access tower attributes;
-    const std::array<int, 5>& get_tower_info(int type);
+    std::array<int, 5>& get_tower_info(int type);
     const std::string& get_tower_name(int type);
+
+    // function to access attribute textures
+    // use heart, and money in as cash and lives
+    sf::Texture& get_texture_attribute(int type);
     
 private:
 
     void load_all_textures();
 
     // load functions for all textures
-    // someimage.png -> sf::Texture
+    // some image.png -> sf::Texture
     void load_texture_tower(int type, const std::string& filename);
     void load_texture_enemy(int type, const std::string& filename);
     void load_texture_tile(int type, const std::string& filename);
+    void load_texture_attribute(int type, const std::string& filename);
     void load_font();
 
     void fill_tower_attributes();
@@ -46,9 +57,14 @@ private:
     std::map<int, std::shared_ptr<sf::Texture>> _tiles_textures_ptr_map;
 
     // holds info for towers
+    // Tower_type --> attribute list
     std::map<int, std::array<int, 5> > _tower_attributes;
     std::map<int, const std::string> _tower_names;
     sf::Font _font;
+
+    //menu graphics;
+    std::map<int, std::shared_ptr<sf::Texture>> _attr_textures_ptr_map;
+
 };
 
 

@@ -12,14 +12,12 @@ class Button : public sf::Drawable{
 
 public:
     Button(){}
-    Button(const std::string& label, sf::Vector2f size, sf::Vector2f position, sf::Color fill_color, sf::Color outline_color);
+    Button(const std::string& label, sf::Vector2f size, sf::Vector2f position, sf::Color fill_color, sf::Color outline_color, const sf::Font* font);
 
-    void set_font(sf::Font& font);
     
     // set the position of the button so that the text is in one of: 
-    void set_position_text_up(sf::Vector2f pos); // TODO: fix or scrap
-    void set_position_text_middle(sf::Vector2f pos);
-    void set_position_text_down(sf::Vector2f pos);
+    void center_text();
+
 
     void set_outline_color(sf::Color outline_color);
     void set_fill_color(sf::Color fill_color);
@@ -66,7 +64,9 @@ protected:
     sf::Vector2f _position;
     sf::Vector2f _size;
     sf::Text _text;
-    
+
+    // load font locally to g
+    const sf::Font* _font;
 };
 
 

@@ -18,16 +18,20 @@ public:
         for (auto button : _drag_buttons){
             delete button;
         }
+        delete _round_button;
     }
 
-    void update_displays();
+    void update();
     void handle_events(sf::RenderWindow& window, const sf::Event& event);
 
 private:
     
     void setup_background();
-    void setup_buttons();
+    void setup_drag_buttons();
+    void setup_round_button();
     void setup_info_displays();
+    void setup_info_display(int type, sf::Sprite& sprite, sf::Text& text_obj, sf::Vector2f pos, float char_size);
+
     void setup_menu_title();
 
     // derived from drawable;
@@ -42,6 +46,11 @@ private:
     sf::Text _title; 
     sf::RectangleShape _background;
 
+    sf::Sprite _cash_drawable;
+    sf::Sprite _lives_drawable;
+    sf::Sprite _round_count_drawable;
+
+
     sf::Text _round_count_text;
     sf::Text _cash_text;
     sf::Text _lives_text;
@@ -50,6 +59,9 @@ private:
     sf::Color _outline_color;
 
     std::vector< TowerDragButton *> _drag_buttons;
+
+    // button to start round / maybe pause? 
+    Button* _round_button; 
 
     // for drawing the dragging image on top of everything
     std::array< const sf::Sprite *, 6>  _drag_img_ptrs;
