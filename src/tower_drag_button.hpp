@@ -8,7 +8,7 @@
 
 class TowerDragButton : public Button{
 public:
-TowerDragButton(int type, const std::string name, sf::Vector2f position,  sf::Texture obj_texture, sf::Color outline, sf::Color fill, const std::array<int, 5>& tower_atrs);
+TowerDragButton(int type, const std::string& name, sf::Vector2f position,  sf::Texture obj_texture, sf::Color outline, sf::Color fill, std::array<int, 5>& tower_attrs, const sf::Font* font, ResourceHandler& _rh);
     /* 
     1. set the position of the tower to where square where the mouse was released.
         1.1 if grid square empty call some function on level to create new tower. TODO: handle this including cash, purchases in side level
@@ -16,8 +16,12 @@ TowerDragButton(int type, const std::string name, sf::Vector2f position,  sf::Te
     reset drag_flag
     */ 
     
-    void setup_images_and_button();
+    void setup_button_texts();
+    void setup_attribute_images();
+    void set_attribute_image(int type, sf::Sprite& sprite, sf::Vector2f pos);
     
+
+    void set_font();
 
     void set_drag_flag();
     void reset_drag_flag();
@@ -62,12 +66,14 @@ protected:
     sf::Sprite _hp_img;
     sf::Sprite _dmg_img;
     sf::Sprite _rng_img;
-    sf::Sprite _price_img;
+    sf::Sprite _atkspd_img;
+
+    sf::Text _price_text;
 
     sf::Text _hp_text;
     sf::Text _dmg_text;
     sf::Text _rng_text;
-    sf::Text _price_text;
+    sf::Text _atkspd_text;
 
     std::array<int, 5> _attributes;
 
@@ -84,9 +90,12 @@ protected:
     // determine image of the button, text, what will be created what will the button represent
     int _tower_type;
     int _tower_price;
+    std::string _tower_name;
 
     // determines whether the image is dragged or not 
     bool _drag_flag;
+
+    ResourceHandler _rh;
 
 };
 
