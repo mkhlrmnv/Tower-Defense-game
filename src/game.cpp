@@ -10,7 +10,7 @@ std::mutex towersMutex;
 // TODO: Smart enemies spawning mechanism in start round
 // TODO: Maybe some slowing down of the game that it isn't so fucking fast
 
-Game::Game(): _game_resolution(800), _side_bar_width(300), _window(), _level(800, 250, 50), _renderer(), some_pos(200,200){
+Game::Game(): _game_resolution(800), _side_bar_width(300), _window(), _level(800, 20000, 50),  _rh(), _renderer(), some_pos(200,200), _side_menu(float(_game_resolution), float(_side_bar_width), _rh, _level){
 }
 
 // Returns resolution of the game
@@ -61,6 +61,7 @@ void Game::run(){
     open_window();
     generate_chosen_level_style(LevelSelection::load); 
 
+    /* 
     // TODO: Delete this after user can spawn own towers
     auto t1_pos = Vector2D(82*5, 1*80);
     auto t2_pos = Vector2D(82*5, 2*80);
@@ -76,9 +77,10 @@ void Game::run(){
     _level.add_tower(new Basic_Tower(_level, t4_pos, 30, 10, 200, 1, 3, 100, 1, true));
     _level.add_tower(new Basic_Tower(_level, t5_pos, 30, 10, 200, 1, 4, 100, 1, true));
     _level.add_tower(new Basic_Tower(_level, t6_pos, 30, 10, 200, 1, 5, 100, 1, true));
+    */
 
     _renderer.make_drawable_level(_level);
-    _renderer.make_level_info_texts(_game_resolution, _side_bar_width);
+    //_renderer.make_level_info_texts(_game_resolution, _side_bar_width);
 
     // manages tick rate of the game
     sf::Clock clock;
@@ -105,6 +107,8 @@ void Game::run(){
 // moves enemies, and calls attack function for all enemies and towers
 void Game::update(){
 
+
+     
     // uses two threads for this, one for updating enemies and one for towers
     std::thread enemiesThread(&Game::update_enemies, this);
     std::thread towersThread(&Game::update_towers, this);
@@ -120,6 +124,8 @@ void Game::update(){
     // waits that both threads are ready
     enemiesThread.join();
     towersThread.join();
+    _side_menu.update();
+    
 }
 
 void Game::process_events(){
@@ -127,7 +133,9 @@ void Game::process_events(){
     while(_window.pollEvent(event)){
         if(event.type == sf::Event::Closed){
             _window.close();
+            
         }
+        _side_menu.handle_events(_window, event);
         // TODO: add events here, like button presses, dragging towers to map
     }
 }
@@ -142,9 +150,14 @@ void Game::render(){
         _renderer.draw_level(_window);
         _renderer.draw_enemies(_window, _level.get_enemies(), i);
         _renderer.draw_towers(_window, _level.get_towers(), i);
-         _renderer.draw_cash(_window, _level.get_cash());
-        _renderer.draw_lives(_window, _level.get_lives());
-        _renderer.draw_round_count(_window, _level.get_round());
+        
+        // in side menu
+        // _renderer.draw_cash(_window, _level.get_cash());
+        // _renderer.draw_lives(_window, _level.get_lives());
+        // _renderer.draw_round_count(_window, _level.get_round());
+
+        _window.draw(_side_menu);
+
         _window.display(); // display the drawn entities
 
         // delay if needed to slow down game

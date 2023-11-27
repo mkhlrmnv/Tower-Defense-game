@@ -138,29 +138,7 @@ void Renderer::draw_enemies(sf::RenderWindow& rwindow, std::vector<Enemy*> enemi
     }
 }
 
-// displays current cash
-void Renderer::draw_cash(sf::RenderWindow& rwindow, int cash){
 
-    std::string text_to_be_displayed = "$" + std::to_string(cash);
-    _cash_text.setString(text_to_be_displayed);
-    rwindow.draw(_cash_text);
-}
-
-// displays current lives
-void Renderer::draw_lives(sf::RenderWindow& rwindow, int lives){
-
-    std::string text_to_be_displayed = "Lives: " + std::to_string(lives);
-    _lives_text.setString(text_to_be_displayed);
-    rwindow.draw(_lives_text);
-}
-
-// displays current round
-void Renderer::draw_round_count(sf::RenderWindow& rwindow, int round_count){
-
-    std::string text_to_be_displayed = "Round: " + std::to_string(round_count);
-    _round_count_text.setString(text_to_be_displayed);
-    rwindow.draw(_round_count_text);
-}
 
 // draws a grid with the rectangle to a rendertexture and sets this as the texture for the drawable level
 void Renderer::make_drawable_level(Level& lv){
@@ -214,46 +192,4 @@ void Renderer::make_drawable_level(Level& lv){
     _drawable_level.setTexture(_level_texture.getTexture());
 }
 
-// loads font to use in level
-void Renderer::load_font(){
-    if(!_font.loadFromFile("../assets/fonts/Ubuntu-R.ttf")){
-        std::cout << "font load failed" << std::endl;
-    }else{
-        std::cout << "font load success" << std::endl;
 
-    }
-}
-
-// displays level on the screen 
-void Renderer::make_level_info_texts(int game_resolution, int side_bar_width){
-
-    load_font();
-
-    _cash_text.setFont(_font);
-    _lives_text.setFont(_font);
-    _round_count_text.setFont(_font);
-
-    int info_display_height = 20;
-    int info_display_width = side_bar_width / 3;
-
-    int cash_x = game_resolution;
-    int cash_y = game_resolution - info_display_height;
-
-    _cash_text.setPosition(sf::Vector2f(cash_x, cash_y));
-    _cash_text.setFillColor(sf::Color::White);
-    _cash_text.setCharacterSize(20);
-
-    int lives_x = cash_x + info_display_width;
-    int lives_y = game_resolution - info_display_height;
-
-    _lives_text.setPosition(sf::Vector2f(lives_x, lives_y));
-    _lives_text.setFillColor(sf::Color::White);
-    _lives_text.setCharacterSize(20);
-
-    int round_count_x = lives_x + info_display_width;
-    int round_count_y = game_resolution - info_display_height;
-
-    _round_count_text.setPosition(sf::Vector2f(round_count_x, round_count_y));
-    _round_count_text.setFillColor(sf::Color::White);
-    _round_count_text.setCharacterSize(20);
-}   

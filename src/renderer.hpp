@@ -29,8 +29,6 @@ public:
     // call at the beginning of the game
     void make_drawable_level(Level & lv); 
     void make_level_info_texts(int game_resolution, int side_bar_width);
-
-    //void make_drawable_buttons()
     
     // draw background
     void draw_level(sf::RenderWindow& rwindow);
@@ -49,12 +47,6 @@ public:
 
 
     // draw texts 
-    void draw_cash(sf::RenderWindow& rwindow, int cash);
-    void draw_lives(sf::RenderWindow& rwindow, int lives);
-    void draw_round_count(sf::RenderWindow& rwindow, int round_count);
-
-    void load_font();
-
 private:
     // a sprite for drawing grid
     sf::Sprite _drawable_level;
@@ -81,10 +73,6 @@ private:
     float _scale_factor_tower = 2.5; // Adjust this value as needed
     float _scale_factor_enemy = 1; // TODO: some enemy type depending value
 
-    sf::Font _font;
-    sf::Text _round_count_text;
-    sf::Text _cash_text;
-    sf::Text _lives_text;
 
     // Resource handler
     ResourceHandler _rh;

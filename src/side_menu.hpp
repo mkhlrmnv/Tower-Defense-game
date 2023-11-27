@@ -9,6 +9,12 @@
 
 #include "iostream"
 
+
+// TODO: Implement start round button!
+// TODO: Tweak the attributes in RH according to final object attributes
+// TODO: Find better font
+// TODO: Tweak asthetics change better color, add background image. 
+
 class SideMenu : public sf::Drawable {
 
 public:
@@ -23,6 +29,8 @@ public:
 
     void update();
     void handle_events(sf::RenderWindow& window, const sf::Event& event);
+    void disable_buttons();
+    void enable_buttons();
 
 private:
     
@@ -38,7 +46,7 @@ private:
     virtual void draw( sf::RenderTarget& target, sf::RenderStates states) const;
 
     //TODO: freeze buttons during gameplay?
-    bool is_paused;
+    bool _disable_buttons;
 
     float _game_resolution;
     float _side_menu_width;

@@ -26,8 +26,8 @@ sf::Font& ResourceHandler::get_font(){
     return _font;
 }
 
-std::array<int, 5>& ResourceHandler::get_tower_info(int type){
-    return _tower_attributes[type];
+int ResourceHandler::get_tower_info(int tower_type, int attr_type){
+    return _tower_attributes[tower_type]->at(attr_type);
 }
 
 const std::string& ResourceHandler::get_tower_name(int type){
@@ -64,8 +64,13 @@ void ResourceHandler::load_texture_attribute(int type, const std::string& filena
 
 // load font and puts it into placeholder
 void ResourceHandler::load_font(){
+
+    //std::string filename = "../assets/fonts/Ubuntu-R.ttf";
+    std::string filename = "../assets/fonts/PixeloidMono-d94EV.ttf";
+
+
     
-    if(!_font.loadFromFile("/home/klind/tower_defence/assets/fonts/Ubuntu-R.ttf")){
+    if(!_font.loadFromFile(filename)){
         std::cout << "failed to load font" << std::endl;
     }
 }
@@ -104,24 +109,45 @@ void ResourceHandler::load_all_textures(){
 
     // Font 
     load_font();
-    fill_tower_attributes();
-    fill_tower_names();
+    fill_tower_attributes_map();
+    fill_tower_names_map();
 }
 
-void ResourceHandler::fill_tower_attributes(){
+
+void ResourceHandler::fill_attribute_map(int type, std::array<int, 5> attributes){
+    std::shared_ptr<std::map<int, int>> attr_map = std::make_shared<std::map<int, int>>();
+    attr_map->emplace(TowerAttributes::HP, attributes.at(0));
+    attr_map->emplace(TowerAttributes::DMG, attributes.at(1));
+    attr_map->emplace(TowerAttributes::RNG, attributes.at(2));
+    attr_map->emplace(TowerAttributes::ATKSPD, attributes.at(3));
+    attr_map->emplace(TowerAttributes::MONEY, attributes.at(4));
+    _tower_attributes[type] = attr_map;
+}
+
+
+void ResourceHandler::fill_tower_attributes_map(){
     
     // hp, dmg, rng, atk_spd, price
-    _tower_attributes[ObjectTypes::AoeTower]= {30, 10, 100, 2, 100};
-    _tower_attributes[ObjectTypes::ArcherTower]= {30, 10, 100, 3, 100};
-    _tower_attributes[ObjectTypes::SniperTower]= {10, 30, 1000, 1, 150};
-    _tower_attributes[ObjectTypes::RepelMageTower]= {30, 5, 120, 1, 180};
+
+
+    fill_attribute_map(ObjectTypes::AoeTower, {30, 10, 100, 2, 100});
+    fill_attribute_map(ObjectTypes::ArcherTower, {30, 10, 100, 3, 100});
+    fill_attribute_map(ObjectTypes::SniperTower, {10, 30, 1000, 1, 150});
+    fill_attribute_map(ObjectTypes::RepelMageTower, {30, 5, 120, 1, 180});
+
+
+    // TODO: fill 
+    fill_attribute_map(ObjectTypes::MudMageTower, {0,0,0,0,0});
+    fill_attribute_map(ObjectTypes::WaterMageTower, {0,0,0,0,0});
 
 }
 
-void ResourceHandler::fill_tower_names(){
+void ResourceHandler::fill_tower_names_map(){
     _tower_names.emplace(ObjectTypes::AoeTower, "Aoe") ;
     _tower_names.emplace(ObjectTypes::ArcherTower , "Archer");
     _tower_names.emplace(ObjectTypes::SniperTower , "Sniper");
     _tower_names.emplace(ObjectTypes::RepelMageTower , "Repel Mage");
+    _tower_names.emplace(ObjectTypes::MudMageTower , "Mud Mage");
+    _tower_names.emplace(ObjectTypes::WaterMageTower , "Water Mage");
 
 }

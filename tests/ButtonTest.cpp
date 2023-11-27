@@ -52,12 +52,7 @@ int test_drag_button(){
     
     ResourceHandler rh;
     Level lv(20,20,20); // just to run test 
-
-    auto tower_name = rh.get_tower_name(ObjectTypes::AoeTower);
-    auto tower_texture = rh.get_texture_tower(ObjectTypes::AoeTower);
-    auto attrs = rh.get_tower_info(ObjectTypes::AoeTower);
-
-    TowerDragButton dt_btn(ObjectTypes::AoeTower, tower_name, {100,100}, tower_texture, sf::Color::White, sf::Color::Black, attrs, &rh.get_font(), rh);
+    TowerDragButton dt_btn(ObjectTypes::AoeTower, {100,100}, sf::Color::White, sf::Color::Black,  rh);
 
     // run the program as long as the window is open
     while (window.isOpen())
@@ -165,12 +160,16 @@ int test_rh(){
 
     ResourceHandler rh;
 
-    for(auto elem : rh.get_tower_info(ObjectTypes::AoeTower)){
-        std::cout << elem << std::endl;
+    for(int i=0; i<6; i++){
+        for(int j=0; j<5; j++){
+            
+            std::cout << rh.get_tower_info(i, j) << std::endl;
+
+        }
     }
 
 
-    
+
     return 1;
 }
 
@@ -266,6 +265,8 @@ int test_rh2(){
 
 int main(){
     //test_button();
-    test_menu();
+    //test_drag_button();
+    //test_rh();
     //test_rh2();
-}
+    test_menu();  
+};   
