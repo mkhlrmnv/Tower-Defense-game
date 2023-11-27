@@ -1,22 +1,16 @@
 #include "game.hpp"
 #include <thread>
 #include <mutex>
+std::mutex enemiesMutex;
+std::mutex enemiesMutex_2;
+std::mutex towersMutex;
 
-//TODO: balance game and update tower attribute values in resource handle for tower drag buttons!
+// TODO: Delete spawning of towers after is handled by user
+// TODO: Some kind of timer in between of round
+// TODO: Smart enemies spawning mechanism in start round
+// TODO: Maybe some slowing down of the game that it isn't so fucking fast
 
-
-Game::Game(): 
-    _game_resolution(800),
-    _side_bar_width(300),
-    _window(),
-    _level(_game_resolution, _starting_cash, _starting_lives),
-    _rh(),
-    _renderer(_rh),
-    _main_menu(_rh, _level),
-    _level_menu(_rh, _level),
-    _side_menu(float(_game_resolution), float(_side_bar_width), _rh, _level),
-    _upgrade(_game_resolution, _rh, _level, 100, 2),
-    _reset_clock(){
+Game::Game(): _game_resolution(800), _side_bar_width(300), _window(), _level(800, 20000, 50),  _rh(), _renderer(), some_pos(200,200), _side_menu(float(_game_resolution), float(_side_bar_width), _rh, _level){
 }
 
 // Returns resolution of the game
@@ -47,7 +41,25 @@ void Game::run(){
     open_window();
     //generate_chosen_level_style(LevelSelection::load); 
 
-    //_renderer.make_drawable_level(_level);
+    /* 
+    // TODO: Delete this after user can spawn own towers
+    auto t1_pos = Vector2D(82*5, 1*80);
+    auto t2_pos = Vector2D(82*5, 2*80);
+    auto t3_pos = Vector2D(82*5, 3*80);
+    auto t4_pos = Vector2D(82*3, 1*80);
+    auto t5_pos = Vector2D(82*3, 2*80);
+    auto t6_pos = Vector2D(82*3, 3*80);
+
+    // Tower(level, health, damage, range, attack_speed, pos, type, price, level, single or not)
+    _level.add_tower(new Basic_Tower(_level, t1_pos, 30, 10, 200, 1, 0, 100, 1, true));
+    _level.add_tower(new Basic_Tower(_level, t2_pos, 30, 10, 200, 1, 1, 100, 1, true));
+    _level.add_tower(new Basic_Tower(_level, t3_pos, 30, 10, 200, 1, 2, 100, 1, true));
+    _level.add_tower(new Basic_Tower(_level, t4_pos, 30, 10, 200, 1, 3, 100, 1, true));
+    _level.add_tower(new Basic_Tower(_level, t5_pos, 30, 10, 200, 1, 4, 100, 1, true));
+    _level.add_tower(new Basic_Tower(_level, t6_pos, 30, 10, 200, 1, 5, 100, 1, true));
+    */
+
+    _renderer.make_drawable_level(_level);
     //_renderer.make_level_info_texts(_game_resolution, _side_bar_width);
 
     // manages tick rate of the game
@@ -75,79 +87,26 @@ void Game::run(){
 void Game::update(){
 
 
-    switch (_game_state)
-    {
-    case GameState::Pause:
+     
+    // uses two threads for this, one for updating enemies and one for towers
+    std::thread enemiesThread(&Game::update_enemies, this);
+    std::thread towersThread(&Game::update_towers, this);
 
-        update_towers();
-        _side_menu.update();
-
-        // transition to victory, starts timer to transition back to start menu
-        if(_rounds_to_survive < _level.get_round()){
-            _game_state = GameState::Victory;
-            _side_menu.pause();
-            _reset_clock.restart();
-
-        }
-    
-    break;
-    
-    case GameState::Round:
-
-        _side_menu.update();
-        update_enemies();
-        update_towers();
-
-        // transition to paused after all enemies are dead
-        if (_level.get_enemies().empty() && !_round_over && _level.get_lives() > 0) {
-            _level.add_cash(_basic_money * _level.get_round());
-            _level.plus_round();
-            _round_over = true;
-            _game_state = GameState::Pause;
-            _side_menu.pause();
-        }
-
-        // transition to game over when no lives left, starts timer to transition back to start menu
-        if (_level.get_lives() < 1){
-            _round_over = true;
-            _game_state = GameState::GameOver;
-            _side_menu.pause();
-            _reset_clock.restart();
-        }
-    
-    break;
-
-    case GameState::Victory :
-        _reset_time = _reset_clock.getElapsedTime();
-        if(_reset_time.asSeconds() > 10.f){
-            _game_state = GameState::StartMenu;
-            _main_menu.reset();
-            _main_menu.enable_menu();
-            _level_menu.reset();
-            _level.reset(_starting_cash, _starting_lives);
-        }
-        
-
-
-    break;
-
-    case GameState::GameOver :
-        _reset_time = _reset_clock.getElapsedTime();
-        if(_reset_time.asSeconds() > 10.f){
-            _game_state = GameState::StartMenu;
-            _main_menu.reset();
-            _main_menu.enable_menu();
-            _level_menu.reset();
-            _level.reset(_starting_cash, _starting_lives);
-        }
-        
-
-    break;
-
+    // if there are not enemies and round over variable hasn't been updates
+    // new round starts
+    if (_level.get_enemies().empty() && !round_over) {
+        _level.plus_round();
+        round_over = true;
+        start_round();
     }
+
+    // waits that both threads are ready
+    enemiesThread.join();
+    towersThread.join();
+    _side_menu.update();
+    
 }
 
-// Process events in loop:  clicks, button presses
 void Game::process_events(){
     sf::Event event;
     while(_window.pollEvent(event)){
@@ -155,184 +114,46 @@ void Game::process_events(){
             _window.close();
             
         }
-
-        // events based on _game_state
-        switch (_game_state)
-        {
-        case GameState::StartMenu:
-            _main_menu.handle_events(_window, event);
-            _game_state = _main_menu.get_state();
-
-            // check game state transition
-            if(_game_state == GameState::Pause){
-
-                _level.make_grid();
-                _level.randomly_generate();
-                _renderer.make_drawable_level(_level);
-                _main_menu.disable_menu(); // redundant
-                _upgrade.reset();
-
-            }else if(_game_state == GameState::MapMenu){
-                
-                _main_menu.disable_menu(); // redundant
-            }
-
-        break;
-        
-        case GameState::MapMenu:
-
-            _level_menu.enable_menu();
-            _level_menu.handle_events(_window, event);
-            _game_state = _level_menu.get_state();
-
-            // check game state transition
-            if(_game_state == GameState::Pause){
-
-                _level.make_grid();
-                _level.read_file(_level_menu.get_level_to_load());
-                _renderer.make_drawable_level(_level);
-                _level_menu.disable_menu(); 
-                _upgrade.reset();
-
-            }
-        break;
-
-        // paused or round running
-
-        case GameState::Pause:
-
-            _upgrade.handle_events(_window, event);
-            _side_menu.handle_events(_window, event);
-            _game_state = _side_menu.get_state();
-            if(_game_state == GameState::Round){
-                start_round();
-            }
-
-        break;
-
-        case GameState::Round:
-        
-            // start round button isnt active in sidemenu 
-            _side_menu.handle_events(_window, event);
-            _upgrade.handle_events(_window, event);
-            // no transition from events, transition back to pause when round over
-        break;
-        
-        }
+        _side_menu.handle_events(_window, event);
+        // TODO: add events here, like button presses, dragging towers to map
     }
 }
 
 // renders current situation on map
 void Game::render(){
-
-
-    switch (_game_state)
+    // because animation are at most five pictures
+    // there is for loop until five
+    for (int i = 0; i < 6; i++)
     {
-    case GameState::StartMenu:
-        _window.clear();
-        _window.draw(_main_menu);
-        _window.display();
-        break;
-
-    case GameState::MapMenu:
-        _window.clear();
-        _window.draw(_level_menu);
-        _window.display();
-        break;
-    
-    case GameState::Round:
-        _round_over = false;
-        // updates moving animations value if it is too high
-        if (_enemy_move_animation > 4){
-            _enemy_move_animation = 0;
-        }
-        // because animation are at most five pictures
-        // there is for loop until five
-        // but basically goes through all attack animations for all attacking objects
-        // and through one moving animation for all moving enemies
-        // goes through only one moving animation to make moving look more natural when enemy takes only one step at the time
-<<<<<<< HEAD
-        if (_animation_phase > 6){
-            _animation_phase = 0;
-        }
-        _window.clear();
-            _renderer.draw_level(_window);
-            _renderer.draw_towers(_window, _level.get_towers(), _animation_phase);
-            _renderer.draw_enemies(_window, _level.get_enemies(), _animation_phase);
-            _window.draw(_side_menu);
-            _window.draw(_upgrade);
-
-            _window.display(); // display the drawn entities
-        _animation_phase++;
-=======
-        for (int i = 0; i < 6; i++)
-        {
-            _window.clear();
-            _renderer.draw_level(_window);
-            _renderer.draw_towers(_window, _level.get_towers(), i);
-            _renderer.draw_enemies(_window, _level.get_enemies(), i, _enemy_move_animation);
-            _window.draw(_side_menu);
-            _window.draw(_upgrade);
-
-            _window.display(); // display the drawn entities
-        }
-        _enemy_move_animation++;
-
->>>>>>> 934afcc (backed down to original animation method)
-
-<<<<<<< HEAD
-=======
-        // std::this_thread::sleep_for(std::chrono::milliseconds(100));
-
-<<<<<<< HEAD
-
->>>>>>> a2d2f1e (removed debuging std:cout's)
-=======
->>>>>>> 934afcc (backed down to original animation method)
-        // removes all towers and enemies with 0 hp, if their dying animation was already played
-        for (auto* t : _level.get_towers()){
-            if (t->get_health() <= 0 && t->get_state() == State::dying){
-                _level.remove_tower(t);
-            } 
-        }
-        for (auto* e : _level.get_enemies()){
-            if (e->get_health() <= 0 && e->get_state() == State::dying){
-                _level.remove_enemy(e);
-            } 
-        }
-        break;
-    
-    case GameState::Pause:
-
-        // game pause between rounds - no enemies to draw
-
         _window.clear();
         _renderer.draw_level(_window);
-        _renderer.draw_towers(_window, _level.get_towers(), 1);
+        _renderer.draw_enemies(_window, _level.get_enemies(), i);
+        _renderer.draw_towers(_window, _level.get_towers(), i);
+        
+        // in side menu
+        // _renderer.draw_cash(_window, _level.get_cash());
+        // _renderer.draw_lives(_window, _level.get_lives());
+        // _renderer.draw_round_count(_window, _level.get_round());
+
         _window.draw(_side_menu);
-        _window.draw(_upgrade);
+
         _window.display(); // display the drawn entities
-        if (_round_over == false){
-            _level.add_cash(_basic_money * _level.get_round());
-            _round_over = true;
-        }
-        break;
 
-    case GameState::Victory:
-
-        _window.clear();
-        _renderer.draw_end_screen_win(_window);
-        _window.display();
-        break;
-
-    case GameState::GameOver:
-
-        _window.clear();
-        _renderer.draw_end_screen_lose(_window);
-        _window.display();
-        break;
+        // delay if needed to slow down game
+        std::this_thread::sleep_for(std::chrono::milliseconds(5));
     }
-    
+
+    // removes all towers and enemies with 0 hp, if their dying animation was already played
+    for (auto* t : _level.get_towers()){
+        if (t->get_health() <= 0 && t->get_state() == State::dying){
+            _level.remove_tower(t);
+        } 
+    }
+    for (auto* e : _level.get_enemies()){
+        if (e->get_health() <= 0 && e->get_state() == State::dying){
+            _level.remove_enemy(e);
+        } 
+    }
 }
 
 // starts new round

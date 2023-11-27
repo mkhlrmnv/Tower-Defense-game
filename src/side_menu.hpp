@@ -10,6 +10,18 @@
 #include "iostream"
 
 
+// TODO: Implement start round button!
+// TODO: Tweak the attributes in RH according to final object attributes
+// TODO: Find better font
+// TODO: Tweak asthetics change better color, add background image. 
+
+
+// TODO: Implement start round button!
+// TODO: Tweak the attributes in RH according to final object attributes
+// TODO: Find better font
+// TODO: Tweak asthetics change better color, add background image. 
+
+
 
 /**
  * @brief Implements side menu of the game. 
@@ -37,6 +49,8 @@ public:
 
     void update();
     void handle_events(sf::RenderWindow& window, const sf::Event& event);
+    void disable_buttons();
+    void enable_buttons();
 
     /**
      * @brief disables handle events
@@ -88,22 +102,9 @@ private:
      */
     virtual void draw( sf::RenderTarget& target, sf::RenderStates states) const;
 
-    /**
-     * @brief disable buttons
-     * 
-     */
+    //TODO: freeze buttons during gameplay?
     bool _disable_buttons;
 
-    /**
-     * @brief gives the state that is in the next game cycle. either continue in pause or transition to round. 
-     * 
-     */
-    int _state;
-
-    /**
-     * @brief Holds height of the menu.
-     * 
-     */
     float _game_resolution;
 
     /**

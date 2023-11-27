@@ -37,59 +37,23 @@ public:
     void make_drawable_level(Level & lv); 
     void make_level_info_texts(int game_resolution, int side_bar_width);
     
-    /**
-     * @brief draw background
-     * @param rwindow windows where background is drawn
-     */
+    // draw background
     void draw_level(sf::RenderWindow& rwindow);
 
-    /**
-     * @brief draw single enemy  
-     * @param rwindow window where to draw
-     * @param e_ptr pointer to enemy
-     * @param frame current frame of animation
-     * @param move_animation current frame for enemies move animation (for smoother movement)
-     */
-    void draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr, int frame, int move_animation);
+    // draw single enemy  
+    void draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr, int frame); // TODO: implement the choice of correct texture with obn and object type
     
-    /**
-     * @brief draw enemies on from a list
-     * @param rwindow window where to draw
-     * @param enemies list of enemies
-     * @param frame current frame of animation
-     * @param move_animation current frame for enemies move animation (for smoother movement)
-     */
-    void draw_enemies(sf::RenderWindow& rwindow, std::vector< Enemy * > enemies, int frame, int move_animation);
+    // draw enemies on from a list
+    void draw_enemies(sf::RenderWindow& rwindow, std::vector< Enemy * > enemies, int frame); // TODO: remove last argument with real textures 
 
-    /**
-     * @brief draw single enemy 
-     * @param rwindow window where to draw
-     * @param t_ptr pointer to tower
-     * @param frame current frame of animation
-     */
-    void draw_tower(sf::RenderWindow& rwindow, Tower* t_ptr, int frame);
+    // draw single enemy 
+    void draw_tower(sf::RenderWindow& rwindow, Tower* t_ptr, int frame); // TODO: implement the choice of correct texture with object state and object type
     
-    /**
-     * @brief draw towers on from a list
-     * @param rwindow  window where to draw
-     * @param towers list of towers
-     * @param frame current frame of animation
-     */
-    void draw_towers(sf::RenderWindow& rwindow, std::vector< Tower * > towers, int frame);
-
-    /**
-     * @brief victory screen on GameState::EndScreen
-     * @param rwindow  window where to draw
-     */
-    void draw_end_screen_win(sf::RenderWindow& rwindow);
-
-    /**
-     * @brief game over screen on GameState::EndScreen
-     * @param rwindow  window where to draw
-     */
-    void draw_end_screen_lose(sf::RenderWindow& rwindow);
+    // draw towers on from a list
+    void draw_towers(sf::RenderWindow& rwindow, std::vector< Tower * > towers, int frame); // TODO: remove last argument with real textures 
 
 
+    // draw texts 
 private:
     /**
      * @brief a sprite for drawing grid
@@ -151,10 +115,9 @@ private:
     float _scale_factor_tower = 2.5; // Adjust this value as needed
     float _scale_factor_enemy = 1; // TODO: some enemy type depending value
 
-    /**
-     * @brief a reference to Resource handler
-     */
-    ResourceHandler& _rh;
+
+    // Resource handler
+    ResourceHandler _rh;
 };
 
 #endif 

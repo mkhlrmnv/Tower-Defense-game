@@ -24,6 +24,10 @@
 #include "tank_enemy.hpp"
 
 #include "side_menu.hpp"
+
+#include "side_menu.hpp"
+
+#include "side_menu.hpp"
 #include "upgrade.hpp"
 #include "main_menu.hpp"
 #include "choose_level_menu.hpp"
@@ -117,81 +121,7 @@ private:
 
     sf::RenderWindow _window;
 
-    
-    
-    /**
-    * @brief sf::Time parameter determines the time which is spent in the end screen before reseting to the start menu
-    *  
-    */
-    sf::Time _reset_time = sf::Time::Zero;
-
-    /**
-    * @brief sf::Time parameter determines the time which is spent in the end screen before reseting to the start menu
-    *  
-    */
-    sf::Clock _reset_clock;
-    
-
-    /**
-     * @brief int parameter determines the starting cash for the level
-     *  
-     */
-    int _starting_cash = 500;
-
-    /**
-     * @brief int parameter determines the starting lives for the level
-     */
-    int _starting_lives = 30;
-
-    /**
-     * @brief int parameter determines state of the game state:
-     * which menu to display, run the game or pause. 
-     */
-    int _game_state = 0;
-
-    /**
-     * @brief int parameter determines how many rounds one must survive to beat the game. 
-     */
-    int _rounds_to_survive = 30;
-
-    /**
-     * @brief Bool parameter if round is over or not
-     */
-    bool _round_over = true;
-
-    /**
-     * @brief Stores difficulty level of current game
-     */
-    int _difficulty_multiplier = 2;
-
-    /**
-     * @brief amount of available enemy types
-     * Gets bigger with rounds beeing played
-     */
-    int _available_types = 1;
-
-    /**
-     * @brief Variable for enemies moving animation
-     * Thats because we want to play only one moving animation and all 
-     * attack animations at the time
-     */
-    int _enemy_move_animation;
-
-    /**
-     * @brief basic amount of money given
-     */
-    int _basic_money = 50;
-
-    /**
-     * @brief a class for getting textures, fonts, and object features for the side menu.
-     * 
-     */
     ResourceHandler _rh;
-
-    /**
-     * @brief a class for drawing the level, tower and enemy objects and end screen.
-     * 
-     */
     Renderer _renderer;
 
     /**
@@ -199,6 +129,8 @@ private:
      * 
      */
     Level _level;
+    SideMenu _side_menu;
+
 
     /**
      * @brief a class to select either random or existing maps.

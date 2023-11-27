@@ -36,29 +36,24 @@ public:
 
     virtual bool is_mouse_over(sf::RenderWindow& window);
 
-
-    // check if mouse in s
-    bool inside_grid( sf::Vector2i mouse_pos, Level& lv);
-    bool inside_grid(sf::Vector2f window_coords, Level& lv);
-
-
-    // use in upgrade button
-    std::pair<int, int> window_coords_to_grid_index( sf::Vector2i mouse_pos, Level& lv);
-    std::pair<int, int> window_coords_to_grid_index( sf::Vector2f window_coords, Level& lv);
-
-
-    // use in drag_button to check mouse position
-    Vector2D window_coords_to_level_coords(sf::Vector2i mouse_pos);
-    Vector2D window_coords_to_level_coords(sf::Vector2f window_coords);
-
-
     // handle button press events etc. 
     virtual void handle_events(sf::RenderWindow& window, const sf::Event& event, Level& lv);
-
-
     
     // TODO: define in child class 
     virtual void some_action_from_level(sf::RenderWindow& window, Level& lv){}
+
+
+     // check if mouse in s
+    static bool inside_grid( sf::Vector2i mouse_pos, Level& lv);
+    static bool inside_grid(sf::Vector2f window_coords, Level& lv);
+
+    // use in upgrade button
+    static std::pair<int, int> window_coords_to_grid_index( sf::Vector2i mouse_pos, Level& lv);
+    static std::pair<int, int> window_coords_to_grid_index( sf::Vector2f window_coords, Level& lv);
+
+    // use in drag_button to check mouse position
+    static Vector2D window_coords_to_level_coords(sf::Vector2i mouse_pos);
+    static Vector2D window_coords_to_level_coords(sf::Vector2f window_coords);
 
 
 
