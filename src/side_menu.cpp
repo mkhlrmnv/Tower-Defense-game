@@ -80,7 +80,7 @@ void SideMenu::setup_round_button(){
 
     // get position of the last button 
 
-   _round_button =  new Button("IMPLEMENT FUNCTIONALITY", {280, 50}, {810, 700}, sf::Color::Red, sf::Color::White, &_rh.get_font());
+   _round_button =  new Button("IMPLEMENT FUNCTIONALITY", {280, 50}, {810, 700}, sf::Color::Red, sf::Color::White, _rh.get_font());
    _round_button->center_text();
 
 }
@@ -94,10 +94,6 @@ void SideMenu::setup_info_display(int type, sf::Sprite& sprite, sf::Text& text_o
     float scale = 30 / image_size;
     sprite.setTexture(_rh.get_texture_attribute(type));
     sprite.setPosition(pos);
-    auto s = sprite.getScale();
-        std::cout <<"scale x"<< s.x << "scale y" << s.y << std::endl;
-
-
     sprite.setScale(scale, scale);
     
 
@@ -161,9 +157,6 @@ void SideMenu::draw( sf::RenderTarget& target, sf::RenderStates states) const{
     target.draw(_title);
     target.draw(*_round_button);
 
-    if(nullptr == _lives_drawable.getTexture()){
-        std::cout <<"no texture"<< std::endl;
-    }
     //std::cout <<"x"<<  _lives_drawable.getPosition().x << "y" << _lives_drawable.getPosition().y << std::endl;
     //std::cout <<"w"<<  _lives_drawable.getGlobalBounds().width << "h" << _lives_drawable.getGlobalBounds().height << std::endl;
 

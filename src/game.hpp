@@ -24,6 +24,7 @@
 #include "tank_enemy.hpp"
 
 #include "side_menu.hpp"
+#include "upgrade.hpp"
 
 namespace LevelSelection{
     enum Choice: int{
@@ -88,7 +89,7 @@ private:
     Renderer _renderer;
     Level _level;
     SideMenu _side_menu;
-
+    Upgrade _upgrade;
 
     bool round_over = false;
 

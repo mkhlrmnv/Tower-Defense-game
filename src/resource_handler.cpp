@@ -106,6 +106,7 @@ void ResourceHandler::load_all_textures(){
     load_texture_attribute(TowerAttributes::MONEY, "../assets/textures/Attributes/Money.png");
     load_texture_attribute(TowerAttributes::RNG,   "../assets/textures/Attributes/Range.png");
     // load_texture_attributes(TowerAttributes::DMG,   "../assets/textures/Attributes/Attack_Speed.png"); TODO: make image for damge
+    load_texture_attribute(TowerAttributes::UPGRADE, "../assets/textures/Attributes/Upgrade_Button.png");
 
 
     // Font 
