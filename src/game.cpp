@@ -7,7 +7,7 @@ std::mutex towersMutex;
 
 // TODO: Delete spawning of towers after is handled by user
 // TODO: Some kind of timer in between of round
-// TODO: Smart enemies spawning mechanism in start round
+// TODO: Testing of start round and maybe modifing it
 // TODO: Maybe some slowing down of the game that it isn't so fucking fast
 
 Game::Game(): _game_resolution(800), _side_bar_width(300), _window(), _level(800, 250, 50), _renderer(), some_pos(200,200){
