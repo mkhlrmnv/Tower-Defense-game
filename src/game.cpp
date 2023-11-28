@@ -70,12 +70,13 @@ void Game::run(){
     auto t6_pos = Vector2D(82*3, 3*80);
 
     // Tower(level, health, damage, range, attack_speed, pos, type, price, level, single or not)
-    _level.add_tower(new Basic_Tower(_level, t1_pos, 30, 10, 200, 1, 0, 100, 1, true));
-    _level.add_tower(new Basic_Tower(_level, t2_pos, 30, 10, 200, 1, 1, 100, 1, true));
-    _level.add_tower(new Basic_Tower(_level, t3_pos, 30, 10, 200, 1, 2, 100, 1, true));
-    _level.add_tower(new Basic_Tower(_level, t4_pos, 30, 10, 200, 1, 3, 100, 1, true));
-    _level.add_tower(new Basic_Tower(_level, t5_pos, 30, 10, 200, 1, 4, 100, 1, true));
-    _level.add_tower(new Basic_Tower(_level, t6_pos, 30, 10, 200, 1, 5, 100, 1, true));
+    _level.add_tower_by_type(0, t1_pos);
+    _level.add_tower_by_type(1, t2_pos);
+    _level.add_tower_by_type(2, t3_pos);
+    _level.add_tower_by_type(3, t4_pos);
+    _level.add_tower_by_type(4, t5_pos);
+    _level.add_tower_by_type(5, t6_pos);
+
 
     _renderer.make_drawable_level(_level);
     _renderer.make_level_info_texts(_game_resolution, _side_bar_width);
@@ -181,7 +182,7 @@ void Game::start_round(){
     }
 
     // waits 3sec to start new round
-    std::this_thread::sleep_for(std::chrono::milliseconds(3000));
+    // std::this_thread::sleep_for(std::chrono::milliseconds(3000));
 }
 
 // updates all enemies

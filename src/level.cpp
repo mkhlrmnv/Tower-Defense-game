@@ -105,7 +105,28 @@ bool Level::add_enemy(Enemy* enemy){
 }
 
 bool Level::add_enemy_by_type(int type, Vector2D pos){
-    return add_enemy(new Basic_Enemy(*this, pos));
+    switch (type)
+    {
+    case ObjectTypes::NoobSkeleton_NoAttack:
+        return add_enemy(new Sceleton(*this, pos));
+    case ObjectTypes::NoobDemon_CanAttack:
+        return add_enemy(new Demon(*this, pos));
+    case ObjectTypes::FastBoy:
+        return add_enemy(new Fast_Boy(*this, pos));
+    case ObjectTypes::FogMage:
+        return add_enemy(new Fog_Mage(*this, pos));
+    case ObjectTypes::HealerPriest:
+        return add_enemy(new Healer(*this, pos));
+    case ObjectTypes::InfernoMage:
+        return add_enemy(new Inferno(*this, pos));
+    case ObjectTypes::TankOrc:
+        return add_enemy(new Tank(*this, pos));
+    case ObjectTypes::BossKnight:
+        return add_enemy(new Boss(*this, pos));
+    default:
+        break;
+    }
+    return false;
 }
 
 bool Level::remove_enemy(Enemy* enemy){
@@ -135,10 +156,29 @@ bool Level::add_tower(Tower* tower){
     return false;
 }
 
+
+// TODO: Mud and water mage when classes are ready
 bool Level::add_tower_by_type(int type, Vector2D pos){
     Vector2D center = Vector2D(get_square_by_pos(pos)->get_center().x, get_square_by_pos(pos)->get_center().y);
 
-    return add_tower(new Basic_Tower(*this, center));
+    switch (type)
+    {
+    case ObjectTypes::ArcherTower:
+        return add_tower(new Archer_Tower(*this, center));
+    case ObjectTypes::AoeTower:
+        return add_tower(new Aoe_Tower(*this, center));
+    case ObjectTypes::MudMageTower:
+        return add_tower(new Basic_Tower(*this, center, 30, 10, 100, 1, ObjectTypes::MudMageTower, 100, 1, true));
+    case ObjectTypes::RepelMageTower:
+        return add_tower(new Repel_Tower(*this, center));
+    case ObjectTypes::SniperTower:
+        return add_tower(new Sniper_Tower(*this, center));
+    case ObjectTypes::WaterMageTower:
+        return add_tower(new Basic_Tower(*this, center, 30, 10, 100, 1, ObjectTypes::WaterMageTower, 100, 1, true));
+    default:
+        break;
+    }
+    return false;
 }
 
 bool Level::remove_tower(Tower* tower){
