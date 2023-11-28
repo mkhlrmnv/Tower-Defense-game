@@ -10,7 +10,16 @@ std::mutex towersMutex;
 // TODO: Smart enemies spawning mechanism in start round
 // TODO: Maybe some slowing down of the game that it isn't so fucking fast
 
-Game::Game(): _game_resolution(800), _side_bar_width(300), _window(), _level(800, 20000, 50),  _rh(), _renderer(), some_pos(200,200), _side_menu(float(_game_resolution), float(_side_bar_width), _rh, _level){
+Game::Game(): 
+    _game_resolution(800),
+    _side_bar_width(300),
+    _window(),
+    _level(800, 20000, 50),
+    _rh(),
+    _renderer(),
+    some_pos(200,200),
+    _side_menu(float(_game_resolution), float(_side_bar_width), _rh, _level),
+    _upgrade(800, _rh, _level, 50){
 }
 
 // Returns resolution of the game
@@ -95,9 +104,9 @@ void Game::run(){
         {
             timeSinceLastUpdate -= sf::seconds(1.f / 60.f);
             process_events();
-            std::this_thread::sleep_for(std::chrono::milliseconds(10));
+            //std::this_thread::sleep_for(std::chrono::milliseconds(10));
             update();
-            std::this_thread::sleep_for(std::chrono::milliseconds(10));
+            //std::this_thread::sleep_for(std::chrono::milliseconds(10));
             render();
         }
     }
@@ -115,7 +124,9 @@ void Game::update(){
 
     // if there are not enemies and round over variable hasn't been updates
     // new round starts
-    if (_level.get_enemies().empty() && !round_over) {
+
+    // TODO::REMOVE FALSE!!!
+    if (_level.get_enemies().empty() && !round_over && false) {
         _level.plus_round();
         round_over = true;
         start_round();
@@ -136,6 +147,7 @@ void Game::process_events(){
             
         }
         _side_menu.handle_events(_window, event);
+        _upgrade.handle_events(_window, event);
         // TODO: add events here, like button presses, dragging towers to map
     }
 }
@@ -150,13 +162,8 @@ void Game::render(){
         _renderer.draw_level(_window);
         _renderer.draw_enemies(_window, _level.get_enemies(), i);
         _renderer.draw_towers(_window, _level.get_towers(), i);
-        
-        // in side menu
-        // _renderer.draw_cash(_window, _level.get_cash());
-        // _renderer.draw_lives(_window, _level.get_lives());
-        // _renderer.draw_round_count(_window, _level.get_round());
-
         _window.draw(_side_menu);
+        _window.draw(_upgrade);
 
         _window.display(); // display the drawn entities
 

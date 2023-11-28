@@ -6,6 +6,7 @@
 #include <level.hpp>
 #include <iostream>
 #include <resource_handler.hpp>
+#include <upgrade.hpp>
 
 
 int test_button(){
@@ -18,7 +19,7 @@ int test_button(){
     ResourceHandler rh;
     font = rh.get_font();
     Level lv(20,20,20); // just to run test 
-    Button btn("iaoai", {100, 100}, {100, 100}, sf::Color::Black, sf::Color::White, &rh.get_font());
+    Button btn("iaoai", {100, 100}, {100, 100}, sf::Color::Black, sf::Color::White, rh.get_font());
     //btn.set_font(font);
 
     // run the program as long as the window is open
@@ -123,7 +124,7 @@ int test_coordinate_and_indexes(){
     sf::RenderWindow window(sf::VideoMode(1100, 800), "My window");
     Level lv(800,20,20); // just to run test
     ResourceHandler rh;
-    Button btn("iaoai", {100, 100}, {100, 100}, sf::Color::Black, sf::Color::White, &rh.get_font());
+    Button btn("iaoai", {100, 100}, {100, 100}, sf::Color::Black, sf::Color::White, rh.get_font());
     
     auto func1_return1 = btn.window_coords_to_grid_index(sf::Vector2i(80*4 + 20, 80*2 + 45), lv);
     auto func2_return1 = btn.window_coords_to_level_coords(sf::Vector2i(80*4 + 20, 80*2 + 45));
@@ -263,10 +264,45 @@ int test_rh2(){
     return 1;
 }
 
+int test_upgrade(){
+
+    sf::RenderWindow window(sf::VideoMode(1100, 800), "My window");
+    window.setPosition({100, 0});
+    
+    ResourceHandler rh;
+    Level level(800,200,200);
+    Upgrade u(800, rh, level, 2);
+
+    // run the program as long as the window is open
+    while (window.isOpen())
+    {
+        // check all the window's events that were triggered since the last iteration of the loop
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            // "close requested" event: we close the window
+            if (event.type == sf::Event::Closed){
+                window.close();
+            }
+            u.handle_events(window, event);
+        }
+
+        
+        window.clear();
+        window.draw(u);
+        window.display();
+
+    }
+
+    return 1;
+
+}
+
 int main(){
     //test_button();
     //test_drag_button();
     //test_rh();
     //test_rh2();
-    test_menu();  
+    //test_menu(); 
+    test_upgrade();
 };   

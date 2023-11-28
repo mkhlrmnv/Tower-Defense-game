@@ -12,7 +12,7 @@
 
 namespace TowerAttributes{
     enum Atr{
-        HP, DMG, RNG, ATKSPD, MONEY,
+        HP, DMG, RNG, ATKSPD, MONEY, UPGRADE
     };
 };
 

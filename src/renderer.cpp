@@ -128,13 +128,13 @@ void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr, int frame){
 // function to draw multiple towers at once
 void Renderer::draw_towers(sf::RenderWindow& rwindow, std::vector<Tower*> towers, int frame){
     for(Tower* t_ptr : towers){
-        draw_tower(rwindow, t_ptr, frame); // zeros are placeholders
+        draw_tower(rwindow, t_ptr, frame);
     }
 }
  // function to draw multiple enemies at once
 void Renderer::draw_enemies(sf::RenderWindow& rwindow, std::vector<Enemy*> enemies, int frame){
     for(Enemy* e_ptr : enemies){
-        draw_enemy(rwindow, e_ptr, frame); // zeros are placeholders
+        draw_enemy(rwindow, e_ptr, frame); 
     }
 }
 
