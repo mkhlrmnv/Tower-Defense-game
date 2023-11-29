@@ -39,6 +39,14 @@ public:
         return !(*this == other);
     }
 
+    Vector2D operator+(const Vector2D& other) const {
+        return Vector2D(x + other.x, y + other.y);
+    }
+
+    Vector2D operator-(const Vector2D& other) const {
+        return Vector2D(x - other.x, y - other.y);
+    }
+    
     /**
      * @brief Overriding <<
      * @param os where output is given
