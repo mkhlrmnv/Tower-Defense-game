@@ -30,8 +30,3 @@ bool Boss::attack() {
     set_state(State::none);
     return false;
 }
-
-void Boss::spawn_enemies() {
-    get_level_reference().add_enemy_by_type(ObjectTypes::NoobSkeleton_NoAttack, get_position());
-    get_level_reference().add_enemy_by_type(ObjectTypes::NoobSkeleton_NoAttack, get_position() + Vector2D(5, 5));
-}
