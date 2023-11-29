@@ -11,6 +11,18 @@ set(SRC_FILES
     tower.hpp
     attack_types.hpp
     vector2d.hpp
+    archer_tower.cpp
+    aoe_tower.cpp
+    boss_enemy.cpp
+    demon_enemy.cpp
+    fastboy_enemy.cpp
+    fogmage_enemy.cpp
+    healer_enemy.cpp
+    inferno_enemy.cpp
+    repel_tower.cpp
+    sceleton_enemy.cpp
+    sniper_tower.cpp
+    tank_enemy.cpp
     # Add all your source files here (excluding headers)
 )
 
