@@ -200,7 +200,7 @@ Under work
 
 ### ------------------------------------------------------------------------------------------------------
 
-# Meeting dd.mm.2021 HH::MM
+# Meeting 22.11.2023 14::00
 
 **Participants**:
 
@@ -250,6 +250,62 @@ Under work
 
 1. Mikhail animation and multithreading
 2. Leo object subclasses
+3. Aki UI
+4. Kalle UI and GUI
+
+### ------------------------------------------------------------------------------------------------------
+
+# Meeting 29.11.2023 16::00
+
+**Participants**:
+
+1. Mikhail Romanov
+2. Kalle Lindgren
+3. Aki Oura
+4. Leo Teodosin
+
+## Summary of works
+
+1. Mikhail Romanov
+
+   Made animation for textures, added functions to level class, and started writhing documentation
+
+2. Leo Teodosin
+
+   Continued object class
+
+3. Aki Oura
+
+   Made design for UI and maps with Kalle
+
+4. Kalle Lindgren
+
+   Made tower drag button, side menu and upgrade mechanism
+
+## Challenges
+
+1. Animation
+2. Multithreading so idea got canceled
+3. remove_tower in level class is not working
+
+## Actions
+
+1. Mikhail balance enemies and towers abilities with Leo
+2. Leo balance enemies and towers abilities with Mikhail
+3. Aki will continues with UI
+4. Kalle will continue with UI and sidemenu
+
+> Please reflect these action decisions in your git commit messages so that
+> your group members and advisor can follow the progress.
+
+## Project status
+
+Finishing touches
+
+### TODOs
+
+1. Mikhail balance of object
+2. Leo balance of object
 3. Aki UI
 4. Kalle UI and GUI
 
