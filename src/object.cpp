@@ -68,6 +68,12 @@ void Object::lose_health(int amount) {
     }
 }
 
+void Object::lose_attack_speed(int amount) {
+    if (get_attack_speed() <= 0) {
+        _attack_speed -= amount;
+    }
+}
+
 State Object::get_state(){
     return _state;
 }

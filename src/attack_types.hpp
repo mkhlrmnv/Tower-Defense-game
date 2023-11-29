@@ -11,6 +11,7 @@ class Tower;
 class Enemy;
 
 
+// TODO: WaterMage and MudMage
 namespace ObjectTypes
 { 
     enum Enemies{

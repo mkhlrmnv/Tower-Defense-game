@@ -38,6 +38,7 @@ public:
     double distance_to(const Vector2D& target_position);
 
     void lose_health(int amount);
+    void lose_attack_speed(int amount);
 
     State get_state();
 

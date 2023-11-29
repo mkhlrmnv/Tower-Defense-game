@@ -16,6 +16,22 @@ files=(
     "src/tower.hpp"
     "src/object.cpp"
     "src/object.hpp"
+    "src/fastboy_enemy.cpp"
+    "src/fastboy_enemy.hpp"
+    "src/healer_enemy.cpp"
+    "src/healer_enemy.hpp"
+    "src/fogmage_enemy.cpp"
+    "src/fogmage_enemy.hpp"
+    "src/repel_tower.cpp"
+    "src/repel_tower.hpp"
+    "src/sniper_tower.cpp"
+    "src/sniper_tower.hpp"
+    "src/mud_mage_tower.cpp"
+    "src/mud_mage_tower.hpp"
+    "src/water_mage_tower.hpp"
+    "src/water_mage_tower.cpp"
+    "src/boss_enemy.cpp"
+    "src/boss_enemy.hpp"
 )
 
 for file in "${files[@]}"; do
