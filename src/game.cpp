@@ -107,7 +107,7 @@ void Game::update(){
     // new round starts
 
     // TODO::REMOVE FALSE!!!
-    if (_level.get_enemies().empty() && !round_over && false) {
+    if (_level.get_enemies().empty() && !round_over) {
         _level.plus_round();
         round_over = true;
         start_round();
