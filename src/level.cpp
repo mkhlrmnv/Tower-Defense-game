@@ -1,8 +1,9 @@
 #include "level.hpp"
 #include "basic_enemy.hpp"
-#include "basic_tower.hpp"
 #include "aoe_tower.hpp"
 #include "archer_tower.hpp"
+#include "mud_mage_tower.hpp"
+#include "water_mage_tower.hpp"
 #include "boss_enemy.hpp"
 #include "demon_enemy.hpp"
 #include "fastboy_enemy.hpp"
@@ -168,13 +169,13 @@ bool Level::add_tower_by_type(int type, Vector2D pos){
     case ObjectTypes::AoeTower:
         return add_tower(new Aoe_Tower(*this, center));
     case ObjectTypes::MudMageTower:
-        return add_tower(new Basic_Tower(*this, center, 30, 10, 100, 1, ObjectTypes::MudMageTower, 100, 1, true));
+        return add_tower(new Mud_Mage_Tower(*this, center));
     case ObjectTypes::RepelMageTower:
         return add_tower(new Repel_Tower(*this, center));
     case ObjectTypes::SniperTower:
         return add_tower(new Sniper_Tower(*this, center));
     case ObjectTypes::WaterMageTower:
-        return add_tower(new Basic_Tower(*this, center, 30, 10, 100, 1, ObjectTypes::WaterMageTower, 100, 1, true));
+        return add_tower(new Water_Mage_Tower(*this, center));
     default:
         break;
     }

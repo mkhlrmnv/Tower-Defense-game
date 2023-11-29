@@ -24,8 +24,7 @@ bool Repel_Tower::attack() {
                 multiplier = check_type_multiplier(this, enemy);
                 enemy->lose_health(this->get_damage() * multiplier);
 
-                // // FIX THIS LINE!
-                // enemy->set_position(enemy->get_position() - );
+                enemy->set_speed(0);
 
                 counter++;
             }
@@ -34,8 +33,10 @@ bool Repel_Tower::attack() {
                 return true;
                 break;
             }
+
+            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+            enemy->set_speed(enemy->get_original_speed());
         }
-        std::this_thread::sleep_for(std::chrono::milliseconds(this->get_attack_speed()));
     }
     set_state(State::none);
     return false;
