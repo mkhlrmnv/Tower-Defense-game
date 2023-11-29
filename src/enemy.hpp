@@ -13,6 +13,8 @@ public:
 
     int get_defense() const;
 
+    void lose_speed(int amount);
+
     void move();
 
     // void State get_state();

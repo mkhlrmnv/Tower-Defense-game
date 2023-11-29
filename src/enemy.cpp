@@ -17,6 +17,10 @@ std::vector<Vector2D> Enemy::get_route() const{
     return _route;
 }
 
+void Enemy::lose_speed(int amount) {
+    _speed -= amount;
+}
+
 void Enemy::set_route_position(Vector2D position) {
     _route.push_back(position);
 }
