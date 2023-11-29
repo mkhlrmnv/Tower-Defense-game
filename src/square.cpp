@@ -21,7 +21,7 @@ void Square::print_info(){
 
 // occupies square by grass
 bool Square::occupy_by_grass(){ 
-    if (_occupied_by == tower || _occupied_by == road){
+    if (_occupied_by == road){
         return false;
     }
     _occupied_by = grass;
