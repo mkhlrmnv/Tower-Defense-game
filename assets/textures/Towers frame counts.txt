@@ -1,4 +1,13 @@
------------------------------------------
+----------------------------------------
+WaterMageTower -> water damage
+MudMageTower -> slows down/freezes enemies
+RepelMageTower -> pushes enemies away
+SniperTower -> long range
+AoeTower -> multiple target
+ArcherTower
+
+---------------------
+
 Towers frame counts:
 
 Idle frame count: 1 (frame 1)
