@@ -1,11 +1,11 @@
-#include "archer_tower.hpp"
+#include "mud_mage_tower.hpp"
 
-Archer_Tower::Archer_Tower(Level& current_level, Vector2D& position, int health, int damage, int range,
+Mud_Mage_Tower::Mud_Mage_Tower(Level& current_level, Vector2D& position, int health, int damage, int range,
         int attack_speed, int type, int price, int level) :
 
         Tower(current_level, position, health, damage, range, attack_speed, type, price, level) {}
 
-bool Archer_Tower::attack() {
+bool Mud_Mage_Tower::attack() {
     double multiplier;
     Level& level_reference = get_level_reference();
 
@@ -20,6 +20,7 @@ bool Archer_Tower::attack() {
                 } else {
                     set_attack_counter(0);
                     multiplier = check_type_multiplier(this, enemy);
+                    enemy->lose_speed(1);
                     enemy->lose_health(this->get_damage() * multiplier);
                     if (this->get_position().y > enemy->get_position().y){
                         set_state(State::attacking_left);

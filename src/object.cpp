@@ -35,6 +35,18 @@ Level& Object::get_level_reference() const {
     return _level;
 }
 
+int Object::get_attack_counter() const {
+    return _attack_counter;
+}
+
+void Object::set_attack_counter(const int amount) {
+    _attack_counter = amount;
+}
+
+void Object::attack_counter_up() {
+    _attack_counter += 1;
+}
+
 void Object::set_position(const Vector2D& position) {
     _position = position;
 }
@@ -65,6 +77,12 @@ void Object::lose_health(int amount) {
         if (_health_points < 0) {
             _health_points = 0;
         }
+    }
+}
+
+void Object::lose_attack_speed(int amount) {
+    if (get_attack_speed() <= 0) {
+        _attack_speed += amount;
     }
 }
 

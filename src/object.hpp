@@ -27,8 +27,12 @@ public:
     const Vector2D get_position() const;
     int get_type() const;
     Level& get_level_reference() const;
+    int get_attack_counter() const;
 
     void set_position(const Vector2D& position);
+    void set_attack_counter(const int amount);
+
+    void attack_counter_up();
 
     void gain_damage(int amount);
     void gain_health(int amount);
@@ -38,6 +42,7 @@ public:
     double distance_to(const Vector2D& target_position);
 
     void lose_health(int amount);
+    void lose_attack_speed(int amount);
 
     State get_state();
 
@@ -51,6 +56,7 @@ private:
     int _damage;
     int _range;
     int _attack_speed;
+    int _attack_counter = 0;
     Vector2D _position;
     int _type;
     State _state;

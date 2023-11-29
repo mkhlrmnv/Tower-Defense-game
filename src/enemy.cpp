@@ -9,12 +9,31 @@ int Enemy::get_speed() const {
     return _speed;
 }
 
+int Enemy::get_original_speed() const {
+    return _original_speed;
+}
+
 int Enemy::get_defense() const {
     return _defense;
 }
 
 std::vector<Vector2D> Enemy::get_route() const{
     return _route;
+}
+
+void Enemy::lose_speed(int amount) {
+    if (_speed != _original_speed - amount) {
+        if (_speed >= 0) {
+            _speed -= amount;
+        }
+    }
+}
+
+void Enemy::set_speed(int amount) {
+    if (_speed == _original_speed) {
+        _original_speed = _speed;
+        _speed = amount;
+    }
 }
 
 void Enemy::set_route_position(Vector2D position) {

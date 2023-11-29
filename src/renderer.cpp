@@ -60,68 +60,49 @@ void Renderer::draw_tower(sf::RenderWindow& rwindow, Tower* t_ptr, int frame){
     rwindow.draw(_drawable_tower);
 }
 
-void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr, int frame){
-
-    // from resource handler takes right spread sheet
+void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr, int frame) {
     _enemy_sprite = _rh.get_texture_enemy(e_ptr->get_type());
-
-    // sets spread sheet as texture
     _drawable_enemy.setTexture(_enemy_sprite);
 
-    // variable for where animation is on spread sheet
-    int animation_pos;
+    int animation_pos = 0;
 
-    // picks right animation value for current tower state
-    if (e_ptr->get_state() == State::none) {
-        animation_pos = 0;
-        frame = 0;
-    } else if (e_ptr->get_state() == State::attacking_right || e_ptr->get_state() == State::attacking_left){
+    if (e_ptr->get_state() == State::attacking_right || e_ptr->get_state() == State::attacking_left) {
         animation_pos = 1;
-        if (frame > 2){ // stops animation if its over
+        if (frame > 2) {
             animation_pos = 0;
             frame = 0;
         }
-    } else if (e_ptr->get_state() == State::walking_left || e_ptr->get_state() == State::walking_right){
+    } else if (e_ptr->get_state() == State::walking_left || e_ptr->get_state() == State::walking_right) {
         animation_pos = 4;
-        if (frame > 3){ // stops animation if its over
+        if (frame > 3) {
             animation_pos = 0;
             frame = 0;
         }
-    } else if (e_ptr->get_state() == State::dying){
+    } else if (e_ptr->get_state() == State::dying) {
         animation_pos = 8;
-        if (frame > 4){ // stops animation if its over
-            frame = 4;
-        }
+        frame = std::min(frame, 4);
     }
 
-    // pics right picture from spread sheed
-    _drawable_enemy.setTextureRect(sf::IntRect((frame + animation_pos) * 32, 0 * 32, 32, 32));
+    int spriteWidth = 32;
 
-    // flips texture if enemy isn't attacking or moving to the left
-    if (e_ptr->get_state() == State::walking_left || e_ptr->get_state() == State::attacking_left){
-        _drawable_enemy.setScale(_scale_factor_enemy, _scale_factor_enemy);
+    // Makes sure that animations isn't getting outside spreadsheet
+    if ((frame + animation_pos) * spriteWidth <= _drawable_enemy.getTexture()->getSize().x){
+        _drawable_enemy.setTextureRect(sf::IntRect((frame + animation_pos) * spriteWidth, 0, spriteWidth, spriteWidth));
     } else {
-        _drawable_enemy.setScale(-_scale_factor_enemy, _scale_factor_enemy);
+       _drawable_enemy.setTextureRect(sf::IntRect(0, 0, spriteWidth, spriteWidth));
     }
 
-    Level& l = e_ptr->get_level_reference();
+    float scale_factor_enemy = 1.0f; // Adjust as needed
+    _drawable_enemy.setScale((e_ptr->get_state() == State::walking_left || e_ptr->get_state() == State::attacking_left) ? scale_factor_enemy : -scale_factor_enemy, scale_factor_enemy);
 
-    // aligns enemies feet with their in game coordinates
-    // Made so, enemy always looks like enemy is walking on the road
-    // TODO: Scaling
-    float new_x = e_ptr->get_position().y + 20; // - _drawable_enemy.getTexture()->getSize().y;// + (_scale_factor_enemy * _drawable_enemy.getTexture()->getSize().x);
-    float new_y = e_ptr->get_position().x - _drawable_enemy.getTexture()->getSize().y;// + (_scale_factor_enemy * _drawable_enemy.getTexture()->getSize().y);
+    float renderedX = e_ptr->get_position().y + 20;
+    float renderedY = e_ptr->get_position().x - _drawable_enemy.getTexture()->getSize().y;
 
-    // make sure that enemy isn't drawn outside field
-    if (new_x <= 0){
-        new_x = 1;
-    }
-    if (new_y <= 0){
-        new_y = 1;
-    }
+    // Ensure enemy isn't drawn outside the field
+    renderedX = std::max(renderedX, 1.0f);
+    renderedY = std::max(renderedY, 1.0f);
 
-    // sets position and draws enemy
-    _drawable_enemy.setPosition(new_x, new_y);
+    _drawable_enemy.setPosition(renderedX, renderedY);
     rwindow.draw(_drawable_enemy);
 }
 
@@ -158,7 +139,9 @@ void Renderer::make_drawable_level(Level& lv){
     // from resource handler picks textures for grass and road
     _grass_pic = _rh.get_texture_tile(0);
     _road_pic = _rh.get_texture_tile(1);
-            
+    _house_pic = _rh.get_texture_tile(2);
+
+    int counter = 0;
     // takes grid from level
     std::vector<std::vector<Square *>> level_grid = lv.get_grid();
 
@@ -172,11 +155,18 @@ void Renderer::make_drawable_level(Level& lv){
             upper_left_corner_y  = center_coords.y - lv.get_square_size()/2;
             // drawable_level_square.setOutlineColor(grey);
 
-            if(square_type == occupied_type::grass){
-                drawable_level_square.setTexture(_grass_pic);
-            }
-            else if(square_type == occupied_type::road){
-                drawable_level_square.setTexture(_road_pic);
+            if (counter == 9){
+                if(square_type == occupied_type::grass){
+                    drawable_level_square.setTexture(_grass_pic);
+                } else if(square_type == occupied_type::road) {
+                    drawable_level_square.setTexture(_house_pic);
+                }
+            } else {
+                if(square_type == occupied_type::grass){
+                    drawable_level_square.setTexture(_grass_pic);
+                } else if(square_type == occupied_type::road) {
+                    drawable_level_square.setTexture(_road_pic);
+                }
             }
 
             drawable_level_square.setPosition(upper_left_corner_y, upper_left_corner_x);
@@ -184,7 +174,9 @@ void Renderer::make_drawable_level(Level& lv){
             drawable_level_square.setScale(2.45 , 2.45);
 
             _level_texture.draw(drawable_level_square);
+            counter++;
         }
+        counter = 0;
     }
 
     // displays whole level

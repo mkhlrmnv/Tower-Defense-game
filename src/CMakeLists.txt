@@ -23,6 +23,9 @@ set(SRC_FILES
     sceleton_enemy.cpp
     sniper_tower.cpp
     tank_enemy.cpp
+    boss_enemy.cpp
+    mud_mage_tower.cpp
+    water_mage_tower.cpp
     # Add all your source files here (excluding headers)
 )
 

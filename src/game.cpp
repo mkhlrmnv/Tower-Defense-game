@@ -7,7 +7,7 @@ std::mutex towersMutex;
 
 // TODO: Delete spawning of towers after is handled by user
 // TODO: Some kind of timer in between of round
-// TODO: Smart enemies spawning mechanism in start round
+// TODO: Testing of start round and maybe modifing it
 // TODO: Maybe some slowing down of the game that it isn't so fucking fast
 
 Game::Game(): 
@@ -201,7 +201,7 @@ void Game::start_round(){
     }
 
     // waits 3sec to start new round
-    std::this_thread::sleep_for(std::chrono::milliseconds(3000));
+    // std::this_thread::sleep_for(std::chrono::milliseconds(3000));
 }
 
 // updates all enemies
@@ -209,6 +209,10 @@ void Game::update_enemies(){
     std::lock_guard<std::mutex> lock(enemiesMutex);
     for (Enemy* e : _level.get_enemies()){
         if (e->get_health() <= 0){ // if enemies hp is 0 sets state to dying
+            if (e->get_type() == ObjectTypes::BossKnight) {
+                _level.add_enemy_by_type(ObjectTypes::NoobSkeleton_NoAttack, e->get_position());
+                _level.add_enemy_by_type(ObjectTypes::NoobSkeleton_NoAttack, e->get_position() + Vector2D(5, 5));
+            }
             e->set_state(State::dying);
         } else { // if not dead attacks OR moves
             if (!e->attack()){

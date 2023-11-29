@@ -10,8 +10,12 @@ public:
     ~Enemy() { }
 
     int get_speed() const;
+    int get_original_speed() const;
 
     int get_defense() const;
+
+    void lose_speed(int amount);
+    void set_speed(int amount);
 
     void move();
 
@@ -30,6 +34,7 @@ public:
 private:
     Vector2D _prev_pos;
     int _speed;
+    int _original_speed;
     int _defense;
     std::vector<Vector2D> _route;
 };

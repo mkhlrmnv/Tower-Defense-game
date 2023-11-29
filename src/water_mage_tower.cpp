@@ -1,11 +1,11 @@
-#include "archer_tower.hpp"
+#include "water_mage_tower.hpp"
 
-Archer_Tower::Archer_Tower(Level& current_level, Vector2D& position, int health, int damage, int range,
+Water_Mage_Tower::Water_Mage_Tower(Level& current_level, Vector2D& position, int health, int damage, int range,
         int attack_speed, int type, int price, int level) :
 
         Tower(current_level, position, health, damage, range, attack_speed, type, price, level) {}
 
-bool Archer_Tower::attack() {
+bool Water_Mage_Tower::attack() {
     double multiplier;
     Level& level_reference = get_level_reference();
 

@@ -14,8 +14,6 @@ public:
     ~Boss() { }
 
     bool attack();
-
-    // void move();
 };
 
 #endif
