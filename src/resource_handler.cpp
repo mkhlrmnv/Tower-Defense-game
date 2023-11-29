@@ -70,6 +70,7 @@ void ResourceHandler::load_all_textures(){
     // Tiles
     load_texture_tile(0, "../assets/textures/VERY_LITTLE_GRASSTILE.png");
     load_texture_tile(1, "../assets/textures/VERY_LITTLE_ROADTILE.png");
+    load_texture_tile(2, "../assets/textures/VerySmallSize_32x32/VerySmall_Tiles_32x32/House_32x32.png");
 
     // Font 
     load_font();

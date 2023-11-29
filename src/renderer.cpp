@@ -161,7 +161,9 @@ void Renderer::make_drawable_level(Level& lv){
     // from resource handler picks textures for grass and road
     _grass_pic = _rh.get_texture_tile(0);
     _road_pic = _rh.get_texture_tile(1);
-            
+    _house_pic = _rh.get_texture_tile(2);
+
+    int counter = 0;
     // takes grid from level
     std::vector<std::vector<Square *>> level_grid = lv.get_grid();
 
@@ -175,11 +177,18 @@ void Renderer::make_drawable_level(Level& lv){
             upper_left_corner_y  = center_coords.y - lv.get_square_size()/2;
             // drawable_level_square.setOutlineColor(grey);
 
-            if(square_type == occupied_type::grass){
-                drawable_level_square.setTexture(_grass_pic);
-            }
-            else if(square_type == occupied_type::road){
-                drawable_level_square.setTexture(_road_pic);
+            if (counter == 9){
+                if(square_type == occupied_type::grass){
+                    drawable_level_square.setTexture(_grass_pic);
+                } else if(square_type == occupied_type::road) {
+                    drawable_level_square.setTexture(_house_pic);
+                }
+            } else {
+                if(square_type == occupied_type::grass){
+                    drawable_level_square.setTexture(_grass_pic);
+                } else if(square_type == occupied_type::road) {
+                    drawable_level_square.setTexture(_road_pic);
+                }
             }
 
             drawable_level_square.setPosition(upper_left_corner_y, upper_left_corner_x);
@@ -187,7 +196,9 @@ void Renderer::make_drawable_level(Level& lv){
             drawable_level_square.setScale(2.45 , 2.45);
 
             _level_texture.draw(drawable_level_square);
+            counter++;
         }
+        counter = 0;
     }
 
     // displays whole level

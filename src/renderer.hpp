@@ -77,6 +77,7 @@ private:
 
     sf::Texture _grass_pic;
     sf::Texture _road_pic;
+    sf::Texture _house_pic;
 
     float _scale_factor_tower = 2.5; // Adjust this value as needed
     float _scale_factor_enemy = 1; // TODO: some enemy type depending value
