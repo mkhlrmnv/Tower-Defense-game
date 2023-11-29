@@ -21,17 +21,20 @@ bool Aoe_Tower::attack() {
             double dist = this->distance_to(enemy->get_position());
 
             if (dist <= this->get_range()) {
-                multiplier = check_type_multiplier(this, enemy);
-                enemy->lose_health(this->get_damage() * multiplier);
-                counter++;
-            }
-
-            if (counter >= 3) {
-                return true;
-                break;
+                if (get_attack_counter() <= get_attack_speed()) {
+                    attack_counter_up();
+                } else {
+                    set_attack_counter(0);
+                    multiplier = check_type_multiplier(this, enemy);
+                    enemy->lose_health(this->get_damage() * multiplier);
+                    counter++;
+                    if (counter >= 3) {
+                        return true;
+                        break;
+                    }
+                }
             }
         }
-        std::this_thread::sleep_for(std::chrono::milliseconds(this->get_attack_speed()));
     }
     set_state(State::none);
     return false;

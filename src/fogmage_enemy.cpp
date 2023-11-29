@@ -14,15 +14,19 @@ bool Fog_Mage::attack() {
             double dist = this->distance_to(tower->get_position());
 
             if (dist <= this->get_range()) {
-                tower->lose_attack_speed(1);
-                counter++;
-            }
+                if (get_attack_counter() <= get_attack_speed()) {
+                    attack_counter_up();
+                } else {
+                    set_attack_counter(0);
+                    tower->lose_attack_speed(1);
+                    counter++;
 
-            if (counter >= 4) {
-                return true;
+                    if (counter >= 4) {
+                        return true;
+                    }
+                }
             }
         }
-        std::this_thread::sleep_for(std::chrono::milliseconds(this->get_attack_speed()));
     }
     set_state(State::none);
     return false;
