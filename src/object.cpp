@@ -76,4 +76,4 @@ void Object::set_state(State state){
     _state = state;
 }
 
-bool Object::attack() { return true;}
+bool Object::attack() { return false;}

@@ -1,0 +1,85 @@
+\@ifundefined {etoctocstyle}{\let \etoc@startlocaltoc \@gobble \let \etoc@settocdepth \@gobble \let \etoc@depthtag \@gobble \let \etoc@setlocaltop \@gobble }{}
+\contentsline {chapter}{\numberline {1}Source content}{1}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Test files}{3}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Unit Tests}{3}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Test of My\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Class}{3}{subsection.2.1.1}%
+\contentsline {chapter}{\numberline {3}Hierarchical Index}{5}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Class Hierarchy}{5}{section.3.1}%
+\contentsline {chapter}{\numberline {4}Class Index}{7}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Class List}{7}{section.4.1}%
+\contentsline {chapter}{\numberline {5}File Index}{9}{chapter.5}%
+\contentsline {section}{\numberline {5.1}File List}{9}{section.5.1}%
+\contentsline {chapter}{\numberline {6}Class Documentation}{11}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Basic\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Enemy Class Reference}{11}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}Member Function Documentation}{12}{subsection.6.1.1}%
+\contentsline {subsubsection}{\numberline {6.1.1.1}attack()}{12}{subsubsection.6.1.1.1}%
+\contentsline {section}{\numberline {6.2}Basic\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Tower Class Reference}{12}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Member Function Documentation}{13}{subsection.6.2.1}%
+\contentsline {subsubsection}{\numberline {6.2.1.1}attack()}{13}{subsubsection.6.2.1.1}%
+\contentsline {section}{\numberline {6.3}Button Class Reference}{13}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Enemy Class Reference}{14}{section.6.4}%
+\contentsline {section}{\numberline {6.5}Game Class Reference}{15}{section.6.5}%
+\contentsline {section}{\numberline {6.6}Level Class Reference}{15}{section.6.6}%
+\contentsline {subsection}{\numberline {6.6.1}Detailed Description}{17}{subsection.6.6.1}%
+\contentsline {subsection}{\numberline {6.6.2}Constructor \& Destructor Documentation}{17}{subsection.6.6.2}%
+\contentsline {subsubsection}{\numberline {6.6.2.1}Level()}{17}{subsubsection.6.6.2.1}%
+\contentsline {subsection}{\numberline {6.6.3}Member Function Documentation}{18}{subsection.6.6.3}%
+\contentsline {subsubsection}{\numberline {6.6.3.1}add\_cash()}{18}{subsubsection.6.6.3.1}%
+\contentsline {subsubsection}{\numberline {6.6.3.2}add\_enemy()}{18}{subsubsection.6.6.3.2}%
+\contentsline {subsubsection}{\numberline {6.6.3.3}add\_enemy\_by\_type()}{18}{subsubsection.6.6.3.3}%
+\contentsline {subsubsection}{\numberline {6.6.3.4}add\_lives()}{19}{subsubsection.6.6.3.4}%
+\contentsline {subsubsection}{\numberline {6.6.3.5}add\_tower()}{19}{subsubsection.6.6.3.5}%
+\contentsline {subsubsection}{\numberline {6.6.3.6}add\_tower\_by\_type()}{19}{subsubsection.6.6.3.6}%
+\contentsline {subsubsection}{\numberline {6.6.3.7}can\_go\_notstart()}{19}{subsubsection.6.6.3.7}%
+\contentsline {subsubsection}{\numberline {6.6.3.8}can\_go\_start()}{20}{subsubsection.6.6.3.8}%
+\contentsline {subsubsection}{\numberline {6.6.3.9}current\_row\_col()}{20}{subsubsection.6.6.3.9}%
+\contentsline {subsubsection}{\numberline {6.6.3.10}current\_square()}{21}{subsubsection.6.6.3.10}%
+\contentsline {subsubsection}{\numberline {6.6.3.11}get\_cash()}{21}{subsubsection.6.6.3.11}%
+\contentsline {subsubsection}{\numberline {6.6.3.12}get\_enemies()}{21}{subsubsection.6.6.3.12}%
+\contentsline {subsubsection}{\numberline {6.6.3.13}get\_first\_road()}{22}{subsubsection.6.6.3.13}%
+\contentsline {subsubsection}{\numberline {6.6.3.14}get\_grid()}{22}{subsubsection.6.6.3.14}%
+\contentsline {subsubsection}{\numberline {6.6.3.15}get\_lives()}{22}{subsubsection.6.6.3.15}%
+\contentsline {subsubsection}{\numberline {6.6.3.16}get\_round()}{22}{subsubsection.6.6.3.16}%
+\contentsline {subsubsection}{\numberline {6.6.3.17}get\_square\_by\_pos()}{22}{subsubsection.6.6.3.17}%
+\contentsline {subsubsection}{\numberline {6.6.3.18}get\_square\_size()}{23}{subsubsection.6.6.3.18}%
+\contentsline {subsubsection}{\numberline {6.6.3.19}get\_towers()}{23}{subsubsection.6.6.3.19}%
+\contentsline {subsubsection}{\numberline {6.6.3.20}next\_road()}{23}{subsubsection.6.6.3.20}%
+\contentsline {subsubsection}{\numberline {6.6.3.21}randomly\_generate()}{23}{subsubsection.6.6.3.21}%
+\contentsline {subsubsection}{\numberline {6.6.3.22}read\_file()}{24}{subsubsection.6.6.3.22}%
+\contentsline {subsubsection}{\numberline {6.6.3.23}remove\_enemy()}{24}{subsubsection.6.6.3.23}%
+\contentsline {subsubsection}{\numberline {6.6.3.24}remove\_tower()}{24}{subsubsection.6.6.3.24}%
+\contentsline {subsubsection}{\numberline {6.6.3.25}save\_to\_file()}{25}{subsubsection.6.6.3.25}%
+\contentsline {subsubsection}{\numberline {6.6.3.26}take\_cash()}{25}{subsubsection.6.6.3.26}%
+\contentsline {subsubsection}{\numberline {6.6.3.27}take\_lives()}{25}{subsubsection.6.6.3.27}%
+\contentsline {section}{\numberline {6.7}Object Class Reference}{26}{section.6.7}%
+\contentsline {section}{\numberline {6.8}Renderer Class Reference}{27}{section.6.8}%
+\contentsline {section}{\numberline {6.9}Resource\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Handler Class Reference}{27}{section.6.9}%
+\contentsline {section}{\numberline {6.10}Side\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Menu Class Reference}{27}{section.6.10}%
+\contentsline {section}{\numberline {6.11}Square Class Reference}{28}{section.6.11}%
+\contentsline {section}{\numberline {6.12}Tower Class Reference}{28}{section.6.12}%
+\contentsline {section}{\numberline {6.13}Tower\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Drag\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Button Class Reference}{29}{section.6.13}%
+\contentsline {subsection}{\numberline {6.13.1}Member Function Documentation}{30}{subsection.6.13.1}%
+\contentsline {subsubsection}{\numberline {6.13.1.1}draw()}{30}{subsubsection.6.13.1.1}%
+\contentsline {subsubsection}{\numberline {6.13.1.2}handle\_events()}{30}{subsubsection.6.13.1.2}%
+\contentsline {subsubsection}{\numberline {6.13.1.3}some\_action\_from\_level()}{31}{subsubsection.6.13.1.3}%
+\contentsline {section}{\numberline {6.14}Vector2D Class Reference}{31}{section.6.14}%
+\contentsline {chapter}{\numberline {7}File Documentation}{33}{chapter.7}%
+\contentsline {section}{\numberline {7.1}attack\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}types.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp}{33}{section.7.1}%
+\contentsline {section}{\numberline {7.2}basic\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}enemy.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp}{33}{section.7.2}%
+\contentsline {section}{\numberline {7.3}basic\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}tower.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp}{34}{section.7.3}%
+\contentsline {section}{\numberline {7.4}button.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp}{34}{section.7.4}%
+\contentsline {section}{\numberline {7.5}enemy.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp}{35}{section.7.5}%
+\contentsline {section}{\numberline {7.6}game.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp}{35}{section.7.6}%
+\contentsline {section}{\numberline {7.7}level.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp}{36}{section.7.7}%
+\contentsline {section}{\numberline {7.8}object.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp}{38}{section.7.8}%
+\contentsline {section}{\numberline {7.9}renderer.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp}{39}{section.7.9}%
+\contentsline {section}{\numberline {7.10}resource\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}handler.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp}{40}{section.7.10}%
+\contentsline {section}{\numberline {7.11}side\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}menu.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp}{40}{section.7.11}%
+\contentsline {section}{\numberline {7.12}square.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp}{41}{section.7.12}%
+\contentsline {section}{\numberline {7.13}tower.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp}{42}{section.7.13}%
+\contentsline {section}{\numberline {7.14}tower\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}drag\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}button.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp}{42}{section.7.14}%
+\contentsline {section}{\numberline {7.15}vector2d.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp}{43}{section.7.15}%
+\contentsline {section}{\numberline {7.16}Enemy\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Tests.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp}{43}{section.7.16}%
+\contentsline {section}{\numberline {7.17}Level\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Tests.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp}{44}{section.7.17}%
+\contentsline {section}{\numberline {7.18}Object\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Tests.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp}{49}{section.7.18}%
+\contentsline {section}{\numberline {7.19}Square\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Tests.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp}{52}{section.7.19}%
