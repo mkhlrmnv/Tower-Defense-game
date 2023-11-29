@@ -60,7 +60,7 @@ void Renderer::draw_tower(sf::RenderWindow& rwindow, Tower* t_ptr, int frame){
     rwindow.draw(_drawable_tower);
 }
 
-void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr, int frame) {
+void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr, int frame, int move_animation) {
     _enemy_sprite = _rh.get_texture_enemy(e_ptr->get_type());
     _drawable_enemy.setTexture(_enemy_sprite);
 
@@ -74,6 +74,7 @@ void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr, int frame) {
         }
     } else if (e_ptr->get_state() == State::walking_left || e_ptr->get_state() == State::walking_right) {
         animation_pos = 4;
+        frame = move_animation;
         if (frame > 3) {
             animation_pos = 0;
             frame = 0;
@@ -113,9 +114,9 @@ void Renderer::draw_towers(sf::RenderWindow& rwindow, std::vector<Tower*> towers
     }
 }
  // function to draw multiple enemies at once
-void Renderer::draw_enemies(sf::RenderWindow& rwindow, std::vector<Enemy*> enemies, int frame){
+void Renderer::draw_enemies(sf::RenderWindow& rwindow, std::vector<Enemy*> enemies, int frame, int move_animation){
     for(Enemy* e_ptr : enemies){
-        draw_enemy(rwindow, e_ptr, frame); // zeros are placeholders
+        draw_enemy(rwindow, e_ptr, frame, move_animation); // zeros are placeholders
     }
 }
 
