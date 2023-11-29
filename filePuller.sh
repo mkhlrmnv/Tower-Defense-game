@@ -2,6 +2,8 @@
 
 branch="3-create-object-class"
 files=(
+    "src/level.hpp"
+    "src/level.cpp"
     "src/attack_types.cpp"
     "src/attack_types.hpp"
     "src/basic_enemy.cpp"
@@ -18,4 +20,9 @@ files=(
 
 for file in "${files[@]}"; do
     git checkout "$branch" -- "$file"
+    if [ $? -eq 0 ]; then
+        echo "Successfully pulled $file from branch $branch"
+    else
+        echo "Failed to pull $file from branch $branch"
+    fi
 done
