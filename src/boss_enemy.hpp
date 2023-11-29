@@ -15,7 +15,7 @@ public:
 
     bool attack();
 
-    // void move();
+    void spawn_enemies();
 };
 
 #endif
