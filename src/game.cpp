@@ -116,25 +116,30 @@ void Game::run(){
 // moves enemies, and calls attack function for all enemies and towers
 void Game::update(){
 
+    // // uses two threads for this, one for updating enemies and one for towers
+    // std::thread enemiesThread(&Game::update_enemies, this);
+    // std::thread towersThread(&Game::update_towers, this);
 
-     
-    // uses two threads for this, one for updating enemies and one for towers
-    std::thread enemiesThread(&Game::update_enemies, this);
-    std::thread towersThread(&Game::update_towers, this);
+    // // if there are not enemies and round over variable hasn't been updates
+    // // new round starts
+    // if (_level.get_enemies().empty() && !round_over) {
+    //     _level.plus_round();
+    //     round_over = true;
+    //     start_round();
+    // }
 
-    // if there are not enemies and round over variable hasn't been updates
-    // new round starts
+    // // waits that both threads are ready
+    // enemiesThread.join();
+    // towersThread.join();
 
-    // TODO::REMOVE FALSE!!!
+    update_enemies();
+    update_towers();
+
     if (_level.get_enemies().empty() && !round_over) {
         _level.plus_round();
         round_over = true;
         start_round();
     }
-
-    // waits that both threads are ready
-    enemiesThread.join();
-    towersThread.join();
     _side_menu.update();
     
 }
@@ -156,11 +161,14 @@ void Game::process_events(){
 void Game::render(){
     // because animation are at most five pictures
     // there is for loop until five
+    if (_enemy_move_animation > 4){
+        _enemy_move_animation = 0;
+    }
     for (int i = 0; i < 6; i++)
     {
         _window.clear();
         _renderer.draw_level(_window);
-        _renderer.draw_enemies(_window, _level.get_enemies(), i);
+        _renderer.draw_enemies(_window, _level.get_enemies(), i, _enemy_move_animation);
         _renderer.draw_towers(_window, _level.get_towers(), i);
         _window.draw(_side_menu);
         _window.draw(_upgrade);
@@ -170,6 +178,7 @@ void Game::render(){
         // delay if needed to slow down game
         std::this_thread::sleep_for(std::chrono::milliseconds(5));
     }
+    _enemy_move_animation++;
 
     // removes all towers and enemies with 0 hp, if their dying animation was already played
     for (auto* t : _level.get_towers()){
@@ -190,14 +199,14 @@ void Game::start_round(){
     for (int i = 0; i < (_difficulty_multiplier * _level.get_round()); i++)
     {
         Square* spawn_sq = _level.get_first_road();
-        int rand_types = rand() % idk;
+        int rand_types = rand() % _available_types;
         int x = rand() % 80;
         int y = rand() % 40;
         Vector2D rand_pos = Vector2D(spawn_sq->get_center().x - (_level.get_square_size() / 2) + x, 1 + y);
         _level.add_enemy_by_type(rand_types, rand_pos);
     }
-    if (idk < 7){
-        idk++;
+    if (_available_types < 7){
+        _available_types++;
     }
 
     // waits 3sec to start new round
