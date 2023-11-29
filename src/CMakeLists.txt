@@ -4,7 +4,6 @@
 set(SRC_FILES
     enemy.hpp
     basic_enemy.cpp
-    basic_tower.cpp
     level.cpp
     object.cpp
     square.cpp
