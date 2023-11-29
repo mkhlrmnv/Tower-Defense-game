@@ -177,8 +177,6 @@ void Renderer::make_drawable_level(Level& lv){
             upper_left_corner_y  = center_coords.y - lv.get_square_size()/2;
             // drawable_level_square.setOutlineColor(grey);
 
-            std::cout << counter << std::endl;
-
             if (counter == 9){
                 if(square_type == occupied_type::grass){
                     drawable_level_square.setTexture(_grass_pic);
