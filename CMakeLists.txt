@@ -18,7 +18,8 @@ set(SFML_CLASS_SOURCES src/game.cpp
                        src/side_menu.cpp 
                        src/resource_handler.cpp 
                        src/upgrade.cpp
-                       src/main_menu.cpp) 
+                       src/main_menu.cpp
+                       src/choose_level_menu.cpp) 
 
 set(BUILD_SHARED_LIBS FALSE)
 
