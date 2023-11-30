@@ -35,6 +35,13 @@ namespace LevelSelection{
     };
 }
 
+namespace GameState{
+    enum State{
+        StartMenu, MapMenu, Pause, Round, Endgame
+    };
+}
+
+
 /**
  * @brief A class for running the game. Opens a window in which a game loop handles user inputs, updates game state and draws game entities.
  */
