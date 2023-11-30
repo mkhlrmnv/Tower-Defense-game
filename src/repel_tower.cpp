@@ -23,13 +23,18 @@ bool Repel_Tower::attack() {
             if (dist <= this->get_range()) {
                 if (get_attack_counter() >= get_attack_speed()) {
                     attack_counter_up();
-                    enemy->set_speed(enemy->get_original_speed());
+                    set_state(State::none);
+                    return false;
                 } else {
                     set_attack_counter(0);
                     multiplier = check_type_multiplier(this, enemy);
                     enemy->lose_health(this->get_damage() * multiplier);
 
-                    enemy->set_speed(0);
+                    if (enemy->get_speed() != 0) {
+                        enemy->set_speed(0);
+                    } else {
+                        enemy->set_speed(enemy->get_original_speed());
+                    }
 
                     counter++;
                     if (counter >= 3) {
