@@ -1,11 +1,19 @@
 #include "button.hpp"
 
+Button::Button(): 
+    _size({0,0}),
+    _position({0,0}),
+    _button_fill_color(sf::Color::White),
+    _button_outline_color(sf::Color::White),
+    _text(), 
+    _button_pressed(false),
+    _button(){}
 
 Button::Button(const std::string& label, sf::Vector2f size, sf::Vector2f position, sf::Color fill_color, sf::Color outline_color, const sf::Font& font): 
 _size(size), _position(position), _button_fill_color(fill_color), _button_outline_color(outline_color), _text(), _button_pressed(false){
     
+    _button.setPosition(_position);
     _button.setSize(_size);
-    _button.setPosition(_position);    
     _button.setOutlineThickness(1);
     _button.setFillColor(_button_fill_color);
     _button.setOutlineColor(_button_outline_color); 
@@ -43,11 +51,14 @@ void Button::center_text(){
 
 
 void Button::set_fill_color(sf::Color fill_color){
+
+    _button_fill_color = fill_color;
     _button_fill_color = fill_color;
     _button.setFillColor(fill_color);
 }
 
 void Button::set_outline_color(sf::Color outline_color){
+
     _button_outline_color = outline_color;
     _button.setOutlineColor(outline_color);
     _text.setFillColor(outline_color);
@@ -64,12 +75,15 @@ void Button::set_text_string(const std::string& text){
 }
 
 void Button::set_position(sf::Vector2f pos){
+    _position = pos;
     _button.setPosition(pos);
     center_text();
 }
 
 void Button::set_size(sf::Vector2f size){
-    _button.setPosition(size);
+
+    _size = size;
+    _button.setSize(size);
     center_text();
 }
 
@@ -186,11 +200,16 @@ void Button::handle_events(sf::RenderWindow& window, const sf::Event& event, Lev
     if (event.type == sf::Event::MouseMoved){
         if(is_mouse_over(window)){
             // TODO: implicate some how that button can be pressed
-            _button_fill_color.a = 10 ;
-            set_fill_color(_button_fill_color);
+            
+            float a = (_button_fill_color.a + 30 < 255) ? _button_fill_color.a + 30 : 255;  
+            float r = (_button_fill_color.r + 10 < 255) ? _button_fill_color.r + 10 : 255; 
+            float g = (_button_fill_color.g + 10 < 255) ? _button_fill_color.g + 10 : 255; 
+            float b = (_button_fill_color.b + 10 < 255) ? _button_fill_color.b + 10 : 255; 
+            sf::Color hover_color(r,g,b,a);
+            _button.setFillColor(hover_color);
+
         }else{
-            _button_fill_color.a = 0;
-            set_fill_color(_button_fill_color);
+            _button.setFillColor(_button_fill_color);
 
         }
     }
@@ -201,8 +220,6 @@ void Button::handle_events(sf::RenderWindow& window, const sf::Event& event, Lev
         }
     }
     
-    
-
 }
 
 

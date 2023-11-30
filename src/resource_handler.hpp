@@ -12,7 +12,7 @@
 
 namespace TowerAttributes{
     enum Atr{
-        HP, DMG, RNG, ATKSPD, MONEY, UPGRADE
+        HP, DMG, RNG, ATKSPD, MONEY, ROUND
     };
 };
 
@@ -45,6 +45,8 @@ private:
     void load_texture_enemy(int type, const std::string& filename);
     void load_texture_tile(int type, const std::string& filename);
     void load_texture_attribute(int type, const std::string& filename);
+
+    void load_texture_menu(int type, const std::string& filename);
     void load_font();
 
     void fill_attribute_map(int type, std::array<int, 5> attributes);
@@ -56,6 +58,8 @@ private:
     std::map<int, std::shared_ptr<sf::Texture>> _towers_textures_ptr_map;
     std::map<int, std::shared_ptr<sf::Texture>> _enemies_textures_ptr_map;
     std::map<int, std::shared_ptr<sf::Texture>> _tiles_textures_ptr_map;
+    std::map<int, std::shared_ptr<sf::Texture>> _menu_textures_ptr_map;
+
 
     // holds info for towers
     // Tower_type --> attribute list
