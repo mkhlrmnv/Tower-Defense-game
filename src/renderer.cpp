@@ -51,9 +51,7 @@ void Renderer::draw_tower(sf::RenderWindow& rwindow, Tower* t_ptr, int frame){
         _drawable_tower.setPosition(sf::Vector2f (sq->get_center().y - (l.get_square_size() / 2), sq->get_center().x - (l.get_square_size() / 2)));
     } else {
         _drawable_tower.setScale(-_scale_factor_tower, _scale_factor_tower);
-        _drawable_tower.setPosition(sf::Vector2f (sq->get_center().y - (l.get_square_size() / 2) + l.get_square_size(), sq->get_center().x - (l.get_square_size() / 2)));
-
-        
+        _drawable_tower.setPosition(sf::Vector2f (sq->get_center().y - (l.get_square_size() / 2) + l.get_square_size(), sq->get_center().x - (l.get_square_size() / 2)));        
     }
 
     // Sets tower position to center of the square and draws it
@@ -61,29 +59,33 @@ void Renderer::draw_tower(sf::RenderWindow& rwindow, Tower* t_ptr, int frame){
 }
 
 void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr, int frame, int move_animation) {
+    // takes right spread sheet from resource handler and sets it as enemies texture
     _enemy_sprite = _rh.get_texture_enemy(e_ptr->get_type());
     _drawable_enemy.setTexture(_enemy_sprite);
 
+    // variable for where to start animation
     int animation_pos = 0;
 
+    // if statements for every state possible
     if (e_ptr->get_state() == State::attacking_right || e_ptr->get_state() == State::attacking_left) {
-        animation_pos = 1;
-        if (frame > 2) {
+        animation_pos = 1; // attacking animation is first to starts from first picture
+        if (frame > 2) { // in total animation is three pictures to stops if if gone too far
             animation_pos = 0;
             frame = 0;
         }
     } else if (e_ptr->get_state() == State::walking_left || e_ptr->get_state() == State::walking_right) {
-        animation_pos = 4;
-        frame = move_animation;
-        if (frame > 3) {
+        animation_pos = 4; // sets right animation start
+        frame = move_animation; // to make movements smoother frame is modified to move_animation value
+        if (frame > 3) { // if too far stops it
             animation_pos = 0;
             frame = 0;
         }
     } else if (e_ptr->get_state() == State::dying) {
-        animation_pos = 8;
-        frame = std::min(frame, 4);
+        animation_pos = 8; // sets right animation start
+        frame = std::min(frame, 4); // if too far stops it
     }
 
+    // variable for width of one picture
     int spriteWidth = 32;
 
     // Makes sure that animations isn't getting outside spreadsheet
@@ -93,9 +95,12 @@ void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr, int frame, in
        _drawable_enemy.setTextureRect(sf::IntRect(0, 0, spriteWidth, spriteWidth));
     }
 
+    // TODO: enemy depending value
     float scale_factor_enemy = 1.0f; // Adjust as needed
+    // if flips texture if needed (if attacking ot the left for example)
     _drawable_enemy.setScale((e_ptr->get_state() == State::walking_left || e_ptr->get_state() == State::attacking_left) ? scale_factor_enemy : -scale_factor_enemy, scale_factor_enemy);
 
+    // adjust coordinates to draw enemy by position of their feet
     float renderedX = e_ptr->get_position().y + 20;
     float renderedY = e_ptr->get_position().x - _drawable_enemy.getTexture()->getSize().y;
 
@@ -119,8 +124,6 @@ void Renderer::draw_enemies(sf::RenderWindow& rwindow, std::vector<Enemy*> enemi
         draw_enemy(rwindow, e_ptr, frame); // zeros are placeholders
     }
 }
-
-
 
 // draws a grid with the rectangle to a rendertexture and sets this as the texture for the drawable level
 void Renderer::make_drawable_level(Level& lv){
@@ -156,6 +159,8 @@ void Renderer::make_drawable_level(Level& lv){
             upper_left_corner_y  = center_coords.y - lv.get_square_size()/2;
             // drawable_level_square.setOutlineColor(grey);
 
+            // draws house if it is on last piece of road
+            // otherwise draws road or grass picture depending on occupancy
             if (counter == 9){
                 if(square_type == occupied_type::grass){
                     drawable_level_square.setTexture(_grass_pic);
