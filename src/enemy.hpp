@@ -34,7 +34,7 @@ public:
 private:
     Vector2D _prev_pos;
     int _speed;
-    int _original_speed;
+    int _original_speed = 0;
     int _defense;
     std::vector<Vector2D> _route;
 };
