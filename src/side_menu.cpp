@@ -143,7 +143,7 @@ void SideMenu::setup_info_displays(){
 
     float extra_space = 10;
 
-    setup_info_display(TowerAttributes::ATKSPD, _round_count_drawable, _round_count_text, {r_x + extra_space, r_y}, char_size); // TODO: image for rounds? 
+    setup_info_display(TowerAttributes::ROUND, _round_count_drawable, _round_count_text, {r_x + extra_space, r_y}, char_size);
 
 }
 
