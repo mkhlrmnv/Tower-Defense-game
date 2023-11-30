@@ -105,9 +105,8 @@ void ResourceHandler::load_all_textures(){
     load_texture_attribute(TowerAttributes::HP,    "../assets/textures/Attributes/Health.png");
     load_texture_attribute(TowerAttributes::MONEY, "../assets/textures/Attributes/Money.png");
     load_texture_attribute(TowerAttributes::RNG,   "../assets/textures/Attributes/Range.png");
-    // load_texture_attributes(TowerAttributes::DMG,   "../assets/textures/Attributes/Attack_Speed.png"); TODO: make image for damge
-    load_texture_attribute(TowerAttributes::UPGRADE, "../assets/textures/Attributes/Upgrade_Button.png");
-
+    load_texture_attribute(TowerAttributes::DMG,   "../assets/textures/Attributes/Attack_Damage.png");
+    load_texture_attribute(TowerAttributes::ROUND, "../assets/textures/Attributes/Round_Marker.png");
 
     // Font 
     load_font();
@@ -139,8 +138,10 @@ void ResourceHandler::fill_tower_attributes_map(){
 
 
     // TODO: fill 
-    fill_attribute_map(ObjectTypes::MudMageTower, {0,0,0,0,0});
-    fill_attribute_map(ObjectTypes::WaterMageTower, {0,0,0,0,0});
+    // int health = 20, int damage = 15, int range = 100, int attack_speed = 3, int type = ObjectTypes::MudMageTower, int price = 140,
+    fill_attribute_map(ObjectTypes::MudMageTower, {20,15,100,3,140});
+    //  int health = 40, int damage = 40, int range = 80, int attack_speed = 2, int type = ObjectTypes::MudMageTower, int price = 250,
+    fill_attribute_map(ObjectTypes::WaterMageTower, {40,40,80,2,250});
 
 }
 
