@@ -26,28 +26,12 @@
 #include "side_menu.hpp"
 #include "upgrade.hpp"
 
-#include "side_menu.hpp"
-
-#include "side_menu.hpp"
-#include "upgrade.hpp"
-#include "main_menu.hpp"
-#include "choose_level_menu.hpp"
-
-
-
 /**
- * @brief enum for game states.
- * 
+ * @brief Enum for which kind of level is beeing loaded
  */
-namespace GameState{
-    enum State{
-        StartMenu, MapMenu, Pause, Round, Victory, GameOver
-    };
-}
-
-namespace GameState{
-    enum State{
-        StartMenu, MapMenu, Pause, Round, Endgame
+namespace LevelSelection{
+    enum Choice: int{
+        random, load
     };
 }
 
@@ -84,6 +68,13 @@ public:
     void run();
 
 private: 
+
+    /**
+     * @brief Makes the grid for the level and then fills it according to the chosen style: random or load from file
+     * @param chosen_lv choosen level
+     * @return int 1 if successful and 0 if not
+     */
+    int generate_chosen_level_style(int chosen_lv);
 
     /**
      * @brief Opens window 
@@ -139,27 +130,26 @@ private:
     Upgrade _upgrade;
 
     /**
-     * @brief a class to select either random or existing maps.
-     * 
+     * @brief Bool parameter if round is over or not
      */
-    MainMenu _main_menu;
+    bool round_over = false;
 
     /**
-     * @brief a class to select from six existing maps.
-     * 
+     * @brief Stores difficulty level of current game
      */
-    ChooseLevelMenu _level_menu;
+    int _difficulty_multiplier = 2;
 
     /**
-     * @brief a class to implement the side menu: purchase towers, display level info, start the round.
-     * 
+     * @brief amount of available enemy types
+     * Gets bigger with rounds beeing played
      */
-    SideMenu _side_menu;
+    int _available_types = 1;
 
     /**
-     * @brief a class to implement the upgrade feature for the towers. 
-     * 
+     * @brief Variable for enemies moving animation
+     * Thats because we want to play only one moving animation and all 
+     * attack animations at the time
      */
-    Upgrade _upgrade;
+    int _enemy_move_animation;
 }; 
 #endif
