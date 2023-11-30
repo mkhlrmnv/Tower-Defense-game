@@ -26,6 +26,9 @@
 #include "side_menu.hpp"
 #include "upgrade.hpp"
 
+/**
+ * @brief Enum for which kind of level is beeing loaded
+ */
 namespace LevelSelection{
     enum Choice: int{
         random, load
@@ -40,45 +43,78 @@ namespace LevelSelection{
  */
 class Game{
 public:
-    
+    /**
+     * @brief Construct a new Game object
+     */
     Game();
+    /**
+     * @brief Destroy the Game object
+     */
     ~Game(){}
     Game(const Game& ) = delete;
     Game operator=(const Game&) = delete;
 
+    /**
+     * @brief Get the side bar width
+     * @return int
+     */
     int get_side_bar_width() const;
+    /**
+     * @brief Get the games resolution
+     * @return int 
+     */
     int get_game_resolution() const;
 
-    // call from main, runs the game loop until a the window is closed, 
+    /**
+     * @brief Starts the game that loop until window is closed
+     */
     void run();
 
-    
-    
 private: 
 
-    // makes the grid for the level and then fills it according to the chosen style: random or load from file
+    /**
+     * @brief Makes the grid for the level and then fills it according to the chosen style: random or load from file
+     * @param chosen_lv choosen level
+     * @return int 1 if successful and 0 if not
+     */
     int generate_chosen_level_style(int chosen_lv);
 
-    // open window
+    /**
+     * @brief Opens window 
+     */
     void open_window();
 
-    // process events in loop:  clicks, button presses
+    /**
+     * @brief Process events in loop:  clicks, button presses
+     */
     void process_events();
 
-    // update game state in loop: attacks, movement
+    /**
+     * @brief Update game state in loop: attacks, movement
+     */
     void update();
 
-    // draws a frame in loop,
+    /**
+     * @brief Draws a frame in loop,
+     */
     void render();
 
+    /**
+     * @brief Starts new round
+     */
     void start_round();
 
+    /**
+     * @brief Updates all enemies
+     * If enemy can attack, it attacks and if not it moves
+     */
     void update_enemies();
 
+    /**
+     * @brief Updates all towers
+     * Attacks if there is enemy in range
+     */
     void update_towers();
-
-    // for testing only
-    Vector2D some_pos; 
 
     int _game_resolution;
     int _side_bar_width;
@@ -91,10 +127,27 @@ private:
     SideMenu _side_menu;
     Upgrade _upgrade;
 
+    /**
+     * @brief Bool parameter if round is over or not
+     */
     bool round_over = false;
 
+    /**
+     * @brief Stores difficulty level of current game
+     */
     int _difficulty_multiplier = 2;
+
+    /**
+     * @brief amount of available enemy types
+     * Gets bigger with rounds beeing played
+     */
     int _available_types = 1;
+
+    /**
+     * @brief Variable for enemies moving animation
+     * Thats because we want to play only one moving animation and all 
+     * attack animations at the time
+     */
     int _enemy_move_animation;
 }; 
 #endif
