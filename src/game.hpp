@@ -88,6 +88,7 @@ private:
     bool round_over = false;
 
     int _difficulty_multiplier = 2;
-    int idk = 1;
+    int _available_types = 1;
+    int _enemy_move_animation;
 }; 
 #endif
