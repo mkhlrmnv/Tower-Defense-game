@@ -309,11 +309,13 @@ int test_main_menu(){
     
     ResourceHandler rh;
     Level level(800,200,200);
-    MainMenu mm(rh, level);
+    MainMenu mm( rh, level);
+    ChooseLevelMenu clm( rh, level);
 
+    int game_state = 0;
     // run the program as long as the window is open
     while (window.isOpen())
-    {
+    {   
         // check all the window's events that were triggered since the last iteration of the loop
         sf::Event event;
         while (window.pollEvent(event))
@@ -323,12 +325,44 @@ int test_main_menu(){
                 window.close();
             }
 
-            mm.handle_events(window, event);
+                switch (game_state)
+                {
+                case 0:
+                    mm.handle_events(window, event);
+                    game_state = mm.get_state();
+                    if(game_state != 0){
+                        mm.disable_menu();
+                    }
+                    break;
+                
+                case 1:
+                    clm.handle_events(window, event);
+                    game_state = clm.get_state();
+                    if(game_state != 1){
+                        clm.disable_menu();
+                    }
+                    break;
+
+                default:
+                    std::cout << clm.get_level_to_load() << std::endl;
+                    window.close();
+                    break;
+                }
 
         }
-        
         window.clear();
-        window.draw(mm);
+        switch (game_state)
+                {
+                case 0:
+                    window.draw(mm);
+                    break;
+                
+                case 1:
+                    window.draw(clm);
+                    break;
+                
+             
+                }
         window.display();
 
     }
@@ -377,6 +411,6 @@ int main(){
     //test_rh2();
     //test_menu(); 
     //test_upgrade();
-    //test_main_menu();
-    test_choose_level_menu();
+    test_main_menu();
+    //test_choose_level_menu();
 };   

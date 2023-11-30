@@ -9,7 +9,6 @@
 #include "button.hpp"
 
 #include <iostream>
-#include <memory>
 
 
 class ChooseLevelMenu : public sf::Drawable{
@@ -25,9 +24,10 @@ public:
     delete _level6_button;
     }
 
-
     // stop update, handle_events, draw
-    void end_menu();
+    void disable_menu();
+    int get_state();
+    const std::string get_level_to_load();
     void handle_events(sf::RenderWindow& window, sf::Event& event);
 
 
@@ -38,7 +38,9 @@ private:
 
     void draw(sf::RenderTarget& target, sf::RenderStates state) const;
 
-    int _next_state;
+    bool _menu_enabled;
+    int _level_number;
+    int _state;
 
     sf::Sprite _menu_background;
     sf::Texture _menu_texture;

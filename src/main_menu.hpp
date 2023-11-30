@@ -19,8 +19,8 @@ public:
 
 
     // stop update, handle_events, draw
-    void end_menu();
-    void get_next_state();
+    void disable_menu();
+    int get_state();
 
     void handle_events(sf::RenderWindow& window, sf::Event& event);
 
@@ -32,7 +32,8 @@ private:
 
     void draw(sf::RenderTarget& target, sf::RenderStates state) const;
 
-    int _next_state;
+    bool _menu_enabled;
+    int _state;
 
     sf::Sprite _menu_background;
     sf::Texture _menu_texture;
