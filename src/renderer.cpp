@@ -60,6 +60,7 @@ void Renderer::draw_tower(sf::RenderWindow& rwindow, Tower* t_ptr, int frame){
 
 void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr, int frame, int move_animation) {
     // takes right spread sheet from resource handler and sets it as enemies texture
+    // takes right spread sheet from resource handler and sets it as enemies texture
     _enemy_sprite = _rh.get_texture_enemy(e_ptr->get_type());
     _drawable_enemy.setTexture(_enemy_sprite);
 
@@ -68,20 +69,20 @@ void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr, int frame, in
 
     // if statements for every state possible
     if (e_ptr->get_state() == State::attacking_right || e_ptr->get_state() == State::attacking_left) {
-        animation_pos = 10; // attacking animation is first to starts from first picture
+        animation_pos = 1; // attacking animation is first to starts from first picture
         if (frame > 2) { // in total animation is three pictures to stops if if gone too far
             animation_pos = 0;
             frame = 0;
         }
     } else if (e_ptr->get_state() == State::walking_left || e_ptr->get_state() == State::walking_right) {
-        animation_pos = 0; // sets right animation start
+        animation_pos = 4; // sets right animation start
         frame = move_animation; // to make movements smoother frame is modified to move_animation value
         if (frame > 3) { // if too far stops it
             animation_pos = 0;
             frame = 0;
         }
     } else if (e_ptr->get_state() == State::dying) {
-        animation_pos = 4; // sets right animation start
+        animation_pos = 8; // sets right animation start
         frame = std::min(frame, 4); // if too far stops it
     }
 
@@ -95,20 +96,15 @@ void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr, int frame, in
        _drawable_enemy.setTextureRect(sf::IntRect(0, 0, spriteWidth, spriteWidth));
     }
 
-    // scales enemy by its size and determines its in game coordinates
-    float scale_factor_enemy = ceil(0.01f + (e_ptr->get_size() - 1) / 2);
-    float renderedX = e_ptr->get_position().y;
-    float renderedY = e_ptr->get_position().x;
-
+    // TODO: enemy depending value
+    float scale_factor_enemy = 1.0f; // Adjust as needed
     // if flips texture if needed (if attacking ot the left for example)
-    if (e_ptr->get_state() == State::walking_left || e_ptr->get_state() == State::attacking_left){
-        _drawable_enemy.setScale(-scale_factor_enemy, scale_factor_enemy);
-    } else {
-        _drawable_enemy.setScale(scale_factor_enemy, scale_factor_enemy);
-    }
+    _drawable_enemy.setScale((e_ptr->get_state() == State::walking_left || e_ptr->get_state() == State::attacking_left) ? scale_factor_enemy : -scale_factor_enemy, scale_factor_enemy);
 
-    // sets texture to be drawn from bottom left corner
-    _drawable_enemy.setOrigin(0, 32);
+    // adjust coordinates to draw enemy by position of their feet
+    float renderedX = e_ptr->get_position().y + 20;
+    float renderedY = e_ptr->get_position().x - _drawable_enemy.getTexture()->getSize().y;
+
     // Ensure enemy isn't drawn outside the field
     renderedX = std::max(renderedX, 1.0f);
     renderedY = std::max(renderedY, 1.0f);
@@ -130,8 +126,6 @@ void Renderer::draw_enemies(sf::RenderWindow& rwindow, std::vector<Enemy*> enemi
         draw_enemy(rwindow, e_ptr, frame); 
     }
 }
-
-
 
 // draws a grid with the rectangle to a rendertexture and sets this as the texture for the drawable level
 void Renderer::make_drawable_level(Level& lv){
