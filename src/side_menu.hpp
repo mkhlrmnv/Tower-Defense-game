@@ -12,8 +12,7 @@
 
 // TODO: Implement start round button!
 // TODO: Tweak the attributes in RH according to final object attributes
-// TODO: Find better font
-// TODO: Tweak asthetics change better color, add background image. 
+// TODO: Tweak aesthetics change better color, add background image. 
 
 class SideMenu : public sf::Drawable {
 

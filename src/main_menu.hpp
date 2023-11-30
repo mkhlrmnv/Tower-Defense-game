@@ -7,29 +7,41 @@
 #include "resource_handler.hpp"
 #include "button.hpp"
 
-#include "iostream"
+#include <iostream>
+#include <memory>
 
 
 class MainMenu : public sf::Drawable{
 public:
 
-    void proceed_to_game();
-    void proceed_to_level_menu();
+    MainMenu( ResourceHandler& rh, Level& level);
+    ~MainMenu(){ delete _choose_level_button; delete _random_level_button;}
+
+
+    // stop update, handle_events, draw
+    void end_menu();
+    void get_next_state();
 
     void handle_events(sf::RenderWindow& window, sf::Event& event);
 
 
 private:
 
-    void draw(sf::RenderTarget& target, sf::RenderStates state);
+    void set_menu_background();
+    void set_buttons();
 
-sf::Sprite _menu_image;
+    void draw(sf::RenderTarget& target, sf::RenderStates state) const;
 
-Button _random_level_button;
-Button _choose_level_button;
+    int _next_state;
 
-ResourceHandler _rh;
-Level _level;
+    sf::Sprite _menu_background;
+    sf::Texture _menu_texture;
+
+    Button* _random_level_button;
+    Button* _choose_level_button;
+
+    ResourceHandler& _rh;
+    Level& _level;
 
 
 };

@@ -173,7 +173,7 @@ void TowerDragButton::setup_attribute_images(){
     float dmg_x = attr_start_x;
     float dmg_y = hp_y + img_size + line_spacing;
 
-    setup_attribute_image(TowerAttributes::RNG, _dmg_img, {dmg_x, dmg_y}); // TODO: get image 
+    setup_attribute_image(TowerAttributes::DMG, _dmg_img, {dmg_x, dmg_y}); // TODO: get image 
 
     float rng_x = attr_start_x;
     float rng_y = dmg_y + img_size + line_spacing;

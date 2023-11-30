@@ -11,7 +11,7 @@
 class Button : public sf::Drawable{
 
 public:
-    Button(){}
+    Button();
     Button(const std::string& label, sf::Vector2f size, sf::Vector2f position, sf::Color fill_color, sf::Color outline_color, const sf::Font& font);
 
     
