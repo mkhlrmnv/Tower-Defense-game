@@ -35,16 +35,10 @@ bool Repel_Tower::attack() {
 
                     if (enemy->get_speed() != 0) {
                         enemy->set_speed(0);
+                    } else {
+                        enemy->set_speed(enemy->get_original_speed());
                     }
 
-                    if (this->get_position().y > level_reference.get_enemies()[0]->get_position().y){
-                        set_state(State::attacking_left);
-                        has_attacked = true;
-                    } else {
-                        set_state(State::attacking_right);
-                        has_attacked = true;
-                    }
-                    
                     counter++;
                     if (counter >= 3) {
                         return true;

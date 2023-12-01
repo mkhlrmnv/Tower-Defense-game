@@ -87,9 +87,7 @@ void Level::add_lives(int how_much){
 }
 
 void Level::take_lives(int how_much){
-    if ((_lives - how_much) >= 0){
-        _lives -= how_much;
-    }
+    _lives -= how_much;
 }
 
 void Level::reset(int start_cash, int start_lives){
@@ -222,6 +220,7 @@ bool Level::add_tower(Tower* tower){
 }
 
 
+// TODO: Mud and water mage when classes are ready
 bool Level::add_tower_by_type(int type, Vector2D pos){
     Vector2D center = Vector2D(get_square_by_pos(pos)->get_center().x, get_square_by_pos(pos)->get_center().y);
 
@@ -249,9 +248,6 @@ bool Level::remove_tower(Tower* tower){
     for (size_t i = 0; i < _towers.size(); i++)
     {
         if (_towers[i]->get_position() == tower->get_position()){
-            auto pos = tower->get_position();
-            auto square = get_square_by_pos(pos);
-            square->occupy_by_grass();
             delete _towers[i];
             _towers.erase(_towers.begin() + i);
             return true;

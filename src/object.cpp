@@ -27,6 +27,10 @@ int Object::get_original_attack_speed() const {
     return (_original_attack_speed == 0) ? _attack_speed : _original_attack_speed;
 }
 
+int Object::get_original_attack_speed() const {
+    return (_original_attack_speed == 0) ? _attack_speed : _original_attack_speed;
+}
+
 const Vector2D Object::get_position() const {
     return _position;
 }
@@ -96,9 +100,7 @@ void Object::gain_attack_speed(int amount) {
         _original_attack_speed = _attack_speed;
     }
 
-    if (_attack_speed - amount > 0) {
-        _attack_speed -= amount;
-    }
+    _attack_speed += amount;
 }
 
 double Object::distance_to(const Vector2D& target_position) {
@@ -117,11 +119,9 @@ void Object::lose_health(int amount) {
 void Object::lose_attack_speed(int amount) {
     if (_original_attack_speed == 0) {
         _original_attack_speed = _attack_speed;
-<<<<<<< HEAD
-=======
     }
 
-    if (_attack_speed == _original_attack_speed) {
+    if (get_attack_speed() <= 0) {
         _attack_speed += amount;
     }
 }

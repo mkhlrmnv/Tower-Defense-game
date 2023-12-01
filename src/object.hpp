@@ -69,19 +69,7 @@ public:
      * @return Integer representing the attack speed.
      */
     int get_attack_speed() const;
-
-    /**
-     * @brief Get the original attack speed of the object.
-     * 
-     * @return Integer representing the original attack speed.
-     */
     int get_original_attack_speed() const;
-
-    /**
-     * @brief Get the position of the object.
-     * 
-     * @return Vector2D object representing the position.
-     */
     const Vector2D get_position() const;
 
     /**

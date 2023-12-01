@@ -26,14 +26,16 @@ bool Fog_Mage::attack() {
                     attack_counter_up();
                     set_state(State::none);
                     return false;
+                    set_state(State::none);
+                    return false;
                 } else {
                     set_attack_counter(0);
                     if (tower->get_attack_speed() != tower->get_original_attack_speed() + 1) {
-                        tower->lose_attack_speed(tower->get_attack_speed() / 2);
+                        tower->lose_attack_speed(1);
                     }
                     counter++;
 
-                    if (counter >= 4) {
+                    if (counter >= 2) {
                         return true;
                     }
                 }
