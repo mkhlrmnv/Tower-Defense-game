@@ -87,6 +87,9 @@ void Button::set_size(sf::Vector2f size){
     center_text();
 }
 
+sf::Vector2f Button::get_size(){
+    return _button.getSize();
+}
 
 
 bool Button::is_mouse_over(sf::RenderWindow &window){
