@@ -241,8 +241,8 @@ int test_rh2(){
     ResourceHandler rh;
     
     sf::Sprite spr;
-    spr.setPosition(100,100);
-    spr.setTexture(rh.get_texture_attribute(TowerAttributes::HP));
+    spr.setPosition(0,0);
+    spr.setTexture(rh.get_texture_menu(4));
 
 
     // run the program as long as the window is open

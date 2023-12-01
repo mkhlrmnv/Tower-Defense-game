@@ -13,8 +13,7 @@ ChooseLevelMenu::ChooseLevelMenu(ResourceHandler& rh, Level& level):
     _level_number(-1),
     _state(1), // GameState::LevelMenu 
     _menu_enabled(true),
-    _menu_background(),
-    _menu_texture(){
+    _menu_background(){
 
         set_menu_background();
         set_buttons();
@@ -23,11 +22,7 @@ ChooseLevelMenu::ChooseLevelMenu(ResourceHandler& rh, Level& level):
 
 
 void ChooseLevelMenu::set_menu_background(){
-
-    if(!_menu_texture.loadFromFile("../assets/textures/Menu/Start_Menu_2.png")){
-        std::cout << "choose level menu load failed" << std::endl;
-    }
-    _menu_background.setTexture(_menu_texture);
+    _menu_background.setTexture(_rh.get_texture_menu(1));
     _menu_background.setPosition(0,0);
 }
 

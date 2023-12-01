@@ -25,6 +25,8 @@ public:
     sf::Texture& get_texture_tower(int type);
     sf::Texture& get_texture_enemy(int type);
     sf::Texture& get_texture_tile(int type);
+    sf::Texture& get_texture_menu(int type);
+
     sf::Font& get_font();
     
     // function to access tower attributes;
