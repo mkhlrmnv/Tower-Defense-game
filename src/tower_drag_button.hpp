@@ -8,7 +8,7 @@
 
 class TowerDragButton : public Button{
 public:
-TowerDragButton(int type, sf::Vector2f position,  sf::Color outline, sf::Color fill, ResourceHandler& _rh);
+TowerDragButton(int type, sf::Vector2f position,  sf::Color outline, sf::Color fill, ResourceHandler& rh);
     /* 
     1. set the position of the tower to where square where the mouse was released.
         1.1 if grid square empty call some function on level to create new tower. 
@@ -86,7 +86,7 @@ protected:
 
 
     // handles Tower textures, font, name, attribute values and images from given tower type
-    ResourceHandler _rh;
+    ResourceHandler& _rh;
 
 };
 
