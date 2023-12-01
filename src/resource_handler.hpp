@@ -47,25 +47,8 @@ public:
      * @return sf::Texture& 
      */
     sf::Texture& get_texture_tile(int type);
-
-    /**
-     * @brief Get the texture of menus as reference.
-     * 0 = start menu,
-     * 1 = level menu,
-     * 2 = side menu,
-     * 3 = game over,
-     * 4 = victory
-     * 
-     * @param type 
-     * @return sf::Texture& 
-     */
     sf::Texture& get_texture_menu(int type);
 
-    /**
-     * @brief Get the sf::Font object as reference.
-     * 
-     * @return sf::Font& 
-     */
     sf::Font& get_font();
 
     /**

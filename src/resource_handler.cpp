@@ -22,6 +22,10 @@ sf::Texture& ResourceHandler::get_texture_attribute(int type){
     return *(_attr_textures_ptr_map[type]);
 }
 
+sf::Texture& ResourceHandler::get_texture_menu(int type){
+    return *(_menu_textures_ptr_map[type]);
+}
+
 // returns pointer to font
 sf::Font& ResourceHandler::get_font(){
     return _font;
@@ -34,6 +38,7 @@ int ResourceHandler::get_tower_info(int tower_type, int attr_type){
 const std::string& ResourceHandler::get_tower_name(int type){
     return _tower_names[type];
 }
+
 
 
 // load towers spread sheet and puts it into placeholder
@@ -62,6 +67,12 @@ void ResourceHandler::load_texture_attribute(int type, const std::string& filena
     tx->loadFromFile(filename);
     _attr_textures_ptr_map[type] = tx;
 };
+
+void ResourceHandler::load_texture_menu(int type, const std::string& filename){
+    std::shared_ptr<sf::Texture> tx = std::make_shared<sf::Texture>();
+    tx->loadFromFile(filename);
+    _menu_textures_ptr_map[type] = tx;
+}
 
 // load font and puts it into placeholder
 void ResourceHandler::load_font(){
@@ -107,6 +118,14 @@ void ResourceHandler::load_all_textures(){
     load_texture_attribute(TowerAttributes::RNG,   "../assets/textures/Attributes/Range.png");
     load_texture_attribute(TowerAttributes::DMG,   "../assets/textures/Attributes/Attack_Damage.png");
     load_texture_attribute(TowerAttributes::ROUND, "../assets/textures/Attributes/Round_Marker.png");
+
+    //Menus
+    load_texture_menu(0, "../assets/textures/Menu/Start_Menu_1.png");
+    load_texture_menu(1, "../assets/textures/Menu/Start_Menu_2.png");
+    load_texture_menu(2, "../assets/textures/Menu/GUI.png");
+    load_texture_menu(3, "../assets/textures/Menu/Game_Over_Screen.png");
+    load_texture_menu(4, "../assets/textures/Menu/You_Won_Screen.png");
+    
 
     // Font 
     load_font();
