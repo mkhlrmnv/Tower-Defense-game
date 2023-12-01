@@ -87,7 +87,9 @@ void Level::add_lives(int how_much){
 }
 
 void Level::take_lives(int how_much){
-    _lives -= how_much;
+    if ((_lives - how_much) >= 0){
+        _lives -= how_much;
+    }
 }
 
 std::vector<Enemy*> Level::get_enemies() const{
