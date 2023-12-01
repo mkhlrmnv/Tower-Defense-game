@@ -37,6 +37,7 @@ public:
     void set_size(sf::Vector2f size);
     void set_font(const sf::Font& font);
 
+    sf::Vector2f get_size();
     
     // do something if 
     bool button_pressed();

@@ -115,6 +115,8 @@ private:
     sf::Text _title; 
     sf::RectangleShape _background;
 
+    sf::Sprite _background_img;
+
     sf::Sprite _cash_drawable;
     sf::Sprite _lives_drawable;
     sf::Sprite _round_count_drawable;
@@ -171,10 +173,7 @@ private:
      */
     Level& _level;
 
-    /**
-     * @brief a reference to the resource handler class, gives font, textures, and attributes to the drag buttons. 
-     * 
-     */
+    // to get textures
     ResourceHandler& _rh;
 };
 

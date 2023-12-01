@@ -3,7 +3,7 @@
 
 TowerDragButton::TowerDragButton(int type, sf::Vector2f position, sf::Color outline, sf::Color fill, ResourceHandler& rh): 
 
-Button(rh.get_tower_name(type), {130, 180}, position, fill, outline, _rh.get_font()), 
+Button(rh.get_tower_name(type), {130, 180}, position, fill, outline, rh.get_font()), 
     _tower_type(type), 
     _drag_flag(false), 
     _rh(rh),
