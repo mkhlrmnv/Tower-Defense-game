@@ -36,7 +36,6 @@ private:
     int _state;
 
     sf::Sprite _menu_background;
-    sf::Texture _menu_texture;
 
     Button* _random_level_button;
     Button* _choose_level_button;
