@@ -24,6 +24,7 @@ public:
     int get_health() const;
     int get_range() const;
     int get_attack_speed() const;
+    int get_original_attack_speed() const;
     const Vector2D get_position() const;
     int get_type() const;
     Level& get_level_reference() const;
@@ -56,6 +57,7 @@ private:
     int _damage;
     int _range;
     int _attack_speed;
+    int _original_attack_speed = 0;
     int _attack_counter = 0;
     Vector2D _position;
     int _type;

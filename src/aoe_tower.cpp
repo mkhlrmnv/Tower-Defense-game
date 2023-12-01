@@ -23,6 +23,8 @@ bool Aoe_Tower::attack() {
             if (dist <= this->get_range()) {
                 if (get_attack_counter() <= get_attack_speed()) {
                     attack_counter_up();
+                    set_state(State::none);
+                    return false;
                 } else {
                     set_attack_counter(0);
                     multiplier = check_type_multiplier(this, enemy);
