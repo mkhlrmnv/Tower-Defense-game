@@ -325,29 +325,29 @@ int test_main_menu(){
                 window.close();
             }
 
-                switch (game_state)
-                {
-                case 0:
-                    mm.handle_events(window, event);
-                    game_state = mm.get_state();
-                    if(game_state != 0){
-                        mm.disable_menu();
-                    }
-                    break;
-                
-                case 1:
-                    clm.handle_events(window, event);
-                    game_state = clm.get_state();
-                    if(game_state != 1){
-                        clm.disable_menu();
-                    }
-                    break;
-
-                default:
-                    std::cout << clm.get_level_to_load() << std::endl;
-                    window.close();
-                    break;
+            switch (game_state)
+            {
+            case 0:
+                mm.handle_events(window, event);
+                game_state = mm.get_state();
+                if(game_state != 0){
+                    mm.disable_menu();
                 }
+                break;
+            
+            case 1:
+                clm.handle_events(window, event);
+                game_state = clm.get_state();
+                if(game_state != 1){
+                    clm.disable_menu();
+                }
+                break;
+
+            default:
+                std::cout << clm.get_level_to_load() << std::endl;
+                window.close();
+                break;
+            }
 
         }
         window.clear();
@@ -409,8 +409,8 @@ int main(){
     //test_drag_button();
     //test_rh();
     //test_rh2();
-    //test_menu(); 
+    test_menu(); 
     //test_upgrade();
-    test_main_menu();
+    //test_main_menu();
     //test_choose_level_menu();
 };   
