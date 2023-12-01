@@ -17,7 +17,7 @@
 
 // Initialize new level
 Level::Level(int resolution, int cash, int lives):
-    _square_size(resolution/10), _round(0), _cash(cash), _lives(lives) { }
+    _square_size(resolution/10), _round(1), _cash(cash), _lives(lives) { }
 
 // Returns current round
 int Level::get_round() const {

@@ -25,6 +25,8 @@
 
 #include "side_menu.hpp"
 #include "upgrade.hpp"
+#include "main_menu.hpp"
+#include "choose_level_menu.hpp"
 
 /**
  * @brief Enum for which kind of level is beeing loaded
@@ -130,13 +132,21 @@ private:
     ResourceHandler _rh;
     Renderer _renderer;
     Level _level;
+    MainMenu _main_menu;
+    ChooseLevelMenu _level_menu;
     SideMenu _side_menu;
     Upgrade _upgrade;
 
     /**
+     * @brief int parameter determines state of the game state:
+     * which menu to display, run the game or pause. 
+     */
+    int _game_state = 0;
+
+    /**
      * @brief Bool parameter if round is over or not
      */
-    bool round_over = false;
+    bool _round_over = true;
 
     /**
      * @brief Stores difficulty level of current game

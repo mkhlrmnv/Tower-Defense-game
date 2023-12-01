@@ -12,7 +12,7 @@
 
 // TODO: Implement start round button!
 // TODO: Tweak the attributes in RH according to final object attributes
-// TODO: Tweak aesthetics change better color, add background image. 
+//TODO: change bakground and tweak buttons accordingly
 
 class SideMenu : public sf::Drawable {
 
@@ -31,6 +31,12 @@ public:
     void disable_buttons();
     void enable_buttons();
 
+    // check state for transition to round start.
+    int get_state();
+    
+    // sets state to GameState::Pause 
+    void pause(); 
+
 private:
     
     void setup_background();
@@ -46,6 +52,8 @@ private:
 
     //TODO: freeze buttons during gameplay?
     bool _disable_buttons;
+
+    int _state;
 
     float _game_resolution;
     float _side_menu_width;
