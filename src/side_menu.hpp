@@ -12,7 +12,7 @@
 
 // TODO: Implement start round button!
 // TODO: Tweak the attributes in RH according to final object attributes
-// TODO: Tweak aesthetics change better color, add background image. 
+//TODO: change bakground and tweak buttons accordingly
 
 
 // TODO: Implement start round button!
@@ -51,33 +51,10 @@ public:
     void disable_buttons();
     void enable_buttons();
 
-    /**
-     * @brief disables handle events
-     * 
-     */
-    void disable_buttons();
-
-    /**
-     * @brief enables handle events
-     * 
-     */
-    void enable_buttons();
-
-
     // check state for transition to round start.
-
-    /**
-     * @brief Get the the next game state, either continue in pause or
-     * if round button pressed transition to round(implemented in game class)
-     * 
-     * @return int 
-     */
     int get_state();
     
-    /**
-     * @brief Sets state to GameState::Pause 
-     * 
-     */
+    // sets state to GameState::Pause 
     void pause(); 
 
 private:
@@ -103,6 +80,8 @@ private:
 
     //TODO: freeze buttons during gameplay?
     bool _disable_buttons;
+
+    int _state;
 
     float _game_resolution;
 

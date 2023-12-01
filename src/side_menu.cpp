@@ -2,7 +2,16 @@
 
 
 SideMenu::SideMenu(float game_resolution, float side_menu_width, ResourceHandler& rh, Level& level) :
- _game_resolution(game_resolution), _side_menu_width(side_menu_width), _level(level), _rh(rh), _fill_color(), _outline_color(), _drag_img_ptrs({}), _disable_buttons(false){
+    _game_resolution(game_resolution),
+    _side_menu_width(side_menu_width),
+    _level(level),
+    _rh(rh),
+    _fill_color(),
+    _outline_color(),
+    _drag_img_ptrs({}),
+    _disable_buttons(false),
+    _state(2) // pause
+    {
     
     
     auto beige = sf::Color(255, 204, 128);
@@ -79,8 +88,8 @@ void SideMenu::setup_drag_buttons(){
 void SideMenu::setup_round_button(){
 
     // get position of the last button 
-
-   _round_button =  new Button("IMPLEMENT FUNCTIONALITY", {280, 50}, {810, 700}, sf::Color::Red, sf::Color::White, _rh.get_font());
+    sf::Color red(220,0,0);
+   _round_button =  new Button("start round", {280, 50}, {810, 700}, red, sf::Color::White, _rh.get_font());
    _round_button->center_text();
 
 }
@@ -147,6 +156,14 @@ void SideMenu::setup_info_displays(){
 
 }
 
+int SideMenu::get_state(){
+    return _state;
+}
+
+void SideMenu::pause(){
+    _state = 2;
+}
+
 
 void SideMenu::draw( sf::RenderTarget& target, sf::RenderStates states) const{
 
@@ -189,6 +206,13 @@ void SideMenu::handle_events(sf::RenderWindow& window, const sf::Event& event){
         }
 
         _round_button->handle_events(window, event, _level);
+
+        if(_round_button->button_pressed()){
+            // set state to running
+            std::cout << "round button pressed" << std::endl;
+            _state = 3;
+            _round_button->reset_button();
+        }
     }
 }
     

@@ -3,14 +3,18 @@
 #include <mutex>
 
 // TODO: Some kind of timer in between of round
+// TODO: Add start round button in side menu and transition between roundstart and paused in game
+// TODO: Add game over, or victory (renderer + game states)
 
 Game::Game(): 
     _game_resolution(800),
     _side_bar_width(300),
     _window(),
-    _level(800, 20000, 50),
+    _level(800, 500, 50),
     _rh(),
     _renderer(),
+    _main_menu(_rh, _level),
+    _level_menu(_rh, _level),
     _side_menu(float(_game_resolution), float(_side_bar_width), _rh, _level),
     _upgrade(800, _rh, _level, 50){
 }
@@ -25,6 +29,28 @@ int Game::get_side_bar_width() const {
     return _side_bar_width;
 }
 
+// generated new level
+int Game::generate_chosen_level_style(int chosen_lv){
+    // TODO: REDUNDANT REMOVE 
+    // TODO: add choosing feature, in a game start menu
+     _level.make_grid();
+    if(chosen_lv == LevelSelection::random){
+        if(!_level.randomly_generate()){
+            std::cout << "random level generation failed" <<std::endl;
+            return 0;
+        }else{
+            std::cout << "random level generation successful" <<std::endl;
+        }
+    }else if(chosen_lv == LevelSelection::load){
+        if(_level.read_file("../maps/example_map.txt")==-1){
+            std::cout << "level file read failed" <<std::endl;
+            return 0;
+        }else{
+            std::cout << "level file read successfull" <<std::endl;
+        }
+    }
+    return 1;
+}
 
 // opens new window
 void Game::open_window(){
@@ -41,9 +67,9 @@ void Game::open_window(){
 // runs whole game
 void Game::run(){
     open_window();
-    generate_chosen_level_style(LevelSelection::load); 
+    //generate_chosen_level_style(LevelSelection::load); 
 
-    _renderer.make_drawable_level(_level);
+    //_renderer.make_drawable_level(_level);
     //_renderer.make_level_info_texts(_game_resolution, _side_bar_width);
 
     // manages tick rate of the game
@@ -56,7 +82,7 @@ void Game::run(){
         process_events();
         timeSinceLastUpdate += clock.restart();
         while (timeSinceLastUpdate > sf::seconds(1.f / 60.f)) // doesn't let game to update too fast
-        {
+        {   
             timeSinceLastUpdate -= sf::seconds(1.f / 60.f); // 60f can be changed to 30f if tick rate 30 is wanted
             process_events();
             update();
@@ -69,21 +95,50 @@ void Game::run(){
 // updates whole game
 // moves enemies, and calls attack function for all enemies and towers
 void Game::update(){
-    update_enemies();
-    update_towers();
 
-    // if there are not any enemies starts new round
-    // TODO: Remove this when there are "start round" button
-    if (_level.get_enemies().empty() && !round_over && _level.get_lives() > 0) {
-        _level.plus_round();
-        round_over = true;
-        start_round();
+
+    switch (_game_state)
+    {
+    case GameState::Pause:
+
+        update_towers();
+        _side_menu.update();
+    
+    break;
+    
+    case GameState::Round:
+
+        _side_menu.update();
+        update_enemies();
+        update_towers();
+
+        // transition to paused after all enemies are dead
+        if (_level.get_enemies().empty() && !_round_over && _level.get_lives() > 0) {
+            _level.plus_round();
+            _round_over = true;
+            _game_state = GameState::Pause;
+            _side_menu.pause();
+        }
+    
+    break;
+
     }
 
-    // waits that both threads are ready
-    enemiesThread.join();
-    towersThread.join();
-    _side_menu.update();
+    // OG HERE 
+    /*
+    if(_game_state == GameState::Pause || _game_state == GameState::Round){
+        update_enemies();
+        update_towers();
+
+        // if there are not any enemies starts new round
+        // TODO: Remove this when there are "start round" button
+        if (_level.get_enemies().empty() && !_round_over && _level.get_lives() > 0) {
+            _level.plus_round();
+            _round_over = true;
+        }
+        _side_menu.update();
+    } */
+
 }
 
 // Process events in loop:  clicks, button presses
@@ -94,51 +149,153 @@ void Game::process_events(){
             _window.close();
             
         }
-        _side_menu.handle_events(_window, event);
-        _upgrade.handle_events(_window, event);
-        // TODO: add events here, like button presses, dragging towers to map
+
+        // events based on _game_state
+        switch (_game_state)
+        {
+        case GameState::StartMenu:
+            _main_menu.handle_events(_window, event);
+            _game_state = _main_menu.get_state();
+
+            // check game state transition
+            if(_game_state == GameState::Pause){
+
+
+                std::cout << " from StartMenu going to: "<<_game_state << std::endl;
+
+                _level.make_grid();
+                _level.randomly_generate();
+                //std::cout << "MAP RANDOM GENERATION HAPPENS" << std::endl;
+                _renderer.make_drawable_level(_level);
+                _main_menu.disable_menu(); // redundant
+               // std::cout << "DRAWING LEVEL  HAPPENS" << std::endl;
+
+
+            }else if(_game_state == GameState::MapMenu){
+                
+                std::cout << " from StartMenu going to: "<<_game_state << std::endl;
+
+                _main_menu.disable_menu(); // redundant
+            }
+
+        break;
+        
+        case GameState::MapMenu:
+
+            _level_menu.handle_events(_window, event);
+            _game_state = _level_menu.get_state();
+            std::cout<< "next state: " << _game_state << std::endl;
+
+            // check game state transition
+            if(_game_state != GameState::MapMenu){
+
+                std::cout << " from MapMenu going to: "<<_game_state << std::endl;
+                //_game_state ++; //TODO: REMOVE ONLY FOR TESTING 
+                _level.make_grid();
+                _level.read_file(_level_menu.get_level_to_load());
+                _renderer.make_drawable_level(_level);
+                _level_menu.disable_menu(); // redundant 
+                //std::cout << "MAP LOAD HAPPENS" << std::endl;
+
+            }
+        break;
+
+        // paused or round running
+
+        case GameState::Pause:
+            _upgrade.handle_events(_window, event);
+            _side_menu.handle_events(_window, event);
+            _game_state = _side_menu.get_state();
+            if(_game_state == GameState::Round){
+                std::cout << "in Pause GOING TO round " << std::endl;
+                start_round();
+            }
+        break;
+
+        case GameState::Round:
+            // start round button isnt active in sidemenu 
+            _side_menu.handle_events(_window, event);
+            _upgrade.handle_events(_window, event);
+            // no transition from events, transition back to pause when round over
+        break;
+        }
     }
 }
 
 // renders current situation on map
 void Game::render(){
-    // updates moving animations value if it is too high
-    if (_enemy_move_animation > 4){
-        _enemy_move_animation = 0;
-    }
-    // because animation are at most five pictures
-    // there is for loop until five
-    // but basically goes through all attack animations for all attacking objects
-    // and through one moving animation for all moving enemies
-    // goes through only one moving animation to make moving look more natural when enemy takes only one step at the time
-    for (int i = 0; i < 6; i++)
+
+
+    switch (_game_state)
     {
+    case GameState::StartMenu:
+        _window.clear();
+        _window.draw(_main_menu);
+        _window.display();
+        break;
+
+    case GameState::MapMenu:
+        _window.clear();
+        _window.draw(_level_menu);
+        _window.display();
+        break;
+    
+    case GameState::Round:
+              // updates moving animations value if it is too high
+        if (_enemy_move_animation > 4){
+            _enemy_move_animation = 0;
+        }
+        // because animation are at most five pictures
+        // there is for loop until five
+        // but basically goes through all attack animations for all attacking objects
+        // and through one moving animation for all moving enemies
+        // goes through only one moving animation to make moving look more natural when enemy takes only one step at the time
+        for (int i = 0; i < 6; i++)
+        {
+            _window.clear();
+            _renderer.draw_level(_window);
+            _renderer.draw_towers(_window, _level.get_towers(), i);
+            _renderer.draw_enemies(_window, _level.get_enemies(), i, _enemy_move_animation);
+            _window.draw(_side_menu);
+            _window.draw(_upgrade);
+
+            _window.display(); // display the drawn entities
+        }
+        _enemy_move_animation++;
+
+        // removes all towers and enemies with 0 hp, if their dying animation was already played
+        for (auto* t : _level.get_towers()){
+            if (t->get_health() <= 0 && t->get_state() == State::dying){
+                _level.remove_tower(t);
+            } 
+        }
+        for (auto* e : _level.get_enemies()){
+            if (e->get_health() <= 0 && e->get_state() == State::dying){
+                _level.remove_enemy(e);
+            } 
+        }
+        break;
+
+    case GameState::Pause:
+
+        //std::cout << "PAUSE STATE HAPPENS" << std::endl;
+        // game pause between rounds - no enemies to draw
+
         _window.clear();
         _renderer.draw_level(_window);
-        _renderer.draw_enemies(_window, _level.get_enemies(), i);
-        _renderer.draw_towers(_window, _level.get_towers(), i);
+        _renderer.draw_towers(_window, _level.get_towers(), 1);
         _window.draw(_side_menu);
         _window.draw(_upgrade);
-
         _window.display(); // display the drawn entities
-    }
+        break;
 
-    // removes all towers and enemies with 0 hp, if their dying animation was already played
-    for (auto* t : _level.get_towers()){
-        if (t->get_health() <= 0 && t->get_state() == State::dying){
-            _level.remove_tower(t);
-        } 
     }
-    for (auto* e : _level.get_enemies()){
-        if (e->get_health() <= 0 && e->get_state() == State::dying){
-            _level.remove_enemy(e);
-        } 
-    }
+    
 }
 
 // starts new round
 void Game::start_round(){
-    round_over = false;
+    _round_over = false;
     // Spawns round played ammount multiplied by difficulty level amount of enemies
     for (int i = 0; i < (_difficulty_multiplier * _level.get_round()); i++)
     {
