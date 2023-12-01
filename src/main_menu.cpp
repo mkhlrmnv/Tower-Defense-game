@@ -9,19 +9,15 @@ _random_level_button(nullptr),
 _choose_level_button(nullptr), 
 _state(0), // GameState::MainMenu
 _menu_enabled(true),
-_menu_background(),
-_menu_texture()
-
-{
+_menu_background(){
+    
     set_menu_background();
     set_buttons();
 }
 
 void MainMenu::set_menu_background(){
-    if(!_menu_texture.loadFromFile("../assets/textures/Menu/Start_Menu_1.png")){
-        std::cout << "menu 1 load failed" << std::endl;
-    }
-    _menu_background.setTexture(_menu_texture);
+    
+    _menu_background.setTexture(_rh.get_texture_menu(0));
     _menu_background.setPosition(0,0);
 }
 

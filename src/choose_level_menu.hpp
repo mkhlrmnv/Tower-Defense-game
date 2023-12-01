@@ -43,7 +43,6 @@ private:
     int _state;
 
     sf::Sprite _menu_background;
-    sf::Texture _menu_texture;
 
     Button* _level1_button;
     Button* _level2_button;
