@@ -1,11 +1,11 @@
 #ifndef TOWER_DEFENCE_SRC_GAME
 #define TOWER_DEFENCE_SRC_GAME
 
-#include <level.hpp>
+#include "level.hpp"
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include <renderer.hpp>
+#include "renderer.hpp"
 #include <random>
 
 #include "basic_enemy.hpp"

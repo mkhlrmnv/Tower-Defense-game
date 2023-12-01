@@ -53,6 +53,8 @@ private:
     sf::Text _title; 
     sf::RectangleShape _background;
 
+    sf::Sprite _background_img;
+
     sf::Sprite _cash_drawable;
     sf::Sprite _lives_drawable;
     sf::Sprite _round_count_drawable;
@@ -76,7 +78,7 @@ private:
     Level& _level;
 
     // to get textures
-    ResourceHandler _rh;
+    ResourceHandler& _rh;
 };
 
 
