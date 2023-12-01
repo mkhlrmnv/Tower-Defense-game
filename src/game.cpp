@@ -74,7 +74,7 @@ void Game::update(){
 
     // if there are not any enemies starts new round
     // TODO: Remove this when there are "start round" button
-    if (_level.get_enemies().empty() && !round_over) {
+    if (_level.get_enemies().empty() && !round_over && _level.get_lives() > 0) {
         _level.plus_round();
         round_over = true;
         start_round();
