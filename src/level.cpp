@@ -248,6 +248,7 @@ bool Level::remove_tower(Tower* tower){
     for (size_t i = 0; i < _towers.size(); i++)
     {
         if (_towers[i]->get_position() == tower->get_position()){
+            current_square(_towers[i])->occupy_by_grass();
             delete _towers[i];
             _towers.erase(_towers.begin() + i);
             return true;
