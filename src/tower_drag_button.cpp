@@ -95,7 +95,7 @@ void TowerDragButton::setup_button_texts(){
     _price_text.setOutlineThickness(1);
     _price_text.setString(std::to_string(_tower_price)+"$");  
 
-    _price_text.setOrigin(_price_text.getGlobalBounds().getSize() / 2.f);
+    _price_text.setOrigin(_price_text.getGlobalBounds().width / 2.f, _price_text.getGlobalBounds().height / 2.f);
 
     float price_x = _img_background.getPosition().x + _img_background.getGlobalBounds().width/2;
     float price_y = _img_background.getPosition().y + _img_background.getGlobalBounds().height - price_char_size;
