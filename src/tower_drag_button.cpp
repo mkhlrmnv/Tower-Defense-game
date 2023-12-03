@@ -3,11 +3,12 @@
 
 TowerDragButton::TowerDragButton(int type, sf::Vector2f position, sf::Color outline, sf::Color fill, ResourceHandler& rh): 
 
-Button(rh.get_tower_name(type), {130, 180}, position, fill, outline, rh.get_font()), 
+Button(rh.get_tower_name(type), {80, 130}, position, fill, outline, rh.get_font()), 
     _tower_type(type), 
     _drag_flag(false), 
     _rh(rh),
-    _tower_price(0){
+    _tower_price(0), 
+    _button_enabled(true){
     
     _tower_price = _rh.get_tower_info(_tower_type, TowerAttributes::MONEY);
 
@@ -25,27 +26,27 @@ Button(rh.get_tower_name(type), {130, 180}, position, fill, outline, rh.get_font
 
 void TowerDragButton::setup_tower_images(){
     
-    _button.setOutlineThickness(2);
-
-    float image_size = 32;
-
+    _button.setOutlineThickness(0);
+    
+    float og_img_size  = 32;
     // scale image to 80 pixels, and set scale negative for facing left
-    float scale = 80 / image_size; 
+    float scale = _img_size / og_img_size; 
 
     _drawable_tower.setTexture(_rh.get_texture_tower(_tower_type));
     _drawable_tower.setTextureRect(sf::IntRect(0, 0, 32,32));
     _drawable_tower.setScale({-scale, scale});
 
     // center the image for horizontally (width - image_size)/2 = 
-    float center_buffer = (130 - 80)/2;
+    float center_buffer = (80-60)/2;
     
     // reserve space for title
     float title_space = 20;
 
     float img_x = _position.x + center_buffer;
     float img_y = _position.y + title_space;
-
-    _drawable_tower.setPosition({img_x + _flip_correction, img_y}); 
+    
+    // offset x with images size to correct flip with scale
+    _drawable_tower.setPosition({img_x + _img_size, img_y}); 
 
     _img_background.setPosition({img_x, img_y});
     auto sky_blue = sf::Color(195, 234, 252);
@@ -53,7 +54,7 @@ void TowerDragButton::setup_tower_images(){
     _img_background.setFillColor(sky_blue);
     _img_background.setOutlineThickness(2);
     _img_background.setOutlineColor(_button_outline_color);
-    _img_background.setSize({80, 80});
+    _img_background.setSize({_img_size, _img_size});
     
     // same for the dragging tower image
 
@@ -71,6 +72,10 @@ void TowerDragButton::setup_button_texts(){
     // tower name - use inherited button text
     auto pos = _button.getPosition();
 
+   
+    _text.setFillColor(brown);
+    _text.setCharacterSize(12);
+
     float title_x = pos.x  + _button.getGlobalBounds().width / 2 - _text.getGlobalBounds().width / 2.f;
     float title_y = pos.y;
 
@@ -78,22 +83,17 @@ void TowerDragButton::setup_button_texts(){
 
     //_text.setOrigin(_text.getGlobalBounds().getSize() / 2.f + _text.getGlobalBounds().getPosition());
     _text.setPosition({title_x, title_y});
-    _text.setFillColor(brown);
-    _text.setCharacterSize(15);
-    _price_text.setPosition({0,0});
-
 
     
-
+    _price_text.setPosition({0,0});
     float price_char_size = 20; 
     
     
-
     _price_text.setCharacterSize(price_char_size);
     _price_text.setFillColor(sf::Color::White);
     _price_text.setOutlineColor(sf::Color::Black);
     _price_text.setOutlineThickness(1);
-    _price_text.setString(std::to_string(_tower_price)+"$");  
+    _price_text.setString("$" + std::to_string(_tower_price));  
 
     _price_text.setOrigin(_price_text.getGlobalBounds().width / 2.f, _price_text.getGlobalBounds().height / 2.f);
 
@@ -103,23 +103,36 @@ void TowerDragButton::setup_button_texts(){
     _price_text.setPosition({price_x, price_y});
 
     // modify these
-    float char_size = 18;
-    float line_spacing = 2;
-    float center_point = _img_background.getGlobalBounds().width/2;
-    float attr_start_x = _img_background.getPosition().x + center_point;
-    float attr_start_y = _img_background.getPosition().y +_drawable_tower.getGlobalBounds().height;
+    float start_x_offset = 10;
+    float char_size = 12;
+    float line_spacing = 10;
+    float img_text_space = 2;
 
-    float hp_x = attr_start_x;
-    float hp_y = attr_start_y;
+    float center_point = _img_background.getGlobalBounds().width/2;
+
+    // assemble texts in 2x2 matrix
+
+    float x_1 = start_x_offset + _button.getGlobalBounds().left + _attr_img_size + img_text_space;
+    float y_1 = _drawable_tower.getGlobalBounds().top + _drawable_tower.getGlobalBounds().height + line_spacing;
+
+    float x_2 =  _img_background.getPosition().x + center_point + _attr_img_size + img_text_space;
+    float y_2 =  y_1 + char_size + line_spacing;
+
+
+    // first column
+
+    float hp_x = x_1;
+    float hp_y = y_1;
 
     _hp_text.setCharacterSize(char_size);
     _hp_text.setFillColor(brown);
     _hp_text.setString(std::to_string(_rh.get_tower_info(_tower_type, TowerAttributes::HP)));
-
     _hp_text.setPosition({hp_x, hp_y});
 
-    float dmg_x = attr_start_x;
-    float dmg_y = hp_y + char_size + line_spacing;
+
+
+    float dmg_x = x_1;
+    float dmg_y = y_2;
 
     _dmg_text.setCharacterSize(char_size);
     _dmg_text.setFillColor(brown);
@@ -127,8 +140,12 @@ void TowerDragButton::setup_button_texts(){
 
     _dmg_text.setPosition({dmg_x, dmg_y});
 
-    float rng_x = attr_start_x ;
-    float rng_y = dmg_y + char_size + line_spacing;
+
+
+    // second column
+
+    float rng_x = x_2;
+    float rng_y = y_1;
 
     _rng_text.setCharacterSize(char_size);
     _rng_text.setFillColor(brown);
@@ -136,8 +153,8 @@ void TowerDragButton::setup_button_texts(){
 
     _rng_text.setPosition({rng_x, rng_y});
 
-    float atkspd_x = attr_start_x ;
-    float atkspd_y = rng_y + char_size + line_spacing;  
+    float atkspd_x = x_2;
+    float atkspd_y = y_2;  
 
     _atkspd_text.setCharacterSize(char_size);
     _atkspd_text.setFillColor(brown);
@@ -157,31 +174,44 @@ void TowerDragButton::setup_font(){
 
 void TowerDragButton::setup_attribute_images(){
 
-    float start_y_offset = 5;
-    float start_x_offset = 20;
-    float img_size = 15;
-    float line_spacing = 5;
 
-    float attr_start_x = _img_background.getPosition().x + start_x_offset;
-    float attr_start_y = _img_background.getPosition().y +_drawable_tower.getGlobalBounds().height;
+    // modify these
 
-    float hp_x = attr_start_x ;
-    float hp_y = attr_start_y + start_y_offset ;
+    float tweak_x = 10;
+    float tweak_y = 10;
+
+    float start_x_offset = 10;
+    float char_size = 10;
+    float line_spacing = 10;
+
+    float center_point = _img_background.getGlobalBounds().width/2;
+
+    // assemble texts in 2x2 matrix
+
+    float x_1 = start_x_offset + _button.getGlobalBounds().left ;
+    float y_1 = _drawable_tower.getGlobalBounds().top + _drawable_tower.getGlobalBounds().height + line_spacing;
+
+    float x_2 =  _img_background.getPosition().x + center_point;
+    float y_2 =  y_1 + char_size + line_spacing;
+    
+    // first column
+    float hp_x = x_1;
+    float hp_y = y_1;
 
     setup_attribute_image(TowerAttributes::HP, _hp_img, {hp_x, hp_y});
 
-    float dmg_x = attr_start_x;
-    float dmg_y = hp_y + img_size + line_spacing;
+    float dmg_x = x_1;
+    float dmg_y = y_2;
 
     setup_attribute_image(TowerAttributes::DMG, _dmg_img, {dmg_x, dmg_y}); // TODO: get image 
 
-    float rng_x = attr_start_x;
-    float rng_y = dmg_y + img_size + line_spacing;
+    float rng_x = x_2;
+    float rng_y = y_1;
 
     setup_attribute_image(TowerAttributes::RNG, _rng_img, {rng_x, rng_y});
 
-    float atkspd_x = attr_start_x;
-    float atkspd_y = rng_y + img_size + line_spacing;
+    float atkspd_x = x_2;
+    float atkspd_y = y_2;
 
     setup_attribute_image(TowerAttributes::ATKSPD, _atkspd_img, {atkspd_x, atkspd_y});
 
@@ -194,8 +224,8 @@ void TowerDragButton::setup_attribute_image(int type, sf::Sprite& sprite, sf::Ve
     sprite.setTexture(_rh.get_texture_attribute(type));
     sprite.setPosition(pos);
 
-    float image_size = 80;
-    float scale = 16 / image_size;
+    float og_image_size = 80;
+    float scale = _attr_img_size / og_image_size;
     sprite.setScale(scale, scale);
 }
 
@@ -222,7 +252,7 @@ void TowerDragButton::set_dragging_drawable_pos(sf::RenderWindow& window){
     // float drag_pos_y = mouse_y - _dragging_tower_offset.y;
 
     // set image to middle of the mouse
-    float drag_pos_x = mouse_x - _drawable_dragging_tower.getGlobalBounds().width/2 + _flip_correction;
+    float drag_pos_x = mouse_x - _drawable_dragging_tower.getGlobalBounds().width/2 + _img_size;
     float drag_pos_y = mouse_y - _drawable_dragging_tower.getGlobalBounds().height/2;
 
     _drawable_dragging_tower.setPosition({drag_pos_x, drag_pos_y});
@@ -252,29 +282,41 @@ void TowerDragButton::add_tower_to_release_square(sf::RenderWindow& window, Leve
     }
 }
 
+void TowerDragButton::update(int player_cash){
+    if(player_cash < _tower_price){
+        _button_enabled = false;
+        _price_text.setFillColor(sf::Color::Red);
+    }else{
+        _price_text.setFillColor(sf::Color::White);
+        _button_enabled = true;
+    }
+}
 
 
 void TowerDragButton::handle_events(sf::RenderWindow& window, const sf::Event& event, Level& lv){
 
-     if(event.type == sf::Event::MouseButtonPressed){
-                if(is_mouse_over(window) && !_drag_flag){
-                    set_drag_flag();
-                    set_dragging_drawable_pos(window);
-                }
-            }
-    if(event.type == sf::Event::MouseMoved){
-        if(get_drag_flag()){
-            set_dragging_drawable_pos(window);
+    if(_button_enabled){
+        if(event.type == sf::Event::MouseButtonPressed){
+                    if(is_mouse_over(window) && !_drag_flag){
+                        set_drag_flag();
+                        set_dragging_drawable_pos(window);
+                    }
         }
-    }
+        
+        if(event.type == sf::Event::MouseMoved){
+            if(get_drag_flag()){
+                set_dragging_drawable_pos(window);
+            }
+        }
 
-    if(event.type == sf::Event::MouseButtonReleased){
-        if(get_drag_flag()){
-            // TODO: Add functionality here
-            reset_drag_flag();
-            _release_pos = sf::Mouse::getPosition(window);
-            auto idx = window_coords_to_grid_index(_release_pos, lv);
-            add_tower_to_release_square(window, lv);
+        if(event.type == sf::Event::MouseButtonReleased){
+            if(get_drag_flag()){
+                // TODO: Add functionality here
+                reset_drag_flag();
+                _release_pos = sf::Mouse::getPosition(window);
+                auto idx = window_coords_to_grid_index(_release_pos, lv);
+                add_tower_to_release_square(window, lv);
+            }
         }
 
     }

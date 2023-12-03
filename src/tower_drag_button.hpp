@@ -37,6 +37,9 @@ TowerDragButton(int type, sf::Vector2f position,  sf::Color outline, sf::Color f
     const sf::Sprite* get_dragging_image() const ;
     int get_type() const;
 
+    // disable_drag if  cash lower than tower price
+    // make price red
+    void update(int player_cash);
 
     // implements the operation of the drag trough events
     void handle_events(sf::RenderWindow& window, const sf::Event& event, Level& lv);    
@@ -87,11 +90,15 @@ protected:
 
     // mirroring the images with scale, results in offset with the image position, this corrects the position for both dragging and static images
     // this should be same as the image size;
-    float _flip_correction  = 80; 
+    float _img_size  = 60; 
+    float _attr_img_size = 12;
 
     // determine image of the button, text, what will be created what will the button represent
     int _tower_type;
     int _tower_price;
+
+
+    bool _button_enabled;
 
     // determines whether the image is dragged or not 
     bool _drag_flag;

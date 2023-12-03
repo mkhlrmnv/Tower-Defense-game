@@ -70,12 +70,7 @@ private:
 
     void setup_menu_title();
 
-    /**
-     * @brief inherited from sf::Drawable, draws sidemenu as window.draw(SideMenu)
-     * 
-     * @param target 
-     * @param states 
-     */
+    // derived from drawable;
     virtual void draw( sf::RenderTarget& target, sf::RenderStates states) const;
 
     //TODO: freeze buttons during gameplay?
@@ -90,9 +85,6 @@ private:
      * 
      */
     float _side_menu_width;
-
-    sf::Text _title; 
-    sf::RectangleShape _background;
 
     sf::Sprite _background_img;
 

@@ -450,9 +450,9 @@ int main(){
     //test_drag_button();
     //test_rh();
     //test_rh2();
-    //test_menu(); 
+    test_menu(); 
     //test_upgrade();
     //test_main_menu();
     //test_choose_level_menu();
-    test_end_screen();
+    //test_end_screen();
 };   
