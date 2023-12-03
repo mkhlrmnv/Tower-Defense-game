@@ -25,7 +25,7 @@ SideMenu::SideMenu(float game_resolution, float side_menu_width, ResourceHandler
     setup_info_displays();
     setup_drag_buttons();
     setup_round_button();
-    setup_menu_title();
+    //setup_menu_title();
 }
 
 void SideMenu::disable_buttons(){
@@ -36,51 +36,27 @@ void SideMenu::enable_buttons(){
     _disable_buttons = false;
 }
 
+
 void SideMenu::setup_background(){
-        
-    _background.setPosition({_game_resolution, 0});
-    _background.setSize({_side_menu_width, _game_resolution});
-    _background.setFillColor(_fill_color);
-    _background.setOutlineColor(_outline_color);
-
-    // set outline inwards
-    _background.setOutlineThickness(-2);
+    _background_img.setTexture(_rh.get_texture_menu(2));
+    _background_img.setPosition({_game_resolution, 0});
 }
 
-void SideMenu::setup_menu_title(){
-
-    auto brown = sf::Color(121, 85, 72);
-
-    std::string title_text = "Drag Towers to grid!";
-    
-    float buffer_x = 5;
-    float buffer_y = 20;
-
-    float x = _background.getPosition().x;
-    float y = _background.getPosition().y;
-    
-    _title.setFont(_rh.get_font());
-    _title.setString(title_text);
-    _title.setCharacterSize(25);
-    _title.setFillColor(brown);
-    _title.setPosition({x + buffer_x, y + buffer_y});
-
-}
 
 void SideMenu::setup_drag_buttons(){
 
-    float x_wrt_bg  = 10;
-    float y_wrt_bg  = 100;
+    float x_wrt_bg  = 35;
+    float y_wrt_bg  = 125;
 
-    float x1 = x_wrt_bg  + _background.getPosition().x; 
-    float y1 = y_wrt_bg + _background.getPosition().y;
+    float x1 = x_wrt_bg  + _background_img.getPosition().x; 
+    float y1 = y_wrt_bg + _background_img.getPosition().y;
 
     sf::Color ashgrey(178, 190, 181); 
     
     // iterates trough tower types and creates buttons accordingly
     for(int i = 0; i<6; i++){
 
-        _drag_buttons.push_back(new TowerDragButton(i, {x1 +(130+20)*(i%2), y1 + (180 + 20)*(i%3)}, _outline_color, _fill_color, _rh));
+        _drag_buttons.push_back(new TowerDragButton(i, {x1 +(130+20)*(i%2), y1 + (193)*(i%3)}, _outline_color, _fill_color, _rh));
     }   
 
 }
@@ -127,14 +103,14 @@ void SideMenu::setup_info_displays(){
     float buffer = 5; 
     float char_size = 30;
 
-    float side_menu_width = _background.getGlobalBounds().width;
-    float side_menu_height = _background.getGlobalBounds().height;
+    float side_menu_width = _background_img.getGlobalBounds().width;
+    float side_menu_height = _background_img.getGlobalBounds().height;
 
     
     int info_display_height = char_size;
     int info_display_width = side_menu_width / 3;
 
-    float display_start_x = _background.getGlobalBounds().left + buffer;
+    float display_start_x = _background_img.getGlobalBounds().left + buffer;
     float display_start_y =  side_menu_height - info_display_height - buffer;
 
     float l_x = display_start_x;
@@ -166,12 +142,12 @@ void SideMenu::pause(){
 
 
 void SideMenu::draw( sf::RenderTarget& target, sf::RenderStates states) const{
-    target.draw(_background);
+
+    target.draw(_background_img);
     target.draw(_cash_text);
     target.draw(_lives_text);
     target.draw(_round_count_text);
 
-    target.draw(_title);
     target.draw(*_round_button);
 
     //std::cout <<"x"<<  _lives_drawable.getPosition().x << "y" << _lives_drawable.getPosition().y << std::endl;
@@ -225,5 +201,9 @@ void SideMenu::update(){
     _cash_text.setString(cash);
     _lives_text.setString(lives);
     _round_count_text.setString(round_count);
+
+    for(auto button : _drag_buttons){
+        button->update(_level.get_cash());
+    }
 
 }
