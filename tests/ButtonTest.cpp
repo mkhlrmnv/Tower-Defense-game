@@ -111,7 +111,15 @@ int test_menu(){
                 window.close();
             }
             sm.handle_events(window, event);
+
+            if(event.type == sf::Event::MouseButtonPressed){
+                auto pos = sf::Mouse::getPosition(window);
+                std::cout << "x" << pos.x << std::endl;
+                std::cout << "y" << pos.y << std::endl;
+            }
+        
         }
+
 
         
         sm.update();
@@ -441,9 +449,9 @@ int main(){
     //test_drag_button();
     //test_rh();
     //test_rh2();
-    //test_menu(); 
+    test_menu(); 
     //test_upgrade();
     //test_main_menu();
     //test_choose_level_menu();
-    test_end_screen();
+    //test_end_screen();
 };   
