@@ -45,8 +45,6 @@ private:
     void setup_info_displays();
     void setup_info_display(int type, sf::Sprite& sprite, sf::Text& text_obj, sf::Vector2f pos, float char_size);
 
-    void setup_menu_title();
-
     // derived from drawable;
     virtual void draw( sf::RenderTarget& target, sf::RenderStates states) const;
 
@@ -57,9 +55,6 @@ private:
 
     float _game_resolution;
     float _side_menu_width;
-
-    sf::Text _title; 
-    sf::RectangleShape _background;
 
     sf::Sprite _background_img;
 
