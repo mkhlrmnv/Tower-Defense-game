@@ -1,7 +1,7 @@
 #include <renderer.hpp>
 
-Renderer::Renderer():
-    _rh(ResourceHandler()){};
+Renderer::Renderer(ResourceHandler& rh):
+    _rh(rh){};
 
 void Renderer::draw_level(sf::RenderWindow& rwindow){
     rwindow.draw(_drawable_level);
@@ -124,6 +124,18 @@ void Renderer::draw_enemies(sf::RenderWindow& rwindow, std::vector<Enemy*> enemi
         draw_enemy(rwindow, e_ptr, frame); // zeros are placeholders
     }
 }
+
+void Renderer::draw_end_screen_win(sf::RenderWindow& rwindow){
+   _end_screen.setTexture(_rh.get_texture_menu(4));
+    rwindow.draw(_end_screen);
+}
+
+void Renderer::draw_end_screen_lose(sf::RenderWindow& rwindow){
+    _end_screen.setTexture(_rh.get_texture_menu(3));
+    rwindow.draw(_end_screen);
+}
+
+
 
 // draws a grid with the rectangle to a rendertexture and sets this as the texture for the drawable level
 void Renderer::make_drawable_level(Level& lv){
