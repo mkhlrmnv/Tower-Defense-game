@@ -3,16 +3,20 @@
 #include <mutex>
 
 // TODO: Some kind of timer in between of round
-// TODO: Add start round button in side menu and transition between roundstart and paused in game
-// TODO: Add game over, or victory (renderer + game states)
+
+//TODO: are objects destoryed properly if transititon to end mid round?
+
+//TODO: balance game and update tower attribute values in resource handle for tower drag buttons!
+
+//TODO: remove redundant parts?
 
 Game::Game(): 
     _game_resolution(800),
     _side_bar_width(300),
     _window(),
-    _level(800, 500, 50),
+    _level(_game_resolution, 500, 5),
     _rh(),
-    _renderer(),
+    _renderer(_rh),
     _main_menu(_rh, _level),
     _level_menu(_rh, _level),
     _side_menu(float(_game_resolution), float(_side_bar_width), _rh, _level),
@@ -102,6 +106,12 @@ void Game::update(){
 
         update_towers();
         _side_menu.update();
+
+        // transition to victory
+        if(_rounds_to_survive < _level.get_round()){
+            _game_state = GameState::Victory;
+            _side_menu.pause();
+        }
     
     break;
     
@@ -116,6 +126,13 @@ void Game::update(){
             _level.plus_round();
             _round_over = true;
             _game_state = GameState::Pause;
+            _side_menu.pause();
+        }
+
+        // transition to game over when no lives left
+        if (_level.get_lives() < 1){
+            _round_over = true;
+            _game_state = GameState::GameOver;
             _side_menu.pause();
         }
     
@@ -189,7 +206,6 @@ void Game::process_events(){
             if(_game_state != GameState::MapMenu){
 
                 std::cout << " from MapMenu going to: "<<_game_state << std::endl;
-                //_game_state ++; //TODO: REMOVE ONLY FOR TESTING 
                 _level.make_grid();
                 _level.read_file(_level_menu.get_level_to_load());
                 _renderer.make_drawable_level(_level);
@@ -217,6 +233,7 @@ void Game::process_events(){
             _upgrade.handle_events(_window, event);
             // no transition from events, transition back to pause when round over
         break;
+        
         }
     }
 }
@@ -288,6 +305,19 @@ void Game::render(){
         _window.display(); // display the drawn entities
         break;
 
+    case GameState::Victory:
+
+        _window.clear();
+        _renderer.draw_end_screen_win(_window);
+        _window.display();
+        break;
+
+    case GameState::GameOver:
+
+        _window.clear();
+        _renderer.draw_end_screen_lose(_window);
+        _window.display();
+        break;
     }
     
 }
