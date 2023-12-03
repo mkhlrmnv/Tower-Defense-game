@@ -127,6 +127,18 @@ void Renderer::draw_enemies(sf::RenderWindow& rwindow, std::vector<Enemy*> enemi
     }
 }
 
+void Renderer::draw_end_screen_win(sf::RenderWindow& rwindow){
+   _end_screen.setTexture(_rh.get_texture_menu(4));
+    rwindow.draw(_end_screen);
+}
+
+void Renderer::draw_end_screen_lose(sf::RenderWindow& rwindow){
+    _end_screen.setTexture(_rh.get_texture_menu(3));
+    rwindow.draw(_end_screen);
+}
+
+
+
 // draws a grid with the rectangle to a rendertexture and sets this as the texture for the drawable level
 void Renderer::make_drawable_level(Level& lv){
     // pass the level argument with existing grid, either from random generation or loaded from file

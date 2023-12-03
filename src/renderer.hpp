@@ -28,6 +28,7 @@ public:
     /**
      * @brief Destroy the Renderer object
      */
+    Renderer(ResourceHandler& rh);
     ~Renderer(){}
     Renderer(const Renderer& ) = delete;
     Renderer operator=(const Renderer&) = delete;
@@ -78,6 +79,19 @@ public:
      * @param frame current frame of animation
      */
     void draw_towers(sf::RenderWindow& rwindow, std::vector< Tower * > towers, int frame);
+
+    /**
+     * @brief victory screen on GameState::EndScreen
+     * @param rwindow  window where to draw
+     */
+    void draw_end_screen_win(sf::RenderWindow& rwindow);
+
+    /**
+     * @brief game over screen on GameState::EndScreen
+     * @param rwindow  window where to draw
+     */
+    void draw_end_screen_lose(sf::RenderWindow& rwindow);
+
 
 private:
     /**
@@ -141,9 +155,9 @@ private:
     float _scale_factor_enemy = 1; // TODO: some enemy type depending value
 
     /**
-     * @brief pointer to Resource handler
+     * @brief a reference to Resource handler
      */
-    ResourceHandler _rh;
+    ResourceHandler& _rh;
 };
 
 #endif 

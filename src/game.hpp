@@ -39,7 +39,7 @@ namespace LevelSelection{
 
 namespace GameState{
     enum State{
-        StartMenu, MapMenu, Pause, Round, Endgame
+        StartMenu, MapMenu, Pause, Round, Victory, GameOver
     };
 }
 
@@ -145,6 +145,11 @@ private:
      * which menu to display, run the game or pause. 
      */
     int _game_state = 0;
+
+    /**
+     * @brief int parameter determines how many rounds one must survive to beat the game. 
+     */
+    int _rounds_to_survive = 5;
 
     /**
      * @brief Bool parameter if round is over or not
