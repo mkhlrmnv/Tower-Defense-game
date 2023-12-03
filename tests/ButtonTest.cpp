@@ -9,6 +9,7 @@
 #include <upgrade.hpp>
 #include <main_menu.hpp>
 #include <choose_level_menu.hpp>
+#include <renderer.hpp>
 
 
 
@@ -404,13 +405,45 @@ int test_choose_level_menu(){
     return 1;
 }
 
+int test_end_screen(){
+
+    sf::RenderWindow window(sf::VideoMode(1100, 800), "My window");
+    window.setPosition({100, 0});
+    
+    ResourceHandler rh;
+    Level level(800,200,200);
+    Renderer renderer(rh);
+
+    // run the program as long as the window is open
+    while (window.isOpen())
+    {
+        // check all the window's events that were triggered since the last iteration of the loop
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            // "close requested" event: we close the window
+            if (event.type == sf::Event::Closed){
+                window.close();
+            }
+        }
+        
+        window.clear();
+        renderer.draw_end_screen_lose(window);
+        window.display();
+
+    }
+
+    return 1;
+}
+
 int main(){
     //test_button();
     //test_drag_button();
     //test_rh();
     //test_rh2();
-    test_menu(); 
+    //test_menu(); 
     //test_upgrade();
     //test_main_menu();
     //test_choose_level_menu();
+    test_end_screen();
 };   
