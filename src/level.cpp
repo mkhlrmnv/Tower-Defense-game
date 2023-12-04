@@ -17,7 +17,7 @@
 
 // Initialize new level
 Level::Level(int resolution, int cash, int lives):
-    _square_size(resolution/10), _round(1), _cash(cash), _lives(lives) { }
+    _square_size(resolution/10), _round(0), _cash(cash), _lives(lives) { }
 
 // Returns current round
 int Level::get_round() const {
@@ -186,7 +186,6 @@ bool Level::remove_tower(Tower* tower){
     for (size_t i = 0; i < _towers.size(); i++)
     {
         if (_towers[i]->get_position() == tower->get_position()){
-            current_square(_towers[i])->occupy_by_grass();
             delete _towers[i];
             _towers.erase(_towers.begin() + i);
             return true;
@@ -230,7 +229,7 @@ std::vector<Direction> Level::next_road(Enemy* enemy){
     if ((row_col.second + 1) < 10  && _grid[row_col.first][row_col.second + 1]->get_occupied() == road){
         list_of_road_squares.push_back(down);
     }
-    if ((row_col.second - 1) >= 0 && _grid[row_col.first][row_col.second - 1]->get_occupied() == road){
+    if ((row_col.second - 1) >= 10 && _grid[row_col.first][row_col.second - 1]->get_occupied() == road){
         list_of_road_squares.push_back(up);
     }
     return list_of_road_squares;
