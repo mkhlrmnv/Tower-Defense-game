@@ -149,7 +149,7 @@ private:
     /**
      * @brief int parameter determines how many rounds one must survive to beat the game. 
      */
-    int _rounds_to_survive = 5;
+    int _rounds_to_survive = 30;
 
     /**
      * @brief Bool parameter if round is over or not

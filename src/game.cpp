@@ -14,7 +14,7 @@ Game::Game():
     _game_resolution(800),
     _side_bar_width(300),
     _window(),
-    _level(_game_resolution, 500, 5),
+    _level(_game_resolution, 500, 30),
     _rh(),
     _renderer(_rh),
     _main_menu(_rh, _level),
