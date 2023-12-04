@@ -121,9 +121,7 @@ void Object::lose_attack_speed(int amount) {
         _original_attack_speed = _attack_speed;
     }
 
-    if (get_attack_speed() <= 0) {
-        _attack_speed += amount;
-    }
+    _attack_speed += amount;
 }
 
 State Object::get_state(){
