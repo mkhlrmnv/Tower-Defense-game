@@ -65,6 +65,7 @@ void Game::open_window(){
     
     _window.create(sf::VideoMode(_game_resolution + _side_bar_width, _game_resolution), "Tower Defence", sf::Style::Default, settings);
     _window.setPosition(sf::Vector2i(200, 0));
+    _window.setVerticalSyncEnabled(true);
 }
 
 // runs whole game
