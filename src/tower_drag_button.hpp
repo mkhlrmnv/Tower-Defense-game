@@ -6,105 +6,260 @@
 #include "button.hpp"
 #include "resource_handler.hpp"
 
+/**
+ * @brief A class to implement dragging towers to grid. 
+ * @param type what object the button creates 
+ * @param position location for the button
+ * @param outline outline color of the button
+ * @param fill fill color of the button
+ * @param rh a reference to ResourceHandler class
+ */
+
 class TowerDragButton : public Button{
 public:
 TowerDragButton(int type, sf::Vector2f position,  sf::Color outline, sf::Color fill, ResourceHandler& rh);
-    /* 
-    1. set the position of the tower to where square where the mouse was released.
-        1.1 if grid square empty call some function on level to create new tower. 
-        1.2 otherwise dont make new object and release image
-    reset drag_flag
-    */ 
+   
     
-
+    /**
+     * @brief Set the drag flag object
+     * 
+     */
     void set_drag_flag();
 
     /**
-     * @brief Set drag flag to false.
+     * @brief 
      * 
      */
     void reset_drag_flag();
 
     /**
-     * @brief Get the drag flag object.
+     * @brief Get the drag flag object
      * 
      * @return true 
      * @return false 
      */
     bool get_drag_flag() const ;
 
-    // returns the dragging image for SideMenu class for drawing on top of all buttons. 
+    /**
+     * @brief Get the dragging image sf::Sprite. Used in SideMenu to draw the dragging image on top of everything.
+     * 
+     * @return const sf::Sprite* 
+     */
     const sf::Sprite* get_dragging_image() const ;
+
+    /**
+     * @brief Get the ObjecType of the button
+     * 
+     * @return int 
+     */
     int get_type() const;
 
-    // disable_drag if  cash lower than tower price
-    // make price red
+  
+
+    /**
+     * @brief updates the buttons state. 
+     * If cash is too low for purchase, sets the price text to red and disables the events. 
+     * 
+     * @param player_cash 
+     */
     void update(int player_cash);
 
-    // implements the operation of the drag trough events
+
+    /**
+     * @brief Handles the button events.
+     * If mouse is pressed on top of the button sets the drag flag on.
+     * If mouse moves sets the new dragging image position. 
+     * If mouse button is released, calls add_tower_to_release_square() and resets drag flag.
+     * @param window 
+     * @param event 
+     * @param lv 
+     */
     void handle_events(sf::RenderWindow& window, const sf::Event& event, Level& lv);    
 
 protected:
 
-       // call level create object, handle purchasing the tower
+
+    /**
+     * @brief adds tower to the release square. Checks if the object is on the grid, if the square is grass, 
+     * and handles the purchase with the level class if add_tower function succeeds.
+     * 
+     * @param window 
+     * @param lv 
+     */
     void add_tower_to_release_square(sf::RenderWindow& window, Level& lv);
 
     // get mouse coords and place dragging image on that position
+    /**
+     * @brief Set the dragging drawable position. 
+     * Checks the mouse position and sets it to the member variable _release_pos.
+     * 
+     * @param window 
+     */
     void set_dragging_drawable_pos(sf::RenderWindow& window);
+
+    /**
+     * @brief Sets up the tower image sprites to right locations, sizes, etc.
+     * Called in constructor.
+     * 
+     */
     void setup_tower_images();
+
+    /**
+     * @brief Sets up the button sf::Texts objects to right locations etc. 
+     * 
+     */
     void setup_button_texts();
+
+    /**
+     * @brief Sets up the attribute images to close to the texts.
+     * 
+     */
     void setup_attribute_images();
+
+    /**
+     * @brief a helper function for the function above. 
+     * Sets up a sprite according to given position and ObjectType.  
+     * 
+     * @param type 
+     * @param sprite 
+     * @param pos 
+     */
     void setup_attribute_image(int type, sf::Sprite& sprite, sf::Vector2f pos);
     
-
+    /**
+     * @brief Sets up the font to all texts.
+     * 
+     */
     void setup_font();
 
-    /* draw the dragging_image, static button image of object, bounding square, object name text,*/
+
+    /**
+     * @brief Inherited from the sf::Drawable class, so that the button can be drawn as window.draw(Button).
+     * Draws the static tower image of object, bounding square, object attribute texts.
+     * 
+     * @param target 
+     * @param states 
+     */
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
-    // for drawing background for tower texture
+    /**
+     * @brief a background for tower texture.
+     * 
+     */
     sf::RectangleShape _img_background;
 
-    // on button
+    /**
+     * @brief a sprite for the static tower image.
+     * 
+     */
     sf::Sprite _drawable_tower;
     
-    // to show image behind mouse while dragging, use blurred image of the same image
+    /**
+     * @brief a sprite for the tower image following the mouse when dragging.
+     * 
+     */
     sf::Sprite _drawable_dragging_tower;
 
-
-    // draw as emblems
+    /**
+     * @brief a sprite for the static tower image.
+     * 
+     */
     sf::Sprite _hp_img;
+
+    /**
+     * @brief A sprite for displaying damage image.
+     * 
+     */
     sf::Sprite _dmg_img;
+
+    /**
+     * @brief A sprite for displaying the range image
+     * 
+     */
     sf::Sprite _rng_img;
+
+    /**
+     * @brief A sprite for displaying the attack speed image.
+     * 
+     */
     sf::Sprite _atkspd_img;
 
+    /**
+     * @brief A text object for displaying the towers price.
+     * 
+     */
     sf::Text _price_text;
 
+    /**
+     * @brief a text object for displaying the hp of the tower.
+     * 
+     */
     sf::Text _hp_text;
+    
+    /**
+     * @brief a text object for displaying the damage of the tower.
+     * 
+     */
     sf::Text _dmg_text;
+    
+    /**
+     * @brief a text object for displaying the range of the tower.
+     * 
+     */
     sf::Text _rng_text;
+    
+    /**
+     * @brief a text object for displaying the attack speed of the tower.
+     * 
+     */
     sf::Text _atkspd_text;
 
-    // where mouse was released -> determine grid from this
+
+    /**
+     * @brief the position where the mouse was released when drag flag is set.
+     * 
+     */    
     sf::Vector2i _release_pos;
 
-    // mirroring the images with scale, results in offset with the image position, this corrects the position for both dragging and static images
-    // this should be same as the image size;
+    /**
+     * @brief size of the tower images.
+     * 
+     */
     float _img_size  = 60; 
+    /**
+     * @brief size of the attribute images (hp, dmg, etc.)
+     * 
+     */
     float _attr_img_size = 12;
 
-    // determine image of the button, text, what will be created what will the button represent
+    /**
+     * @brief tower's ObjectType
+     * 
+     */
     int _tower_type;
+
+    /**
+     * @brief tower's price, displayed in _price_text
+     * 
+     */
     int _tower_price;
 
-
+    /**
+     * @brief deterines if the button is usable.
+     * 
+     */
     bool _button_enabled;
 
-    // determines whether the image is dragged or not 
+    /**
+     * @brief determines if the image is dragged or not
+     * 
+     */
     bool _drag_flag;
 
-
-    // handles Tower textures, font, name, attribute values and images from given tower type
+    /**
+     * @brief handles Tower textures, font, name, attribute values and images from given tower type
+     * 
+     */
     ResourceHandler& _rh;
 
 };

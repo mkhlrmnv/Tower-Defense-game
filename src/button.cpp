@@ -1,13 +1,6 @@
 #include "button.hpp"
 
-Button::Button(): 
-    _size({0,0}),
-    _position({0,0}),
-    _button_fill_color(sf::Color::White),
-    _button_outline_color(sf::Color::White),
-    _text(), 
-    _button_pressed(false),
-    _button(){}
+
 
 Button::Button(const std::string& label, sf::Vector2f size, sf::Vector2f position, sf::Color fill_color, sf::Color outline_color, const sf::Font& font): 
 _size(size), _position(position), _button_fill_color(fill_color), _button_outline_color(outline_color), _text(), _button_pressed(false){
@@ -23,19 +16,6 @@ _size(size), _position(position), _button_fill_color(fill_color), _button_outlin
     _text.setFillColor(_button_outline_color); 
     _text.setString(label);
     _text.setPosition(_button.getPosition());
-    
-    
-    /* 
-    std::cout << "_text.getGlobalBounds().height " << _text.getGlobalBounds().height << std::endl;
-    std::cout << "_text.getGlobalBounds().width " << _text.getGlobalBounds().width << std::endl;
-    std::cout << "_text.getGlobalBounds().left " << _text.getGlobalBounds().left << std::endl;
-    std::cout << "_text.getGlobalBounds().top " << _text.getGlobalBounds().top << std::endl;
-
-    std::cout << "_text.getLocalBounds().height " << _text.getLocalBounds().height << std::endl;
-    std::cout << "_text.getLocalBounds().width " << _text.getLocalBounds().width << std::endl;
-    std::cout << "_text.getLocalBounds().left " << _text.getLocalBounds().left << std::endl;
-    std::cout << "_text.getLocalBounds().top " << _text.getLocalBounds().top << std::endl;
-    */
     
 }
 
@@ -114,22 +94,7 @@ bool Button::inside_grid(sf::Vector2i mouse_pos, Level& lv){
 
     int res = lv.get_square_size()*10;
     
-    // dont care to flip to level as grid is a square
-    if(x>0 && x<res && y>0 && y<800){
-        return true;
-    }else{
-        return false;
-    }
-}
-
-bool Button::inside_grid(sf::Vector2f window_coords, Level& lv){
-    
-    int x = static_cast<int>(window_coords.x);
-    int y = static_cast<int>(window_coords.y);
-    
-    int res = lv.get_square_size()*10;
-    
-    // dont need flip to level coords as grid is a square
+    //no need to flip to level as grid is a square
     if(x>0 && x<res && y>0 && y<800){
         return true;
     }else{
@@ -153,35 +118,11 @@ std::pair<int, int> Button::window_coords_to_grid_index(sf::Vector2i mouse_pos, 
     return grid_index;
 }
 
-std::pair<int, int> Button::window_coords_to_grid_index(sf::Vector2f window_coords, Level& lv){
-    
-
-    // NOTE: pass only coords inside game 0<=coord<=800  
-
-    int col = floor(window_coords.x / lv.get_square_size());
-    int row = floor(window_coords.y / lv.get_square_size());
-
-    if(row<0 && row>9 && col<0 && col>9){
-        std::cout << "in Button::window_coords_to_grid_index - position out of grid" << std::endl; 
-    };
-
-    std::pair<int, int> grid_index = std::make_pair(row, col);
-    return grid_index;
-}
 
 Vector2D Button::window_coords_to_level_coords(sf::Vector2i mouse_pos){
     
     int x = mouse_pos.y;
     int y = mouse_pos.x;
-
-    return Vector2D(x,y);
-    
-}
-
-Vector2D Button::window_coords_to_level_coords(sf::Vector2f window_coords){
-    
-    int x = static_cast<int>(window_coords.y);
-    int y = static_cast<int>(window_coords.x);
 
     return Vector2D(x,y);
     

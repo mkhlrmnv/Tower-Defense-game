@@ -45,7 +45,7 @@ namespace GameState{
 
 
 /**
- * @brief A class for running the game. Opens a window in which a game loop handles user inputs, updates game state and draws game entities.
+ * @brief A class for running the game. Opens a window in which a game loop handles user input key, updates game state and draws game entities. 
  */
 class Game{
 public:
