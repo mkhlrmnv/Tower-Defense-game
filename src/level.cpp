@@ -1,4 +1,19 @@
 #include "level.hpp"
+#include "basic_enemy.hpp"
+#include "aoe_tower.hpp"
+#include "archer_tower.hpp"
+#include "mud_mage_tower.hpp"
+#include "water_mage_tower.hpp"
+#include "boss_enemy.hpp"
+#include "demon_enemy.hpp"
+#include "fastboy_enemy.hpp"
+#include "fogmage_enemy.hpp"
+#include "healer_enemy.hpp"
+#include "inferno_enemy.hpp"
+#include "repel_tower.hpp"
+#include "sceleton_enemy.hpp"
+#include "sniper_tower.hpp"
+#include "tank_enemy.hpp"
 
 // Initialize new level
 Level::Level(int resolution, int cash, int lives):
@@ -29,6 +44,10 @@ void Level::plus_round() {
     _round++;
 }
 
+int Level::get_square_size() const{
+    return _square_size;
+}
+
 // Makes new grid
 void Level::make_grid() {
     if (!_grid.empty()){ // Deletes current grid if its not empty
@@ -54,6 +73,7 @@ void Level::make_grid() {
     } 
 }
 
+// Functions below handels everything related to cash, round, etc. 
 void Level::add_cash(int how_much){
     _cash += how_much;
 }
@@ -74,9 +94,16 @@ std::vector<Enemy*> Level::get_enemies() const{
     return _enemies;
 }
 
+<<<<<<< HEAD
 bool Level::add_enemy(Enemy* enemy){
     int row = floor(enemy->get_position().y / _square_size);
     int col = floor(enemy->get_position().x / _square_size);
+=======
+// functions below handels everythign related to enemies and vector of them
+bool Level::add_enemy(Enemy* enemy){
+    int col = floor(enemy->get_position().x / _square_size);
+    int row = floor(enemy->get_position().y / _square_size);
+>>>>>>> bc314f0c80edd1a43211ae786e65d3543ca5d1d9
     if (_grid[col][row]->get_occupied() == road){
         _enemies.push_back(enemy);
         return true;
@@ -84,10 +111,54 @@ bool Level::add_enemy(Enemy* enemy){
     return false;
 }
 
+<<<<<<< HEAD
+=======
+bool Level::add_enemy_by_type(int type, Vector2D pos){
+    switch (type)
+    {
+    case ObjectTypes::NoobSkeleton_NoAttack:
+        return add_enemy(new Sceleton(*this, pos));
+    case ObjectTypes::NoobDemon_CanAttack:
+        return add_enemy(new Demon(*this, pos));
+    case ObjectTypes::FastBoy:
+        return add_enemy(new Fast_Boy(*this, pos));
+    case ObjectTypes::FogMage:
+        return add_enemy(new Fog_Mage(*this, pos));
+    case ObjectTypes::HealerPriest:
+        return add_enemy(new Healer(*this, pos));
+    case ObjectTypes::InfernoMage:
+        return add_enemy(new Inferno(*this, pos));
+    case ObjectTypes::TankOrc:
+        return add_enemy(new Tank(*this, pos));
+    case ObjectTypes::BossKnight:
+        return add_enemy(new Boss(*this, pos));
+    default:
+        break;
+    }
+    return false;
+}
+
+bool Level::remove_enemy(Enemy* enemy){
+    for (size_t i = 0; i < _enemies.size(); i++)
+    {
+        if (_enemies[i]->get_position() == enemy->get_position() && _enemies[i]->get_health() == enemy->get_health()){
+            delete _enemies[i];
+            _enemies.erase(_enemies.begin() + i);
+            return true;
+        }
+    }
+    return false;
+}
+
+>>>>>>> bc314f0c80edd1a43211ae786e65d3543ca5d1d9
 std::vector<Tower*> Level::get_towers() const{
     return _towers;
 }
 
+<<<<<<< HEAD
+=======
+// Functions below handels everything related to towers
+>>>>>>> bc314f0c80edd1a43211ae786e65d3543ca5d1d9
 bool Level::add_tower(Tower* tower){
     int row = floor(tower->get_position().y / _square_size);
     int col = floor(tower->get_position().x / _square_size);
@@ -98,12 +169,99 @@ bool Level::add_tower(Tower* tower){
     return false;
 }
 
+<<<<<<< HEAD
 void Level::print_objects(){
     for (auto* e : _enemies){
         std::cout << typeid(e).name() << " in point " << e->get_position() << std::endl;
     }
     for (auto* t : _towers){
         std::cout << typeid(t).name() << " in point " << t->get_position() << std::endl;
+=======
+
+// TODO: Mud and water mage when classes are ready
+bool Level::add_tower_by_type(int type, Vector2D pos){
+    Vector2D center = Vector2D(get_square_by_pos(pos)->get_center().x, get_square_by_pos(pos)->get_center().y);
+
+    switch (type)
+    {
+    case ObjectTypes::ArcherTower:
+        return add_tower(new Archer_Tower(*this, center));
+    case ObjectTypes::AoeTower:
+        return add_tower(new Aoe_Tower(*this, center));
+    case ObjectTypes::MudMageTower:
+        return add_tower(new Mud_Mage_Tower(*this, center));
+    case ObjectTypes::RepelMageTower:
+        return add_tower(new Repel_Tower(*this, center));
+    case ObjectTypes::SniperTower:
+        return add_tower(new Sniper_Tower(*this, center));
+    case ObjectTypes::WaterMageTower:
+        return add_tower(new Water_Mage_Tower(*this, center));
+    default:
+        break;
+    }
+    return false;
+}
+
+bool Level::remove_tower(Tower* tower){
+    for (size_t i = 0; i < _towers.size(); i++)
+    {
+        if (_towers[i]->get_position() == tower->get_position()){
+            delete _towers[i];
+            _towers.erase(_towers.begin() + i);
+            return true;
+        }
+    }
+    return false;
+}
+
+// returns pair where first is current column and second is current row
+std::pair<int, int> Level::current_row_col(Object* obj){
+    int col = floor(obj->get_position().x / _square_size);
+    int row = floor(obj->get_position().y / _square_size);
+    return std::make_pair(col, row);
+}
+
+// returns square where is object
+Square* Level::current_square(Object* obj){
+    std::pair<int, int> row_col = current_row_col(obj);
+    return _grid[row_col.first][row_col.second];
+}
+
+Square* Level::get_square_by_pos(Vector2D pos){
+    int col = floor(pos.x / _square_size);
+    int row = floor(pos.y / _square_size);
+    return _grid[col][row];
+}
+
+/* returns vector with directions in which are road squares
+Usually size of vector is 2 because if enemy isn't in first or last road square
+there are always two ways to go
+*/ 
+std::vector<Direction> Level::next_road(Enemy* enemy){
+    std::pair<int, int> row_col = current_row_col(enemy);
+    std::vector<Direction> list_of_road_squares;
+    if ((row_col.first + 1) < 10 && _grid[row_col.first + 1][row_col.second]->get_occupied() == road){
+        list_of_road_squares.push_back(right);
+    }
+    if ((row_col.first - 1) >= 0 && _grid[row_col.first - 1][row_col.second]->get_occupied() == road){
+        list_of_road_squares.push_back(left);
+    }
+    if ((row_col.second + 1) < 10  && _grid[row_col.first][row_col.second + 1]->get_occupied() == road){
+        list_of_road_squares.push_back(down);
+    }
+    if ((row_col.second - 1) >= 10 && _grid[row_col.first][row_col.second - 1]->get_occupied() == road){
+        list_of_road_squares.push_back(up);
+    }
+    return list_of_road_squares;
+}
+
+void Level::print_objects(){
+    for (auto* e : _enemies){
+        std::cout << typeid(e).name() << " in point " << e->get_position() << " health: " << e->get_health() << std::endl;
+    }
+    for (auto* t : _towers){
+        std::cout << typeid(t).name() << " in point " << t->get_position()<< " health: " << t->get_health() << std::endl;
+>>>>>>> bc314f0c80edd1a43211ae786e65d3543ca5d1d9
     }
 }
 
@@ -125,6 +283,12 @@ int Level::read_file(const std::string& file_name){
                 c = file.get();
             }
 
+            // sets variable first road to represent square where is first peace
+            // of road
+            if (c == '=' && j == 0){
+                _first_road = _grid[i][j];
+            }
+
             if (c == '#'){
                 _grid[i][j]->occupy_by_grass(); // if char is # occupy square with grass
             } 
@@ -135,6 +299,7 @@ int Level::read_file(const std::string& file_name){
             }
         } 
     }
+    file.close();
     return 1;
 }
 
@@ -162,6 +327,7 @@ int Level::save_to_file(const std::string& file_name){
             file << std::endl;
         }
     }
+    file.close();
     return 1;
 }
 
@@ -204,7 +370,7 @@ std::pair<int, int> Level::can_go_notstart(Direction dir, std::vector<Direction>
     {
     case up:
         if (prev != down && sec_prev != down && row != 0){
-            /* 
+            /*
             if direction is up and previous and next to previous
             isn't down and if we are not on top row we can move up
             */
@@ -252,12 +418,7 @@ std::pair<int, int> Level::can_go_start(Direction dir, std::vector<Direction> pr
         switch (dir) // switch case for direction
         {
         case up:
-            if (prev_dirs.empty() && row != 0){
-                /*
-                If its fist move and its not top row, can move up
-                */
-                pair.first--;
-            } else if (!prev_dirs.empty() && prev_dirs[0] != down && row != 0){
+            if (!prev_dirs.empty() && prev_dirs[0] != down && row != 0){
                 /*
                 If its not first move, previous direction isn't down
                 and its not top row we can move up
@@ -268,12 +429,7 @@ std::pair<int, int> Level::can_go_start(Direction dir, std::vector<Direction> pr
             }
             break;
         case down:
-            if (prev_dirs.empty() && row != 9){
-                /*
-                If its fist move and its not bottom row, can move down
-                */
-                pair.first++;
-            } else if (!prev_dirs.empty() && prev_dirs[0] != up && row != 9){
+            if (!prev_dirs.empty() && prev_dirs[0] != up && row != 9){
                 /*
                 If its not first move, previous direction isn't up
                 and its not bottom row we can move down
@@ -292,7 +448,7 @@ std::pair<int, int> Level::can_go_start(Direction dir, std::vector<Direction> pr
         default:
             break;
         }
-        return pair;
+    return pair;
 }
 
 bool Level::randomly_generate(){
@@ -304,6 +460,10 @@ bool Level::randomly_generate(){
     
     int cout_left = 0;
     int max_left = 4;
+
+    // sets variable first road to represent square where is first peace
+    // of road
+    _first_road = _grid[currentRow][0];
 
     Direction dir;
     std::vector<Direction> prev_dirs;
@@ -353,4 +513,8 @@ bool Level::randomly_generate(){
         //std::cout << dir << " " << roadLength << std::endl;
         }
     return false;
+}
+
+Square* Level::get_first_road(){
+    return _first_road;
 }

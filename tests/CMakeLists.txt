@@ -5,6 +5,7 @@ set(TEST_FILES
     LevelTests.cpp
     ObjectTests.cpp
     SquareTests.cpp
+    EnemyTests.cpp
 
     # Add all your test files here
 )
