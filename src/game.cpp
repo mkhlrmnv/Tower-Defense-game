@@ -4,7 +4,6 @@
 
 //TODO: balance game and update tower attribute values in resource handle for tower drag buttons!
 
-//TODO: remove redundant parts?
 
 Game::Game(): 
     _game_resolution(800),
