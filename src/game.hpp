@@ -46,8 +46,6 @@ namespace GameState{
 
 /**
  * @brief A class for running the game. Opens a window in which a game loop handles user input key, updates game state and draws game entities. 
- * Currently only draws place holder game entities. 
- * check SFML Game Development.pdf from google.
  */
 class Game{
 public:
