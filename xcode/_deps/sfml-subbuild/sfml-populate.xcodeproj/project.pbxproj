@@ -1,0 +1,631 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		595E089C6D4643E88D0A0F61 /* ALL_BUILD */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = FDB784B777734226BC5F8B07 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */;
+			buildPhases = (
+				6AC812D187FFDEBC76B0120C /* Generate CMakeFiles/ALL_BUILD */,
+			);
+			dependencies = (
+				A2968A3348C04797BF451099 /* PBXTargetDependency */,
+				B5D770FBAAE44759AE938010 /* PBXTargetDependency */,
+			);
+			name = ALL_BUILD;
+			productName = ALL_BUILD;
+		};
+		6BE89D20DF324200BAAFBBA3 /* ZERO_CHECK */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 30452F2F57FB4D3092527681 /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */;
+			buildPhases = (
+				F96B7F8B3BB0F8BC53BD5C44 /* Generate CMakeFiles/ZERO_CHECK */,
+			);
+			dependencies = (
+			);
+			name = ZERO_CHECK;
+			productName = ZERO_CHECK;
+		};
+		997476C6BB36411BBFD34E82 /* sfml-populate */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = C2759EF4D8104F77B5623213 /* Build configuration list for PBXAggregateTarget "sfml-populate" */;
+			buildPhases = (
+				997BAE1A104C93F4F53B45AB /* Generate sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-mkdir */,
+				F1E804DE46B690B810D72FB3 /* Generate sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-download */,
+				8B6F0CF4750104A139EE7174 /* Generate sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-update */,
+				E4D5855763F575C4165A6906 /* Generate sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-patch */,
+				EC17A2439EC81F68927D2A01 /* Generate sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-configure */,
+				088567AD00CE48A260B7B1A6 /* Generate sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-build */,
+				F6A0EF2248F65B0A8D02FFC3 /* Generate sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-install */,
+				EC3EE75770C98FC5DA79CD75 /* Generate sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-test */,
+				8A039014F66390203B7D051D /* Generate CMakeFiles/Debug/sfml-populate-complete */,
+				0BA78252A9B3F1F05A02735C /* Generate CMakeFiles/sfml-populate */,
+			);
+			dependencies = (
+				FFE07E0786F04289B913B4E3 /* PBXTargetDependency */,
+			);
+			name = "sfml-populate";
+			productName = "sfml-populate";
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildStyle section */
+		1A2282ACE19B496A86A0F8B2 /* Debug */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Debug;
+		};
+/* End PBXBuildStyle section */
+
+/* Begin PBXContainerItemProxy section */
+		0A6B3B2B865F44E08B0EE0D2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9EC6B578B0504E05BD3A577C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 997476C6BB36411BBFD34E82;
+			remoteInfo = "sfml-populate";
+		};
+		881811A3B3114BF59BFFFB8A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9EC6B578B0504E05BD3A577C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6BE89D20DF324200BAAFBBA3;
+			remoteInfo = ZERO_CHECK;
+		};
+		F2046383A02B4441BB37919D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9EC6B578B0504E05BD3A577C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6BE89D20DF324200BAAFBBA3;
+			remoteInfo = ZERO_CHECK;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		59E27ECDE7FF40D6910446D3 /* /Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		5DE70F5649E344B7A2452D04 /* /Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		0A8635A993CD4952A3452EA4 /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		23EB09F819CD42FB844CA5A1 = {
+			isa = PBXGroup;
+			children = (
+				9B501D74D14A450BB373600B /* ExternalProjectTargets */,
+				9897B7D1D9434FBBA35E0E37 /* ALL_BUILD */,
+				7B5820659D454669BE05AD4C /* Products */,
+				2DEA9BCC27D948B6A5007B24 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		2DEA9BCC27D948B6A5007B24 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7B5820659D454669BE05AD4C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9897B7D1D9434FBBA35E0E37 /* ALL_BUILD */ = {
+			isa = PBXGroup;
+			children = (
+				0A8635A993CD4952A3452EA4 /* CMake Rules */,
+				5DE70F5649E344B7A2452D04 /* /Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/CMakeLists.txt */,
+			);
+			name = ALL_BUILD;
+			sourceTree = "<group>";
+		};
+		9B501D74D14A450BB373600B /* ExternalProjectTargets */ = {
+			isa = PBXGroup;
+			children = (
+				F56A0830A9714F919FD395C2 /* sfml-populate */,
+			);
+			name = ExternalProjectTargets;
+			sourceTree = "<group>";
+		};
+		CDBF6B4B5F47471F927929B6 /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		D86319B0CB964612AEF33EC7 /* sfml-populate */ = {
+			isa = PBXGroup;
+			children = (
+				CDBF6B4B5F47471F927929B6 /* CMake Rules */,
+				59E27ECDE7FF40D6910446D3 /* /Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/CMakeLists.txt */,
+			);
+			name = "sfml-populate";
+			sourceTree = "<group>";
+		};
+		F56A0830A9714F919FD395C2 /* sfml-populate */ = {
+			isa = PBXGroup;
+			children = (
+				D86319B0CB964612AEF33EC7 /* sfml-populate */,
+			);
+			name = "sfml-populate";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+		9EC6B578B0504E05BD3A577C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1500;
+			};
+			buildConfigurationList = FB544919C3C045F88E27AE47 /* Build configuration list for PBXProject "sfml-populate" */;
+			buildSettings = {
+			};
+			buildStyles = (
+				1A2282ACE19B496A86A0F8B2 /* Debug */,
+			);
+			compatibilityVersion = "Xcode 3.2";
+			hasScannedForEncodings = 0;
+			mainGroup = 23EB09F819CD42FB844CA5A1;
+			projectDirPath = .;
+			projectRoot = "";
+			targets = (
+				595E089C6D4643E88D0A0F61 /* ALL_BUILD */,
+				6BE89D20DF324200BAAFBBA3 /* ZERO_CHECK */,
+				997476C6BB36411BBFD34E82 /* sfml-populate */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		088567AD00CE48A260B7B1A6 /* Generate sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-build */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+"/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-configure"			);
+			name = "Generate sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-build";
+			outputPaths = (
+"/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-build"			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e
+if test \"$CONFIGURATION\" = \"Debug\"; then :
+  cd /Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-build
+  /opt/homebrew/Cellar/cmake/3.27.7/bin/cmake -E echo_append
+  /opt/homebrew/Cellar/cmake/3.27.7/bin/cmake -E touch /Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-build
+fi
+";
+			showEnvVarsInLog = 0;
+		};
+		0BA78252A9B3F1F05A02735C /* Generate CMakeFiles/sfml-populate */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+"/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/CMakeFiles/Debug/sfml-populate-complete"			);
+			name = "Generate CMakeFiles/sfml-populate";
+			outputPaths = (
+"/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/CMakeFiles/sfml-populate"			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e
+if test \"$CONFIGURATION\" = \"Debug\"; then :
+  cd /Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild
+fi
+";
+			showEnvVarsInLog = 0;
+		};
+		3C0110FC8322DE7E50886E21 = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		6AC812D187FFDEBC76B0120C /* Generate CMakeFiles/ALL_BUILD */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate CMakeFiles/ALL_BUILD";
+			outputPaths = (
+"/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/CMakeFiles/ALL_BUILD"			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e
+if test \"$CONFIGURATION\" = \"Debug\"; then :
+  cd /Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild
+  echo Build\\ all\\ projects
+fi
+";
+			showEnvVarsInLog = 0;
+		};
+		8A039014F66390203B7D051D /* Generate CMakeFiles/Debug/sfml-populate-complete */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+"/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-build","/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-configure","/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-download","/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-install","/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-mkdir","/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-patch","/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-test","/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-update"			);
+			name = "Generate CMakeFiles/Debug/sfml-populate-complete";
+			outputPaths = (
+"/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/CMakeFiles/Debug/sfml-populate-complete"			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e
+if test \"$CONFIGURATION\" = \"Debug\"; then :
+  cd /Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild
+  /opt/homebrew/Cellar/cmake/3.27.7/bin/cmake -E make_directory /Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/CMakeFiles/Debug
+  /opt/homebrew/Cellar/cmake/3.27.7/bin/cmake -E touch /Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/CMakeFiles/Debug/sfml-populate-complete
+  /opt/homebrew/Cellar/cmake/3.27.7/bin/cmake -E touch /Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-done
+fi
+";
+			showEnvVarsInLog = 0;
+		};
+		8B6F0CF4750104A139EE7174 /* Generate sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-update */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+"/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-download","/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-update-info.txt","/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/sfml-populate-prefix/tmp/sfml-populate-gitupdate.cmake"			);
+			name = "Generate sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-update";
+			outputPaths = (
+"/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-update"			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e
+if test \"$CONFIGURATION\" = \"Debug\"; then :
+  cd /Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-src
+  /opt/homebrew/Cellar/cmake/3.27.7/bin/cmake -Dcan_fetch=YES -P /Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/sfml-populate-prefix/tmp/sfml-populate-gitupdate.cmake
+fi
+";
+			showEnvVarsInLog = 0;
+		};
+		997BAE1A104C93F4F53B45AB /* Generate sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-mkdir */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-mkdir";
+			outputPaths = (
+"/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-mkdir"			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e
+if test \"$CONFIGURATION\" = \"Debug\"; then :
+  cd /Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild
+  /opt/homebrew/Cellar/cmake/3.27.7/bin/cmake -Dcfgdir=/Debug -P /Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/sfml-populate-prefix/tmp/sfml-populate-mkdirs.cmake
+  /opt/homebrew/Cellar/cmake/3.27.7/bin/cmake -E touch /Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-mkdir
+fi
+";
+			showEnvVarsInLog = 0;
+		};
+		9B50530E35CC49C82C2FACCF = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		E4D5855763F575C4165A6906 /* Generate sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-patch */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+"/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-update","/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-patch-info.txt"			);
+			name = "Generate sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-patch";
+			outputPaths = (
+"/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-patch"			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e
+if test \"$CONFIGURATION\" = \"Debug\"; then :
+  cd /Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild
+  /opt/homebrew/Cellar/cmake/3.27.7/bin/cmake -E echo_append
+  /opt/homebrew/Cellar/cmake/3.27.7/bin/cmake -E touch /Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-patch
+fi
+";
+			showEnvVarsInLog = 0;
+		};
+		EC17A2439EC81F68927D2A01 /* Generate sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-configure */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+"/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-patch","/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/sfml-populate-prefix/tmp/sfml-populate-cfgcmd.txt"			);
+			name = "Generate sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-configure";
+			outputPaths = (
+"/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-configure"			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e
+if test \"$CONFIGURATION\" = \"Debug\"; then :
+  cd /Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-build
+  /opt/homebrew/Cellar/cmake/3.27.7/bin/cmake -E echo_append
+  /opt/homebrew/Cellar/cmake/3.27.7/bin/cmake -E touch /Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-configure
+fi
+";
+			showEnvVarsInLog = 0;
+		};
+		EC3EE75770C98FC5DA79CD75 /* Generate sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-test */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+"/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-install"			);
+			name = "Generate sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-test";
+			outputPaths = (
+"/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-test"			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e
+if test \"$CONFIGURATION\" = \"Debug\"; then :
+  cd /Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-build
+  /opt/homebrew/Cellar/cmake/3.27.7/bin/cmake -E echo_append
+  /opt/homebrew/Cellar/cmake/3.27.7/bin/cmake -E touch /Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-test
+fi
+";
+			showEnvVarsInLog = 0;
+		};
+		ECFABDB909A10F90080D6000 = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		F1E804DE46B690B810D72FB3 /* Generate sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-download */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+"/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-mkdir","/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/sfml-populate-gitinfo.txt"			);
+			name = "Generate sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-download";
+			outputPaths = (
+"/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-download"			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e
+if test \"$CONFIGURATION\" = \"Debug\"; then :
+  cd /Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps
+  /opt/homebrew/Cellar/cmake/3.27.7/bin/cmake -P /Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/sfml-populate-prefix/tmp/sfml-populate-gitclone.cmake
+  /opt/homebrew/Cellar/cmake/3.27.7/bin/cmake -E touch /Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-download
+fi
+";
+			showEnvVarsInLog = 0;
+		};
+		F6A0EF2248F65B0A8D02FFC3 /* Generate sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-install */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+"/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-build"			);
+			name = "Generate sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-install";
+			outputPaths = (
+"/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-install"			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e
+if test \"$CONFIGURATION\" = \"Debug\"; then :
+  cd /Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-build
+  /opt/homebrew/Cellar/cmake/3.27.7/bin/cmake -E echo_append
+  /opt/homebrew/Cellar/cmake/3.27.7/bin/cmake -E touch /Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-install
+fi
+";
+			showEnvVarsInLog = 0;
+		};
+		F96B7F8B3BB0F8BC53BD5C44 /* Generate CMakeFiles/ZERO_CHECK */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate CMakeFiles/ZERO_CHECK";
+			outputPaths = (
+"/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/CMakeFiles/ZERO_CHECK"			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e
+if test \"$CONFIGURATION\" = \"Debug\"; then :
+  cd /Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild
+  make -f /Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/CMakeScripts/ReRunCMake.make
+fi
+";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A2968A3348C04797BF451099 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 997476C6BB36411BBFD34E82 /* sfml-populate */;
+			targetProxy = 0A6B3B2B865F44E08B0EE0D2 /* PBXContainerItemProxy */;
+		};
+		B5D770FBAAE44759AE938010 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6BE89D20DF324200BAAFBBA3 /* ZERO_CHECK */;
+			targetProxy = F2046383A02B4441BB37919D /* PBXContainerItemProxy */;
+		};
+		FFE07E0786F04289B913B4E3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6BE89D20DF324200BAAFBBA3 /* ZERO_CHECK */;
+			targetProxy = 881811A3B3114BF59BFFFB8A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		138257E9E7354DE1AB8AEDEF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.0.sdk;
+				SYMROOT = "/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/xcode/_deps/sfml-subbuild/build";
+			};
+			name = Debug;
+		};
+		159A796752FF40B2BBA33C8F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Debug;
+		};
+		4CA41E6B91A34D3AB8D9DAF8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = "sfml-populate";
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Debug;
+		};
+		ADD8C571B9C64D07AD914751 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		30452F2F57FB4D3092527681 /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADD8C571B9C64D07AD914751 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		C2759EF4D8104F77B5623213 /* Build configuration list for PBXAggregateTarget "sfml-populate" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4CA41E6B91A34D3AB8D9DAF8 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		FB544919C3C045F88E27AE47 /* Build configuration list for PBXProject "sfml-populate" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				138257E9E7354DE1AB8AEDEF /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		FDB784B777734226BC5F8B07 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				159A796752FF40B2BBA33C8F /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9EC6B578B0504E05BD3A577C /* Project object */;
+}
