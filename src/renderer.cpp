@@ -97,13 +97,18 @@ void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr, int frame, in
 
     // TODO: enemy depending value
     float scale_factor_enemy = 1.0f; // Adjust as needed
+    float renderedX, renderedY;
+
     // if flips texture if needed (if attacking ot the left for example)
-    _drawable_enemy.setScale((e_ptr->get_state() == State::walking_left || e_ptr->get_state() == State::attacking_left) ? scale_factor_enemy : -scale_factor_enemy, scale_factor_enemy);
-
-    // adjust coordinates to draw enemy by position of their feet
-    float renderedX = e_ptr->get_position().y + 20;
-    float renderedY = e_ptr->get_position().x - _drawable_enemy.getTexture()->getSize().y;
-
+    if (e_ptr->get_state() == State::walking_left || e_ptr->get_state() == State::attacking_left){
+        _drawable_enemy.setScale(-scale_factor_enemy, scale_factor_enemy);
+        renderedX = e_ptr->get_position().y + 20;
+        renderedY = e_ptr->get_position().x - _drawable_enemy.getTexture()->getSize().y;
+    } else {
+        _drawable_enemy.setScale(scale_factor_enemy, scale_factor_enemy);
+        renderedX = e_ptr->get_position().y - 20;
+        renderedY = e_ptr->get_position().x - _drawable_enemy.getTexture()->getSize().y;
+    }
     // Ensure enemy isn't drawn outside the field
     renderedX = std::max(renderedX, 1.0f);
     renderedY = std::max(renderedY, 1.0f);
