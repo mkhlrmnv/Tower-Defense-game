@@ -39,13 +39,26 @@ public:
         return !(*this == other);
     }
 
+    /**
+     * @brief Overriding addition operator (+) for Vector2D objects.
+     * 
+     * @param other Vector2D object to be added to the current Vector2D.
+     * @return Vector2D Resultant Vector2D object after addition.
+     */
     Vector2D operator+(const Vector2D& other) const {
         return Vector2D(x + other.x, y + other.y);
     }
 
+    /**
+     * @brief Overriding subtraction operator (-) for Vector2D objects.
+     * 
+     * @param other Vector2D object to be subtracted from the current Vector2D.
+     * @return Vector2D Resultant Vector2D object after subtraction.
+     */
     Vector2D operator-(const Vector2D& other) const {
         return Vector2D(x - other.x, y - other.y);
     }
+
     
     /**
      * @brief Overriding <<

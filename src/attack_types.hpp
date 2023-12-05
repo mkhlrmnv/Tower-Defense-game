@@ -4,17 +4,17 @@
 #include <string>
 #include <iostream>
 
-// #include "enemy.hpp"
-// #include "tower.hpp"
-
 class Tower;
 class Enemy;
 
-
-// TODO: WaterMage and MudMage
-namespace ObjectTypes
-{ 
-    enum Enemies{
+/**
+ * @brief Namespace containing enums for different enemy and tower types.
+ */
+namespace ObjectTypes {
+    /**
+     * @brief Enums representing different types of enemies.
+     */
+    enum Enemies {
         NoobSkeleton_NoAttack,
         NoobDemon_CanAttack,
         FastBoy,
@@ -24,7 +24,11 @@ namespace ObjectTypes
         TankOrc,
         BossKnight,
     };
-    enum Towers{
+
+    /**
+     * @brief Enums representing different types of towers.
+     */
+    enum Towers {
         AoeTower,
         ArcherTower,
         MudMageTower,
@@ -34,7 +38,13 @@ namespace ObjectTypes
     };
 }
 
+/**
+ * @brief Function to check the type multiplier between a tower and an enemy.
+ * 
+ * @param tower Pointer to the Tower object.
+ * @param enemy Pointer to the Enemy object.
+ * @return Double representing the type multiplier between the tower and enemy.
+ */
 double check_type_multiplier(Tower* tower, Enemy* enemy);
-
 
 #endif
