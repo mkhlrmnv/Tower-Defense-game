@@ -43,12 +43,22 @@ void ChooseLevelMenu::set_buttons(){
 
 }
 
+void ChooseLevelMenu::reset(){
+    _state = 1;
+    _level_number = -1;
+
+}
+
 int ChooseLevelMenu::get_state(){
     return _state;
 }
 
 void ChooseLevelMenu::disable_menu(){
     _menu_enabled = false;
+}
+
+void ChooseLevelMenu::enable_menu(){
+    _menu_enabled = true;
 }
 
 const std::string ChooseLevelMenu::get_level_to_load(){
