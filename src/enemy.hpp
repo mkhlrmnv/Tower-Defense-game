@@ -8,6 +8,20 @@
 */
 class Enemy : public Object {
 public:
+    /**
+     * @brief Constructor to initialize an Enemy object.
+     * 
+     * @param level Reference to the Level object.
+     * @param position Initial position of the Enemy (Vector2D).
+     * @param health Initial health points of the Enemy.
+     * @param damage Damage inflicted by the Enemy.
+     * @param range Range of attack for the Enemy.
+     * @param attack_speed Attack speed for the Enemy.
+     * @param type Type of the Enemy.
+     * @param speed Speed attribute of the Enemy.
+     * @param defense Defense attribute of the Enemy.
+     * @param size Size of the Enemy.
+     */
     Enemy(Level& level, Vector2D& position, int health, int damage, int range, int attack_speed, int type, int speed, int defense, int size);
 
     /**
@@ -34,8 +48,25 @@ public:
      * 
      * @return Integer representing the defense attribute.
      */
+    /**
+     * @brief Get the defense attribute of the Enemy.
+     * 
+     * @return Integer representing the defense attribute.
+     */
     int get_defense() const;
 
+    /**
+     * @brief Get the size of the Enemy.
+     * 
+     * @return Integer representing the size of the Enemy.
+     */
+    int get_size() const;
+
+    /**
+     * @brief Decrease the speed attribute of the Enemy.
+     * 
+     * @param amount Amount by which the speed is decreased.
+     */
     void lose_speed(int amount);
 
     /**

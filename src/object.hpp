@@ -13,10 +13,17 @@
 /**
  * @brief Forward declaration of level class.
  */
+/**
+ * @brief Forward declaration of level class.
+ */
 class Level;
 
 enum State{none, walking_right, walking_left, attacking_right, attacking_left, dying};
 
+
+/**
+ * @brief Class that defines the behavior of all objects in the game.
+ */
 
 /**
  * @brief Class that defines the behavior of all objects in the game.
@@ -69,8 +76,26 @@ public:
      * @return Integer representing the attack speed.
      */
     int get_attack_speed() const;
+
+    /**
+     * @brief Get the original attack speed of the object.
+     * 
+     * @return Integer representing the original attack speed.
+     */
     int get_original_attack_speed() const;
+
+    /**
+     * @brief Get the position of the object.
+     * 
+     * @return Vector2D object representing the position.
+     */
     const Vector2D get_position() const;
+
+    /**
+     * @brief Get the type of the object.
+     * 
+     * @return Integer representing the type of the object.
+     */
 
     /**
      * @brief Get the type of the object.
@@ -84,7 +109,19 @@ public:
      * 
      * @return Reference to the Level object.
      */
+
+    /**
+     * @brief Get a reference to the Level object associated with this object.
+     * 
+     * @return Reference to the Level object.
+     */
     Level& get_level_reference() const;
+
+    /**
+     * @brief Get the attack counter value of the object.
+     * 
+     * @return Integer representing the attack counter value.
+     */
 
     /**
      * @brief Get the attack counter value of the object.
@@ -93,6 +130,18 @@ public:
      */
     int get_attack_counter() const;
 
+    /**
+     * @brief Get the reset counter value of the object.
+     * 
+     * @return Integer representing the reset counter value.
+     */
+    int get_reset_counter() const;
+
+    /**
+     * @brief Set the position of the object.
+     * 
+     * @param position New position of the object (Vector2D).
+     */
     void set_position(const Vector2D& position);
 
     /**
@@ -102,8 +151,35 @@ public:
      */
     void set_attack_counter(const int amount);
 
+    /**
+     * @brief Set the reset counter value of the object.
+     * 
+     * @param amount New value for the reset counter.
+     */
+    void set_reset_counter(const int amount);
+
+    /**
+     * @brief Set the attack speed of the object.
+     * 
+     * @param amount New value for the attack speed.
+     */
+    void set_attack_speed(const int amount);
+
+    /**
+     * @brief Increment the attack counter value by one.
+     */
     void attack_counter_up();
 
+    /**
+     * @brief Increment the reset counter value by one.
+     */
+    void reset_counter_up();
+
+    /**
+     * @brief Increase the damage value of the object.
+     * 
+     * @param amount Amount by which the damage is increased.
+     */
     void gain_damage(int amount);
 
     /**
@@ -155,13 +231,6 @@ public:
      * @return State enum representing the current state.
      */
     State get_state();
-
-    /**
-     * @brief Get the reset wait time for all objects.
-     * 
-     * @return Integer the amount of time to wait.
-     */
-    int get_wait_time() const;
 
     /**
      * @brief Set the state of the object.
