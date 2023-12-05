@@ -56,6 +56,13 @@ void Enemy::set_prev_pos(Vector2D pos){
 }
 
 void Enemy::move() {
+    if (get_reset_counter() >= 100) {
+        set_attack_speed(get_original_attack_speed());
+        set_speed(get_original_speed());
+        set_reset_counter(0);
+    } else {
+        reset_counter_up();
+    }
 
     std::vector<Vector2D> route = get_route();
     // if current square center is different then previous center of previous position square
