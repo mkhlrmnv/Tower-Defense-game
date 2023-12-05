@@ -75,7 +75,7 @@ void Upgrade::setup_text_line(sf::Sprite& sprite, sf::Text &text, sf::Vector2f p
 
     float img_pos_y_tweak = 2;
 
-    float img_size = 80;
+    float img_size = 16;
     float scale = (char_size+1.f) / img_size;
 
     sprite.setTexture(_rh.get_texture_attribute(attr_type));
