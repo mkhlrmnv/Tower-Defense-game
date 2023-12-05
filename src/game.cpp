@@ -10,13 +10,14 @@ Game::Game():
     _game_resolution(800),
     _side_bar_width(300),
     _window(),
-    _level(_game_resolution, 500, 30),
+    _level(_game_resolution, _starting_cash, _starting_lives),
     _rh(),
     _renderer(_rh),
     _main_menu(_rh, _level),
     _level_menu(_rh, _level),
     _side_menu(float(_game_resolution), float(_side_bar_width), _rh, _level),
-    _upgrade(800, _rh, _level, 50){
+    _upgrade(_game_resolution, _rh, _level, 50),
+    _reset_clock(){
 }
 
 // Returns resolution of the game
@@ -29,28 +30,6 @@ int Game::get_side_bar_width() const {
     return _side_bar_width;
 }
 
-// generated new level
-int Game::generate_chosen_level_style(int chosen_lv){
-    // TODO: REDUNDANT REMOVE 
-    // TODO: add choosing feature, in a game start menu
-     _level.make_grid();
-    if(chosen_lv == LevelSelection::random){
-        if(!_level.randomly_generate()){
-            std::cout << "random level generation failed" <<std::endl;
-            return 0;
-        }else{
-            std::cout << "random level generation successful" <<std::endl;
-        }
-    }else if(chosen_lv == LevelSelection::load){
-        if(_level.read_file("../maps/example_map.txt")==-1){
-            std::cout << "level file read failed" <<std::endl;
-            return 0;
-        }else{
-            std::cout << "level file read successfull" <<std::endl;
-        }
-    }
-    return 1;
-}
 
 // opens new window
 void Game::open_window(){
@@ -104,10 +83,12 @@ void Game::update(){
         update_towers();
         _side_menu.update();
 
-        // transition to victory
+        // transition to victory, starts timer to transition back to start menu
         if(_rounds_to_survive < _level.get_round()){
             _game_state = GameState::Victory;
             _side_menu.pause();
+            _reset_clock.restart();
+
         }
     
     break;
@@ -127,13 +108,41 @@ void Game::update(){
             _side_menu.pause();
         }
 
-        // transition to game over when no lives left
+        // transition to game over when no lives left, starts timer to transition back to start menu
         if (_level.get_lives() < 1){
             _round_over = true;
             _game_state = GameState::GameOver;
             _side_menu.pause();
+            _reset_clock.restart();
         }
     
+    break;
+
+    case GameState::Victory :
+        _reset_time = _reset_clock.getElapsedTime();
+        if(_reset_time.asSeconds() > 10.f){
+            _game_state = GameState::StartMenu;
+            _main_menu.reset();
+            _main_menu.enable_menu();
+            _level_menu.reset();
+            _level.reset(_starting_cash, _starting_lives);
+        }
+        
+
+
+    break;
+
+    case GameState::GameOver :
+        _reset_time = _reset_clock.getElapsedTime();
+        if(_reset_time.asSeconds() > 10.f){
+            _game_state = GameState::StartMenu;
+            _main_menu.reset();
+            _main_menu.enable_menu();
+            _level_menu.reset();
+            _level.reset(_starting_cash, _starting_lives);
+        }
+        
+
     break;
 
     }
@@ -196,9 +205,9 @@ void Game::process_events(){
         
         case GameState::MapMenu:
 
+            _level_menu.enable_menu();
             _level_menu.handle_events(_window, event);
             _game_state = _level_menu.get_state();
-            std::cout<< "next state: " << _game_state << std::endl;
 
             // check game state transition
             if(_game_state != GameState::MapMenu){

@@ -33,8 +33,16 @@ void MainMenu::set_buttons(){
 
 }
 
+void MainMenu::reset(){
+    _state = 0;
+}
+
 void MainMenu::disable_menu(){
     _menu_enabled = false;
+}
+
+void MainMenu::enable_menu(){
+    _menu_enabled = true;
 }
 
 int MainMenu::get_state(){

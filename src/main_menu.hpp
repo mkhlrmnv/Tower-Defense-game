@@ -20,8 +20,10 @@ public:
 
     // stop update, handle_events, draw
     void disable_menu();
-    int get_state();
+    void enable_menu();
 
+    int get_state();
+    void reset();
     void handle_events(sf::RenderWindow& window, sf::Event& event);
 
 

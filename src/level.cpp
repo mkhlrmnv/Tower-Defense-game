@@ -17,7 +17,7 @@
 
 // Initialize new level
 Level::Level(int resolution, int cash, int lives):
-    _square_size(resolution/10), _round(0), _cash(cash), _lives(lives) { }
+    _square_size(resolution/10), _round(1), _cash(cash), _lives(lives) { }
 
 // Returns current round
 int Level::get_round() const {
@@ -98,6 +98,14 @@ void Level::reset(int start_cash, int start_lives){
     _round = 1;
 }
 
+void Level::reset(int start_cash, int start_lives){
+    remove_all_enemies();
+    remove_all_towers();
+    _cash = start_cash;
+    _lives = start_lives;
+    _round = 1;
+}
+
 std::vector<Enemy*> Level::get_enemies() const{
     return _enemies;
 }
@@ -157,53 +165,6 @@ void Level::remove_all_enemies(){
     _enemies.clear();
 }
 
-void Level::remove_all_enemies(){
-    for(auto enemy_ptr : _enemies){
-        delete enemy_ptr;
-    }
-    _enemies.clear();
-}
-
-<<<<<<< HEAD
-=======
-bool Level::add_enemy_by_type(int type, Vector2D pos){
-    switch (type)
-    {
-    case ObjectTypes::NoobSkeleton_NoAttack:
-        return add_enemy(new Sceleton(*this, pos));
-    case ObjectTypes::NoobDemon_CanAttack:
-        return add_enemy(new Demon(*this, pos));
-    case ObjectTypes::FastBoy:
-        return add_enemy(new Fast_Boy(*this, pos));
-    case ObjectTypes::FogMage:
-        return add_enemy(new Fog_Mage(*this, pos));
-    case ObjectTypes::HealerPriest:
-        return add_enemy(new Healer(*this, pos));
-    case ObjectTypes::InfernoMage:
-        return add_enemy(new Inferno(*this, pos));
-    case ObjectTypes::TankOrc:
-        return add_enemy(new Tank(*this, pos));
-    case ObjectTypes::BossKnight:
-        return add_enemy(new Boss(*this, pos));
-    default:
-        break;
-    }
-    return false;
-}
-
-bool Level::remove_enemy(Enemy* enemy){
-    for (size_t i = 0; i < _enemies.size(); i++)
-    {
-        if (_enemies[i]->get_position() == enemy->get_position() && _enemies[i]->get_health() == enemy->get_health()){
-            delete _enemies[i];
-            _enemies.erase(_enemies.begin() + i);
-            return true;
-        }
-    }
-    return false;
-}
-
->>>>>>> bc314f0c80edd1a43211ae786e65d3543ca5d1d9
 std::vector<Tower*> Level::get_towers() const{
     return _towers;
 }
@@ -248,6 +209,7 @@ bool Level::remove_tower(Tower* tower){
     for (size_t i = 0; i < _towers.size(); i++)
     {
         if (_towers[i]->get_position() == tower->get_position()){
+            current_square(_towers[i])->occupy_by_grass();
             delete _towers[i];
             _towers.erase(_towers.begin() + i);
             return true;
