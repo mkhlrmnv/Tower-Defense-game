@@ -5,7 +5,7 @@
 
 class Enemy: public Object {
 public:
-    Enemy(Level& level, Vector2D& position, int health, int damage, int range, int attack_speed, int type, int speed, int defense);
+    Enemy(Level& level, Vector2D& position, int health, int damage, int range, int attack_speed, int type, int speed, int defense, int size);
 
     ~Enemy() { }
 
@@ -13,6 +13,7 @@ public:
     int get_original_speed() const;
 
     int get_defense() const;
+    int get_size() const;
 
     void lose_speed(int amount);
     void set_speed(int amount);
@@ -36,6 +37,7 @@ private:
     int _speed;
     int _original_speed = 0;
     int _defense;
+    int _size;
     std::vector<Vector2D> _route;
 };
 
