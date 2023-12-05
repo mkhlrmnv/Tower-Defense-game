@@ -21,6 +21,9 @@
 
 # Shared objects (inc. Windows DLLs)
 
+#xcode
+xcode/
+
 
 #built folder
 /build/
