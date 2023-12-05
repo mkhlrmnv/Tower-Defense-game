@@ -93,18 +93,6 @@ public:
      */
     int get_attack_counter() const;
 
-    /**
-     * @brief Get the reset counter value of the object.
-     * 
-     * @return Integer representing the reset counter value.
-     */
-    int get_reset_counter() const;
-
-    /**
-     * @brief Set the position of the object.
-     * 
-     * @param position New position of the object (Vector2D).
-     */
     void set_position(const Vector2D& position);
 
     /**
@@ -114,42 +102,8 @@ public:
      */
     void set_attack_counter(const int amount);
 
-    /**
-     * @brief Set the reset counter value of the object.
-     * 
-     * @param amount New value for the reset counter.
-     */
-    void set_reset_counter(const int amount);
-
-    /**
-     * @brief Set the attack speed of the object.
-     * 
-     * @param amount New value for the attack speed.
-     */
-    void set_attack_speed(const int amount);
-
-    /**
-     * @brief Set the original attack speed of the object.
-     * 
-     * @param amount New value for the original attack speed.
-     */
-    void set_original_attack_speed(const int amount);
-
-    /**
-     * @brief Increment the attack counter value by one.
-     */
     void attack_counter_up();
 
-    /**
-     * @brief Increment the reset counter value by one.
-     */
-    void reset_counter_up();
-
-    /**
-     * @brief Increase the damage value of the object.
-     * 
-     * @param amount Amount by which the damage is increased.
-     */
     void gain_damage(int amount);
 
     /**
@@ -232,7 +186,6 @@ private:
     int _original_attack_speed = 0;
     int _attack_counter = 0;
     int _reset_counter = 0;
-    int _reset_wait_time = 100;
     Vector2D _position;
     int _type;
     State _state;

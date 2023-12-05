@@ -6,13 +6,13 @@ Water_Mage_Tower::Water_Mage_Tower(Level& current_level, Vector2D& position, int
         Tower(current_level, position, health, damage, range, attack_speed, type, price, level) {}
 
 bool Water_Mage_Tower::attack() {
-    if (get_reset_counter() >= get_wait_time()) {
+    if (get_reset_counter() >= 50) {
         set_attack_speed(get_original_attack_speed());
         set_reset_counter(0);
     } else {
         reset_counter_up();
     }
-
+    
     double multiplier;
     Level& level_reference = get_level_reference();
 
