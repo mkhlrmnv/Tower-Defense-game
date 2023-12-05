@@ -2,10 +2,6 @@
 #include <thread>
 #include <mutex>
 
-// TODO: Some kind of timer in between of round
-
-//TODO: are objects destoryed properly if transititon to end mid round?
-
 //TODO: balance game and update tower attribute values in resource handle for tower drag buttons!
 
 //TODO: remove redundant parts?
@@ -124,6 +120,7 @@ void Game::update(){
 
         // transition to paused after all enemies are dead
         if (_level.get_enemies().empty() && !_round_over && _level.get_lives() > 0) {
+            _level.add_cash(_basic_money * _level.get_round());
             _level.plus_round();
             _round_over = true;
             _game_state = GameState::Pause;
@@ -258,6 +255,7 @@ void Game::render(){
         break;
     
     case GameState::Round:
+        _round_over = false;
               // updates moving animations value if it is too high
         if (_enemy_move_animation > 4){
             _enemy_move_animation = 0;
@@ -292,7 +290,7 @@ void Game::render(){
             } 
         }
         break;
-
+    
     case GameState::Pause:
 
         //std::cout << "PAUSE STATE HAPPENS" << std::endl;
@@ -304,6 +302,10 @@ void Game::render(){
         _window.draw(_side_menu);
         _window.draw(_upgrade);
         _window.display(); // display the drawn entities
+        if (_round_over == false){
+            _level.add_cash(_basic_money * _level.get_round());
+            _round_over = true;
+        }
         break;
 
     case GameState::Victory:

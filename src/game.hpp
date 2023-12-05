@@ -170,5 +170,11 @@ private:
      * attack animations at the time
      */
     int _enemy_move_animation;
+
+    /**
+     * @brief basic amount of money given
+     */
+    int _basic_money = 50;
+
 }; 
 #endif
