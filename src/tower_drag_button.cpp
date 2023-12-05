@@ -227,7 +227,7 @@ void TowerDragButton::setup_attribute_image(int type, sf::Sprite& sprite, sf::Ve
     sprite.setTexture(_rh.get_texture_attribute(type));
     sprite.setPosition(pos);
 
-    float og_image_size = 80;
+    float og_image_size = 16;
     float scale = _attr_img_size / og_image_size;
     sprite.setScale(scale, scale);
 }

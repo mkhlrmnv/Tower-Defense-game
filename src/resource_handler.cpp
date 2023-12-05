@@ -112,17 +112,17 @@ void ResourceHandler::load_all_textures(){
     load_texture_tile(2, "../assets/textures/VerySmallSize_32x32/VerySmall_Tiles_32x32/House_32x32.png");
 
     //Attributes 
-    load_texture_attribute(TowerAttributes::ATKSPD, "../assets/textures/Attributes/Attack_Speed.png");
-    load_texture_attribute(TowerAttributes::HP,    "../assets/textures/Attributes/Health.png");
-    load_texture_attribute(TowerAttributes::MONEY, "../assets/textures/Attributes/Money.png");
-    load_texture_attribute(TowerAttributes::RNG,   "../assets/textures/Attributes/Range.png");
-    load_texture_attribute(TowerAttributes::DMG,   "../assets/textures/Attributes/Attack_Damage.png");
-    load_texture_attribute(TowerAttributes::ROUND, "../assets/textures/Attributes/Round_Marker.png");
+    load_texture_attribute(TowerAttributes::ATKSPD, "../assets/textures/Attributes/16x16/Attack_Speed.png");
+    load_texture_attribute(TowerAttributes::HP,    "../assets/textures/Attributes/16x16/Hitpoints.png");
+    load_texture_attribute(TowerAttributes::MONEY, "../assets/textures/Attributes/16x16/Money.png");
+    load_texture_attribute(TowerAttributes::RNG,   "../assets/textures/Attributes/16x16/Attack_Range.png");
+    load_texture_attribute(TowerAttributes::DMG,   "../assets/textures/Attributes/16x16/Attack_Damage.png");
+    load_texture_attribute(TowerAttributes::ROUND, "../assets/textures/Attributes/16x16/Round_Marker_New.png");
 
     //Menus
     load_texture_menu(0, "../assets/textures/Menu/Start_Menu_1.png");
     load_texture_menu(1, "../assets/textures/Menu/Start_Menu_2.png");
-    load_texture_menu(2, "../assets/textures/Menu/GUI.png");
+    load_texture_menu(2, "../assets/textures/Menu/GUI_New.png");
     load_texture_menu(3, "../assets/textures/Menu/Game_Over_Screen.png");
     load_texture_menu(4, "../assets/textures/Menu/You_Won_Screen.png");
     
