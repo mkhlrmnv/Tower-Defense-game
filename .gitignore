@@ -21,9 +21,6 @@
 
 # Shared objects (inc. Windows DLLs)
 
-#xcode
-xcode/
-
 
 #built folder
 /build/
@@ -62,3 +59,6 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+#xcode
+xcode/
