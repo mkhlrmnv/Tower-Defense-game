@@ -56,7 +56,7 @@ void Enemy::set_prev_pos(Vector2D pos){
 }
 
 void Enemy::move() {
-    if (get_reset_counter() >= get_wait_time()) {
+    if (get_reset_counter() >= 100) {
         set_attack_speed(get_original_attack_speed());
         set_speed(get_original_speed());
         set_reset_counter(0);
