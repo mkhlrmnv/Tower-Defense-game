@@ -5,6 +5,14 @@ Inferno::Inferno(Level& level, Vector2D& position, int health, int damage, int r
     Enemy(level, position, health, damage, range, attack_speed, type, speed, defense, size) {}
 
 bool Inferno::attack() {
+    if (get_reset_counter() >= 50) {
+        set_attack_speed(get_original_attack_speed());
+        set_speed(get_original_speed());
+        set_reset_counter(0);
+    } else {
+        reset_counter_up();
+    }
+    
     double multiplier;
     Level& level_reference = get_level_reference();
 

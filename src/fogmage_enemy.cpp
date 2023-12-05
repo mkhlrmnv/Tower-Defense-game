@@ -5,6 +5,14 @@ Fog_Mage::Fog_Mage(Level& level, Vector2D& position, int health, int damage, int
     Enemy(level, position, health, damage, range, attack_speed, type, speed, defense, size) {}
 
 bool Fog_Mage::attack() {
+    if (get_reset_counter() >= 50) {
+        set_attack_speed(get_original_attack_speed());
+        set_speed(get_original_speed());
+        set_reset_counter(0);
+    } else {
+        reset_counter_up();
+    }
+    
     Level& level_reference = get_level_reference();
 
     if (!level_reference.get_towers().empty()) {
@@ -21,11 +29,11 @@ bool Fog_Mage::attack() {
                 } else {
                     set_attack_counter(0);
                     if (tower->get_attack_speed() != tower->get_original_attack_speed() + 1) {
-                        tower->lose_attack_speed(1);
+                        tower->lose_attack_speed(tower->get_attack_speed() / 2);
                     }
                     counter++;
 
-                    if (counter >= 2) {
+                    if (counter >= 5) {
                         return true;
                     }
                 }
