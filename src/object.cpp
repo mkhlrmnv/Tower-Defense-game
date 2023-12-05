@@ -44,7 +44,7 @@ int Object::get_attack_counter() const {
 }
 
 int Object::get_reset_counter() const {
-    return _attack_counter;
+    return _reset_counter;
 }
 
 void Object::set_attack_counter(const int amount) {
