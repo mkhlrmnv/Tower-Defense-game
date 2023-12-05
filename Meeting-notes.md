@@ -311,50 +311,52 @@ Finishing touches
 
 ### ------------------------------------------------------------------------------------------------------
 
-# Meeting dd.mm.2021 HH::MM
+# Meeting 05.12.2023 14::00
 
 **Participants**:
 
-1. Member 1
-2. Member 2
-3. Member 3
-4. Member 4
+1. Mikhail Romanov
+2. Kalle Lindgren
+3. Aki Oura
+4. Leo Teodosin
 
 ## Summary of works
 
-1. Member 1
+1. Mikhail
 
-   Implementing the class XX. Tested the class XX.
-   Results are in `tests/<class-xx-tests>`. Resolved the identified problems.
+   Wrote documentation and debugged game for errors and made list of todos
 
-2. Member 2
+2. Leo
 
-   Same as above
+   Balanced game, fixed objects and made abilities for enemies
 
-3. ...
+3. Aki
+
+   Aki helped UI and made screens for "you lost" and "you win"
+
+4. Kalle
+
+   Main menu, level chooser, and made manager for game states
 
 ## Challenges
 
-1. The integration of UI with the monsters requires an abstract interface.
-2. ...
+1. Object abilities
+2. Build instruction
 
 ## Actions
 
-1. Member 1 is going to look into defining an abstract interface for monsters
-   to enable easy UI integration.
-2. Member 2 is going to work with Member 1 to use abstract interface in derived
-   monster classes.
-3. Member 2 is going to test the interface.
-4. Member 3 is going to use ...
-
-> Please reflect these action decisions in your git commit messages so that
-> your group members and advisor can follow the progress.
+1. Mikhail will finish documentation, will fix animations
+2. Leo will balance game and finish abilities
+3. Kalle will comment his classes
+4. Aki will help with documentation
+5. All will write comments to their classes
 
 ## Project status
 
-Short summary of current project status.
+Finishing touched
 
 ### TODOs
 
-1. Member 1: Write an action.
-2. ...
+1. Mikhail documentation
+2. Leo abilities and balance
+3. Kalle and aki documentation
