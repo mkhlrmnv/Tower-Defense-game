@@ -6,16 +6,18 @@ Aoe_Tower::Aoe_Tower(Level& current_level, Vector2D& position, int health, int d
         Tower(current_level, position, health, damage, range, attack_speed, type, price, level) {}
 
 bool Aoe_Tower::attack() {
+    if (get_reset_counter() >= 50) {
+        set_attack_speed(get_original_attack_speed());
+        set_reset_counter(0);
+    } else {
+        reset_counter_up();
+    }
+
     double multiplier;
     Level& level_reference = get_level_reference();
 
     if (!level_reference.get_enemies().empty()) {
         int counter = 0;
-        if (this->get_position().y > level_reference.get_enemies()[0]->get_position().y){
-            set_state(State::attacking_left);
-        } else {
-            set_state(State::attacking_right);
-        }
         for (auto& enemy : level_reference.get_enemies()) {
 
             double dist = this->distance_to(enemy->get_position());
@@ -30,6 +32,11 @@ bool Aoe_Tower::attack() {
                     multiplier = check_type_multiplier(this, enemy);
                     enemy->lose_health(this->get_damage() * multiplier);
                     counter++;
+                    if (this->get_position().y > level_reference.get_enemies()[0]->get_position().y){
+                        set_state(State::attacking_left);
+                    } else {
+                        set_state(State::attacking_right);
+                    }
                     if (counter >= 3) {
                         return true;
                         break;

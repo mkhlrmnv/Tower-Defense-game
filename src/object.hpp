@@ -29,11 +29,15 @@ public:
     int get_type() const;
     Level& get_level_reference() const;
     int get_attack_counter() const;
+    int get_reset_counter() const;
 
     void set_position(const Vector2D& position);
     void set_attack_counter(const int amount);
+    void set_reset_counter(const int amount);
+    void set_attack_speed(const int amount);
 
     void attack_counter_up();
+    void reset_counter_up();
 
     void gain_damage(int amount);
     void gain_health(int amount);
@@ -59,6 +63,7 @@ private:
     int _attack_speed;
     int _original_attack_speed = 0;
     int _attack_counter = 0;
+    int _reset_counter = 0;
     Vector2D _position;
     int _type;
     State _state;

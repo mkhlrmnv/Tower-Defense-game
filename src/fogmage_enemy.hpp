@@ -8,8 +8,8 @@
 class Fog_Mage: public Enemy {
 public:
 
-    Fog_Mage(Level& level, Vector2D& position, int health = 20, int damage = 0, int range = 100, int attack_speed = 1, 
-        int type = ObjectTypes::FogMage, int speed = 1, int defense = 5);
+    Fog_Mage(Level& level, Vector2D& position, int health = 50, int damage = 0, int range = 100, int attack_speed = 1, 
+        int type = ObjectTypes::FogMage, int speed = 1, int defense = 5, int size = 3);
 
     ~Fog_Mage() { }
 
