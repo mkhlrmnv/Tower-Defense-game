@@ -1,8 +1,8 @@
 #include "healer_enemy.hpp"
 #include "level.hpp"
 
-Healer::Healer(Level& level, Vector2D& position, int health, int damage, int range, int attack_speed, int type, int speed, int defense) :
-    Enemy(level, position, health, damage, range, attack_speed, type, speed, defense) {}
+Healer::Healer(Level& level, Vector2D& position, int health, int damage, int range, int attack_speed, int type, int speed, int defense, int size) :
+    Enemy(level, position, health, damage, range, attack_speed, type, speed, defense, size) {}
 
 bool Healer::attack() {
     Level& level_reference = get_level_reference();
@@ -20,7 +20,7 @@ bool Healer::attack() {
                 } else {
                     set_state(State::attacking_right);
                 }
-                
+
                 if (get_attack_counter() <= get_attack_speed()) {
                     attack_counter_up();
                     set_state(State::none);

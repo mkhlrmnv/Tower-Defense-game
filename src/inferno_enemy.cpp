@@ -1,8 +1,8 @@
 #include "inferno_enemy.hpp"
 #include "level.hpp"
 
-Inferno::Inferno(Level& level, Vector2D& position, int health, int damage, int range, int attack_speed, int type, int speed, int defense) :
-    Enemy(level, position, health, damage, range, attack_speed, type, speed, defense) {}
+Inferno::Inferno(Level& level, Vector2D& position, int health, int damage, int range, int attack_speed, int type, int speed, int defense, int size) :
+    Enemy(level, position, health, damage, range, attack_speed, type, speed, defense, size) {}
 
 bool Inferno::attack() {
     double multiplier;
