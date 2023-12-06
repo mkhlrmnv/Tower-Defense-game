@@ -24,9 +24,9 @@ bool Healer::attack() {
             if (dist <= this->get_range()) {
 
                 if (this->get_position().y > level_reference.get_enemies()[0]->get_position().y){
-                    set_state(State::attacking_left);
+                    set_state(State::walking_left);
                 } else {
-                    set_state(State::attacking_right);
+                    set_state(State::walking_right);
                 }
 
                 if (get_attack_counter() <= get_attack_speed()) {
