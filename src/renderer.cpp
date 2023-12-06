@@ -60,7 +60,7 @@ void Renderer::draw_tower(sf::RenderWindow& rwindow, Tower* t_ptr, int frame){
     rwindow.draw(_drawable_tower);
 }
 
-void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr, int frame, int move_animation) {
+void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr, int frame) {
     // takes right spread sheet from resource handler and sets it as enemies texture
     _enemy_sprite = _rh.get_texture_enemy(e_ptr->get_type());
     _drawable_enemy.setTexture(_enemy_sprite);
@@ -77,7 +77,6 @@ void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr, int frame, in
         }
     } else if (e_ptr->get_state() == State::walking_left || e_ptr->get_state() == State::walking_right) {
         animation_pos = 0; // sets right animation start
-        frame = move_animation; // to make movements smoother frame is modified to move_animation value
         if (frame > 3) { // if too far stops it
             animation_pos = 0;
             frame = 0;
@@ -126,7 +125,7 @@ void Renderer::draw_towers(sf::RenderWindow& rwindow, std::vector<Tower*> towers
     }
 }
  // function to draw multiple enemies at once
-void Renderer::draw_enemies(sf::RenderWindow& rwindow, std::vector<Enemy*> enemies, int frame, int move_animation){
+void Renderer::draw_enemies(sf::RenderWindow& rwindow, std::vector<Enemy*> enemies, int frame){
     for(Enemy* e_ptr : enemies){
         draw_enemy(rwindow, e_ptr, frame); // zeros are placeholders
     }
