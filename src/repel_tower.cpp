@@ -13,6 +13,7 @@ bool Repel_Tower::attack() {
         reset_counter_up();
     }
 
+    bool has_attacked;
     double multiplier;
     Level& level_reference = get_level_reference();
 
@@ -38,8 +39,10 @@ bool Repel_Tower::attack() {
 
                     if (this->get_position().y > level_reference.get_enemies()[0]->get_position().y){
                         set_state(State::attacking_left);
+                        has_attacked = true;
                     } else {
                         set_state(State::attacking_right);
+                        has_attacked = true;
                     }
                     
                     counter++;
@@ -51,6 +54,12 @@ bool Repel_Tower::attack() {
             }
         }
     }
-    set_state(State::none);
+    if (!has_attacked) {
+        set_state(State::none);
+    } else {
+        return true;
+    }
+
+    has_attacked = false;
     return false;
 }
