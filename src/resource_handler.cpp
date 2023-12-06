@@ -89,26 +89,26 @@ void ResourceHandler::load_font(){
 // loads all textures that game will use
 void ResourceHandler::load_all_textures(){
     // Enemies
-    load_texture_enemy(ObjectTypes::NoobSkeleton_NoAttack, "../assets/textures/VERY_LITTLE_ENEMIES/VERY_LITTLE_NoobSkeleton.png");
-    load_texture_enemy(ObjectTypes::NoobDemon_CanAttack, "../assets/textures/VERY_LITTLE_ENEMIES/VERY_LITTLE_NoobDemon.png");
-    load_texture_enemy(ObjectTypes::FastBoy, "../assets/textures/VERY_LITTLE_ENEMIES/VERY_LITTLE_FastBoy.png");
-    load_texture_enemy(ObjectTypes::FogMage, "../assets/textures/VERY_LITTLE_ENEMIES/VERY_LITTLE_FogMage.png");
-    load_texture_enemy(ObjectTypes::HealerPriest, "../assets/textures/VERY_LITTLE_ENEMIES/VERY_LITTLE_HealerPriest.png");
-    load_texture_enemy(ObjectTypes::InfernoMage, "../assets/textures/VERY_LITTLE_ENEMIES/VERY_LITTLE_InfernoMage.png");
-    load_texture_enemy(ObjectTypes::TankOrc, "../assets/textures/VERY_LITTLE_ENEMIES/VERY_LITTLE_TankOrc.png");
-    load_texture_enemy(ObjectTypes::BossKnight, "../assets/textures/VERY_LITTLE_ENEMIES/VERY_LITTLE_BossKnight.png");
+    load_texture_enemy(ObjectTypes::NoobSkeleton_NoAttack, "../assets/textures/VerySmallSize_32x32/VerySmall_Enemies_32x32/Right/NoobSkeleton_Right.png");
+    load_texture_enemy(ObjectTypes::NoobDemon_CanAttack, "../assets/textures/VerySmallSize_32x32/VerySmall_Enemies_32x32/Right/NoobDemon_Right.png");
+    load_texture_enemy(ObjectTypes::FastBoy, "../assets/textures/VerySmallSize_32x32/VerySmall_Enemies_32x32/Right/FastBoy_Right.png");
+    load_texture_enemy(ObjectTypes::FogMage, "../assets/textures/VerySmallSize_32x32/VerySmall_Enemies_32x32/Right/FogMage_Right.png");
+    load_texture_enemy(ObjectTypes::HealerPriest, "../assets/textures/VerySmallSize_32x32/VerySmall_Enemies_32x32/Right/HealerPriest_Right.png");
+    load_texture_enemy(ObjectTypes::InfernoMage, "../assets/textures/VerySmallSize_32x32/VerySmall_Enemies_32x32/Right/InfernoMage_Right.png");
+    load_texture_enemy(ObjectTypes::TankOrc, "../assets/textures/VerySmallSize_32x32/VerySmall_Enemies_32x32/Right/TankOrc_Right.png");
+    load_texture_enemy(ObjectTypes::BossKnight, "../assets/textures/VerySmallSize_32x32/VerySmall_Enemies_32x32/Right/BossKnight_Right.png");
 
     // Towers
-    load_texture_tower(ObjectTypes::ArcherTower, "../assets/textures/VERY_LITTLE_TOWERS/VERY_LITTLE_ArcherTower.png");
-    load_texture_tower(ObjectTypes::AoeTower, "../assets/textures/VERY_LITTLE_TOWERS/VERY_LITTLE_AoeTower.png");
-    load_texture_tower(ObjectTypes::MudMageTower, "../assets/textures/VERY_LITTLE_TOWERS/VERY_LITTLE_MudMage.png");
-    load_texture_tower(ObjectTypes::RepelMageTower, "../assets/textures/VERY_LITTLE_TOWERS/VERY_LITTLE_RepelMage.png");
-    load_texture_tower(ObjectTypes::SniperTower, "../assets/textures/VERY_LITTLE_TOWERS/VERY_LITTLE_SniperTower.png");
-    load_texture_tower(ObjectTypes::WaterMageTower, "../assets/textures/VERY_LITTLE_TOWERS/VERY_LITTLE_WaterMage.png");
+    load_texture_tower(ObjectTypes::ArcherTower, "../assets/textures/VerySmallSize_32x32/VerySmall_Towers_32x32/Right/ArcherTower_Right.png");
+    load_texture_tower(ObjectTypes::AoeTower, "../assets/textures/VerySmallSize_32x32/VerySmall_Towers_32x32/Right/AoeTower_Right.png");
+    load_texture_tower(ObjectTypes::MudMageTower, "../assets/textures/VerySmallSize_32x32/VerySmall_Towers_32x32/Right/MudMage_Right.png");
+    load_texture_tower(ObjectTypes::RepelMageTower, "../assets/textures/VerySmallSize_32x32/VerySmall_Towers_32x32/Right/RepelMage_Right.png");
+    load_texture_tower(ObjectTypes::SniperTower, "../assets/textures/VerySmallSize_32x32/VerySmall_Towers_32x32/Right/SniperTower_Right.png");
+    load_texture_tower(ObjectTypes::WaterMageTower, "../assets/textures/VerySmallSize_32x32/VerySmall_Towers_32x32/Right/WaterMage_Right.png");
 
     // Tiles
-    load_texture_tile(0, "../assets/textures/VERY_LITTLE_GRASSTILE.png");
-    load_texture_tile(1, "../assets/textures/VERY_LITTLE_ROADTILE.png");
+    load_texture_tile(0, "../assets/textures/VerySmallSize_32x32/VerySmall_Tiles_32x32/VerySmall_GrassTile_32x32.png");
+    load_texture_tile(1, "../assets/textures/VerySmallSize_32x32/VerySmall_Tiles_32x32/VerySmall_RoadTile_32x32.png");
     load_texture_tile(2, "../assets/textures/VerySmallSize_32x32/VerySmall_Tiles_32x32/House_32x32.png");
 
     //Attributes 
