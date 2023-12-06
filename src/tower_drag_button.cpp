@@ -12,8 +12,7 @@ Button(rh.get_tower_name(type), {80, 130}, position, fill, outline, rh.get_font(
     
     _tower_price = _rh.get_tower_info(_tower_type, TowerAttributes::MONEY);
 
-    // set the first frame of the spreadsheet to represent tower as 
-    //_drawable_tower.setTextureRect(sf::IntRect(d(frame + animation_pos) * 32, 0 * 32, 32, 32));
+   
     setup_font();
     
     // TODO: set price and other attributes
@@ -30,8 +29,10 @@ void TowerDragButton::setup_tower_images(){
     
     float og_img_size  = 32;
     // scale image to 80 pixels, and set scale negative for facing left
-    float scale = _img_size / og_img_size; 
+    float scale = _img_size / og_img_size;
 
+
+    // set the first frame of the spreadsheet to represent tower and flip to face left
     _drawable_tower.setTexture(_rh.get_texture_tower(_tower_type));
     _drawable_tower.setTextureRect(sf::IntRect(0, 0, 32,32));
     _drawable_tower.setScale({-scale, scale});
@@ -45,7 +46,7 @@ void TowerDragButton::setup_tower_images(){
     float img_x = _position.x + center_buffer;
     float img_y = _position.y + title_space;
     
-    // offset x with images size to correct flip with scale
+    // offset x with image size to correct position flip with negative scale
     _drawable_tower.setPosition({img_x + _img_size, img_y}); 
 
     _img_background.setPosition({img_x, img_y});
@@ -62,7 +63,7 @@ void TowerDragButton::setup_tower_images(){
     _drawable_dragging_tower.setTextureRect(sf::IntRect(0, 0, 32,32));
     _drawable_dragging_tower.setScale({-scale, scale});
 
-
+    // position corrected in set_dragging_drawable_pos
 }
 
 void TowerDragButton::setup_button_texts(){
@@ -177,8 +178,8 @@ void TowerDragButton::setup_attribute_images(){
 
     // modify these
 
-    float tweak_x = 10;
-    float tweak_y = 10;
+    float tweak_x = 0;
+    float tweak_y = 2;
 
     float start_x_offset = 10;
     float char_size = 10;
@@ -186,12 +187,12 @@ void TowerDragButton::setup_attribute_images(){
 
     float center_point = _img_background.getGlobalBounds().width/2;
 
-    // assemble texts in 2x2 matrix
+    // assemble images in 2x2 matrix
 
-    float x_1 = start_x_offset + _button.getGlobalBounds().left ;
-    float y_1 = _drawable_tower.getGlobalBounds().top + _drawable_tower.getGlobalBounds().height + line_spacing;
+    float x_1 = tweak_x + start_x_offset + _button.getGlobalBounds().left ;
+    float y_1 = tweak_y + _drawable_tower.getGlobalBounds().top + _drawable_tower.getGlobalBounds().height + line_spacing;
 
-    float x_2 =  _img_background.getPosition().x + center_point;
+    float x_2 =  tweak_x + _img_background.getPosition().x + center_point;
     float y_2 =  y_1 + char_size + line_spacing;
     
     // first column
@@ -204,6 +205,8 @@ void TowerDragButton::setup_attribute_images(){
     float dmg_y = y_2;
 
     setup_attribute_image(TowerAttributes::DMG, _dmg_img, {dmg_x, dmg_y}); // TODO: get image 
+
+    // second column
 
     float rng_x = x_2;
     float rng_y = y_1;
@@ -224,7 +227,7 @@ void TowerDragButton::setup_attribute_image(int type, sf::Sprite& sprite, sf::Ve
     sprite.setTexture(_rh.get_texture_attribute(type));
     sprite.setPosition(pos);
 
-    float og_image_size = 80;
+    float og_image_size = 16;
     float scale = _attr_img_size / og_image_size;
     sprite.setScale(scale, scale);
 }
@@ -262,6 +265,7 @@ void TowerDragButton::set_dragging_drawable_pos(sf::RenderWindow& window){
 
 const sf::Sprite* TowerDragButton::get_dragging_image() const{
 
+    // side draws the dragging image so that it is on top of every button.
     if(get_drag_flag()){
         return &_drawable_dragging_tower;
     }else{
@@ -277,8 +281,10 @@ void TowerDragButton::add_tower_to_release_square(sf::RenderWindow& window, Leve
     if(inside_grid(_release_pos, lv) && (lv.get_cash()>=_tower_price)){
 
         auto square_ptr = lv.get_square_by_pos(window_coords_to_level_coords(_release_pos));
-        bool tower_add_successfull = lv.add_tower_by_type(_tower_type, window_coords_to_level_coords(_release_pos));
-        lv.take_cash(_tower_price);
+        bool tower_add_successful = lv.add_tower_by_type(_tower_type, window_coords_to_level_coords(_release_pos));
+        if (tower_add_successful){
+            lv.take_cash(_tower_price);
+        }
     }
 }
 
@@ -311,7 +317,6 @@ void TowerDragButton::handle_events(sf::RenderWindow& window, const sf::Event& e
 
         if(event.type == sf::Event::MouseButtonReleased){
             if(get_drag_flag()){
-                // TODO: Add functionality here
                 reset_drag_flag();
                 _release_pos = sf::Mouse::getPosition(window);
                 auto idx = window_coords_to_grid_index(_release_pos, lv);
@@ -346,13 +351,5 @@ void TowerDragButton::draw(sf::RenderTarget& target, sf::RenderStates states) co
     target.draw(_rng_img);
     target.draw(_atkspd_img);
 
-
-
-
-    // Draw in side menu instead so dragging image appears at top of everything
-    /* 
-    if(_drag_flag){
-        target.draw(_drawable_dragging_tower);
-    }*/
 }
 

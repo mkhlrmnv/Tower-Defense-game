@@ -75,7 +75,7 @@ void Upgrade::setup_text_line(sf::Sprite& sprite, sf::Text &text, sf::Vector2f p
 
     float img_pos_y_tweak = 2;
 
-    float img_size = 80;
+    float img_size = 16;
     float scale = (char_size+1.f) / img_size;
 
     sprite.setTexture(_rh.get_texture_attribute(attr_type));
@@ -173,9 +173,6 @@ void Upgrade::set_text_line(sf::Sprite& sprite, sf::Text &text, sf::Vector2f pos
     text.setPosition(pos.x + space_to_image_x, pos.y);
 }
 
-float Upgrade::max_line_width(){
-    return 1.f;
-}
 
 void Upgrade::upgrade_tower(){
     if(_level.get_cash()>=_upgrade_cost){

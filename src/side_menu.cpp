@@ -75,7 +75,7 @@ void SideMenu::setup_info_display(int type, sf::Sprite& sprite, sf::Text& text_o
     auto brown = sf::Color(121, 85, 72);
     auto color = brown;
     
-    float image_size = 80;
+    float image_size = 16;
     float scale = 30 / image_size;
     sprite.setTexture(_rh.get_texture_attribute(type));
     sprite.setPosition(pos);

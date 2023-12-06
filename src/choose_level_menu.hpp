@@ -24,9 +24,14 @@ public:
     delete _level6_button;
     }
 
+    ChooseLevelMenu(const ChooseLevelMenu&) = delete; 
+    ChooseLevelMenu& operator=(const ChooseLevelMenu&) = delete;
+
     // stop update, handle_events, draw
     void disable_menu();
+    void enable_menu();
     int get_state();
+    void reset();
     const std::string get_level_to_load();
     void handle_events(sf::RenderWindow& window, sf::Event& event);
 

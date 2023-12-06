@@ -96,7 +96,7 @@ void Enemy::move() {
                 */
                 if (get_route().back() != pos && !moved && get_prev_pos().y >= get_position().y){
                     next_position = Vector2D(get_position().x, get_position().y - get_speed());
-                    set_state(State::walking_right);
+                    set_state(State::walking_left);
                     moved = true;
                 }
             } else {
@@ -104,7 +104,7 @@ void Enemy::move() {
                 // enemy gets new position and variable moved is switched to true, so enemy doesn't change direction on this call
                 if (!moved){
                     next_position = Vector2D(get_position().x, get_position().y - get_speed());
-                    set_state(State::walking_right);
+                    set_state(State::walking_left);
                     moved = true;
                 }
             }
@@ -149,13 +149,14 @@ void Enemy::move() {
             if (!get_route().empty()){
                 if (get_route().back() != pos && !moved && get_prev_pos().x >= get_position().x){
                     next_position = Vector2D(get_position().x - get_speed(), get_position().y); // get_level_reference().get_square_by_pos(get_position())->get_center().y
-                    set_state(State::walking_left);
+                    set_state(State::walking_right);
                     moved = true;
                 }
             } else {
                 if (!moved){
                     next_position = Vector2D(get_position().x - get_speed(), get_position().y);
                     moved = true;
+                    set_state(State::walking_right);
                 }
             }
             break;

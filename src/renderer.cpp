@@ -38,6 +38,8 @@ void Renderer::draw_tower(sf::RenderWindow& rwindow, Tower* t_ptr, int frame){
         }
     }
 
+    std::cout << animation_pos << std::endl;
+
     // picks right picture from spread sheet
     _drawable_tower.setTextureRect(sf::IntRect((frame + animation_pos) * 32, 0 * 32, 32, 32));
 
@@ -68,20 +70,20 @@ void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr, int frame, in
 
     // if statements for every state possible
     if (e_ptr->get_state() == State::attacking_right || e_ptr->get_state() == State::attacking_left) {
-        animation_pos = 1; // attacking animation is first to starts from first picture
+        animation_pos = 10; // attacking animation is first to starts from first picture
         if (frame > 2) { // in total animation is three pictures to stops if if gone too far
             animation_pos = 0;
             frame = 0;
         }
     } else if (e_ptr->get_state() == State::walking_left || e_ptr->get_state() == State::walking_right) {
-        animation_pos = 4; // sets right animation start
+        animation_pos = 0; // sets right animation start
         frame = move_animation; // to make movements smoother frame is modified to move_animation value
         if (frame > 3) { // if too far stops it
             animation_pos = 0;
             frame = 0;
         }
     } else if (e_ptr->get_state() == State::dying) {
-        animation_pos = 8; // sets right animation start
+        animation_pos = 4; // sets right animation start
         frame = std::min(frame, 4); // if too far stops it
     }
 
@@ -97,13 +99,18 @@ void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr, int frame, in
 
     // TODO: enemy depending value
     float scale_factor_enemy = 1.0f; // Adjust as needed
+    float renderedX, renderedY;
+
     // if flips texture if needed (if attacking ot the left for example)
-    _drawable_enemy.setScale((e_ptr->get_state() == State::walking_left || e_ptr->get_state() == State::attacking_left) ? scale_factor_enemy : -scale_factor_enemy, scale_factor_enemy);
-
-    // adjust coordinates to draw enemy by position of their feet
-    float renderedX = e_ptr->get_position().y + 20;
-    float renderedY = e_ptr->get_position().x - _drawable_enemy.getTexture()->getSize().y;
-
+    if (e_ptr->get_state() == State::walking_left || e_ptr->get_state() == State::attacking_left){
+        _drawable_enemy.setScale(-scale_factor_enemy, scale_factor_enemy);
+        renderedX = e_ptr->get_position().y + 20;
+        renderedY = e_ptr->get_position().x - _drawable_enemy.getTexture()->getSize().y;
+    } else {
+        _drawable_enemy.setScale(scale_factor_enemy, scale_factor_enemy);
+        renderedX = e_ptr->get_position().y - 20;
+        renderedY = e_ptr->get_position().x - _drawable_enemy.getTexture()->getSize().y;
+    }
     // Ensure enemy isn't drawn outside the field
     renderedX = std::max(renderedX, 1.0f);
     renderedY = std::max(renderedY, 1.0f);

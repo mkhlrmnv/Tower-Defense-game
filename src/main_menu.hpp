@@ -16,12 +16,15 @@ public:
 
     MainMenu( ResourceHandler& rh, Level& level);
     ~MainMenu(){ delete _choose_level_button; delete _random_level_button;}
-
-
+    MainMenu(const MainMenu&) = delete; 
+    MainMenu& operator=(const MainMenu&) = delete;
+    
     // stop update, handle_events, draw
     void disable_menu();
-    int get_state();
+    void enable_menu();
 
+    int get_state();
+    void reset();
     void handle_events(sf::RenderWindow& window, sf::Event& event);
 
 
