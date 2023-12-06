@@ -38,6 +38,8 @@ void Renderer::draw_tower(sf::RenderWindow& rwindow, Tower* t_ptr, int frame){
         }
     }
 
+    std::cout << animation_pos << std::endl;
+
     // picks right picture from spread sheet
     _drawable_tower.setTextureRect(sf::IntRect((frame + animation_pos) * 32, 0 * 32, 32, 32));
 
@@ -69,20 +71,20 @@ void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr, int frame, in
 
     // if statements for every state possible
     if (e_ptr->get_state() == State::attacking_right || e_ptr->get_state() == State::attacking_left) {
-        animation_pos = 1; // attacking animation is first to starts from first picture
+        animation_pos = 10; // attacking animation is first to starts from first picture
         if (frame > 2) { // in total animation is three pictures to stops if if gone too far
             animation_pos = 0;
             frame = 0;
         }
     } else if (e_ptr->get_state() == State::walking_left || e_ptr->get_state() == State::walking_right) {
-        animation_pos = 4; // sets right animation start
+        animation_pos = 0; // sets right animation start
         frame = move_animation; // to make movements smoother frame is modified to move_animation value
         if (frame > 3) { // if too far stops it
             animation_pos = 0;
             frame = 0;
         }
     } else if (e_ptr->get_state() == State::dying) {
-        animation_pos = 8; // sets right animation start
+        animation_pos = 4; // sets right animation start
         frame = std::min(frame, 4); // if too far stops it
     }
 
