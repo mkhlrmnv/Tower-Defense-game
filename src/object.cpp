@@ -51,6 +51,10 @@ int Object::get_reset_counter() const {
     return _reset_counter;
 }
 
+int Object::get_wait_time() const {
+    return _reset_wait_time;
+}
+
 void Object::set_attack_counter(const int amount) {
     _attack_counter = amount;
 }
