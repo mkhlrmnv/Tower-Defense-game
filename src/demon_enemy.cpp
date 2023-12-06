@@ -14,7 +14,6 @@ bool Demon::attack() {
     } else {
         reset_counter_up();
     }
-    std::cout << get_reset_counter() << std::endl;
 
     double multiplier;
     Level& level_reference = get_level_reference();
