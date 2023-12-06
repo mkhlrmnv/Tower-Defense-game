@@ -13,6 +13,7 @@ bool Aoe_Tower::attack() {
         reset_counter_up();
     }
 
+    bool has_attacked;
     double multiplier;
     Level& level_reference = get_level_reference();
 
@@ -32,11 +33,15 @@ bool Aoe_Tower::attack() {
                     multiplier = check_type_multiplier(this, enemy);
                     enemy->lose_health(this->get_damage() * multiplier);
                     counter++;
+
                     if (this->get_position().y > level_reference.get_enemies()[0]->get_position().y){
                         set_state(State::attacking_left);
+                        has_attacked = true;
                     } else {
                         set_state(State::attacking_right);
+                        has_attacked = true;
                     }
+
                     if (counter >= 3) {
                         return true;
                         break;
@@ -45,6 +50,12 @@ bool Aoe_Tower::attack() {
             }
         }
     }
-    set_state(State::none);
+    if (!has_attacked) {
+        set_state(State::none);
+    } else {
+        return true;
+    }
+
+    has_attacked = false;
     return false;
 }
