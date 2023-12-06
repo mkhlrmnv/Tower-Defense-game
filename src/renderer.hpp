@@ -53,7 +53,7 @@ public:
      * @param frame current frame of animation
      * @param move_animation current frame for enemies move animation (for smoother movement)
      */
-    void draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr, int frame, int move_animation);
+    void draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr, int frame);
     
     /**
      * @brief draw enemies on from a list
@@ -62,7 +62,7 @@ public:
      * @param frame current frame of animation
      * @param move_animation current frame for enemies move animation (for smoother movement)
      */
-    void draw_enemies(sf::RenderWindow& rwindow, std::vector< Enemy * > enemies, int frame, int move_animation);
+    void draw_enemies(sf::RenderWindow& rwindow, std::vector< Enemy * > enemies, int frame);
 
     /**
      * @brief draw single enemy 

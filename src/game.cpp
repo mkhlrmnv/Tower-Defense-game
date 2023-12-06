@@ -265,26 +265,24 @@ void Game::render(){
     case GameState::Round:
         _round_over = false;
               // updates moving animations value if it is too high
-        if (_enemy_move_animation > 4){
-            _enemy_move_animation = 0;
-        }
+        
         // because animation are at most five pictures
         // there is for loop until five
         // but basically goes through all attack animations for all attacking objects
         // and through one moving animation for all moving enemies
         // goes through only one moving animation to make moving look more natural when enemy takes only one step at the time
-        for (int i = 0; i < 6; i++)
-        {
-            _window.clear();
+        if (_animation_phase > 6){
+            _animation_phase = 0;
+        }
+        _window.clear();
             _renderer.draw_level(_window);
-            _renderer.draw_towers(_window, _level.get_towers(), i);
-            _renderer.draw_enemies(_window, _level.get_enemies(), i, _enemy_move_animation);
+            _renderer.draw_towers(_window, _level.get_towers(), _animation_phase);
+            _renderer.draw_enemies(_window, _level.get_enemies(), _animation_phase);
             _window.draw(_side_menu);
             _window.draw(_upgrade);
 
             _window.display(); // display the drawn entities
-        }
-        _enemy_move_animation++;
+        _animation_phase++;
 
         // removes all towers and enemies with 0 hp, if their dying animation was already played
         for (auto* t : _level.get_towers()){
@@ -336,7 +334,7 @@ void Game::render(){
 // starts new round
 void Game::start_round(){
     _round_over = false;
-    // Spawns round played ammount multiplied by difficulty level amount of enemies
+    //Spawns round played ammount multiplied by difficulty level amount of enemies
     for (int i = 0; i < (_difficulty_multiplier * _level.get_round()); i++)
     {
         // Square where enemies can spawn
