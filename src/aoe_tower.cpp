@@ -6,7 +6,7 @@ Aoe_Tower::Aoe_Tower(Level& current_level, Vector2D& position, int health, int d
         Tower(current_level, position, health, damage, range, attack_speed, type, price, level) {}
 
 bool Aoe_Tower::attack() {
-    if (get_reset_counter() >= 50) {
+    if (get_reset_counter() >= get_wait_time()) {
         set_attack_speed(get_original_attack_speed());
         set_reset_counter(0);
     } else {

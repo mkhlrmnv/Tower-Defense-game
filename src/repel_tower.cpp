@@ -6,7 +6,7 @@ Repel_Tower::Repel_Tower(Level& current_level, Vector2D& position, int health, i
         Tower(current_level, position, health, damage, range, attack_speed, type, price, level) {}
 
 bool Repel_Tower::attack() {
-    if (get_reset_counter() >= 50) {
+    if (get_reset_counter() >= get_wait_time()) {
         set_attack_speed(get_original_attack_speed());
         set_reset_counter(0);
     } else {
@@ -36,6 +36,12 @@ bool Repel_Tower::attack() {
                         enemy->set_speed(0);
                     }
 
+                    if (this->get_position().y > level_reference.get_enemies()[0]->get_position().y){
+                        set_state(State::attacking_left);
+                    } else {
+                        set_state(State::attacking_right);
+                    }
+                    
                     counter++;
                     if (counter >= 3) {
                         return true;

@@ -233,6 +233,13 @@ public:
     State get_state();
 
     /**
+     * @brief Get the reset wait time for all objects.
+     * 
+     * @return Integer the amount of time to wait.
+     */
+    int get_wait_time() const;
+
+    /**
      * @brief Set the state of the object.
      * 
      * @param state The new state of the object.
@@ -255,6 +262,7 @@ private:
     int _original_attack_speed = 0;
     int _attack_counter = 0;
     int _reset_counter = 0;
+    int reset_wait_time = 100;
     Vector2D _position;
     int _type;
     State _state;
