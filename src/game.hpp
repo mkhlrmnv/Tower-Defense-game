@@ -144,7 +144,7 @@ private:
     /**
      * @brief int parameter determines the starting lives for the level
      */
-    int _starting_lives = 5;
+    int _starting_lives = 30;
 
     /**
      * @brief int parameter determines state of the game state:
