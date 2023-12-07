@@ -14,3 +14,7 @@ void Tower::level_up() {
 int Tower::get_price() {
     return _price;
 }
+
+int Tower::get_level() {
+    return _level;
+}
