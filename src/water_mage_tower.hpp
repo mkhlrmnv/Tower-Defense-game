@@ -23,8 +23,8 @@ public:
      * @param price Price of the Water Mage Tower.
      * @param level Level of the Water Mage Tower.
      */
-    Water_Mage_Tower(Level& current_level, Vector2D& position, int health = 40, int damage = 40, int range = 80,
-                     int attack_speed = 2, int type = ObjectTypes::WaterMageTower, int price = 250, int level = 1);
+    Water_Mage_Tower(Level& current_level, Vector2D& position, int health = 300, int damage = 40, int range = 150,
+                     int attack_speed = 25, int type = ObjectTypes::WaterMageTower, int price = 250, int level = 1);
 
     /**
      * @brief Destructor for the Water Mage Tower.

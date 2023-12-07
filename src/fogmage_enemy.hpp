@@ -23,8 +23,8 @@ public:
      * @param defense Defense attribute of the Fog Mage Enemy.
      * @param size Size of the Fog Mage Enemy.
      */
-    Fog_Mage(Level& level, Vector2D& position, int health = 50, int damage = 0, int range = 100, int attack_speed = 1,
-             int type = ObjectTypes::FogMage, int speed = 1, int defense = 5, int size = 3);
+    Fog_Mage(Level& level, Vector2D& position, int health = 300, int damage = 0, int range = 150, int attack_speed = 50,
+             int type = ObjectTypes::FogMage, int speed = 1, int defense = 10, int size = 4);
 
     /**
      * @brief Destructor for the Fog Mage Enemy.
