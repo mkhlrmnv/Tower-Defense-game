@@ -24,7 +24,7 @@ public:
      * @param level Level of the AOE Tower.
      */
     Aoe_Tower(Level& current_level, Vector2D& position, int health = 400, int damage = 50, int range = 200,
-              int attack_speed = 40, int type = ObjectTypes::AoeTower, int price = 150, int level = 1);
+              int attack_speed = 25, int type = ObjectTypes::AoeTower, int price = 150, int level = 1);
 
     /**
      * @brief Destructor for the AOE Tower.

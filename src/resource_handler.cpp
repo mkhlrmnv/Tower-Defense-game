@@ -150,13 +150,10 @@ void ResourceHandler::fill_tower_attributes_map(){
     // hp, dmg, rng, atk_spd, price
 
 
-    fill_attribute_map(ObjectTypes::AoeTower, {400, 50, 200, 40, 150});
+    fill_attribute_map(ObjectTypes::AoeTower, {400, 50, 200, 25, 150});
     fill_attribute_map(ObjectTypes::ArcherTower, {300, 25, 250, 20, 100});
     fill_attribute_map(ObjectTypes::SniperTower, {200, 100, 999, 120, 200});
     fill_attribute_map(ObjectTypes::RepelMageTower, {350, 0, 150, 50, 250});
-
-
-    // TODO: fill 
     // int health = 20, int damage = 15, int range = 100, int attack_speed = 3, int type = ObjectTypes::MudMageTower, int price = 140,
     fill_attribute_map(ObjectTypes::MudMageTower, {400, 30, 180, 30, 200});
     //  int health = 40, int damage = 40, int range = 80, int attack_speed = 2, int type = ObjectTypes::MudMageTower, int price = 250,
