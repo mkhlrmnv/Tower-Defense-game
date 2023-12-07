@@ -117,7 +117,7 @@ void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr, int frame) {
         }
 
         // adjust size on the enemy by its personal size
-        float scale_factor_enemy = 0.01f + e_ptr->get_size() / 2;
+        float scale_factor_enemy = ceil(0.01f + e_ptr->get_size() / 2);
         float renderedX, renderedY;
 
         // if flips texture if needed (if attacking ot the left for example)
