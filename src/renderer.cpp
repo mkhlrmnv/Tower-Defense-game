@@ -33,8 +33,8 @@ void Renderer::draw_tower(sf::RenderWindow& rwindow, Tower* t_ptr, int frame){
     } else if (t_ptr->get_state() == State::dying){
         animation_pos = 4;
         if (frame > 4){ // stops animation in right place
-            animation_pos = 0;
-            frame = 0;
+            animation_pos = 4;
+            frame = 3;
         }
     }
 
