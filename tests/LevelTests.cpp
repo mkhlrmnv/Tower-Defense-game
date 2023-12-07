@@ -10,6 +10,10 @@
 #include <string>
 #include <vector>
 
+// full path can be added if needed
+// for example lldb debugger required full path
+std::string path = ".."; 
+
 // tests round count
 bool testRound(){
     Level lv(1000, 1000, 50); // new level
@@ -42,7 +46,7 @@ bool testLives(){
 }
 
 bool testAddObject(){
-    std::string file_name = "maps/example_map.txt"; // file name of the map test map
+    std::string file_name = path + "/maps/example_map.txt"; // file name of the map test map
     Level lv(1000, 1000, 50); // new level
     lv.make_grid(); 
     if (lv.read_file(file_name) == -1){  // reads new map from test map file
@@ -68,7 +72,7 @@ bool testAddObject(){
 }
 
 bool TestAddObjectByType(){
-    std::string file_name = "maps/example_map.txt"; // file name of the map test map
+    std::string file_name = path + "/maps/example_map.txt"; // file name of the map test map
     Level lv(1000, 1000, 50); // new level
     lv.make_grid(); 
     if (lv.read_file(file_name) == -1){  // reads new map from test map file
@@ -129,7 +133,7 @@ bool testGridSquareCenters(){
 }
 
 bool testCurrentRowCol(){
-    std::string file_name = "maps/example_map.txt"; // file name of the map test map
+    std::string file_name = path + "/maps/example_map.txt"; // file name of the map test map
     Level lv(1000, 1000, 50); // new level
     lv.make_grid(); 
     if (lv.read_file(file_name) == -1){  // reads new map from test map file
@@ -149,7 +153,7 @@ bool testCurrentRowCol(){
 }
 
 bool testCurrentSquare(){
-    std::string file_name = "maps/example_map.txt"; // file name of the map test map
+    std::string file_name = path + "/maps/example_map.txt"; // file name of the map test map
     Level lv(1000, 1000, 50); // new level
     lv.make_grid(); 
     if (lv.read_file(file_name) == -1){  // reads new map from test map file
@@ -172,7 +176,7 @@ bool testCurrentSquare(){
 }
 
 bool testGetSquareByPos(){
-    std::string file_name = "maps/example_map.txt"; // file name of the map test map
+    std::string file_name = path + "/maps/example_map.txt"; // file name of the map test map
     Level lv(1000, 1000, 50); // new level
     lv.make_grid(); 
     if (lv.read_file(file_name) == -1){  // reads new map from test map file
@@ -187,7 +191,7 @@ bool testGetSquareByPos(){
 }
 
 bool testNextRoad(){
-    std::string file_name = "maps/example_map.txt"; // file name of the map test map
+    std::string file_name = path + "/maps/example_map.txt"; // file name of the map test map
     Level lv(1000, 1000, 50); // new level
     lv.make_grid(); 
     if (lv.read_file(file_name) == -1){  // reads new map from test map file
@@ -205,7 +209,7 @@ bool testNextRoad(){
 }
 
 bool testFirstRoad(){
-    std::string file_name = "maps/example_map.txt"; // file name of the map test map
+    std::string file_name = path + "/maps/example_map.txt"; // file name of the map test map
     Level lv(1000, 1000, 50); // new level
     lv.make_grid(); 
     if (lv.read_file(file_name) == -1){  // reads new map from test map file
@@ -217,7 +221,7 @@ bool testFirstRoad(){
 
 // Test for read and write to file
 bool testRead(){
-    std::string file_name = "maps/example_map.txt"; // file name of the map test map
+    std::string file_name = path + "/maps/example_map.txt"; // file name of the map test map
     Level lv(1000, 1000, 50); // new level
     lv.make_grid(); 
     if (lv.read_file(file_name) == -1){  // reads new map from test map file
@@ -242,8 +246,8 @@ bool testRead(){
 }
 
 bool testWrite(){
-    std::string file_name = "maps/example_map.txt"; // file name for reading
-    std::string file_name_w = "maps/example_map_w.txt"; // file name for writing
+    std::string file_name = path + "/maps/example_map.txt"; // file name for reading
+    std::string file_name_w = path + "/maps/example_map_w.txt"; // file name for writing
     Level lv(1000, 1000, 50); // new level
     lv.make_grid();
     lv.read_file(file_name); // reads maps from file
@@ -276,6 +280,8 @@ bool testRandomMap(){
     lv.print_map();
     return res;
 }
+
+// Tests under are for more in depth random functions trouble shooting
 
 /*bool testRandomHelp(){
     Level lv(1000, 1000, 50); // new level
