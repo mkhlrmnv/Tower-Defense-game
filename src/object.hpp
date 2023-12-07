@@ -141,6 +141,13 @@ public:
     void set_attack_speed(const int amount);
 
     /**
+     * @brief Set the original attack speed of the object.
+     * 
+     * @param amount New value for the original attack speed.
+     */
+    void set_original_attack_speed(const int amount);
+
+    /**
      * @brief Increment the attack counter value by one.
      */
     void attack_counter_up();
