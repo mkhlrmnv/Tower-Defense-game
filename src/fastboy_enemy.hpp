@@ -23,8 +23,8 @@ public:
      * @param defense Defense attribute of the Fast Boy Enemy.
      * @param size Size of the Fast Boy Enemy.
      */
-    Fast_Boy(Level& level, Vector2D& position, int health = 50, int damage = 0, int range = 0, int attack_speed = 1,
-             int type = ObjectTypes::FastBoy, int speed = 5, int defense = 5, int size = 1);
+    Fast_Boy(Level& level, Vector2D& position, int health = 10, int damage = 0, int range = 0, int attack_speed = 1,
+             int type = ObjectTypes::FastBoy, int speed = 10, int defense = 5, int size = 2);
 
     /**
      * @brief Destructor for the Fast Boy Enemy.
