@@ -1,206 +1,222 @@
-// #include "object.hpp"
-// #include "vector2d.hpp"
-// #include "attack_types.hpp"
-// #include "level.hpp"
-// #include <iostream>
+#include "object.hpp"
+#include "level.hpp"
+#include "vector2d.hpp"
+#include <stdio.h>
+#include <cassert>
 
-// bool testObjectHealth() {
-//     Vector2D position(0, 0);
-//     Level level(1000, 100, 3);
-//     Object obj(level, 100, 20, 10, 1000, position, BASIC);
-//     return obj.get_health() == 100;
-// }
+// Test for Object Constructor
+bool testObjectConstructor() {
+    Level lv(1000, 1000, 50); // Create a level
+    Vector2D pos(100, 200); // Create a position vector
 
-// bool testObjectPosition() {
-//     Vector2D position(0, 0);
-//     Vector2D newPosition(10, 20);
-//     Level level(1000, 100, 3);
-//     Object obj(level, 100, 20, 10, 1000, position, BASIC);
+    Object obj(lv, pos, 100, 10, 50, 5, 1); // Create an object
 
-//     // Check the initial position
-//     if (obj.get_position() != position) {
-//         return false;
-//     }
+    // Check if the object properties were set correctly
+    return (obj.get_position() == pos &&
+            obj.get_health() == 100 &&
+            obj.get_damage() == 10 &&
+            obj.get_range() == 50 &&
+            obj.get_attack_speed() == 5 &&
+            obj.get_original_attack_speed() == 5 &&
+            obj.get_type() == 1 &&
+            obj.get_state() == State::none);
+}
 
-//     // Set a new position and check if it's updated
-//     obj.set_position(newPosition);
-//     if (obj.get_position() != newPosition) {
-//         return false;
-//     }
+// Test for Object Getters and Setters
+bool testObjectGettersAndSetters() {
+    Level lv(1000, 1000, 50); // Create a level
+    Vector2D pos(100, 200); // Create a position vector
+    Object obj(lv, pos, 100, 10, 50, 5, 1); // Create an object
 
-//     return true;
-// }
+    // Test Getters
+    assert(obj.get_health() == 100);
+    assert(obj.get_damage() == 10);
+    assert(obj.get_range() == 50);
+    assert(obj.get_attack_speed() == 5);
+    assert(obj.get_original_attack_speed() == 5);
+    assert(obj.get_position() == pos);
+    assert(obj.get_type() == 1);
+    assert(obj.get_attack_counter() == 0);
+    assert(obj.get_reset_counter() == 0);
 
-// bool testObjectDamage() {
-//     Vector2D position(0, 0);
-//     Level level(1000, 100, 3);
-//     Object obj(level, 100, 20, 10, 1000, position, BASIC);
-//     return obj.get_damage() == 20;
-// }
+    // Test Setters
+    obj.set_attack_speed(6);
+    obj.set_position(pos);
 
-// bool testObjectRange() {
-//     Vector2D position(0, 0);
-//     Level level(1000, 100, 3);
-//     Object obj(level, 100, 20, 10, 1000, position, BASIC);
-//     return obj.get_range() == 10;
-// }
+    assert(obj.get_health() == 100);
+    assert(obj.get_damage() == 10);
+    assert(obj.get_range() == 50);
+    assert(obj.get_attack_speed() == 6);
+    assert(obj.get_position() == Vector2D(100, 200));
 
-// bool testObjectAttackSpeed() {
-//     Vector2D position(0, 0);
-//     Level level(1000, 100, 3);
-//     Object obj(level, 100, 20, 10, 1000, position, BASIC);
-//     return obj.get_attack_speed() == 1000;
-// }
+    return true;
+}
 
-// bool testObjectGetType() {
-//     Vector2D position(0, 0);
-//     Level level(1000, 100, 3);
-//     Object obj(level, 100, 20, 10, 1000, position, BASIC);
-//     return obj.get_type() == BASIC;
-// }
+// Test for Object Movement
+bool testObjectMovement() {
+    Level lv(1000, 1000, 50); // Create a level
+    Vector2D pos(100, 200); // Create a position vector
+    Object obj(lv, pos, 100, 10, 50, 5, 1); // Create an object
 
-// bool testObjectGainDamage() {
-//     Vector2D position(0, 0);
-//     Level level(1000, 100, 3);
-//     Object obj(level, 100, 20, 10, 1000, position, BASIC);
-//     obj.gain_damage(5);
-//     return obj.get_damage() == 25;
-// }
+    Vector2D new_pos(150, 250);
+    obj.set_position(new_pos);
 
-// bool testObjectGainHealth() {
-//     Vector2D position(0, 0);
-//     Level level(1000, 100, 3);
-//     Object obj(level, 100, 20, 10, 1000, position, BASIC);
-//     obj.gain_health(10);
-//     return obj.get_health() == 110;
-// }
+    // Check if the object's position has been updated
+    assert(obj.get_position() == new_pos);
 
-// bool testObjectGainRange() {
-//     Vector2D position(0, 0);
-//     Level level(1000, 100, 3);
-//     Object obj(level, 100, 20, 10, 1000, position, BASIC);
-//     obj.gain_range(2);
-//     return obj.get_range() == 12;
-// }
+    return true;
+}
 
-// bool testObjectGainAttackSpeed() {
-//     Vector2D position(0, 0);
-//     Level level(1000, 100, 3);
-//     Object obj(level, 100, 20, 10, 1000, position, BASIC);
-//     obj.gain_attack_speed(200);
-//     return obj.get_attack_speed() == 1200;
-// }
+// Test for Object State
+bool testObjectState() {
+    Level lv(1000, 1000, 50); // Create a level
+    Vector2D pos(100, 200); // Create a position vector
+    Object obj(lv, pos, 100, 10, 50, 5, 1); // Create an object
 
-// bool testObjectDistanceTo() {
-//     Vector2D position(0, 0);
-//     Level level(1000, 100, 3);
-//     Object obj(level, 100, 20, 10, 1000, position, BASIC);
-//     Vector2D targetPosition(3, 4);
-//     double distance = obj.distance_to(targetPosition);
-//     // Check if the distance is calculated correctly (considering the distance formula)
-//     return distance == 5.0;
-// }
+    obj.set_state(State::attacking_left); // Set object state to ATTACK
 
-// bool testObjectLoseHealth() {
-//     Vector2D position(0, 0);
-//     Level level(1000, 100, 3);
-//     Object obj(level, 100, 20, 10, 1000, position, BASIC);
-//     obj.lose_health(30);
-//     return obj.get_health() == 70;
-// }
+    // Check if the object's state has been updated
+    assert(obj.get_state() == State::attacking_left);
 
-// static int object_tests() {
-//     int testsFailed = 0;
+    return true;
+}
 
-//     if (testObjectHealth()) {
-//         std::cout << "testObjectHealth: Passed" << std::endl;
-//     } else {
-//         std::cout << "testObjectHealth: Failed" << std::endl;
-//         testsFailed++;
-//     }
+// Test for Object Distance Calculation
+bool testObjectDistanceCalculation() {
+    Level lv(1000, 1000, 50); // Create a level
+    Vector2D pos(100, 200); // Create a position vector
+    Object obj(lv, pos, 100, 10, 50, 5, 1); // Create an object
 
-//     if (testObjectPosition()) {
-//         std::cout << "testObjectPosition: Passed" << std::endl;
-//     } else {
-//         std::cout << "testObjectPosition: Failed" << std::endl;
-//         testsFailed++;
-//     }
+    Vector2D target_pos(150, 250);
 
-//     if (testObjectDamage()) {
-//         std::cout << "testObjectDamage: Passed" << std::endl;
-//     } else {
-//         std::cout << "testObjectDamage: Failed" << std::endl;
-//         testsFailed++;
-//     }
+    // Calculate distance between object and target position
+    double distance = obj.distance_to(target_pos);
 
-//     if (testObjectRange()) {
-//         std::cout << "testObjectRange: Passed" << std::endl;
-//     } else {
-//         std::cout << "testObjectRange: Failed" << std::endl;
-//         testsFailed++;
-//     }
+    return true;
+}
 
-//     if (testObjectAttackSpeed()) {
-//         std::cout << "testObjectAttackSpeed: Passed" << std::endl;
-//     } else {
-//         std::cout << "testObjectAttackSpeed: Failed" << std::endl;
-//         testsFailed++;
-//     }
+// Test for Object Health Management
+bool testObjectHealthManagement() {
+    Level lv(1000, 1000, 50); // Create a level
+    Vector2D pos(100, 200); // Create a position vector
+    Object obj(lv, pos, 100, 10, 50, 5, 1); // Create an object
 
-//     if (testObjectGetType()) {
-//         std::cout << "testObjectGetType: Passed" << std::endl;
-//     } else {
-//         std::cout << "testObjectGetType: Failed" << std::endl;
-//         testsFailed++;
-//     }
+    obj.lose_health(20); // Lose health
 
-//     if (testObjectGainDamage()) {
-//         std::cout << "testObjectGainDamage: Passed" << std::endl;
-//     } else {
-//         std::cout << "testObjectGainDamage: Failed" << std::endl;
-//         testsFailed++;
-//     }
+    // Check if the object's health decreased correctly
+    assert(obj.get_health() == 80);
 
-//     if (testObjectGainHealth()) {
-//         std::cout << "testObjectGainHealth: Passed" << std::endl;
-//     } else {
-//         std::cout << "testObjectGainHealth: Failed" << std::endl;
-//         testsFailed++;
-//     }
+    obj.gain_health(30); // Gain health
 
-//     if (testObjectGainRange()) {
-//         std::cout << "testObjectGainRange: Passed" << std::endl;
-//     } else {
-//         std::cout << "testObjectGainRange: Failed" << std::endl;
-//         testsFailed++;
-//     }
+    // Check if the object's health increased correctly
+    assert(obj.get_health() == 110);
 
-//     if (testObjectGainAttackSpeed()) {
-//         std::cout << "testObjectGainAttackSpeed: Passed" << std::endl;
-//     } else {
-//         std::cout << "testObjectGainAttackSpeed: Failed" << std::endl;
-//         testsFailed++;
-//     }
+    return true;
+}
 
-//     if (testObjectDistanceTo()) {
-//         std::cout << "testObjectDistanceTo: Passed" << std::endl;
-//     } else {
-//         std::cout << "testObjectDistanceTo: Failed" << std::endl;
-//         testsFailed++;
-//     }
+// Test for Object Attack Speed Management
+bool testObjectAttackSpeedManagement() {
+    Level lv(1000, 1000, 50); // Create a level
+    Vector2D pos(100, 200); // Create a position vector
+    Object obj(lv, pos, 100, 10, 50, 5, 1); // Create an object
 
-//     if (testObjectLoseHealth()) {
-//         std::cout << "testObjectLoseHealth: Passed" << std::endl;
-//     } else {
-//         std::cout << "testObjectLoseHealth: Failed" << std::endl;
-//         testsFailed++;
-//     }
+    obj.gain_attack_speed(2); // Gain attack speed
 
-//     if (testsFailed == 0) {
-//         std::cout << "All tests passed." << std::endl;
-//     } else {
-//         std::cout << "Some tests failed." << std::endl;
-//     }
+    // Check if the object's attack speed decreased correctly
+    assert(obj.get_attack_speed() == 3);
 
-//     return testsFailed;
-// }
+    obj.set_attack_speed(obj.get_original_attack_speed());
+    obj.lose_attack_speed(1); // Lose attack speed
+
+    // Check if the object's attack speed increased correctly
+    assert(obj.get_attack_speed() == 6);
+
+    return true;
+}
+
+// Test for Object Counter Management
+bool testObjectCounterManagement() {
+    Level lv(1000, 1000, 50); // Create a level
+    Vector2D pos(100, 200); // Create a position vector
+    Object obj(lv, pos, 100, 10, 50, 5, 1); // Create an object
+
+    obj.set_attack_counter(2); // Set attack counter
+    obj.set_reset_counter(3); // Set reset counter
+
+    obj.attack_counter_up(); // Increment attack counter
+    obj.reset_counter_up(); // Increment reset counter
+
+    // Check if the counters incremented correctly
+    assert(obj.get_attack_counter() == 1);
+    assert(obj.get_reset_counter() == 4);
+
+    return true;
+}
+
+int object_tests() {
+    int failed_tests = 0;
+
+    if (!testObjectConstructor()) {
+        std::cout << "testObjectConstructor failed!" << std::endl;
+        failed_tests++;
+    } else {
+        std::cout << "testObjectConstructor passed!" << std::endl;
+    }
+
+    if (!testObjectGettersAndSetters()) {
+        std::cout << "testObjectGettersAndSetters failed!" << std::endl;
+        failed_tests++;
+    } else {
+        std::cout << "testObjectGettersAndSetters passed!" << std::endl;
+    }
+
+    if (!testObjectMovement()) {
+        std::cout << "testObjectMovement failed!" << std::endl;
+        failed_tests++;
+    } else {
+        std::cout << "testObjectMovement passed!" << std::endl;
+    }
+
+    if (!testObjectState()) {
+        std::cout << "testObjectState failed!" << std::endl;
+        failed_tests++;
+    } else {
+        std::cout << "testObjectState passed!" << std::endl;
+    }
+
+    if (!testObjectDistanceCalculation()) {
+        std::cout << "testObjectDistanceCalculation failed!" << std::endl;
+        failed_tests++;
+    } else {
+        std::cout << "testObjectDistanceCalculation passed!" << std::endl;
+    }
+
+    if (!testObjectHealthManagement()) {
+        std::cout << "testObjectHealthManagement failed!" << std::endl;
+        failed_tests++;
+    } else {
+        std::cout << "testObjectHealthManagement passed!" << std::endl;
+    }
+
+    if (!testObjectAttackSpeedManagement()) {
+        std::cout << "testObjectAttackSpeedManagement failed!" << std::endl;
+        failed_tests++;
+    } else {
+        std::cout << "testObjectAttackSpeedManagement passed!" << std::endl;
+    }
+
+    if (!testObjectCounterManagement()) {
+        std::cout << "testObjectCounterManagement failed!" << std::endl;
+        failed_tests++;
+    } else {
+        std::cout << "testObjectCounterManagement passed!" << std::endl;
+    }
+
+    if (failed_tests == 0) {
+        std::cout << "All Object tests passed!" << std::endl;
+    } else {
+        std::cout << failed_tests << " Object tests failed!" << std::endl;
+    }
+
+    return failed_tests;
+}
