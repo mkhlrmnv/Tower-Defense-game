@@ -8,6 +8,7 @@ void Tower::level_up() {
     gain_health(50);
     gain_range(50);
     gain_attack_speed(10);
+    set_original_attack_speed(get_attack_speed());
     _level++;
 }
 

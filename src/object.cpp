@@ -60,7 +60,7 @@ void Object::set_reset_counter(const int amount) {
 }
 
 void Object::attack_counter_up() {
-    _attack_counter += 1;
+    _attack_counter -= 1;
 }
 
 void Object::reset_counter_up() {
@@ -73,6 +73,10 @@ void Object::set_position(const Vector2D& position) {
 
 void Object::set_attack_speed(const int amount) {
     _attack_speed = amount;
+}
+
+void Object::set_original_attack_speed(const int amount) {
+    _original_attack_speed = amount;
 }
 
 void Object::gain_damage(int amount) {
