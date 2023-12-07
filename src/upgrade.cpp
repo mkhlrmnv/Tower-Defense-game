@@ -79,7 +79,7 @@ void Upgrade::setup_menu(){
 
 void Upgrade::setup_text_line(sf::Sprite& sprite, sf::Text &text, sf::Vector2f pos, sf::Color color, int attr_type, int char_size){
 
-    float img_pos_y_tweak = -2;
+    float img_pos_y_tweak = -1;
 
     float img_size = 16;
     float scale = (char_size+6.f) / img_size;
@@ -112,13 +112,21 @@ void Upgrade::set_menu(sf::Vector2f position){
 
     float x = position.x; 
     float y = position.y;
+
     
     // prevent menu popping half below the screen
     if(y > 800 - _background.getGlobalBounds().height /2.f){
         y = y -_background.getGlobalBounds().height / 2.f;
     }
+    
+    //draw shorter menu if the tower level is maxed, and the buttons arent drawn.
+    float size_x = 100; 
+    float size_y = (_tower_to_upgrade->get_level()-1 >= _max_upgrades) ? 105 : 160 ;
+    
 
     _background.setPosition(x, y);
+    _background.setSize({size_x, size_y});
+
 
     float line_spacing = 5;
     int char_size = 15; // dont change
@@ -181,12 +189,11 @@ void Upgrade::set_menu(sf::Vector2f position){
     _upgrade_button->set_position({x + bg_width/2.f - _upgrade_button->get_size().x/2.f, attrs_start_y + 6*(line_spacing + char_size) + y_space_to_button});
     _upgrade_button->center_text();
 
-
 }   
 
 void Upgrade::set_text_line(sf::Sprite& sprite, sf::Text &text, sf::Vector2f pos, int attr){
     
-    float img_pos_y_tweak = 2;
+    float img_pos_y_tweak = -1;
     float space_to_image_x = sprite.getGlobalBounds().width + 5;
 
     sprite.setPosition(pos.x, pos.y + img_pos_y_tweak);
