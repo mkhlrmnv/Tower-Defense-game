@@ -79,7 +79,7 @@ void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr, int frame) {
     int animation_pos = 0;
 
     // variable for how many animations to play at once
-    int how_many_times = 0;
+    int how_many_times = 1;
 
     // if statements for every state possible
     if (e_ptr->get_state() == State::attacking_right || e_ptr->get_state() == State::attacking_left) {
