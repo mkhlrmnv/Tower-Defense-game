@@ -27,8 +27,8 @@ public:
      * @param defense Defense attribute of the Inferno Enemy.
      * @param size Size of the Inferno Enemy.
      */
-    Inferno(Level& level, Vector2D& position, int health = 70, int damage = 5, int range = 100, int attack_speed = 1,
-            int type = ObjectTypes::InfernoMage, int speed = 3, int defense = 10, int size = 3);
+    Inferno(Level& level, Vector2D& position, int health = 400, int damage = 40, int range = 150, int attack_speed = 60,
+            int type = ObjectTypes::InfernoMage, int speed = 3, int defense = 10, int size = 4);
 
     /**
      * @brief Destructor for the Inferno Enemy.

@@ -27,8 +27,8 @@ public:
      * @param defense Defense attribute of the Tank Enemy.
      * @param size Size of the Tank Enemy.
      */
-    Tank(Level& level, Vector2D& position, int health = 300, int damage = 5, int range = 80, int attack_speed = 1,
-         int type = ObjectTypes::TankOrc, int speed = 1, int defense = 100, int size = 4);
+    Tank(Level& level, Vector2D& position, int health = 700, int damage = 20, int range = 130, int attack_speed = 20,
+         int type = ObjectTypes::TankOrc, int speed = 2, int defense = 30, int size = 4);
 
     /**
      * @brief Destructor for the Tank Enemy.

@@ -27,8 +27,8 @@ public:
      * @param price Price of the Sniper Tower.
      * @param level Level of the Sniper Tower.
      */
-    Sniper_Tower(Level& current_level, Vector2D& position, int health = 10, int damage = 30, int range = 1000,
-                 int attack_speed = 1, int type = ObjectTypes::SniperTower, int price = 150, int level = 1);
+    Sniper_Tower(Level& current_level, Vector2D& position, int health = 200, int damage = 120, int range = 999,
+                 int attack_speed = 120, int type = ObjectTypes::SniperTower, int price = 200, int level = 1);
 
     /**
      * @brief Destructor for the Sniper Tower.
