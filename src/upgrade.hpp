@@ -22,6 +22,8 @@ public:
 
     Upgrade(float grid_resolution, ResourceHandler& rh, Level& level, int upgrade_cost);
     ~Upgrade(){delete _upgrade_button;}
+    Upgrade(const Upgrade&) = delete; 
+    Upgrade& operator=(const Upgrade&) = delete;
    
     /**
      * @brief handles events from the game.
@@ -209,14 +211,6 @@ private:
      */
     sf::Text _price_text;
 
-    /* if false
-        click tower on grid -> select tower, pop menu
-    
-        if true 
-        click button upgrade_tower
-        click menu nothing
-        click outside menu or button close menu and button, set _upgrade_menu_enabled false;
-    */
 
     /**
      * @brief if menu is popped
