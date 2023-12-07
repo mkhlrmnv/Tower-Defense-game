@@ -183,19 +183,15 @@ void Game::process_events(){
             if(_game_state == GameState::Pause){
 
 
-                std::cout << " from StartMenu going to: "<<_game_state << std::endl;
 
                 _level.make_grid();
                 _level.randomly_generate();
-                //std::cout << "MAP RANDOM GENERATION HAPPENS" << std::endl;
                 _renderer.make_drawable_level(_level);
                 _main_menu.disable_menu(); // redundant
-               // std::cout << "DRAWING LEVEL  HAPPENS" << std::endl;
 
 
             }else if(_game_state == GameState::MapMenu){
                 
-                std::cout << " from StartMenu going to: "<<_game_state << std::endl;
 
                 _main_menu.disable_menu(); // redundant
             }
@@ -211,12 +207,10 @@ void Game::process_events(){
             // check game state transition
             if(_game_state != GameState::MapMenu){
 
-                std::cout << " from MapMenu going to: "<<_game_state << std::endl;
                 _level.make_grid();
                 _level.read_file(_level_menu.get_level_to_load());
                 _renderer.make_drawable_level(_level);
                 _level_menu.disable_menu(); // redundant 
-                //std::cout << "MAP LOAD HAPPENS" << std::endl;
 
             }
         break;
@@ -228,7 +222,6 @@ void Game::process_events(){
             _side_menu.handle_events(_window, event);
             _game_state = _side_menu.get_state();
             if(_game_state == GameState::Round){
-                std::cout << "in Pause GOING TO round " << std::endl;
                 start_round();
             }
         break;
@@ -302,7 +295,6 @@ void Game::render(){
     
     case GameState::Pause:
 
-        //std::cout << "PAUSE STATE HAPPENS" << std::endl;
         // game pause between rounds - no enemies to draw
 
         _window.clear();
