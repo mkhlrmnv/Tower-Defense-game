@@ -284,7 +284,7 @@ int test_upgrade(){
     
     ResourceHandler rh;
     Level level(800,200,200);
-    Upgrade u(800, rh, level, 2);
+    Upgrade u(800, rh, level, 50, 20);
 
     // run the program as long as the window is open
     while (window.isOpen())

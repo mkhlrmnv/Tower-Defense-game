@@ -15,7 +15,7 @@ Game::Game():
     _main_menu(_rh, _level),
     _level_menu(_rh, _level),
     _side_menu(float(_game_resolution), float(_side_bar_width), _rh, _level),
-    _upgrade(_game_resolution, _rh, _level, 50),
+    _upgrade(_game_resolution, _rh, _level, 100, 2),
     _reset_clock(){
 }
 
@@ -182,17 +182,14 @@ void Game::process_events(){
             // check game state transition
             if(_game_state == GameState::Pause){
 
-
-
                 _level.make_grid();
                 _level.randomly_generate();
                 _renderer.make_drawable_level(_level);
                 _main_menu.disable_menu(); // redundant
-
+                _upgrade.reset();
 
             }else if(_game_state == GameState::MapMenu){
                 
-
                 _main_menu.disable_menu(); // redundant
             }
 
@@ -205,12 +202,13 @@ void Game::process_events(){
             _game_state = _level_menu.get_state();
 
             // check game state transition
-            if(_game_state != GameState::MapMenu){
+            if(_game_state == GameState::Pause){
 
                 _level.make_grid();
                 _level.read_file(_level_menu.get_level_to_load());
                 _renderer.make_drawable_level(_level);
-                _level_menu.disable_menu(); // redundant 
+                _level_menu.disable_menu(); 
+                _upgrade.reset();
 
             }
         break;
@@ -218,15 +216,18 @@ void Game::process_events(){
         // paused or round running
 
         case GameState::Pause:
+
             _upgrade.handle_events(_window, event);
             _side_menu.handle_events(_window, event);
             _game_state = _side_menu.get_state();
             if(_game_state == GameState::Round){
                 start_round();
             }
+
         break;
 
         case GameState::Round:
+        
             // start round button isnt active in sidemenu 
             _side_menu.handle_events(_window, event);
             _upgrade.handle_events(_window, event);
