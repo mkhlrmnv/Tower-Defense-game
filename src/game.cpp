@@ -284,6 +284,8 @@ void Game::render(){
         _window.display(); // display the drawn entities
         _animation_phase++;
 
+        // std::this_thread::sleep_for(std::chrono::milliseconds(100));
+
 
         // removes all towers and enemies with 0 hp, if their dying animation was already played
         for (auto* t : _level.get_towers()){
