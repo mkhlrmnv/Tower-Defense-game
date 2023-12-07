@@ -18,46 +18,58 @@ void Renderer::draw_tower(sf::RenderWindow& rwindow, Tower* t_ptr, int frame){
     // variable for where animation is on spread sheet
     int animation_pos;
 
+    // variable for how many animations to play at once
+    int how_many_times = 0;
+
     // picks right animation value for current tower state
     if (t_ptr->get_state() == State::none) {
         animation_pos = 0;
+        how_many_times = 1;
         frame = 0;
     } else if (t_ptr->get_state() == State::attacking_right || t_ptr->get_state() == State::attacking_left){
         animation_pos = 1;
         // because attacking animation is only 3 frames
         // it stops on third picture
+        how_many_times = 1;
         if (frame > 2){
             animation_pos = 0;
             frame = 0;
         }
     } else if (t_ptr->get_state() == State::dying){
         animation_pos = 4;
+        how_many_times = 4;
         if (frame > 4){ // stops animation in right place
             animation_pos = 4;
             frame = 3;
         }
     }
 
-    std::cout << animation_pos << std::endl;
+    // for loops that plays only one animation if state is none or attacking
+    // or plays whole animation if state is dying
+    for (int i = 0; i < how_many_times; i++)
+    {
+        std::cout << animation_pos << std::endl;
 
-    // picks right picture from spread sheet
-    _drawable_tower.setTextureRect(sf::IntRect((frame + animation_pos) * 32, 0 * 32, 32, 32));
+        // picks right picture from spread sheet
+        _drawable_tower.setTextureRect(sf::IntRect((frame + animation_pos + i) * 32, 0 * 32, 32, 32));
 
-    // pointers for level and square
-    Level& l = t_ptr->get_level_reference();
-    Square* sq = l.current_square(t_ptr);
+        // pointers for level and square
+        Level& l = t_ptr->get_level_reference();
+        Square* sq = l.current_square(t_ptr);
 
-    // if attacking left use normal sprite and if right mirror is horizontally
-    if (t_ptr->get_state() == State::attacking_right){
-        _drawable_tower.setScale(_scale_factor_tower, _scale_factor_tower);
-        _drawable_tower.setPosition(sf::Vector2f (sq->get_center().y - (l.get_square_size() / 2), sq->get_center().x - (l.get_square_size() / 2)));
-    } else {
-        _drawable_tower.setScale(-_scale_factor_tower, _scale_factor_tower);
-        _drawable_tower.setPosition(sf::Vector2f (sq->get_center().y - (l.get_square_size() / 2) + l.get_square_size(), sq->get_center().x - (l.get_square_size() / 2)));        
+        // if attacking left use normal sprite and if right mirror is horizontally
+        if (t_ptr->get_state() == State::attacking_right){
+            _drawable_tower.setScale(_scale_factor_tower, _scale_factor_tower);
+            _drawable_tower.setPosition(sf::Vector2f (sq->get_center().y - (l.get_square_size() / 2), sq->get_center().x - (l.get_square_size() / 2)));
+        } else {
+            _drawable_tower.setScale(-_scale_factor_tower, _scale_factor_tower);
+            _drawable_tower.setPosition(sf::Vector2f (sq->get_center().y - (l.get_square_size() / 2) + l.get_square_size(), sq->get_center().x - (l.get_square_size() / 2)));        
+        }
+
+        // Sets tower position to center of the square and draws it
+        rwindow.draw(_drawable_tower);
+        frame ++;
     }
-
-    // Sets tower position to center of the square and draws it
-    rwindow.draw(_drawable_tower);
 }
 
 void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr, int frame) {
@@ -68,20 +80,26 @@ void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr, int frame) {
     // variable for where to start animation
     int animation_pos = 0;
 
+    // variable for how many animations to play at once
+    int how_many_times = 0;
+
     // if statements for every state possible
     if (e_ptr->get_state() == State::attacking_right || e_ptr->get_state() == State::attacking_left) {
         animation_pos = 10; // attacking animation is first to starts from first picture
+        how_many_times = 1;
         if (frame > 2) { // in total animation is three pictures to stops if if gone too far
             animation_pos = 0;
             frame = 0;
         }
     } else if (e_ptr->get_state() == State::walking_left || e_ptr->get_state() == State::walking_right) {
         animation_pos = 0; // sets right animation start
+        how_many_times = 1;
         if (frame > 3) { // if too far stops it
             animation_pos = 0;
             frame = 0;
         }
     } else if (e_ptr->get_state() == State::dying) {
+        how_many_times = 4;
         animation_pos = 4; // sets right animation start
         frame = std::min(frame, 4); // if too far stops it
     }
@@ -89,33 +107,38 @@ void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr, int frame) {
     // variable for width of one picture
     int spriteWidth = 32;
 
-    // Makes sure that animations isn't getting outside spreadsheet
-    if ((frame + animation_pos) * spriteWidth <= _drawable_enemy.getTexture()->getSize().x){
-        _drawable_enemy.setTextureRect(sf::IntRect((frame + animation_pos) * spriteWidth, 0, spriteWidth, spriteWidth));
-    } else {
-       _drawable_enemy.setTextureRect(sf::IntRect(0, 0, spriteWidth, spriteWidth));
+    // for loops that plays only one animation if state is none or attacking
+    // or plays whole animation if state is dying
+    for (int i = 0; i < how_many_times; i++)
+    {
+        // Makes sure that animations isn't getting outside spreadsheet
+        if ((frame + animation_pos) * spriteWidth <= _drawable_enemy.getTexture()->getSize().x){
+            _drawable_enemy.setTextureRect(sf::IntRect((frame + animation_pos + i) * spriteWidth, 0, spriteWidth, spriteWidth));
+        } else {
+        _drawable_enemy.setTextureRect(sf::IntRect(0, 0, spriteWidth, spriteWidth));
+        }
+
+        // adjust size on the enemy by its personal size
+        float scale_factor_enemy = 0.01f + e_ptr->get_size() / 2;
+        float renderedX, renderedY;
+
+        // if flips texture if needed (if attacking ot the left for example)
+        if (e_ptr->get_state() == State::walking_left || e_ptr->get_state() == State::attacking_left){
+            _drawable_enemy.setScale(-scale_factor_enemy, scale_factor_enemy);
+            renderedX = e_ptr->get_position().y + 20;
+            renderedY = e_ptr->get_position().x - 11 * e_ptr->get_size();
+        } else {
+            _drawable_enemy.setScale(scale_factor_enemy, scale_factor_enemy);
+            renderedX = e_ptr->get_position().y - 20;
+            renderedY = e_ptr->get_position().x - 11 * e_ptr->get_size();
+        }
+        // Ensure enemy isn't drawn outside the field
+        renderedX = std::max(renderedX, 1.0f);
+        renderedY = std::max(renderedY, 1.0f);
+
+        _drawable_enemy.setPosition(renderedX, renderedY);
+        rwindow.draw(_drawable_enemy);
     }
-
-    // adjust size on the enemy by its personal size
-    float scale_factor_enemy = 0.01f + e_ptr->get_size() / 2;
-    float renderedX, renderedY;
-
-    // if flips texture if needed (if attacking ot the left for example)
-    if (e_ptr->get_state() == State::walking_left || e_ptr->get_state() == State::attacking_left){
-        _drawable_enemy.setScale(-scale_factor_enemy, scale_factor_enemy);
-        renderedX = e_ptr->get_position().y + 20;
-        renderedY = e_ptr->get_position().x - 11 * e_ptr->get_size();
-    } else {
-        _drawable_enemy.setScale(scale_factor_enemy, scale_factor_enemy);
-        renderedX = e_ptr->get_position().y - 20;
-        renderedY = e_ptr->get_position().x - 11 * e_ptr->get_size();
-    }
-    // Ensure enemy isn't drawn outside the field
-    renderedX = std::max(renderedX, 1.0f);
-    renderedY = std::max(renderedY, 1.0f);
-
-    _drawable_enemy.setPosition(renderedX, renderedY);
-    rwindow.draw(_drawable_enemy);
 }
 
 // function to draw multiple towers at once
