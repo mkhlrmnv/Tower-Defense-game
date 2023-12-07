@@ -1,7 +1,13 @@
 #include "upgrade.hpp"
 
-Upgrade:: Upgrade(float grid_resolution, ResourceHandler& rh, Level& level, int upgrade_cost): _upgrade_menu_enabled(false), _rh(rh), _level(level), _tower_to_upgrade(nullptr),
-_upgrade_button(nullptr), _upgrade_cost(upgrade_cost){
+Upgrade::Upgrade(float grid_resolution, ResourceHandler& rh, Level& level, int upgrade_cost, int max_upgrades): 
+    _upgrade_menu_enabled(false), 
+    _rh(rh), 
+    _level(level), 
+    _tower_to_upgrade(nullptr),
+    _upgrade_button(nullptr), 
+    _upgrade_cost(upgrade_cost),
+    _max_upgrades(max_upgrades){
 
     setup_menu();
     //setup_text_line(_hp_img, _hp_text, {100, 100}, sf::Color::White, TowerAttributes::HP, 20);
@@ -35,7 +41,7 @@ void Upgrade::setup_menu(){
     float bg_width = _background.getGlobalBounds().width;
 
     float line_spacing = 5;
-    int char_size = 15;
+    int char_size = 10;
 
     float attrs_start_x = 5;
     float attrs_start_y = 5;
@@ -73,10 +79,10 @@ void Upgrade::setup_menu(){
 
 void Upgrade::setup_text_line(sf::Sprite& sprite, sf::Text &text, sf::Vector2f pos, sf::Color color, int attr_type, int char_size){
 
-    float img_pos_y_tweak = 2;
+    float img_pos_y_tweak = -2;
 
     float img_size = 16;
-    float scale = (char_size+1.f) / img_size;
+    float scale = (char_size+6.f) / img_size;
 
     sprite.setTexture(_rh.get_texture_attribute(attr_type));
     sprite.setScale(scale, scale);
@@ -97,6 +103,10 @@ void Upgrade::setup_text_line(sf::Sprite& sprite, sf::Text &text, sf::Vector2f p
 
 }
 
+void Upgrade::reset(){
+    _upgrade_menu_enabled = false;
+    _tower_to_upgrade = nullptr;
+}
 
 void Upgrade::set_menu(sf::Vector2f position){
 
@@ -121,7 +131,7 @@ void Upgrade::set_menu(sf::Vector2f position){
     //std::string tower_name = "ARCHER";
 
     std::string tower_name = _rh.get_tower_name(_tower_to_upgrade->get_type());
-
+    int tower_lv = _tower_to_upgrade->get_level();
     /*
     int hp = 1000; // _tower_to_upgrade->get_health()
     int dmg = 1000; // _tower_to_upgrade->get_damage()
@@ -139,7 +149,7 @@ void Upgrade::set_menu(sf::Vector2f position){
     // for centering texts and buttons
     float bg_width = _background.getGlobalBounds().width;
 
-    _name_text.setString(tower_name);
+    _name_text.setString(tower_name +" lv" +std::to_string(tower_lv));
     // center pos 
     _name_text.setPosition(attrs_start_x, attrs_start_y);
     float name_width = _name_text.getGlobalBounds().width;
@@ -155,12 +165,23 @@ void Upgrade::set_menu(sf::Vector2f position){
     
     float price_width = _price_text.getGlobalBounds().width;
     
+    // draw price as red if there is not enough cash to buy an upgrade
+    if(_level.get_cash() < _upgrade_cost){
+        _price_text.setFillColor(sf::Color::Red);
+    }else{
+        _price_text.setFillColor(sf::Color::White);
+    }
+
     _price_text.setPosition({x - price_width/2.f + bg_width/2.f, attrs_start_y + 5*(line_spacing + char_size)});
+
 
     float y_space_to_button = 5;
 
+
     _upgrade_button->set_position({x + bg_width/2.f - _upgrade_button->get_size().x/2.f, attrs_start_y + 6*(line_spacing + char_size) + y_space_to_button});
     _upgrade_button->center_text();
+
+
 }   
 
 void Upgrade::set_text_line(sf::Sprite& sprite, sf::Text &text, sf::Vector2f pos, int attr){
@@ -254,8 +275,12 @@ void Upgrade::handle_events(sf::RenderWindow& window, sf::Event& event){
     // menu on, tower to be upgraded selected
 
     if(_upgrade_menu_enabled){
-        // mouse press inside button
-        _upgrade_button->handle_events(window, event, _level);
+
+        // mouse press inside button react if enough cash and upgra
+        if((_tower_to_upgrade->get_level() - 1 < _max_upgrades) && _level.get_cash() >= _upgrade_cost){
+            _upgrade_button->handle_events(window, event, _level);
+        }
+
         if(_upgrade_button->button_pressed()){
             upgrade_tower();
             _upgrade_button->reset_button();
@@ -292,7 +317,6 @@ void Upgrade::draw(sf::RenderTarget& target, sf::RenderStates states) const{
         target.draw(_rng_img);
         target.draw(_atkspd_img);
         
-        //target.draw(_upgrade_button_img);
 
         target.draw(_name_text);
 
@@ -301,9 +325,12 @@ void Upgrade::draw(sf::RenderTarget& target, sf::RenderStates states) const{
         target.draw(_rng_text);
         target.draw(_atkspd_text);
 
-        target.draw(_price_text);
 
-        target.draw(*_upgrade_button);
+        // level starts from 1, disable button after two upgrades
+        if(_tower_to_upgrade->get_level()-1 < _max_upgrades){
+            target.draw(_price_text);
+            target.draw(*_upgrade_button);
+        }
     }
     
 }

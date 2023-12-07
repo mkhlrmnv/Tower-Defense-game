@@ -40,6 +40,13 @@ public:
      */
     int get_price();
 
+    /**
+     * @brief Get the level of the Tower, that is how many times the tower has been upgraded.
+     * 
+     * @return Integer representing the level of the Tower.
+     */
+    int get_level();
+
 private:
     int _price;
     int _level;
