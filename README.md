@@ -1,7 +1,6 @@
 # Tower Defense Game
 
-This is the template for the projects. Please copy the project description here.
-You can use Markdown language to render it as formatted **HTML** file.
+We have built developed our own tower defense game. Game has fully own graphics and a lot of features. Our game has 8 different kinds of enemies and 6 different kinds of towers. Enemies and towers have all their own animations when attacking, moving or dying. Game has money system where player gets cash by surviving rounds, player can use that cash to buy new towers or to upgrade existing ones. Also, there is mechanic where damage between towers and enemies depends on objects type and on the type of object that it’s attacking
 
 # Group
 
@@ -12,53 +11,13 @@ You can use Markdown language to render it as formatted **HTML** file.
 
 # Repository organization
 
-Your project implementation should follow the skelaton organization in this repository.
-See readme.md files in each folder.
+All our projects source code is in the src folder, tests are in the tests folder, all assets are in the assets folder and all executables after building will be placed in the build folder.
 
-# Project Implementation
+# Weekly meetings
 
-You must use git repository for the work on the project, making frequent enough commits so
-that the project group (and course staff) can follow the progress.
-
-The completed project work will be demonstrated to the group's advisor at a demo session.
-The final demonstrations are arranged on week 50. After the final demonstrations project group
-evaluates another project, and self-evaluates own project. In addition, project members will
-give a confidential individual assessment of each group member
-
-The course staff should be able to easily compile the project work using makefile and related
-instructions provided in the git repository. The final output should be in the **master branch** of the git repository.
-
-# Working practices
-
-Each project group is assigned an advisor from the project teaching personnel.
-There will be a dedicated Teams channel for each project topic to facilitate discussion between
-the groups in the same topic and the advisor.
-
-**The group should meet weekly.** The weekly meeting does not need to be long if there are no special issues
-to discuss, and can be taken remotely as voice/video chat on the group Teams channel (or Zoom or other similar tool),
-preferably at a regular weekly time. In the meeting the group updates:
-
-- What each member has done during the week
-- Are there challenges or problems? Discuss the possible solutions
-- Plan for the next week for everyone
-- Deviations and changes to the project plan, if any
-- After the meetings, the meeting notes will be committed to the project repository in the `Meeting-notes.md` file.
-  - The commits within the week should have some commit messages referring to the meeting notes so
-    that the project advisor can follow the progress.
-  - **The meeting notes should be in English.**
-
-> Everyone may not be able to participate to all meetings, but at least a couple of members should be present in each meeting.
-> Regular absence from meetings will affect in individual evaluation.
+During development our team has had weekly meetings every week where we talked over last week.
+About what has been done and what has to be done during next 7 days.
 
 # Source code documentation
 
-It is strongly recommended to use Doxygen to document your source code.
-Please go over the _Project Guidelines_ for details.
-
-# TODOs (Date)
-
-You can create a list of TODOs in this file.
-The recommended format is:
-
-- Complete class implementation **foo**. Assigned to \<Member 1\>
-- Test ...
+All documentations is in the doc folder, where are two pdf files. One is called documentation where is detailed description of the project, structure, build and use instructions and work log of the project. Other one is called structure and is goes in depth of the structure of out projects, there are descriptions of each class and function that is in our project.
