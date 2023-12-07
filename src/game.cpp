@@ -145,22 +145,6 @@ void Game::update(){
     break;
 
     }
-
-    // OG HERE 
-    /*
-    if(_game_state == GameState::Pause || _game_state == GameState::Round){
-        update_enemies();
-        update_towers();
-
-        // if there are not any enemies starts new round
-        // TODO: Remove this when there are "start round" button
-        if (_level.get_enemies().empty() && !_round_over && _level.get_lives() > 0) {
-            _level.plus_round();
-            _round_over = true;
-        }
-        _side_menu.update();
-    } */
-
 }
 
 // Process events in loop:  clicks, button presses
@@ -257,28 +241,30 @@ void Game::render(){
     
     case GameState::Round:
         _round_over = false;
-              // updates moving animations value if it is too high
-        
+        // updates moving animations value if it is too high
+        if (_enemy_move_animation > 4){
+            _enemy_move_animation = 0;
+        }
         // because animation are at most five pictures
         // there is for loop until five
         // but basically goes through all attack animations for all attacking objects
         // and through one moving animation for all moving enemies
         // goes through only one moving animation to make moving look more natural when enemy takes only one step at the time
-        if (_animation_phase > 6){
-            _animation_phase = 0;
-        }
-        _window.clear();
-        _renderer.draw_level(_window);
-        _renderer.draw_towers(_window, _level.get_towers(), _animation_phase);
-        _renderer.draw_enemies(_window, _level.get_enemies(), _animation_phase);
-        _window.draw(_side_menu);
-        _window.draw(_upgrade);
+        for (int i = 0; i < 6; i++)
+        {
+            _window.clear();
+            _renderer.draw_level(_window);
+            _renderer.draw_towers(_window, _level.get_towers(), i);
+            _renderer.draw_enemies(_window, _level.get_enemies(), i, _enemy_move_animation);
+            _window.draw(_side_menu);
+            _window.draw(_upgrade);
 
-        _window.display(); // display the drawn entities
-        _animation_phase++;
+            _window.display(); // display the drawn entities
+        }
+        _enemy_move_animation++;
+
 
         // std::this_thread::sleep_for(std::chrono::milliseconds(100));
-
 
         // removes all towers and enemies with 0 hp, if their dying animation was already played
         for (auto* t : _level.get_towers()){
@@ -357,7 +343,7 @@ void Game::start_round(){
     //     int y = rand() % 40;
     //     Vector2D rand_pos = Vector2D(spawn_sq->get_center().x - (_level.get_square_size() / 2) + x, 1 + y);
     //     // add enemy to level
-    //     _level.add_enemy_by_type(7, rand_pos);
+    //     _level.add_enemy_by_type(i, rand_pos);
     // }
     
 }
