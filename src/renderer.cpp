@@ -48,8 +48,6 @@ void Renderer::draw_tower(sf::RenderWindow& rwindow, Tower* t_ptr, int frame){
     // or plays whole animation if state is dying
     for (int i = 0; i < how_many_times; i++)
     {
-        std::cout << animation_pos << std::endl;
-
         // picks right picture from spread sheet
         _drawable_tower.setTextureRect(sf::IntRect((frame + animation_pos + i) * 32, 0 * 32, 32, 32));
 
