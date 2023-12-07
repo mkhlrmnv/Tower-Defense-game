@@ -83,48 +83,35 @@ void ChooseLevelMenu::handle_events(sf::RenderWindow& window, sf::Event& event){
 
 
         if(_level1_button->button_pressed()){
-            std::cout << "button 1 pressed " << std::endl;
             _level_number = 1;
             _state = 2; 
             _level1_button->reset_button();
             
 
         }else if(_level2_button->button_pressed()){
-            std::cout << "button 2 pressed " << std::endl;
             _level_number = 2;
             _state = 2; 
             _level2_button->reset_button();
 
         }else if(_level3_button->button_pressed()){
-            std::cout << "button 3 pressed " << std::endl;
             _level_number = 3;
             _state = 2; 
             _level3_button->reset_button();
 
         }else if(_level4_button->button_pressed()){
-            std::cout << "button 4 pressed " << std::endl;
             _level_number = 4;
             _state = 2; 
             _level4_button->reset_button();
 
         }else if(_level5_button->button_pressed()){
-            std::cout << "button 5 pressed " << std::endl;
             _level_number = 5;
             _state = 2; 
             _level5_button->reset_button();
 
         }else if(_level6_button->button_pressed()){
-            std::cout << "button 6 pressed " << std::endl;
             _level_number = 6;
             _state = 2; 
             _level6_button->reset_button();
-        }
-
-        // TODO: REMOVE
-        if(event.type == sf::Event::MouseButtonPressed){
-            auto pos = sf::Mouse::getPosition(window);
-            std::cout << "x" << pos.x << std::endl;
-            std::cout << "y" << pos.y << std::endl;
         }
 
     }   
