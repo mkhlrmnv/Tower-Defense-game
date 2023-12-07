@@ -65,7 +65,7 @@ void SideMenu::setup_round_button(){
 
     // get position of the last button 
     sf::Color red(220,0,0);
-   _round_button =  new Button("start round", {280, 50}, {810, 700}, red, sf::Color::White, _rh.get_font());
+   _round_button =  new Button("START ROUND", {242, 38}, {829, 701}, red, sf::Color::White, _rh.get_font());
    _round_button->center_text();
 
 }
@@ -118,12 +118,15 @@ void SideMenu::setup_info_displays(){
 
     setup_info_display(TowerAttributes::HP, _lives_drawable, _lives_text, {l_x, l_y}, char_size);
 
-    float c_x =  l_x + info_display_width;
+    // move cash towards lives with offset 
+    float lives_offset  = 20;
+
+    float c_x =  l_x + info_display_width - lives_offset;
     float c_y =  display_start_y;
 
     setup_info_display(TowerAttributes::MONEY, _cash_drawable, _cash_text, {c_x, c_y}, char_size);
 
-    float r_x =  c_x + info_display_width;
+    float r_x =  c_x + info_display_width + lives_offset;
     float r_y =  display_start_y;
 
     float extra_space = 10;
@@ -181,6 +184,7 @@ void SideMenu::handle_events(sf::RenderWindow& window, const sf::Event& event){
             _state = 3;
             _round_button->reset_button();
         }
+
     }
 }
     
