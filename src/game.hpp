@@ -144,7 +144,7 @@ private:
     /**
      * @brief int parameter determines the starting lives for the level
      */
-    int _starting_lives = 5;
+    int _starting_lives = 30;
 
     /**
      * @brief int parameter determines state of the game state:
@@ -174,10 +174,11 @@ private:
     int _available_types = 1;
 
     /**
-     * @brief Variable for animation phase
-     * To know which part of animation to play
+     * @brief Variable for enemies moving animation
+     * Thats because we want to play only one moving animation and all 
+     * attack animations at the time
      */
-    int _animation_phase;
+    int _enemy_move_animation;
 
     /**
      * @brief basic amount of money given

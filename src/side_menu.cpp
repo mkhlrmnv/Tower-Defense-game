@@ -65,7 +65,7 @@ void SideMenu::setup_round_button(){
 
     // get position of the last button 
     sf::Color red(220,0,0);
-   _round_button =  new Button("start round", {280, 50}, {810, 700}, red, sf::Color::White, _rh.get_font());
+   _round_button =  new Button("START ROUND", {242, 38}, {829, 701}, red, sf::Color::White, _rh.get_font());
    _round_button->center_text();
 
 }
@@ -118,12 +118,15 @@ void SideMenu::setup_info_displays(){
 
     setup_info_display(TowerAttributes::HP, _lives_drawable, _lives_text, {l_x, l_y}, char_size);
 
-    float c_x =  l_x + info_display_width;
+    // move cash towards lives with offset 
+    float lives_offset  = 20;
+
+    float c_x =  l_x + info_display_width - lives_offset;
     float c_y =  display_start_y;
 
     setup_info_display(TowerAttributes::MONEY, _cash_drawable, _cash_text, {c_x, c_y}, char_size);
 
-    float r_x =  c_x + info_display_width;
+    float r_x =  c_x + info_display_width + lives_offset;
     float r_y =  display_start_y;
 
     float extra_space = 10;
@@ -149,11 +152,6 @@ void SideMenu::draw( sf::RenderTarget& target, sf::RenderStates states) const{
     target.draw(_round_count_text);
 
     target.draw(*_round_button);
-
-    //std::cout <<"x"<<  _lives_drawable.getPosition().x << "y" << _lives_drawable.getPosition().y << std::endl;
-    //std::cout <<"w"<<  _lives_drawable.getGlobalBounds().width << "h" << _lives_drawable.getGlobalBounds().height << std::endl;
-
-
     target.draw(_lives_drawable);
     target.draw(_cash_drawable);
     target.draw(_round_count_drawable);
@@ -176,7 +174,6 @@ void SideMenu::handle_events(sf::RenderWindow& window, const sf::Event& event){
         for(auto drag_button : _drag_buttons){
 
             drag_button->handle_events(window, event, _level);
-            //std::cout <<"type:" << drag_button->get_type() << " dragging: " << drag_button->get_drag_flag() << std::endl; ;
             _drag_img_ptrs[drag_button->get_type()] =  drag_button->get_dragging_image();
         }
 
@@ -184,10 +181,10 @@ void SideMenu::handle_events(sf::RenderWindow& window, const sf::Event& event){
 
         if(_round_button->button_pressed()){
             // set state to running
-            std::cout << "round button pressed" << std::endl;
             _state = 3;
             _round_button->reset_button();
         }
+
     }
 }
     

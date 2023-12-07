@@ -20,8 +20,10 @@
 class Upgrade : public sf::Drawable{
 public:
 
-    Upgrade(float grid_resolution, ResourceHandler& rh, Level& level, int upgrade_cost);
+    Upgrade(float grid_resolution, ResourceHandler& rh, Level& level, int upgrade_cost, int max_upgrades);
     ~Upgrade(){delete _upgrade_button;}
+    Upgrade(const Upgrade&) = delete; 
+    Upgrade& operator=(const Upgrade&) = delete;
    
     /**
      * @brief handles events from the game.
@@ -38,6 +40,12 @@ public:
      * 
      */
     void disable_grid_click();
+
+    /**
+     * @brief reset upgrade so the menu wont stay to next game 
+     * 
+     */
+    void reset();
 
 
 private:
@@ -209,14 +217,6 @@ private:
      */
     sf::Text _price_text;
 
-    /* if false
-        click tower on grid -> select tower, pop menu
-    
-        if true 
-        click button upgrade_tower
-        click menu nothing
-        click outside menu or button close menu and button, set _upgrade_menu_enabled false;
-    */
 
     /**
      * @brief if menu is popped
@@ -229,6 +229,14 @@ private:
      *  -click outside menu or button close menu and button, set _upgrade_menu_enabled false;
      */
     bool _upgrade_menu_enabled;
+
+
+    /**
+     * @brief Is the upgrade feature is active.
+     * Prevents the menu suriving after end screen to new game.
+     *  
+     */
+    bool _upgrade_enabled;
 
     /**
      * @brief a reference,  handles textures
@@ -253,6 +261,12 @@ private:
      * 
      */
     int _upgrade_cost;
+
+    /**
+     * @brief the number of tower upgrades.
+     * 
+     */
+    int _max_upgrades;
 
 };
 

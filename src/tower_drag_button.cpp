@@ -104,7 +104,7 @@ void TowerDragButton::setup_button_texts(){
     _price_text.setPosition({price_x, price_y});
 
     // modify these
-    float start_x_offset = 10;
+    float start_x_offset = 4;
     float char_size = 12;
     float line_spacing = 10;
     float img_text_space = 2;
@@ -181,7 +181,7 @@ void TowerDragButton::setup_attribute_images(){
     float tweak_x = 0;
     float tweak_y = 2;
 
-    float start_x_offset = 10;
+    float start_x_offset = 4;
     float char_size = 10;
     float line_spacing = 10;
 
