@@ -275,14 +275,17 @@ void Game::render(){
             _animation_phase = 0;
         }
         _window.clear();
-            _renderer.draw_level(_window);
-            _renderer.draw_towers(_window, _level.get_towers(), _animation_phase);
-            _renderer.draw_enemies(_window, _level.get_enemies(), _animation_phase);
-            _window.draw(_side_menu);
-            _window.draw(_upgrade);
+        _renderer.draw_level(_window);
+        _renderer.draw_towers(_window, _level.get_towers(), _animation_phase);
+        _renderer.draw_enemies(_window, _level.get_enemies(), _animation_phase);
+        _window.draw(_side_menu);
+        _window.draw(_upgrade);
 
-            _window.display(); // display the drawn entities
+        _window.display(); // display the drawn entities
         _animation_phase++;
+
+        // std::this_thread::sleep_for(std::chrono::milliseconds(100));
+
 
         // removes all towers and enemies with 0 hp, if their dying animation was already played
         for (auto* t : _level.get_towers()){
@@ -352,6 +355,19 @@ void Game::start_round(){
     if (_available_types < 7){
         _available_types++;
     }
+    // for (int i = 0; i < 8; i++)
+    // {
+    //     Square* spawn_sq = _level.get_first_road();
+    //     // Picks random type of enemy from available types
+    //     int rand_types = rand() % _available_types;
+    //     // Picks random position inside spawn square
+    //     int x = rand() % 80;
+    //     int y = rand() % 40;
+    //     Vector2D rand_pos = Vector2D(spawn_sq->get_center().x - (_level.get_square_size() / 2) + x, 1 + y);
+    //     // add enemy to level
+    //     _level.add_enemy_by_type(i, rand_pos);
+    // }
+    
 }
 
 // updates all enemies

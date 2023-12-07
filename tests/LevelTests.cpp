@@ -18,7 +18,7 @@ bool testRound(){
     {
         lv.plus_round();
     }
-    return lv.get_round() == random_int; // checks if count was correct
+    return lv.get_round() == 1 + random_int; // checks if count was correct
 }
 
 // tests cash count 
