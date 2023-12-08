@@ -21,19 +21,19 @@ TowerDragButton(int type, sf::Vector2f position,  sf::Color outline, sf::Color f
    
     
     /**
-     * @brief Set the drag flag object
+     * @brief Set the drag flag to true.
      * 
      */
     void set_drag_flag();
 
     /**
-     * @brief 
+     * @brief Set drag flag to false.
      * 
      */
     void reset_drag_flag();
 
     /**
-     * @brief Get the drag flag object
+     * @brief Get the drag flag object.
      * 
      * @return true 
      * @return false 
@@ -48,7 +48,7 @@ TowerDragButton(int type, sf::Vector2f position,  sf::Color outline, sf::Color f
     const sf::Sprite* get_dragging_image() const ;
 
     /**
-     * @brief Get the ObjecType of the button
+     * @brief Get the ObjectType of the button.
      * 
      * @return int 
      */
@@ -57,7 +57,7 @@ TowerDragButton(int type, sf::Vector2f position,  sf::Color outline, sf::Color f
   
 
     /**
-     * @brief updates the buttons state. 
+     * @brief Updates the buttons state. 
      * If cash is too low for purchase, sets the price text to red and disables the events. 
      * 
      * @param player_cash 
@@ -88,7 +88,6 @@ protected:
      */
     void add_tower_to_release_square(sf::RenderWindow& window, Level& lv);
 
-    // get mouse coords and place dragging image on that position
     /**
      * @brief Set the dragging drawable position. 
      * Checks the mouse position and sets it to the member variable _release_pos.
@@ -117,7 +116,7 @@ protected:
     void setup_attribute_images();
 
     /**
-     * @brief a helper function for the function above. 
+     * @brief a helper function for the function above 
      * Sets up a sprite according to given position and ObjectType.  
      * 
      * @param type 
@@ -143,80 +142,80 @@ protected:
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
     /**
-     * @brief a background for tower texture.
+     * @brief a background for tower texture
      * 
      */
     sf::RectangleShape _img_background;
 
     /**
-     * @brief a sprite for the static tower image.
+     * @brief a sprite for the static tower image
      * 
      */
     sf::Sprite _drawable_tower;
     
     /**
-     * @brief a sprite for the tower image following the mouse when dragging.
+     * @brief a sprite for the tower image following the mouse when dragging
      * 
      */
     sf::Sprite _drawable_dragging_tower;
 
     /**
-     * @brief a sprite for the static tower image.
+     * @brief a sprite for the static tower image
      * 
      */
     sf::Sprite _hp_img;
 
     /**
-     * @brief A sprite for displaying damage image.
+     * @brief a sprite for displaying damage image
      * 
      */
     sf::Sprite _dmg_img;
 
     /**
-     * @brief A sprite for displaying the range image
+     * @brief a sprite for displaying the range image
      * 
      */
     sf::Sprite _rng_img;
 
     /**
-     * @brief A sprite for displaying the attack speed image.
+     * @brief a sprite for displaying the attack speed image
      * 
      */
     sf::Sprite _atkspd_img;
 
     /**
-     * @brief A text object for displaying the towers price.
+     * @brief a text object for displaying the towers price
      * 
      */
     sf::Text _price_text;
 
     /**
-     * @brief a text object for displaying the hp of the tower.
+     * @brief a text object for displaying the hp of the tower
      * 
      */
     sf::Text _hp_text;
     
     /**
-     * @brief a text object for displaying the damage of the tower.
+     * @brief a text object for displaying the damage of the tower
      * 
      */
     sf::Text _dmg_text;
     
     /**
-     * @brief a text object for displaying the range of the tower.
+     * @brief a text object for displaying the range of the tower
      * 
      */
     sf::Text _rng_text;
     
     /**
-     * @brief a text object for displaying the attack speed of the tower.
+     * @brief a text object for displaying the attack speed of the tower
      * 
      */
     sf::Text _atkspd_text;
 
 
     /**
-     * @brief the position where the mouse was released when drag flag is set.
+     * @brief the position where the mouse was released when drag flag is set
      * 
      */    
     sf::Vector2i _release_pos;
@@ -245,19 +244,19 @@ protected:
     int _tower_price;
 
     /**
-     * @brief deterines if the button is usable.
+     * @brief Determines if the button is usable.
      * 
      */
     bool _button_enabled;
 
     /**
-     * @brief determines if the image is dragged or not
+     * @brief Determines if the image is dragged or not.
      * 
      */
     bool _drag_flag;
 
     /**
-     * @brief handles Tower textures, font, name, attribute values and images from given tower type
+     * @brief Handles Tower textures, font, name, attribute values and images from given tower type.
      * 
      */
     ResourceHandler& _rh;

@@ -9,14 +9,15 @@
 #include <iostream>
 
 /**
- * @brief A class to represent buttons in menus. Inherits from the sfml Drawable class to hide draw calls. 
+ * @brief A class to represent buttons in menus. Inherits from the sfml Drawable class to hide draw calls.
+ * Works as a transparent button in the two first menus and as an opaque button for side menu and upgrade classes.  
  * 
  * @param label what to write in the button
  * @param size  size of the button
  * @param position position of the button
  * @param fill_color color of the button
  * @param outline_color outline color of the button
- * @param font a refence to the games font from resource handler
+ * @param font a reference to the games font from resource handler
  */
 class Button : public sf::Drawable{
 

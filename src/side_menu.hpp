@@ -10,8 +10,6 @@
 #include "iostream"
 
 
-// TODO: Implement start round button!
-// TODO: Tweak the attributes in RH according to final object attributes
 
 /**
  * @brief Implements side menu of the game. 
@@ -218,7 +216,7 @@ private:
      * Is either a pointer to the drag image sprite or a null pointer.
      * Only one element on the list is a pointer to a drag image if the drag flag is set, the others are null pointers.
      * Otherwise everything is a null pointer and nothing is drawn. 
-     * The draw call draws the element that isnt a null pointer, so its on top of all other draw calls. 
+     * The draw call draws the element that isn't a null pointer, so its on top of all other draw calls. 
      */
     std::array< const sf::Sprite *, 6>  _drag_img_ptrs;
 
