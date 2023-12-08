@@ -1,0 +1,25 @@
+Enemies_CanAttack:
+
+BossKnight -> BOSS
+FogMage -> Confuses towers from shooting
+InfernoMage -> Inferno damage
+NoobDemon
+TankOrc -> Tanky
+
+Attack frame count: 3 (frames 1,2,3)
+Walk frame count: 4 (frames 4,5,6,7)
+Dying frame count: 6 (frames 8,9,10,11,12,13)
+
+------------------------------------------------
+------------------------------------------------
+
+Enemies_NoAttack:
+
+FastBoy - Very fast
+NoobSkeleton
+HealerPriest - Heals overtime or casts heal
+
+Walk frame count: 4 (frames 1,2,3,4)
+Dying frame count: 6 (frames 5,6,7,8,9,10)
+
+----------------------------------------
