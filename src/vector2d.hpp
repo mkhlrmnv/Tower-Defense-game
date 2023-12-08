@@ -3,12 +3,9 @@
 
 #include <iostream>
 
-<<<<<<< HEAD
-=======
 /**
  * @brief class for in game coordinates
  */
->>>>>>> bc314f0c80edd1a43211ae786e65d3543ca5d1d9
 class Vector2D {
 public:
     int x;
@@ -42,8 +39,6 @@ public:
         return !(*this == other);
     }
 
-<<<<<<< HEAD
-=======
     Vector2D operator+(const Vector2D& other) const {
         return Vector2D(x + other.x, y + other.y);
     }
@@ -59,7 +54,6 @@ public:
      * @return std::ostream& new line in console with information about this vector
      * in format "x y"
      */
->>>>>>> bc314f0c80edd1a43211ae786e65d3543ca5d1d9
     friend std::ostream& operator<<(std::ostream& os, const Vector2D& vec) {
         os << vec.x << " " << vec.y;
         return os;

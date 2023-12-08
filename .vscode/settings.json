@@ -89,14 +89,10 @@
     "random": "cpp",
     "utility": "cpp",
     "stop_token": "cpp",
-    "__tree": "cpp",
-    "map": "cpp"
-=======
-    "stack": "cpp",
-    "variant": "cpp",
-    "__tree": "cpp",
     "map": "cpp",
-    "set": "cpp"
->>>>>>> bc314f0c80edd1a43211ae786e65d3543ca5d1d9
-  }
+    "set": "cpp",
+    "cinttypes": "cpp",
+    "__tree": "cpp"
+  },
+  "C_Cpp.errorSquiggles": "enabled"
 }

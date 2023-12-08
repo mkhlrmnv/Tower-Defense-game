@@ -2,13 +2,14 @@
 
 # Add all your source files in this directory
 set(SRC_FILES
-    enemy.hpp
+    enemy.cpp
     basic_enemy.cpp
+    basic_tower.cpp
     level.cpp
     object.cpp
     square.cpp
-    tower.hpp
-    attack_types.hpp
+    tower.cpp
+    attack_types.cpp
     vector2d.hpp
     archer_tower.cpp
     aoe_tower.cpp
@@ -22,6 +23,9 @@ set(SRC_FILES
     sceleton_enemy.cpp
     sniper_tower.cpp
     tank_enemy.cpp
+    boss_enemy.cpp
+    mud_mage_tower.cpp
+    water_mage_tower.cpp
     # Add all your source files here (excluding headers)
 )
 

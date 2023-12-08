@@ -7,7 +7,7 @@ You can use Markdown language to render it as formatted **HTML** file.
 - Leo Teodosin
 - Mikhail Romanov
 - Aki oura
-- Member 4
+- Kalle Lindgren
 
 # Repository organization
 Your project implementation should follow the skelaton organization in this repository.

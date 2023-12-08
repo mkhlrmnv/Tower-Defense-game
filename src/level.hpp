@@ -134,19 +134,6 @@ public:
      */
     void add_lives(int how_much);
 
-<<<<<<< HEAD
-    std::vector<Enemy*> get_enemies() const;
-
-    bool add_enemy(Enemy* enemy);
-
-    std::vector<Tower*> get_towers() const;
-
-    bool add_tower(Tower* tower);
-
-    void print_objects();
-    
-    // Load level from file
-=======
     /**
      * @brief Get the vector of enemies
      * @return std::vector<Enemy*> 
@@ -249,7 +236,6 @@ public:
      * @param file_name Name of file from where map is loaded
      * @return int 1 if maps is loaded and -1 if load failed
      */
->>>>>>> bc314f0c80edd1a43211ae786e65d3543ca5d1d9
     int read_file(const std::string& file_name);
 
     /**

@@ -1,0 +1,93 @@
+#ifndef TOWER_DEFENCE_SRC_RENDERER_HPP
+#define TOWER_DEFENCE_SRC_RENDERER_HPP
+
+
+#include "vector2d.hpp"
+#include "level.hpp"
+#include "object.hpp"
+#include <SFML/Window.hpp>
+#include <SFML/Graphics.hpp>
+#include <iostream>
+#include <string>
+#include "resource_handler.hpp"
+
+#include "attack_types.hpp"
+
+/**
+ * @brief Class for creating drawable game objects for window.draw([DRAWABLE GAME OBJECT])
+ * 
+ */
+class Renderer{
+public:
+
+    Renderer();
+    ~Renderer(){}
+    Renderer(const Renderer& ) = delete;
+    Renderer operator=(const Renderer&) = delete;
+
+    // call at the beginning of the game
+    void make_drawable_level(Level & lv); 
+    void make_level_info_texts(int game_resolution, int side_bar_width);
+
+    //void make_drawable_buttons()
+    
+    // draw background
+    void draw_level(sf::RenderWindow& rwindow);
+
+    // draw single enemy  
+    void draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr, int frame, int move_animation);
+    
+    // draw enemies on from a list
+    void draw_enemies(sf::RenderWindow& rwindow, std::vector< Enemy * > enemies, int frame, int move_animation);
+
+    // draw single enemy 
+    void draw_tower(sf::RenderWindow& rwindow, Tower* t_ptr, int frame);
+    
+    // draw towers on from a list
+    void draw_towers(sf::RenderWindow& rwindow, std::vector< Tower * > towers, int frame);
+
+
+    // draw texts 
+    void draw_cash(sf::RenderWindow& rwindow, int cash);
+    void draw_lives(sf::RenderWindow& rwindow, int lives);
+    void draw_round_count(sf::RenderWindow& rwindow, int round_count);
+
+    void load_font();
+
+private:
+    // a sprite for drawing grid
+    sf::Sprite _drawable_level;
+
+    // a sprite for drawing objects 
+    sf::Sprite _drawable_enemy;
+    sf::Sprite _drawable_tower; 
+
+    // grids connected as a one RenderedTexture
+    sf::RenderTexture _level_texture; 
+
+    // place holders
+    sf::RenderTexture _tower_texture; 
+    sf::RenderTexture _enemy_texture; 
+
+    float scale_factor; // number that scales textures to right size
+
+    sf::Texture _tower_sprite; // for tower texture
+    sf::Texture _enemy_sprite; // for enemy texture
+
+    sf::Texture _grass_pic;
+    sf::Texture _road_pic;
+    sf::Texture _house_pic;
+
+    float _scale_factor_tower = 2.5; // Adjust this value as needed
+    float _scale_factor_enemy = 1; // TODO: some enemy type depending value
+
+    sf::Font _font;
+    sf::Text _round_count_text;
+    sf::Text _cash_text;
+    sf::Text _lives_text;
+
+    // Resource handler
+    ResourceHandler _rh;
+};
+
+#endif 

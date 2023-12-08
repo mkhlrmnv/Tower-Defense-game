@@ -9,7 +9,7 @@ class Tank: public Enemy {
 public:
 
     Tank(Level& level, Vector2D& position, int health = 100, int damage = 5, int range = 80, int attack_speed = 1, 
-        int type = ObjectTypes::TankOrc, int speed = 1, int defense = 100, int size = 4);
+        int type = ObjectTypes::TankOrc, int speed = 1, int defense = 100);
 
     ~Tank() { }
 

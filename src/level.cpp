@@ -94,19 +94,50 @@ std::vector<Enemy*> Level::get_enemies() const{
     return _enemies;
 }
 
-<<<<<<< HEAD
-bool Level::add_enemy(Enemy* enemy){
-    int row = floor(enemy->get_position().y / _square_size);
-    int col = floor(enemy->get_position().x / _square_size);
-=======
 // functions below handels everythign related to enemies and vector of them
 bool Level::add_enemy(Enemy* enemy){
     int col = floor(enemy->get_position().x / _square_size);
     int row = floor(enemy->get_position().y / _square_size);
->>>>>>> bc314f0c80edd1a43211ae786e65d3543ca5d1d9
     if (_grid[col][row]->get_occupied() == road){
         _enemies.push_back(enemy);
         return true;
+    }
+    return false;
+}
+
+bool Level::add_enemy_by_type(int type, Vector2D pos){
+    switch (type)
+    {
+    case ObjectTypes::NoobSkeleton_NoAttack:
+        return add_enemy(new Sceleton(*this, pos));
+    case ObjectTypes::NoobDemon_CanAttack:
+        return add_enemy(new Demon(*this, pos));
+    case ObjectTypes::FastBoy:
+        return add_enemy(new Fast_Boy(*this, pos));
+    case ObjectTypes::FogMage:
+        return add_enemy(new Fog_Mage(*this, pos));
+    case ObjectTypes::HealerPriest:
+        return add_enemy(new Healer(*this, pos));
+    case ObjectTypes::InfernoMage:
+        return add_enemy(new Inferno(*this, pos));
+    case ObjectTypes::TankOrc:
+        return add_enemy(new Tank(*this, pos));
+    case ObjectTypes::BossKnight:
+        return add_enemy(new Boss(*this, pos));
+    default:
+        break;
+    }
+    return false;
+}
+
+bool Level::remove_enemy(Enemy* enemy){
+    for (size_t i = 0; i < _enemies.size(); i++)
+    {
+        if (_enemies[i]->get_position() == enemy->get_position() && _enemies[i]->get_health() == enemy->get_health()){
+            delete _enemies[i];
+            _enemies.erase(_enemies.begin() + i);
+            return true;
+        }
     }
     return false;
 }
@@ -155,10 +186,7 @@ std::vector<Tower*> Level::get_towers() const{
     return _towers;
 }
 
-<<<<<<< HEAD
-=======
 // Functions below handels everything related to towers
->>>>>>> bc314f0c80edd1a43211ae786e65d3543ca5d1d9
 bool Level::add_tower(Tower* tower){
     int row = floor(tower->get_position().y / _square_size);
     int col = floor(tower->get_position().x / _square_size);
@@ -169,14 +197,6 @@ bool Level::add_tower(Tower* tower){
     return false;
 }
 
-<<<<<<< HEAD
-void Level::print_objects(){
-    for (auto* e : _enemies){
-        std::cout << typeid(e).name() << " in point " << e->get_position() << std::endl;
-    }
-    for (auto* t : _towers){
-        std::cout << typeid(t).name() << " in point " << t->get_position() << std::endl;
-=======
 
 // TODO: Mud and water mage when classes are ready
 bool Level::add_tower_by_type(int type, Vector2D pos){
@@ -255,13 +275,13 @@ std::vector<Direction> Level::next_road(Enemy* enemy){
     return list_of_road_squares;
 }
 
+<<<<<<< HEAD
 void Level::print_objects(){
     for (auto* e : _enemies){
         std::cout << typeid(e).name() << " in point " << e->get_position() << " health: " << e->get_health() << std::endl;
     }
     for (auto* t : _towers){
         std::cout << typeid(t).name() << " in point " << t->get_position()<< " health: " << t->get_health() << std::endl;
->>>>>>> bc314f0c80edd1a43211ae786e65d3543ca5d1d9
     }
 }
 

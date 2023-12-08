@@ -10,7 +10,7 @@ public:
 
     Sceleton(Level& level, Vector2D& position, int health = 20, int damage = 0, 
         int range = 0, int attack_speed = 0, int type = ObjectTypes::NoobSkeleton_NoAttack, 
-        int speed = 3, int defense = 5, int size = 2);
+        int speed = 3, int defense = 5);
 
     ~Sceleton() { }
 

@@ -18,34 +18,15 @@
 
 # Libraries
 
-# built
-build/**/*
-
-
-
-# xcode folder for buildin on mac
-xcode/
-
-
-# xcode folder for buildin on mac
+# xcode folder for building gui on mac
 xcode/
 
 
 # Shared objects (inc. Windows DLLs)
 
-#built / cmake
-build/**/*
-**/.DS_Store
-**/cmake-build-debug
-**/CMakeCache.txt
-**/cmake_install.cmake
-**/install_manifest.txt
-**/CMakeFiles/
-**/CTestTestfile.cmake
-**/Makefile
-**/*.cbp
-**/CMakeScripts
-**/compile_commands.json
+#build folder
+build/*
+!build/build.xml
 
 #built folder
 /build/
@@ -85,5 +66,5 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
-#xcode
-xcode/
+# misc.
+.DS_Store

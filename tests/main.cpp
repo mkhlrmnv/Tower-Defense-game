@@ -17,7 +17,7 @@ int main(){
     // std::cout << "\n" <<"RUNNING ENEMY TEST ----------------------------------" << "\n" << std::endl;
     // fails += enemy_tests();
 
-    // std::cout << "\n" <<"TEST FINISHED WITH: " << fails << " ERRORS" << "\n" << std::endl;
+    std::cout << "\n" <<"TEST FINISHED WITH: " << fails << " ERRORS" << "\n" << std::endl;
 
     return 0;
 }

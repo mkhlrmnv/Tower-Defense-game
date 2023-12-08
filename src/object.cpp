@@ -43,24 +43,12 @@ int Object::get_attack_counter() const {
     return _attack_counter;
 }
 
-int Object::get_reset_counter() const {
-    return _attack_counter;
-}
-
 void Object::set_attack_counter(const int amount) {
     _attack_counter = amount;
 }
 
-void Object::set_reset_counter(const int amount) {
-    _reset_counter = amount
-}
-
 void Object::attack_counter_up() {
     _attack_counter += 1;
-}
-
-void Object::reset_counter_up() {
-    _reset_counter += 1;
 }
 
 void Object::set_position(const Vector2D& position) {
@@ -88,7 +76,7 @@ void Object::gain_attack_speed(int amount) {
         _original_attack_speed = _attack_speed;
     }
 
-    _attack_speed -= amount;
+    _attack_speed += amount;
 }
 
 double Object::distance_to(const Vector2D& target_position) {
@@ -109,9 +97,7 @@ void Object::lose_attack_speed(int amount) {
         _original_attack_speed = _attack_speed;
     }
 
-    if (_attack_speed == _original_attack_speed) {
-        _attack_speed += amount;
-    }
+    _attack_speed += amount;
 }
 
 State Object::get_state(){

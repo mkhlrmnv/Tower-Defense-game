@@ -5,9 +5,9 @@ Tower::Tower(Level& current_level, Vector2D& position, int health, int damage, i
 
 void Tower::level_up() {
     gain_damage(10 * _level);
-    gain_health(30 * _level);
-    gain_range(100 * _level);
-    gain_attack_speed(2 * _level);
+    gain_health(50 * _level);
+    gain_range(5 * _level);
+    gain_attack_speed(150 * _level);
     _level++;
 }
 
