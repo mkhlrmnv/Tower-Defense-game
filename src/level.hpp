@@ -269,10 +269,10 @@ public:
     void print_map();
     
     // Helper functions for randomly generate
-    // One handels situations of first few moves and other all the rest ones
+    // One handles situations of first few moves and other all the rest ones
     /**
      * @brief Helper functions for randomly generate
-     *   Handels situation where it's not few of first round
+     *   Handles situation where it's not few of first round
      * @param dir Direction where randomly generate wants to go
      * @param prev_dirs Vector of all previous directions
      * @param row Current row
@@ -284,7 +284,7 @@ public:
 
     /**
      * @brief Helper functions for randomly generate
-     *   Handels situation where its first few moves
+     *   Handles situation where its first few moves
      * @param dir Direction where randomly generate wants to go
      * @param prev_dirs Vector of all previous directions
      * @param row Current row
