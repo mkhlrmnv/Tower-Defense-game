@@ -1,0 +1,26 @@
+[
+{
+  "directory": "/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/build",
+  "command": "/opt/homebrew/bin/aarch64-apple-darwin22-g++-13  -I/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/. -I/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/src -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -Wall -Wextra -pedantic -Wno-missing-field-initializers -o CMakeFiles/test.dir/src/level.cpp.o -c /Users/mkhlrmnv/Desktop/cpp_project/tower-defence/src/level.cpp",
+  "file": "/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/src/level.cpp",
+  "output": "CMakeFiles/test.dir/src/level.cpp.o"
+},
+{
+  "directory": "/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/build",
+  "command": "/opt/homebrew/bin/aarch64-apple-darwin22-g++-13  -I/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/. -I/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/src -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -Wall -Wextra -pedantic -Wno-missing-field-initializers -o CMakeFiles/test.dir/src/main.cpp.o -c /Users/mkhlrmnv/Desktop/cpp_project/tower-defence/src/main.cpp",
+  "file": "/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/src/main.cpp",
+  "output": "CMakeFiles/test.dir/src/main.cpp.o"
+},
+{
+  "directory": "/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/build",
+  "command": "/opt/homebrew/bin/aarch64-apple-darwin22-g++-13  -I/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/. -I/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/src -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -Wall -Wextra -pedantic -Wno-missing-field-initializers -o CMakeFiles/test.dir/src/object.cpp.o -c /Users/mkhlrmnv/Desktop/cpp_project/tower-defence/src/object.cpp",
+  "file": "/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/src/object.cpp",
+  "output": "CMakeFiles/test.dir/src/object.cpp.o"
+},
+{
+  "directory": "/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/build",
+  "command": "/opt/homebrew/bin/aarch64-apple-darwin22-g++-13  -I/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/. -I/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/src -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -Wall -Wextra -pedantic -Wno-missing-field-initializers -o CMakeFiles/test.dir/src/square.cpp.o -c /Users/mkhlrmnv/Desktop/cpp_project/tower-defence/src/square.cpp",
+  "file": "/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/src/square.cpp",
+  "output": "CMakeFiles/test.dir/src/square.cpp.o"
+}
+]

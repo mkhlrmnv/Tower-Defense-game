@@ -18,6 +18,14 @@
 
 # Libraries
 
+# built
+build/**/*
+
+
+
+# xcode folder for buildin on mac
+xcode/
+
 
 # xcode folder for buildin on mac
 xcode/
@@ -76,3 +84,6 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+#xcode
+xcode/
