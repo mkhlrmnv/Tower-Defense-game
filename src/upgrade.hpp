@@ -10,7 +10,12 @@
 #include <iostream>
 
 /**
- * @brief A class to implement tower upgrades. Click a object on the grid and a menu will pop. Push upgrade button to upgrade the tower's attributes. 
+ * @brief A class to implement tower upgrades. Click a object on the grid and a menu will pop. Push upgrade button to upgrade the tower's attributes.
+ * Basic idea: 
+ * 1. click grid position. 
+ * 2. if there is a tower: pop menu with current attributes of the tower on the square
+ * 3. press button to call tower_to_be_upgraded->level_up()
+ * 4. hide menu 
  * 
  * @param grid_resolution
  * @param rh
@@ -26,7 +31,7 @@ public:
     Upgrade& operator=(const Upgrade&) = delete;
    
     /**
-     * @brief handles events from the game.
+     * @brief Handles events from the game.
      *
      * 
      * @param window 
@@ -36,13 +41,13 @@ public:
     
     
     /**
-     * @brief disable grid click
+     * @brief Disable grid click.
      * 
      */
     void disable_grid_click();
 
     /**
-     * @brief reset upgrade so the menu wont stay to next game 
+     * @brief Reset upgrade so the menu wont stay to next game.
      * 
      */
     void reset();
@@ -60,7 +65,7 @@ private:
     bool outside_menu(sf::Vector2i mouse_pos);
 
     /**
-     * @brief checks if mouse position is inside grid
+     * @brief Checks if mouse position is inside grid.
      * 
      * @param mouse_pos 
      * @return true 
@@ -71,14 +76,14 @@ private:
     // 
     // 
     /**
-     * @brief get tower to upgrade from grid if such exist on a square. 
+     * @brief Get tower to upgrade from grid if such exist on a square. 
      * 
      * @param mouse_pos 
      */
     void grid_click(sf::Vector2i mouse_pos);
 
     /**
-     * @brief pops the upgrade menu on the given position.
+     * @brief Pops the upgrade menu on the given position.
      * The menu displays tower stats and upgrade button.
      * 
      * @param pop_here 
@@ -110,14 +115,14 @@ private:
     void setup_text_line(sf::Sprite& sprite, sf::Text &text, sf::Vector2f pos, sf::Color color, int attr_type, int char_size);
 
     /**
-     * @brief updates the menus position, and the attributes according to the selected tower
+     * @brief Updates the menus position, and the attributes according to the selected tower.
      * 
      * @param position 
      */
     void set_menu(sf::Vector2f position);
 
     /**
-     * @brief set the position of text lines in set menu function
+     * @brief Set the position of text lines in set menu function.
      * 
      * @param sprite 
      * @param text 
@@ -128,14 +133,14 @@ private:
 
     
     /**
-     * @brief calls tower.upgrade() if theres enough money to upgrade and  removes price of upgrade from cash in level
+     * @brief Calls tower.upgrade() if theres enough money to upgrade and removes price of upgrade from cash in level.
      * 
      */
     void upgrade_tower();
 
     
     /**
-     * @brief the inherited method from sf::Drawable class, just pass this object as argument to window.draw() to handle drawing 
+     * @brief The inherited method from sf::Drawable class, just pass this object as argument to window.draw() to handle drawing.
      * 
      * @param target 
      * @param states 
@@ -232,14 +237,14 @@ private:
 
 
     /**
-     * @brief Is the upgrade feature is active.
+     * @brief Tells if the upgrade feature is active
      * Prevents the menu suriving after end screen to new game.
      *  
      */
     bool _upgrade_enabled;
 
     /**
-     * @brief a reference,  handles textures
+     * @brief a reference to ResourceHandler, handles textures
      * 
      */
     ResourceHandler& _rh;
@@ -257,13 +262,13 @@ private:
     Tower* _tower_to_upgrade;
 
     /**
-     * @brief the cost of the upgrade.
+     * @brief the cost of the upgrade
      * 
      */
     int _upgrade_cost;
 
     /**
-     * @brief the number of tower upgrades.
+     * @brief the number of tower upgrades
      * 
      */
     int _max_upgrades;

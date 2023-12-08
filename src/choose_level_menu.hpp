@@ -34,19 +34,19 @@ public:
 
     
     /**
-     * @brief disable menu when the GameState is not ChooseLevelMenu
+     * @brief Disables menu.
      * 
      */
     void disable_menu();
 
     /**
-     * @brief enable menu when the GameState is ChooseLevelMenu
+     * @brief Enables menu.
      * 
      */
     void enable_menu();
 
     /**
-     * @brief Get the GameState to check the transition: 
+     * @brief Get the GameState to check the transition in Game class:
      * 1 = stay on the menu
      * 2 = load level in transtion and start game with pause 
      * 
@@ -55,13 +55,13 @@ public:
     int get_state();
 
     /**
-     * @brief reset state and buttons after end screen. 
+     * @brief Resets state and buttons.
      * 
      */
     void reset();
 
     /**
-     * @brief forward the events from window to the buttons.
+     * @brief Forwards the events from window to the buttons.
      * 
      * @param window 
      * @param event 
@@ -99,13 +99,13 @@ private:
     void draw(sf::RenderTarget& target, sf::RenderStates state) const;
 
     /**
-     * @brief keeps track of wether the menu is enabled
+     * @brief Keeps track of wether the menu is enabled
      * 
      */
     bool _menu_enabled;
 
     /**
-     * @brief holds the level number which is set with by handle events. 
+     * @brief Holds the level number which is set with by handle events. 
      * Used in get_level_to_load(). 
      * Default value is set to -1 - no corresponding level files.  
      * 

@@ -28,15 +28,12 @@
 #include "main_menu.hpp"
 #include "choose_level_menu.hpp"
 
-/**
- * @brief Enum for which kind of level is beeing loaded
- */
-namespace LevelSelection{
-    enum Choice: int{
-        random, load
-    };
-}
 
+
+/**
+ * @brief enum for game states.
+ * 
+ */
 namespace GameState{
     enum State{
         StartMenu, MapMenu, Pause, Round, Victory, GameOver
@@ -45,7 +42,7 @@ namespace GameState{
 
 
 /**
- * @brief A class for running the game. Opens a window in which a game loop handles user input key, updates game state and draws game entities. 
+ * @brief A class for running the game. Opens a window in which a game loop handles user inputs, updates game state and draws game entities.
  */
 class Game{
 public:
@@ -185,13 +182,46 @@ private:
      */
     int _basic_money = 50;
 
-
+    /**
+     * @brief a class for getting textures, fonts, and object features for the side menu.
+     * 
+     */
     ResourceHandler _rh;
+
+    /**
+     * @brief a class for drawing the level, tower and enemy objects and end screen.
+     * 
+     */
     Renderer _renderer;
+
+    /**
+     * @brief a class to represent the level and implement game logic.
+     * 
+     */
     Level _level;
+
+    /**
+     * @brief a class to select either random or existing maps.
+     * 
+     */
     MainMenu _main_menu;
+
+    /**
+     * @brief a class to select from six existing maps.
+     * 
+     */
     ChooseLevelMenu _level_menu;
+
+    /**
+     * @brief a class to implement the side menu: purchase towers, display level info, start the round.
+     * 
+     */
     SideMenu _side_menu;
+
+    /**
+     * @brief a class to implement the upgrade feature for the towers. 
+     * 
+     */
     Upgrade _upgrade;
 }; 
 #endif
