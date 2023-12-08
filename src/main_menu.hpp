@@ -25,19 +25,19 @@ public:
     MainMenu& operator=(const MainMenu&) = delete;
     
     /**
-     * @brief disable menu when the GameState is not MainMenu
+     * @brief Disables menu
      * 
      */
     void disable_menu();
 
     /**
-     * @brief enable menu when the GameState is MainMenu
+     * @brief Enables menu.
      * 
      */
     void enable_menu();
 
     /**
-     * @brief Get the GameState to check the transition: 
+     * @brief Get the GameState to check the transition in Game class: 
      * 0 =  stay on the menu, 
      * 1 = go to choose level menu, or
      * 2 = generate random level and start pause 
@@ -47,13 +47,13 @@ public:
     int get_state();
 
     /**
-     * @brief reset state and buttons after end screen. 
+     * @brief Resets state and buttons after end screen. 
      * 
      */
     void reset();
 
     /**
-     * @brief forward the events from window to the buttons.
+     * @brief Forward the events from window to the buttons.
      * 
      * @param window 
      * @param event 
@@ -76,7 +76,7 @@ private:
     void set_buttons();
 
     /**
-     * @brief draw the background and buttons.s
+     * @brief Draw the background and buttons.
      * 
      * @param target 
      * @param state 
@@ -84,13 +84,13 @@ private:
     void draw(sf::RenderTarget& target, sf::RenderStates state) const;
 
     /**
-     * @brief keeps track of wether the menu is enabled
+     * @brief Keeps track of wether the menu is enabled.
      * 
      */
     bool _menu_enabled;
 
     /**
-     * @brief keeps track of the next state in the game loop
+     * @brief Keeps track of the next state in the game loop.
      * 
      */
     int _state;
