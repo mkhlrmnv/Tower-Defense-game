@@ -95,19 +95,22 @@ void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr, int frame, in
        _drawable_enemy.setTextureRect(sf::IntRect(0, 0, spriteWidth, spriteWidth));
     }
 
+    // scales enemy by its size and determines its in game coordinates
     float scale_factor_enemy = ceil(0.01f + (e_ptr->get_size() - 1) / 2);
-    float renderedX, renderedY;
+    float renderedX = e_ptr->get_position().y;
+    float renderedY = e_ptr->get_position().x;
 
     // if flips texture if needed (if attacking ot the left for example)
     if (e_ptr->get_state() == State::walking_left || e_ptr->get_state() == State::attacking_left){
         _drawable_enemy.setScale(-scale_factor_enemy, scale_factor_enemy);
-        renderedX = e_ptr->get_position().y + 20;
-        renderedY = e_ptr->get_position().x - _drawable_enemy.getTexture()->getSize().y;
     } else {
         _drawable_enemy.setScale(scale_factor_enemy, scale_factor_enemy);
-        renderedX = e_ptr->get_position().y - 20;
-        renderedY = e_ptr->get_position().x - _drawable_enemy.getTexture()->getSize().y;
     }
+
+
+
+    // sets texture to be drawn from bottom left corner
+    _drawable_enemy.setOrigin(0, 32);
     // Ensure enemy isn't drawn outside the field
     renderedX = std::max(renderedX, 1.0f);
     renderedY = std::max(renderedY, 1.0f);
