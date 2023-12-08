@@ -107,8 +107,6 @@ void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr, int frame, in
         _drawable_enemy.setScale(scale_factor_enemy, scale_factor_enemy);
     }
 
-
-
     // sets texture to be drawn from bottom left corner
     _drawable_enemy.setOrigin(0, 32);
     // Ensure enemy isn't drawn outside the field
