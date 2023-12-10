@@ -10,28 +10,17 @@
 #include <sstream>
 #include <string>
 #include <vector>
-=======
-// #include "level.hpp"
-// #include "object.hpp"
-// #include <iostream>
-// #include <cstdlib>
-// #include <fstream>
-// #include <iostream>
-// #include <sstream>
-// #include <string>
-// #include <vector>
->>>>>>> bc314f0c80edd1a43211ae786e65d3543ca5d1d9
 
-// // tests round count
-// bool testRound(){
-//     Level lv(1000, 1000, 50); // new level
-//     int random_int = rand() % 10;
-//     for (int i = 0; i < random_int; i++) // add random amount of rounds
-//     {
-//         lv.plus_round();
-//     }
-//     return lv.get_round() == random_int; // checks if count was correct
-// }
+// tests round count
+bool testRound(){
+    Level lv(1000, 1000, 50); // new level
+    int random_int = rand() % 10;
+    for (int i = 0; i < random_int; i++) // add random amount of rounds
+    {
+        lv.plus_round();
+    }
+    return lv.get_round() == 1 + random_int; // checks if count was correct
+}
 
 // // tests cash count 
 // bool testCash(){

@@ -96,19 +96,19 @@ void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr, int frame) {
        _drawable_enemy.setTextureRect(sf::IntRect(0, 0, spriteWidth, spriteWidth));
     }
 
-    // TODO: enemy depending value
-    float scale_factor_enemy = 1.0f; // Adjust as needed
+    // adjust size on the enemy by its personal size
+    float scale_factor_enemy = 0.01f + e_ptr->get_size() / 2;
     float renderedX, renderedY;
 
     // if flips texture if needed (if attacking ot the left for example)
     if (e_ptr->get_state() == State::walking_left || e_ptr->get_state() == State::attacking_left){
         _drawable_enemy.setScale(-scale_factor_enemy, scale_factor_enemy);
         renderedX = e_ptr->get_position().y + 20;
-        renderedY = e_ptr->get_position().x - _drawable_enemy.getTexture()->getSize().y;
+        renderedY = e_ptr->get_position().x - 11 * e_ptr->get_size();
     } else {
         _drawable_enemy.setScale(scale_factor_enemy, scale_factor_enemy);
         renderedX = e_ptr->get_position().y - 20;
-        renderedY = e_ptr->get_position().x - _drawable_enemy.getTexture()->getSize().y;
+        renderedY = e_ptr->get_position().x - 11 * e_ptr->get_size();
     }
     // Ensure enemy isn't drawn outside the field
     renderedX = std::max(renderedX, 1.0f);
