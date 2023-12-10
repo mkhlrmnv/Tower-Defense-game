@@ -284,6 +284,12 @@ void Game::render(){
             _window.display(); // display the drawn entities
         _animation_phase++;
 
+<<<<<<< HEAD
+=======
+        // std::this_thread::sleep_for(std::chrono::milliseconds(100));
+
+
+>>>>>>> a2d2f1e (removed debuging std:cout's)
         // removes all towers and enemies with 0 hp, if their dying animation was already played
         for (auto* t : _level.get_towers()){
             if (t->get_health() <= 0 && t->get_state() == State::dying){
