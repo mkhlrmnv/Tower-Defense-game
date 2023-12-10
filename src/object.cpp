@@ -121,6 +121,8 @@ void Object::lose_health(int amount) {
 void Object::lose_attack_speed(int amount) {
     if (_original_attack_speed == 0) {
         _original_attack_speed = _attack_speed;
+<<<<<<< HEAD
+=======
     }
 
     if (_attack_speed == _original_attack_speed) {

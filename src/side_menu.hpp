@@ -118,7 +118,12 @@ private:
      */
     void setup_info_display(int type, sf::Sprite& sprite, sf::Text& text_obj, sf::Vector2f pos, float char_size);
 
-    // derived from drawable;
+    /**
+     * @brief inherited from sf::Drawable, draws sidemenu as window.draw(SideMenu)
+     * 
+     * @param target 
+     * @param states 
+     */
     virtual void draw( sf::RenderTarget& target, sf::RenderStates states) const;
 
     /**

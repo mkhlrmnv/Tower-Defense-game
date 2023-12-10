@@ -158,13 +158,46 @@ bool Level::remove_enemy(Enemy* enemy){
     return false;
 }
 
-void Level::remove_all_enemies(){
-    for(auto enemy_ptr : _enemies){
-        delete enemy_ptr;
+<<<<<<< HEAD
+=======
+bool Level::add_enemy_by_type(int type, Vector2D pos){
+    switch (type)
+    {
+    case ObjectTypes::NoobSkeleton_NoAttack:
+        return add_enemy(new Sceleton(*this, pos));
+    case ObjectTypes::NoobDemon_CanAttack:
+        return add_enemy(new Demon(*this, pos));
+    case ObjectTypes::FastBoy:
+        return add_enemy(new Fast_Boy(*this, pos));
+    case ObjectTypes::FogMage:
+        return add_enemy(new Fog_Mage(*this, pos));
+    case ObjectTypes::HealerPriest:
+        return add_enemy(new Healer(*this, pos));
+    case ObjectTypes::InfernoMage:
+        return add_enemy(new Inferno(*this, pos));
+    case ObjectTypes::TankOrc:
+        return add_enemy(new Tank(*this, pos));
+    case ObjectTypes::BossKnight:
+        return add_enemy(new Boss(*this, pos));
+    default:
+        break;
     }
-    _enemies.clear();
+    return false;
 }
 
+bool Level::remove_enemy(Enemy* enemy){
+    for (size_t i = 0; i < _enemies.size(); i++)
+    {
+        if (_enemies[i]->get_position() == enemy->get_position() && _enemies[i]->get_health() == enemy->get_health()){
+            delete _enemies[i];
+            _enemies.erase(_enemies.begin() + i);
+            return true;
+        }
+    }
+    return false;
+}
+
+>>>>>>> bc314f0c80edd1a43211ae786e65d3543ca5d1d9
 std::vector<Tower*> Level::get_towers() const{
     return _towers;
 }

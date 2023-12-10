@@ -43,12 +43,15 @@
 },
 {
   "directory": "/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/build",
+<<<<<<< HEAD
   "command": "/usr/bin/clang++ -DSFML_STATIC -I/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/build/_deps/sfml-src/include -I/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/src -g -std=gnu++11 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.0.sdk -F/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/build/_deps/sfml-src/extlibs/libs-osx/Frameworks  -o CMakeFiles/ButtonTest.dir/src/upgrade.cpp.o -c /Users/mkhlrmnv/Desktop/cpp_project/tower-defence/src/upgrade.cpp",
   "file": "/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/src/upgrade.cpp",
   "output": "CMakeFiles/ButtonTest.dir/src/upgrade.cpp.o"
 },
 {
   "directory": "/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/build",
+=======
+>>>>>>> de54448b7f0d932b97d3dc01fdc069604cf217b6
   "command": "/usr/bin/clang++ -DSFML_STATIC -I/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/build/_deps/sfml-src/include -I/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/src -g -std=gnu++11 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.0.sdk -F/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/build/_deps/sfml-src/extlibs/libs-osx/Frameworks  -o CMakeFiles/TestRunner.dir/tests/main.cpp.o -c /Users/mkhlrmnv/Desktop/cpp_project/tower-defence/tests/main.cpp",
   "file": "/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/tests/main.cpp",
   "output": "CMakeFiles/TestRunner.dir/tests/main.cpp.o"
@@ -91,12 +94,15 @@
 },
 {
   "directory": "/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/build",
+<<<<<<< HEAD
   "command": "/usr/bin/clang++ -DSFML_STATIC -I/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/build/_deps/sfml-src/include -I/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/src -g -std=gnu++11 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.0.sdk -F/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/build/_deps/sfml-src/extlibs/libs-osx/Frameworks  -o CMakeFiles/TestRunner.dir/src/upgrade.cpp.o -c /Users/mkhlrmnv/Desktop/cpp_project/tower-defence/src/upgrade.cpp",
   "file": "/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/src/upgrade.cpp",
   "output": "CMakeFiles/TestRunner.dir/src/upgrade.cpp.o"
 },
 {
   "directory": "/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/build",
+=======
+>>>>>>> de54448b7f0d932b97d3dc01fdc069604cf217b6
   "command": "/usr/bin/clang++ -DSFML_STATIC -I/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/build/_deps/sfml-src/include -I/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/src -g -std=gnu++11 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.0.sdk -F/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/build/_deps/sfml-src/extlibs/libs-osx/Frameworks  -o CMakeFiles/MainExec.dir/src/main.cpp.o -c /Users/mkhlrmnv/Desktop/cpp_project/tower-defence/src/main.cpp",
   "file": "/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/src/main.cpp",
   "output": "CMakeFiles/MainExec.dir/src/main.cpp.o"
@@ -138,12 +144,15 @@
   "output": "CMakeFiles/MainExec.dir/src/resource_handler.cpp.o"
 },
 {
+<<<<<<< HEAD
   "directory": "/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/build",
   "command": "/usr/bin/clang++ -DSFML_STATIC -I/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/build/_deps/sfml-src/include -I/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/src -g -std=gnu++11 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.0.sdk -F/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/build/_deps/sfml-src/extlibs/libs-osx/Frameworks  -o CMakeFiles/MainExec.dir/src/upgrade.cpp.o -c /Users/mkhlrmnv/Desktop/cpp_project/tower-defence/src/upgrade.cpp",
   "file": "/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/src/upgrade.cpp",
   "output": "CMakeFiles/MainExec.dir/src/upgrade.cpp.o"
 },
 {
+=======
+>>>>>>> de54448b7f0d932b97d3dc01fdc069604cf217b6
   "directory": "/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/build/src",
   "command": "/usr/bin/clang++  -I/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/src -g -std=gnu++11 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.0.sdk -o CMakeFiles/src_code_library.dir/enemy.cpp.o -c /Users/mkhlrmnv/Desktop/cpp_project/tower-defence/src/enemy.cpp",
   "file": "/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/src/enemy.cpp",

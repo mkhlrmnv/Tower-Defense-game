@@ -1,15 +1,12 @@
-
 ---
 events:
-  -
-    kind: "message-v1"
+  - kind: "message-v1"
     backtrace:
       - "/Applications/CMake.app/Contents/share/cmake-3.27/Modules/CMakeDetermineSystem.cmake:211 (message)"
       - "CMakeLists.txt:2 (project)"
     message: |
       The system is: Darwin - 23.0.0 - arm64
-  -
-    kind: "message-v1"
+  - kind: "message-v1"
     backtrace:
       - "/Applications/CMake.app/Contents/share/cmake-3.27/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
       - "/Applications/CMake.app/Contents/share/cmake-3.27/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
@@ -20,18 +17,17 @@ events:
       Compiler: /usr/bin/clang 
       Build flags: 
       Id flags:  
-      
+
       The output was:
       0
-      
-      
+
+
       Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
-      
+
       The C compiler identification is AppleClang, found in:
         /Users/mkhlrmnv/Desktop/cpp_project/tower-defence/build/CMakeFiles/3.27.4/CompilerIdC/a.out
-      
-  -
-    kind: "message-v1"
+
+  - kind: "message-v1"
     backtrace:
       - "/Applications/CMake.app/Contents/share/cmake-3.27/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
       - "/Applications/CMake.app/Contents/share/cmake-3.27/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
@@ -42,18 +38,17 @@ events:
       Compiler: /usr/bin/clang++ 
       Build flags: 
       Id flags:  
-      
+
       The output was:
       0
-      
-      
+
+
       Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
-      
+
       The CXX compiler identification is AppleClang, found in:
         /Users/mkhlrmnv/Desktop/cpp_project/tower-defence/build/CMakeFiles/3.27.4/CompilerIdCXX/a.out
-      
-  -
-    kind: "try_compile-v1"
+
+  - kind: "try_compile-v1"
     backtrace:
       - "/Applications/CMake.app/Contents/share/cmake-3.27/Modules/CMakeDetermineCompilerABI.cmake:57 (try_compile)"
       - "/Applications/CMake.app/Contents/share/cmake-3.27/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
@@ -65,10 +60,6 @@ events:
       binary: "/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/build/CMakeFiles/CMakeScratch/TryCompile-TqiAvZ"
     cmakeVariables:
       CMAKE_C_FLAGS: ""
-      CMAKE_C_FLAGS_DEBUG: "-g"
-      CMAKE_EXE_LINKER_FLAGS: ""
-      CMAKE_C_FLAGS_DEBUG: "-g"
-      CMAKE_EXE_LINKER_FLAGS: ""
       CMAKE_OSX_ARCHITECTURES: ""
       CMAKE_OSX_DEPLOYMENT_TARGET: ""
       CMAKE_OSX_SYSROOT: "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.0.sdk"
@@ -77,7 +68,7 @@ events:
       cached: true
       stdout: |
         Change Dir: '/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/build/CMakeFiles/CMakeScratch/TryCompile-TqiAvZ'
-        
+
         Run Build Command(s): /Applications/CMake.app/Contents/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_c7bf8/fast
         /Applications/Xcode.app/Contents/Developer/usr/bin/make  -f CMakeFiles/cmTC_c7bf8.dir/build.make CMakeFiles/cmTC_c7bf8.dir/build
         Building C object CMakeFiles/cmTC_c7bf8.dir/CMakeCCompilerABI.c.o
@@ -114,10 +105,9 @@ events:
         TAPI support using: Apple TAPI version 15.0.0 (tapi-1500.0.12.3)
         Library search paths:
         Framework search paths:
-        
+
       exitCode: 0
-  -
-    kind: "message-v1"
+  - kind: "message-v1"
     backtrace:
       - "/Applications/CMake.app/Contents/share/cmake-3.27/Modules/CMakeDetermineCompilerABI.cmake:127 (message)"
       - "/Applications/CMake.app/Contents/share/cmake-3.27/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
@@ -134,10 +124,8 @@ events:
         collapse include dir [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.0.sdk/usr/include] ==> [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.0.sdk/usr/include]
         collapse include dir [/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include] ==> [/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include]
         implicit include dirs: [/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/15.0.0/include;/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.0.sdk/usr/include;/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include]
-      
-      
-  -
-    kind: "message-v1"
+
+  - kind: "message-v1"
     backtrace:
       - "/Applications/CMake.app/Contents/share/cmake-3.27/Modules/CMakeDetermineCompilerABI.cmake:152 (message)"
       - "/Applications/CMake.app/Contents/share/cmake-3.27/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
@@ -202,15 +190,12 @@ events:
         implicit objs: []
         implicit dirs: []
         implicit fwks: []
-      
-      
-  -
-    kind: "try_compile-v1"
+
+  - kind: "try_compile-v1"
     backtrace:
       - "/Applications/CMake.app/Contents/share/cmake-3.27/Modules/CMakeDetermineCompilerABI.cmake:57 (try_compile)"
       - "/Applications/CMake.app/Contents/share/cmake-3.27/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
-      - "CMakeLists.txt:2 (project)"
-      - "CMakeLists.txt:2 (project)"
+      - "CMakeLists.txt"
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
@@ -228,7 +213,7 @@ events:
       cached: true
       stdout: |
         Change Dir: '/Users/mkhlrmnv/Desktop/cpp_project/tower-defence/build/CMakeFiles/CMakeScratch/TryCompile-ID4K5T'
-        
+
         Run Build Command(s): /Applications/CMake.app/Contents/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_453e1/fast
         /Applications/Xcode.app/Contents/Developer/usr/bin/make  -f CMakeFiles/cmTC_453e1.dir/build.make CMakeFiles/cmTC_453e1.dir/build
         Building CXX object CMakeFiles/cmTC_453e1.dir/CMakeCXXCompilerABI.cpp.o
@@ -261,23 +246,15 @@ events:
         @(#)PROGRAM:ld  PROJECT:dyld-1015.7
         BUILD 16:59:34 Oct  1 2023
         configured to support archs: armv6 armv7 armv7s arm64 arm64e arm64_32 i386 x86_64 x86_64h armv6m armv7k armv7m armv7em
-        will use ld-classic for: armv6 armv7 armv7s arm64_32 i386 armv6m armv7k armv7m armv7em
-        LTO support using: LLVM version 15.0.0 (static support for 29, runtime is 29)
-        TAPI support using: Apple TAPI version 15.0.0 (tapi-1500.0.12.3)
-        will use ld-classic for: armv6 armv7 armv7s arm64_32 i386 armv6m armv7k armv7m armv7em
-        LTO support using: LLVM version 15.0.0 (static support for 29, runtime is 29)
-        TAPI support using: Apple TAPI version 15.0.0 (tapi-1500.0.12.3)
         Library search paths:
         Framework search paths:
-        
+
       exitCode: 0
-  -
-    kind: "message-v1"
+  - kind: "message-v1"
     backtrace:
       - "/Applications/CMake.app/Contents/share/cmake-3.27/Modules/CMakeDetermineCompilerABI.cmake:127 (message)"
       - "/Applications/CMake.app/Contents/share/cmake-3.27/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
-      - "CMakeLists.txt:2 (project)"
-      - "CMakeLists.txt:2 (project)"
+      - "CMakeLists.txt"
     message: |
       Parsed CXX implicit include dir info: rv=done
         found start of include info
@@ -292,15 +269,12 @@ events:
         collapse include dir [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.0.sdk/usr/include] ==> [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.0.sdk/usr/include]
         collapse include dir [/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include] ==> [/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include]
         implicit include dirs: [/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.0.sdk/usr/include/c++/v1;/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/15.0.0/include;/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.0.sdk/usr/include;/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include]
-      
-      
-  -
-    kind: "message-v1"
+
+  - kind: "message-v1"
     backtrace:
       - "/Applications/CMake.app/Contents/share/cmake-3.27/Modules/CMakeDetermineCompilerABI.cmake:152 (message)"
       - "/Applications/CMake.app/Contents/share/cmake-3.27/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
-      - "CMakeLists.txt:2 (project)"
-      - "CMakeLists.txt:2 (project)"
+      - "CMakeLists.txt"
     message: |
       Parsed CXX implicit link information:
         link line regex: [^( *|.*[/\\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
@@ -363,6 +337,3 @@ events:
         implicit objs: []
         implicit dirs: []
         implicit fwks: []
-      
-      
-...

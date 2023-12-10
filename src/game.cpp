@@ -17,6 +17,22 @@ Game::Game():
     _side_menu(float(_game_resolution), float(_side_bar_width), _rh, _level),
     _upgrade(_game_resolution, _rh, _level, 100, 2),
     _reset_clock(){
+
+//TODO: balance game and update tower attribute values in resource handle for tower drag buttons!
+
+
+Game::Game(): 
+    _game_resolution(800),
+    _side_bar_width(300),
+    _window(),
+    _level(_game_resolution, _starting_cash, _starting_lives),
+    _rh(),
+    _renderer(_rh),
+    _main_menu(_rh, _level),
+    _level_menu(_rh, _level),
+    _side_menu(float(_game_resolution), float(_side_bar_width), _rh, _level),
+    _upgrade(_game_resolution, _rh, _level, 100, 2),
+    _reset_clock(){
 }
 
 // Returns resolution of the game
@@ -326,6 +342,8 @@ void Game::start_round(){
     // }
     for (int i = 0; i < 8; i++)
     {
+        // Square where enemies can spawn
+        // Square where enemies can spawn
         Square* spawn_sq = _level.get_first_road();
         // Picks random type of enemy from available types
         int rand_types = rand() % (_available_types + 1);
