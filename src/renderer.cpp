@@ -2,8 +2,6 @@
 
 Renderer::Renderer(ResourceHandler& rh):
     _rh(rh){};
-Renderer::Renderer(ResourceHandler& rh):
-    _rh(rh){};
 
 void Renderer::draw_level(sf::RenderWindow& rwindow){
     rwindow.draw(_drawable_level);

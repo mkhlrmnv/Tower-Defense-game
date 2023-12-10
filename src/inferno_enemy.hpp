@@ -4,10 +4,7 @@
 #include "enemy.hpp"
 #include "attack_types.hpp"
 
-/**
- * Class for an Inferno enemy
-*/
-class Inferno : public Enemy {
+
 /**
  * Class for an Inferno enemy
 */

@@ -24,25 +24,8 @@ enum State{none, walking_right, walking_left, attacking_right, attacking_left, d
 /**
  * @brief Class that defines the behavior of all objects in the game.
  */
-
-/**
- * @brief Class that defines the behavior of all objects in the game.
- */
 class Object {
 public:
-
-    /**
-     * @brief Constructor to initialize an Object.
-     * 
-     * @param level Reference to the Level object.
-     * @param position Initial position of the Object (Vector2D).
-     * @param health Initial health points of the Object.
-     * @param damage Damage inflicted by the Object.
-     * @param range Range of attack for the Object.
-     * @param attack_speed Speed of attack for the Object.
-     * @param type Type of the Object.
-     */
-
     /**
      * @brief Constructor to initialize an Object.
      * 

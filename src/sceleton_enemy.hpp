@@ -8,10 +8,6 @@
  * @brief Class for Skeleton enemy
 */
 class Sceleton : public Enemy {
-/**
- * @brief Class for Skeleton enemy
-*/
-class Sceleton : public Enemy {
 public:
     /**
      * @brief Constructor to initialize a Sceleton Enemy object.

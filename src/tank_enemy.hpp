@@ -4,10 +4,7 @@
 #include "enemy.hpp"
 #include "attack_types.hpp"
 
-/**
- * @brief Class for a Tank enemy
-*/
-class Tank : public Enemy {
+
 /**
  * @brief Class for a Tank enemy
 */

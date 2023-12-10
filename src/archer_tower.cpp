@@ -2,7 +2,6 @@
 
 Archer_Tower::Archer_Tower(Level& current_level, Vector2D& position, int health, int damage, int range,
         int attack_speed, int type, int price, int level) :
-
         Tower(current_level, position, health, damage, range, attack_speed, type, price, level) {}
 
 bool Archer_Tower::attack() {

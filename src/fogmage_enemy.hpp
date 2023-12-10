@@ -4,10 +4,7 @@
 #include "enemy.hpp"
 #include "attack_types.hpp"
 
-/**
- * @brief Class for a Fog Mage enemy
-*/
-class Fog_Mage : public Enemy {
+
 /**
  * @brief Class for a Fog Mage enemy
 */

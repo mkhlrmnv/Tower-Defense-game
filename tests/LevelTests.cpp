@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #include "level.hpp"
 #include "object.hpp"
 #include "basic_tower.cpp"
@@ -26,25 +25,25 @@ bool testRound(){
     return lv.get_round() == 1 + random_int; // checks if count was correct
 }
 
-// // tests cash count 
-// bool testCash(){
-//     Level lv(1000, 1000, 50); // new level
-//     int random_int = rand() % 500; // add some random number of cash
-//     lv.add_cash(random_int);
-//     int random_int2 = rand() % 100; // take some random number of cash
-//     lv.take_cash(random_int2);
-//     return lv.get_cash() == (1000 + random_int - random_int2); // checks if cash count was correct
-// }
+// tests cash count 
+bool testCash(){
+    Level lv(1000, 1000, 50); // new level
+    int random_int = rand() % 500; // add some random number of cash
+    lv.add_cash(random_int);
+    int random_int2 = rand() % 100; // take some random number of cash
+    lv.take_cash(random_int2);
+    return lv.get_cash() == (1000 + random_int - random_int2); // checks if cash count was correct
+}
 
-// // tests lives count
-// bool testLives(){
-//     Level lv(1000, 1000, 50); // new level
-//     int random_int = rand() % 25;
-//     lv.take_lives(random_int); // Minuses random amount of money
-//     int random_int2 = rand() % 10;
-//     lv.add_lives(random_int2); // add random amount of money
-//     return lv.get_lives() == (50 - random_int + random_int2); // checks if lives count 
-// }
+// tests lives count
+bool testLives(){
+    Level lv(1000, 1000, 50); // new level
+    int random_int = rand() % 25;
+    lv.take_lives(random_int); // Minuses random amount of money
+    int random_int2 = rand() % 10;
+    lv.add_lives(random_int2); // add random amount of money
+    return lv.get_lives() == (50 - random_int + random_int2); // checks if lives count 
+}
 
 bool testAddObject(){
     std::string file_name = path + "/maps/example_map.txt"; // file name of the map test map
@@ -108,16 +107,6 @@ bool testGridSize(){
     }
     return true;
 }
-=======
-// bool testObjectList(){
-//     std::string file_name = "maps/example_map.txt"; // file name of the map test map
-//     Level lv(1000, 1000, 50); // new level
-//     lv.make_grid(); 
-//     if (lv.read_file(file_name) == -1){  // reads new map from test map file
-//         std::cout << "File reading failed" << std::endl;
-//         return false;
-//     }
->>>>>>> bc314f0c80edd1a43211ae786e65d3543ca5d1d9
 
 // checks that makeGrid function initialize squares with right center points
 bool testGridSquareCenters(){
@@ -438,13 +427,6 @@ static int level_test(){
         fails++;
     }
 
-    if (testFirstRoad()){
-        std::cout << "testFirstRoad: Passed" << std::endl;
-    } else {
-        std::cout << "testFirstRoad: Failed" << std::endl; 
-        fails++;
-    }
-
     if (testRead()){
         std::cout << "testRead: Passed" << std::endl;
     } else {
@@ -459,40 +441,31 @@ static int level_test(){
         fails++;
     }
 
-    if (testAddObject()){
-        std::cout << "testAddObject: Passed" << std::endl;
-    } else {
-        std::cout << "testAddObject: Failed" << std::endl;
-        fails++;
-    }
-
-    if (TestAddObjectByType()){
-        std::cout << "TestAddObjectByType: Passed" << std::endl;
-    } else {
-        std::cout << "TestAddObjectByType: Failed" << std::endl;
-        fails++;
-    }
-=======
-//     // compares two two files 
-//     std::ifstream f1(file_name, std::ifstream::binary|std::ifstream::ate);
-//     std::ifstream f2(file_name_w, std::ifstream::binary|std::ifstream::ate);
->>>>>>> bc314f0c80edd1a43211ae786e65d3543ca5d1d9
+    // if (testObjectList()){
+    //     std::cout << "testObjectList: Passed" << std::endl;
+    // } else {
+    //     std::cout << "testObjectList: Failed" << std::endl;
+    //     fails++;
+    // }
     
-//     if (f1.fail() || f2.fail()) {
-//         return false; //file problem
-//     }
+    std::cout << "Making random map:" << std::endl;    
+    if (testRandomMap()){
+        std::cout << "testRandom: Passed" << std::endl;
+    } else {
+        std::cout << "testRandom: Failed" << std::endl;
+    }
 
-//     if (f1.tellg() != f2.tellg()) {
-//         return false; //size mismatch
-//     }
+    //testRandom2();
 
-//     //seek back to beginning and use std::equal to compare contents
-//     f1.seekg(0, std::ifstream::beg);
-//     f2.seekg(0, std::ifstream::beg);
-//     return std::equal(std::istreambuf_iterator<char>(f1.rdbuf()),
-//                         std::istreambuf_iterator<char>(),
-//                         std::istreambuf_iterator<char>(f2.rdbuf()));
-// }
+    if (fails == 0){
+        std::cout << "All Level test passed" << std::endl;
+    } else {
+        std::cout << fails << " Level test failed" << std::endl;
+    }
+    
+    return fails;
+}
+
 
 // bool testRandomMap(){
 //     Level lv(1000, 1000, 50); // new level

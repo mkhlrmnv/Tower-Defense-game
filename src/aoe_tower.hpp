@@ -5,10 +5,7 @@
 #include "attack_types.hpp"
 #include "level.hpp"
 
-/**
- * @brief Class for AOE tower
-*/
-class Aoe_Tower : public Tower {
+
 /**
  * @brief Class for AOE tower
 */

@@ -20,21 +20,6 @@ namespace TowerAttributes{
  * @brief A class to load all resources at one place; loads textures, fonts, tower attributes for the menu. Loads everything when it is constructed, distributes resources as references to shared pointers.
  * 
  */
-
-/**
- * @brief An enumerator for the tower attributes
- * 
- */
-namespace TowerAttributes{
-    enum Atr{
-        HP, DMG, RNG, ATKSPD, MONEY, ROUND
-    };
-};
-
-/**
- * @brief A class to load all resources at one place; loads textures, fonts, tower attributes for the menu. Loads everything when it is constructed, distributes resources as references to shared pointers.
- * 
- */
 class ResourceHandler{
 
 public:

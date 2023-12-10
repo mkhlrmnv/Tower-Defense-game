@@ -63,7 +63,6 @@ int test_drag_button(){
     sf::RenderWindow window(sf::VideoMode(1100, 800), "My window");
     
     ResourceHandler rh;
-    ResourceHandler rh;
     Level lv(20,20,20); // just to run test 
     TowerDragButton dt_btn(ObjectTypes::AoeTower, {100,100}, sf::Color::White, sf::Color::Black,  rh);
 

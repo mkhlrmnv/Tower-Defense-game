@@ -9,10 +9,6 @@
  * @brief Class for a Mud Mage tower
 */
 class Mud_Mage_Tower : public Tower {
-/**
- * @brief Class for a Mud Mage tower
-*/
-class Mud_Mage_Tower : public Tower {
 public:
     /**
      * @brief Constructor to initialize a Mud Mage Tower object.

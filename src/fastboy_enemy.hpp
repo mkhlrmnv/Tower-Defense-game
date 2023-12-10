@@ -4,10 +4,7 @@
 #include "enemy.hpp"
 #include "attack_types.hpp"
 
-/**
- * Class for a Fast boy enemy
-*/
-class Fast_Boy : public Enemy {
+
 /**
  * Class for a Fast boy enemy
 */

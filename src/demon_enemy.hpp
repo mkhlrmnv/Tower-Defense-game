@@ -4,10 +4,7 @@
 #include "enemy.hpp"
 #include "attack_types.hpp"
 
-/**
- * Class for a Demon enemy
-*/
-class Demon : public Enemy {
+
 /**
  * Class for a Demon enemy
 */
