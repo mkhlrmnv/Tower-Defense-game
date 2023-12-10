@@ -1,6 +1,6 @@
 #!/bin/bash
 
-branch="3-create-object-class"
+branch="7-game-with-sfml-library"
 files=(
     "src/level.hpp"
     "src/level.cpp"
