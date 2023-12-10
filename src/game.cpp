@@ -121,6 +121,11 @@ void Game::update(){
 
     // if there are not enemies and round over variable hasn't been updates
     // new round starts
+<<<<<<< HEAD
+=======
+
+    // TODO::REMOVE FALSE!!!
+>>>>>>> 3ef0828 (Start implementing menu)
     if (_level.get_enemies().empty() && !round_over) {
         _level.plus_round();
         round_over = true;
