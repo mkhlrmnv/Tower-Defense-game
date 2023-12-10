@@ -92,7 +92,9 @@ void Object::gain_attack_speed(int amount) {
         _original_attack_speed = _attack_speed;
     }
 
-    _attack_speed -= amount;
+    if (_attack_speed - amount > 0) {
+        _attack_speed -= amount;
+    }
 }
 
 double Object::distance_to(const Vector2D& target_position) {
