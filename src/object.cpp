@@ -60,7 +60,7 @@ void Object::set_reset_counter(const int amount) {
 }
 
 void Object::attack_counter_up() {
-    _attack_counter -= 1;
+    _attack_counter += 1;
 }
 
 void Object::reset_counter_up() {

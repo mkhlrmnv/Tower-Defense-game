@@ -25,6 +25,7 @@ bool Fog_Mage::attack() {
                 if (get_attack_counter() <= get_attack_speed()) {
                     attack_counter_up();
                     set_state(State::none);
+                    std::cout << "uuuuuu" << std::endl;
                     return false;
                 } else {
                     set_attack_counter(0);
@@ -38,6 +39,7 @@ bool Fog_Mage::attack() {
                     }
                 }
             }
+            std::cout << "aaaaaaa" << std::endl;
         }
     }
     set_state(State::none);

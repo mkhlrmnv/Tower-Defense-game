@@ -2,9 +2,6 @@
 #include <thread>
 #include <mutex>
 
-//TODO: balance game and update tower attribute values in resource handle for tower drag buttons!
-
-
 Game::Game(): 
     _game_resolution(800),
     _side_bar_width(300),
