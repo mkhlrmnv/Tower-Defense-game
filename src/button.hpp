@@ -9,7 +9,7 @@
 #include <iostream>
 
 /**
- * @brief A class to represent buttons in menus. Inherits from the sfml Drawable class to hide draw calls.
+ * @brief Class to represent buttons in menus. Inherits from the sf::Drawable class to hide draw calls.
  * Works as a transparent button in the two first menus and as an opaque button for side menu and upgrade classes.  
  * 
  * @param label what to write in the button
@@ -169,7 +169,7 @@ protected:
     sf::Vector2f _size;
 
     /**
-     * @brief Text obect of the button.      
+     * @brief Text object of the button.      
      * 
      */ 
     sf::Text _text;

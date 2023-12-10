@@ -11,7 +11,7 @@
 #include <iostream>
 
 /**
- * @brief a class representing the level selection menu.
+ * @brief Class representing the level selection menu.  Inherits from the sf::Drawable class to hide draw calls.
  * @param ResourceHandler&
  * @param Level&
  */

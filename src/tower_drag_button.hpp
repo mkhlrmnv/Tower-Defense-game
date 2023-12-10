@@ -7,7 +7,7 @@
 #include "resource_handler.hpp"
 
 /**
- * @brief A class to implement dragging towers to grid. 
+ * @brief Class to implement dragging towers to grid. 
  * @param type what object the button creates 
  * @param position location for the button
  * @param outline outline color of the button
