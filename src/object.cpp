@@ -95,6 +95,13 @@ void Object::lose_health(int amount) {
 void Object::lose_attack_speed(int amount) {
     if (_original_attack_speed == 0) {
         _original_attack_speed = _attack_speed;
+<<<<<<< HEAD
+=======
+    }
+
+    if (get_attack_speed() <= 0) {
+        _attack_speed += amount;
+>>>>>>> 7ca08d4 (pulled updated enemies and tower classes from branch 3)
     }
 
     _attack_speed += amount;
