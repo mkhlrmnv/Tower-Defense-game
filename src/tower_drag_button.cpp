@@ -328,7 +328,6 @@ void TowerDragButton::draw(sf::RenderTarget& target, sf::RenderStates states) co
 
     target.draw(_button);
     target.draw(_img_background);
-    target.draw(_img_background);
     target.draw(_drawable_tower);
 
     // texts

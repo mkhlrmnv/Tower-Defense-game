@@ -48,11 +48,6 @@ public:
      * 
      * @return Integer representing the defense attribute.
      */
-    /**
-     * @brief Get the defense attribute of the Enemy.
-     * 
-     * @return Integer representing the defense attribute.
-     */
     int get_defense() const;
 
     /**

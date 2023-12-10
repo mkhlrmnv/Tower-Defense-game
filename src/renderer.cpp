@@ -121,7 +121,6 @@ void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr, int frame, in
 void Renderer::draw_towers(sf::RenderWindow& rwindow, std::vector<Tower*> towers, int frame){
     for(Tower* t_ptr : towers){
         draw_tower(rwindow, t_ptr, frame);
-        draw_tower(rwindow, t_ptr, frame);
     }
 }
  // function to draw multiple enemies at once

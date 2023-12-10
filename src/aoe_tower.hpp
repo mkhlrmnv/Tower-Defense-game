@@ -5,7 +5,6 @@
 #include "attack_types.hpp"
 #include "level.hpp"
 
-
 /**
  * @brief Class for AOE tower
 */

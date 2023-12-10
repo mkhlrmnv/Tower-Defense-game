@@ -150,6 +150,13 @@ bool Level::remove_enemy(Enemy* enemy){
     return false;
 }
 
+void Level::remove_all_enemies(){
+    for(auto enemy_ptr : _enemies){
+        delete enemy_ptr;
+    }
+    _enemies.clear();
+}
+
 std::vector<Tower*> Level::get_towers() const{
     return _towers;
 }
@@ -165,6 +172,8 @@ bool Level::add_tower(Tower* tower){
     return false;
 }
 
+
+// TODO: Mud and water mage when classes are ready
 bool Level::add_tower_by_type(int type, Vector2D pos){
     Vector2D center = Vector2D(get_square_by_pos(pos)->get_center().x, get_square_by_pos(pos)->get_center().y);
 
@@ -209,14 +218,6 @@ void Level::remove_all_towers(){
     _towers.clear();
 }   
 
-void Level::remove_all_enemies(){
-    for(auto enemy_ptr : _enemies){
-        // no need set level occupied as it is done in the make grid. 
-        delete enemy_ptr;
-    }
-    _enemies.clear();
-}
-
 // returns pair where first is current column and second is current row
 std::pair<int, int> Level::current_row_col(Object* obj){
     int col = floor(obj->get_position().x / _square_size);
@@ -257,7 +258,6 @@ std::vector<Direction> Level::next_road(Enemy* enemy){
     }
     return list_of_road_squares;
 }
-
 
 void Level::print_objects(){
     for (auto* e : _enemies){

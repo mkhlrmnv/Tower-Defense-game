@@ -427,6 +427,13 @@ static int level_test(){
         fails++;
     }
 
+    if (testFirstRoad()){
+        std::cout << "testFirstRoad: Passed" << std::endl;
+    } else {
+        std::cout << "testFirstRoad: Failed" << std::endl; 
+        fails++;
+    }
+
     if (testRead()){
         std::cout << "testRead: Passed" << std::endl;
     } else {
@@ -441,12 +448,19 @@ static int level_test(){
         fails++;
     }
 
-    // if (testObjectList()){
-    //     std::cout << "testObjectList: Passed" << std::endl;
-    // } else {
-    //     std::cout << "testObjectList: Failed" << std::endl;
-    //     fails++;
-    // }
+    if (testAddObject()){
+        std::cout << "testAddObject: Passed" << std::endl;
+    } else {
+        std::cout << "testAddObject: Failed" << std::endl;
+        fails++;
+    }
+
+    if (TestAddObjectByType()){
+        std::cout << "TestAddObjectByType: Passed" << std::endl;
+    } else {
+        std::cout << "TestAddObjectByType: Failed" << std::endl;
+        fails++;
+    }
     
     std::cout << "Making random map:" << std::endl;    
     if (testRandomMap()){
@@ -465,195 +479,3 @@ static int level_test(){
     
     return fails;
 }
-
-
-// bool testRandomMap(){
-//     Level lv(1000, 1000, 50); // new level
-//     lv.make_grid();
-//     bool res = lv.randomly_generate();
-//     lv.print_map();
-//     return res;
-// }
-
-// /*bool testRandomHelp(){
-//     Level lv(1000, 1000, 50); // new level
-//     lv.make_grid();
-//     std::vector<Direction> list;
-//     list.push_back(right);
-//     list.push_back(right);
-//     bool res = !lv.can_go_notfirst(right, list); // should fail
-//     list.push_back(left);
-//     res = lv.can_go_notfirst(right, list); // should pass
-//     list.clear();
-//     list.push_back(down);
-//     list.push_back(down);
-//     res = !lv.can_go_notfirst(up, list);// should fail
-//     list.push_back(right);
-//     res = lv.can_go_notfirst(up, list); // should pass
-//     list.clear();
-//     list.push_back(up);
-//     list.push_back(up);
-//     res = !lv.can_go_notfirst(down, list); // should fail
-//     list.push_back(right);
-//     res = lv.can_go_notfirst(down, list); // should pass
-//     list.clear();
-//     list.push_back(left);
-//     list.push_back(left);
-//     res = !lv.can_go_notfirst(left, list); // should fail
-//     list.push_back(right);
-//     res = lv.can_go_notfirst(left, list); // should pass
-//     return res;
-// }*/
-
-// /*bool testRandom1(){ // test for can_go_start()
-//     Level lv(1000, 1000, 50); // new level
-//     lv.make_grid();
-//     std::vector<Direction> list;
-//     std::pair<int, int> pair = lv.can_go_start(right, list, 4, 10);
-//     std::cout << pair.first << " " << pair.second << std::endl;
-//     list.push_back(right);
-//     pair = lv.can_go_start(left, list, 4, 1);
-//     std::cout << pair.first << " " << pair.second << std::endl;
-//     list.clear();
-//     list.push_back(down);
-//     pair = lv.can_go_start(up, list, 4, 0);
-//     std::cout << pair.first << " " << pair.second << std::endl;
-//     list.clear();
-//     list.push_back(up);
-//     pair = lv.can_go_start(down, list, 4, 0);
-//     std::cout << pair.first << " " << pair.second << std::endl;
-//     return true;
-// }*/
-
-// /*bool testRandom2(){
-//     Level lv(1000, 1000, 50); // new level
-//     lv.make_grid();
-//     std::vector<Direction> list;
-//     list.push_back(right);
-//     list.push_back(up);
-//     std::pair<int, int> pair = lv.can_go_notstart(up, list, 10, 4, true);
-//     std::cout << pair.first << " " << pair.second << std::endl;
-
-//     list.push_back(right);
-//     list.push_back(down);
-//     pair = lv.can_go_notstart(down, list, 0, 4, true);
-//     std::cout << pair.first << " " << pair.second << std::endl;
-
-//     list.push_back(up);
-//     list.push_back(up);
-//     pair = lv.can_go_notstart(right, list, 4, 10, true);
-//     std::cout << pair.first << " " << pair.second << std::endl;
-
-//     list.push_back(up);
-//     list.push_back(up);
-//     pair = lv.can_go_notstart(left, list, 4, 0, true);
-//     std::cout << pair.first << " " << pair.second << std::endl;
-
-//     return true;
-// }*/
-
-// static int level_test(){
-//     srand((unsigned int)time(NULL)); // makes rand() more random
-//     int fails = 0;
-
-//     if (testRound()){
-//         std::cout << "testRound: Passed" << std::endl;
-//     } else {
-//         std::cout << "testRound: Failed" << std::endl;
-//         fails++;
-//     }
-
-//     if (testCash()){
-//         std::cout << "testCash: Passed" << std::endl;
-//     } else {
-//         std::cout << "testCash: Failed" << std::endl;
-//         fails++;
-//     }
-
-//     if (testLives()){
-//         std::cout << "testLives: Passed" << std::endl;
-//     } else {
-//         std::cout << "testLives: Failed" << std::endl;
-//         fails++;
-//     }
-
-//     if (testGridSize()){
-//         std::cout << "testGridSize: Passed" << std::endl;
-//     } else {
-//         std::cout << "testGridSize: Failed" << std::endl;
-//         fails++;
-//     }
-
-//     if (testGridSquareCenters()){
-//         std::cout << "testGridSquareCenters: Passed" << std::endl;
-//     } else {
-//         std::cout << "testGridSquareCenters: Failed" << std::endl;
-//         fails++;
-//     }
-
-//     if (testCurrentRowCol()){
-//         std::cout << "testCurrentRowCol: Passed" << std::endl;
-//     } else {
-//         std::cout << "testCurrentRowCol: Failed" << std::endl; 
-//         fails++;
-//     }
-
-//     if (testCurrentSquare()){
-//         std::cout << "testCurrentSquare: Passed" << std::endl;
-//     } else {
-//         std::cout << "testCurrentSquare: Failed" << std::endl; 
-//         fails++;
-//     }
-
-//     if (testGetSquareByPos()){
-//         std::cout << "testGetSquareByPos: Passed" << std::endl;
-//     } else {
-//         std::cout << "testGetSquareByPos: Failed" << std::endl; 
-//         fails++;
-//     }
-
-//     if (testNextRoad()){
-//         std::cout << "testNextRoad: Passed" << std::endl;
-//     } else {
-//         std::cout << "testNextRoad: Failed" << std::endl; 
-//         fails++;
-//     }
-
-//     if (testRead()){
-//         std::cout << "testRead: Passed" << std::endl;
-//     } else {
-//         std::cout << "testRead: Failed" << std::endl;
-//         fails++;
-//     }
-
-//     if (testWrite()){
-//         std::cout << "testWrite: Passed" << std::endl;
-//     } else {
-//         std::cout << "testWrite: Failed" << std::endl;
-//         fails++;
-//     }
-
-//     if (testObjectList()){
-//         std::cout << "testObjectList: Passed" << std::endl;
-//     } else {
-//         std::cout << "testObjectList: Failed" << std::endl;
-//         fails++;
-//     }
-    
-//     std::cout << "Making random map:" << std::endl;    
-//     if (testRandomMap()){
-//         std::cout << "testRandom: Passed" << std::endl;
-//     } else {
-//         std::cout << "testRandom: Failed" << std::endl;
-//     }
-
-//     //testRandom2();
-
-//     if (fails == 0){
-//         std::cout << "All Level test passed" << std::endl;
-//     } else {
-//         std::cout << fails << " Level test failed" << std::endl;
-//     }
-    
-//     return fails;
-// }

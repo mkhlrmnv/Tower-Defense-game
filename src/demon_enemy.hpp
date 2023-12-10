@@ -4,7 +4,6 @@
 #include "enemy.hpp"
 #include "attack_types.hpp"
 
-
 /**
  * Class for a Demon enemy
 */
@@ -24,7 +23,7 @@ public:
      * @param defense Defense attribute of the Demon Enemy.
      * @param size Size of the Demon Enemy.
      */
-    Demon(Level& level, Vector2D& position, int health = 150, int damage = 10, int range = 130, int attack_speed = 20,
+    Demon(Level& level, Vector2D& position, int health = 150, int damage = 10, int range = 500, int attack_speed = 1,
           int type = ObjectTypes::NoobDemon_CanAttack, int speed = 2, int defense = 5, int size = 2);
 
     /**

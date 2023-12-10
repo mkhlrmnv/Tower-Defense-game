@@ -31,12 +31,6 @@ public:
      * @param type 
      * @return sf::Texture& 
      */
-    /**
-     * @brief Get the texture of tower by ObjectType enum as reference. 
-     * 
-     * @param type 
-     * @return sf::Texture& 
-     */
     sf::Texture& get_texture_tower(int type);
 
     /**
@@ -121,14 +115,6 @@ private:
      * @param filename 
      */
     void load_texture_tower(int type, const std::string& filename);
-
-    
-    /**
-     * @brief Loads filename, creates a shared texture pointer and places it to the enemies map with key being the given type. 
-     * 
-     * @param type 
-     * @param filename 
-     */
 
     
     /**

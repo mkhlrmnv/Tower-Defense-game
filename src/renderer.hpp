@@ -21,9 +21,6 @@ public:
     /**
      * @brief Construct a new Renderer object
      */
-    /**
-     * @brief Construct a new Renderer object
-     */
     Renderer();
     /**
      * @brief Destroy the Renderer object

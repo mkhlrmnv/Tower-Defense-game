@@ -12,5 +12,6 @@ bool Sceleton::attack() {
     } else {
         reset_counter_up();
     }
+
     return false;
 }

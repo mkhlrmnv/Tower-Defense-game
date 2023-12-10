@@ -4,7 +4,6 @@
 #include "enemy.hpp"
 #include "attack_types.hpp"
 
-
 /**
  * Class for a Healer enemy
 */

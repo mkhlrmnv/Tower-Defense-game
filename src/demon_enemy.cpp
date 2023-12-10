@@ -12,7 +12,7 @@ bool Demon::attack() {
     } else {
         reset_counter_up();
     }
-    
+
     double multiplier;
     Level& level_reference = get_level_reference();
 

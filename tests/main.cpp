@@ -4,11 +4,11 @@
 
 int main(){
     int fails = 0;
-    // std::cout << "\n" <<"RUNNING LEVEL TEST ----------------------------------" << "\n" << std::endl;
-    // fails += level_test();
+    std::cout << "\n" <<"RUNNING LEVEL TEST ----------------------------------" << "\n" << std::endl;
+    fails += level_test();
 
-    // std::cout << "\n" <<"RUNNING SQUARE TEST ----------------------------------" << "\n" << std::endl;
-    // fails += square_test();
+    std::cout << "\n" <<"RUNNING SQUARE TEST ----------------------------------" << "\n" << std::endl;
+    fails += square_test();
 
     std::cout << "\n" <<"RUNNING OBJECT TEST ----------------------------------" << "\n" << std::endl;
     fails += object_tests();

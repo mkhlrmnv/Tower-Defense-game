@@ -2,6 +2,9 @@
 #include <thread>
 #include <mutex>
 
+//TODO: balance game and update tower attribute values in resource handle for tower drag buttons!
+
+
 Game::Game(): 
     _game_resolution(800),
     _side_bar_width(300),
@@ -13,7 +16,8 @@ Game::Game():
     _level_menu(_rh, _level),
     _side_menu(float(_game_resolution), float(_side_bar_width), _rh, _level),
     _upgrade(_game_resolution, _rh, _level, 100, 2),
-    _reset_clock(){}
+    _reset_clock(){
+}
 
 // Returns resolution of the game
 int Game::get_game_resolution() const {
@@ -65,6 +69,8 @@ void Game::run(){
 // updates whole game
 // moves enemies, and calls attack function for all enemies and towers
 void Game::update(){
+
+
     switch (_game_state)
     {
     case GameState::Pause:
@@ -301,7 +307,7 @@ void Game::render(){
 void Game::start_round(){
     _round_over = false;
     //Spawns round played ammount multiplied by difficulty level amount of enemies
-    for (int i = 0; i < 8; i++)
+    for (int i = 0; i < (_difficulty_multiplier * _level.get_round()); i++)
     {
         // Square where enemies can spawn
         Square* spawn_sq = _level.get_first_road();
