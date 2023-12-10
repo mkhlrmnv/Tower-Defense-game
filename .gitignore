@@ -25,7 +25,7 @@ xcode/
 # Shared objects (inc. Windows DLLs)
 
 #build folder
-build/*
+build/**/*
 !build/build.xml
 
 #built folder

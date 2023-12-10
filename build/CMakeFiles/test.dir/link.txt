@@ -1,1 +1,0 @@
-/opt/homebrew/bin/aarch64-apple-darwin22-g++-13 -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/test.dir/src/level.cpp.o CMakeFiles/test.dir/src/main.cpp.o CMakeFiles/test.dir/src/object.cpp.o CMakeFiles/test.dir/src/square.cpp.o -o test 
