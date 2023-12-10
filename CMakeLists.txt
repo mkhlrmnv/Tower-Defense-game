@@ -11,15 +11,7 @@ add_subdirectory(src)
 add_subdirectory(tests)
 
 # uses files that use SFML
-set(SFML_CLASS_SOURCES src/game.cpp
-                       src/renderer.cpp 
-                       src/button.cpp 
-                       src/tower_drag_button.cpp 
-                       src/side_menu.cpp 
-                       src/resource_handler.cpp 
-                       src/upgrade.cpp
-                       src/main_menu.cpp
-                       src/choose_level_menu.cpp) 
+set(SFML_CLASS_SOURCES src/game.cpp src/renderer.cpp src/button.cpp src/tower_drag_button.cpp src/side_menu.cpp src/resource_handler.cpp src/upgrade.cpp) 
 
 set(BUILD_SHARED_LIBS FALSE)
 

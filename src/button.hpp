@@ -23,7 +23,7 @@ class Button : public sf::Drawable{
 
 public:
     Button(){}
-    Button(const std::string& label, sf::Vector2f size, sf::Vector2f position, sf::Color fill_color, sf::Color outline_color, const sf::Font* font);
+    Button(const std::string& label, sf::Vector2f size, sf::Vector2f position, sf::Color fill_color, sf::Color outline_color, const sf::Font& font);
 
     
     // set the position of the button so that the text is in one of: 
@@ -33,15 +33,22 @@ public:
     void set_outline_color(sf::Color outline_color);
     void set_fill_color(sf::Color fill_color);
     void set_text_string(const std::string& label);
+    void set_position(sf::Vector2f pos);
+    void set_size(sf::Vector2f size);
+    void set_font(const sf::Font& font);
+
+    
+    // do something if 
+    bool button_pressed();
+
+    // reset button after doing something
+    void reset_button();
 
     virtual bool is_mouse_over(sf::RenderWindow& window);
 
     // handle button press events etc. 
     virtual void handle_events(sf::RenderWindow& window, const sf::Event& event, Level& lv);
     
-    // TODO: define in child class 
-    virtual void some_action_from_level(sf::RenderWindow& window, Level& lv){}
-
 
      // check if mouse in s
     static bool inside_grid( sf::Vector2i mouse_pos, Level& lv);
@@ -75,9 +82,6 @@ protected:
 
 
 
-    /**
-     * @brief Position of the button.
-     */ 
     sf::Vector2f _position;
     
     /**
@@ -91,8 +95,8 @@ protected:
      */ 
     sf::Text _text;
 
-    // load font locally to g
-    const sf::Font* _font;
+    bool _button_pressed;
+
 };
 
 

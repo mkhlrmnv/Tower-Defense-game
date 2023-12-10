@@ -3,7 +3,7 @@
 
 TowerDragButton::TowerDragButton(int type, sf::Vector2f position, sf::Color outline, sf::Color fill, ResourceHandler& rh): 
 
-Button(rh.get_tower_name(type), {130, 180}, position, fill, outline, &_rh.get_font()), 
+Button(rh.get_tower_name(type), {130, 180}, position, fill, outline, _rh.get_font()), 
     _tower_type(type), 
     _drag_flag(false), 
     _rh(rh),
@@ -74,20 +74,12 @@ void TowerDragButton::setup_button_texts(){
     float title_x = pos.x  + _button.getGlobalBounds().width / 2 - _text.getGlobalBounds().width / 2.f;
     float title_y = pos.y;
 
-    std::cout << "x"<<title_x << "" << title_y << std::endl; 
+    // std::cout << "x"<<title_x << "" << title_y << std::endl; 
 
     //_text.setOrigin(_text.getGlobalBounds().getSize() / 2.f + _text.getGlobalBounds().getPosition());
     _text.setPosition({title_x, title_y});
-
-
-    std::cout << "_text.getGlobalBounds().height " << _text.getGlobalBounds().height << std::endl;
-    std::cout << "_text.getGlobalBounds().width " << _text.getGlobalBounds().width << std::endl;
-    std::cout << "_text.getGlobalBounds().left " << _text.getGlobalBounds().left << std::endl;
-    std::cout << "_text.getGlobalBounds().top " << _text.getGlobalBounds().top << std::endl;
-
     _text.setFillColor(brown);
     _text.setCharacterSize(15);
-
     _price_text.setPosition({0,0});
 
 
@@ -108,17 +100,7 @@ void TowerDragButton::setup_button_texts(){
     float price_x = _img_background.getPosition().x + _img_background.getGlobalBounds().width/2;
     float price_y = _img_background.getPosition().y + _img_background.getGlobalBounds().height - price_char_size;
     
-    
-    std::cout << "_price_text.getGlobalBounds().height " << _price_text.getGlobalBounds().height << std::endl;
-    std::cout << "_price_text.getGlobalBounds().width " << _price_text.getGlobalBounds().width << std::endl;
-    std::cout << "_price_text.getGlobalBounds().left " << _price_text.getGlobalBounds().left << std::endl;
-    std::cout << "_price_text.getGlobalBounds().top " << _price_text.getGlobalBounds().top << std::endl;    
-
-    
     _price_text.setPosition({price_x, price_y});
-
-
-    
 
     // modify these
     float char_size = 18;
@@ -261,30 +243,13 @@ int TowerDragButton::get_type() const {
     return _tower_type;
 }
 
-void TowerDragButton::some_action_from_level(sf::RenderWindow& window, Level& lv){
+void TowerDragButton::add_tower_to_release_square(sf::RenderWindow& window, Level& lv){
     if(inside_grid(_release_pos, lv) && (lv.get_cash()>=_tower_price)){
 
-
         auto square_ptr = lv.get_square_by_pos(window_coords_to_level_coords(_release_pos));
-        std::cout << "BEFORE occupied by: " << square_ptr->get_occupied() << std::endl;
-        std::cout << "BEFORE center: " << square_ptr->get_center() << std::endl;
-
-        std::pair<int, int> index = window_coords_to_grid_index(_release_pos, lv);
-        square_ptr = lv.get_grid()[index.first][index.second];
-        std::cout << "center of indexed square: " << square_ptr->get_center() << std::endl;
-
-
         bool tower_add_successfull = lv.add_tower_by_type(_tower_type, window_coords_to_level_coords(_release_pos));
         lv.take_cash(_tower_price);
-
-        square_ptr = lv.get_square_by_pos(window_coords_to_level_coords(_release_pos));
-        std::cout << "AFTER occupied by: " << square_ptr->get_occupied() << std::endl;
-        std::cout << "AFTER enter: " << square_ptr->get_center() << std::endl;
-
-
     }
-    
-
 }
 
 
@@ -309,7 +274,7 @@ void TowerDragButton::handle_events(sf::RenderWindow& window, const sf::Event& e
             reset_drag_flag();
             _release_pos = sf::Mouse::getPosition(window);
             auto idx = window_coords_to_grid_index(_release_pos, lv);
-            some_action_from_level(window, lv);
+            add_tower_to_release_square(window, lv);
         }
 
     }

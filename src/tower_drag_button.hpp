@@ -33,21 +33,21 @@ TowerDragButton(int type, sf::Vector2f position,  sf::Color outline, sf::Color f
      */
     bool get_drag_flag() const ;
 
-    // returns the dragging image for side menu, for drawing on top of all buttons. 
+    // returns the dragging image for SideMenu class for drawing on top of all buttons. 
     const sf::Sprite* get_dragging_image() const ;
     int get_type() const;
 
-    // call level create object, handle purchasing the tower
-    void some_action_from_level(sf::RenderWindow& window, Level& lv);
 
     // implements the operation of the drag trough events
     void handle_events(sf::RenderWindow& window, const sf::Event& event, Level& lv);    
 
 protected:
 
+       // call level create object, handle purchasing the tower
+    void add_tower_to_release_square(sf::RenderWindow& window, Level& lv);
+
     // get mouse coords and place dragging image on that position
     void set_dragging_drawable_pos(sf::RenderWindow& window);
-
     void setup_tower_images();
     void setup_button_texts();
     void setup_attribute_images();

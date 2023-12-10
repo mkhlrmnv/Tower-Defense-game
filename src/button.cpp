@@ -1,8 +1,8 @@
 #include "button.hpp"
 
 
-Button::Button(const std::string& label, sf::Vector2f size, sf::Vector2f position, sf::Color fill_color, sf::Color outline_color, const sf::Font* font): 
-_size(size), _position(position), _button_fill_color(fill_color), _button_outline_color(outline_color), _text(), _font(font){
+Button::Button(const std::string& label, sf::Vector2f size, sf::Vector2f position, sf::Color fill_color, sf::Color outline_color, const sf::Font& font): 
+_size(size), _position(position), _button_fill_color(fill_color), _button_outline_color(outline_color), _text(), _button_pressed(false){
     
     _button.setPosition(_position);
     _button.setSize(_size);
@@ -10,8 +10,8 @@ _size(size), _position(position), _button_fill_color(fill_color), _button_outlin
     _button.setFillColor(_button_fill_color);
     _button.setOutlineColor(_button_outline_color); 
 
-    _text.setFont(*_font);
-    _text.setCharacterSize(20);
+    _text.setFont(font);
+    _text.setCharacterSize(15);
     _text.setFillColor(_button_outline_color); 
     _text.setString(label);
     _text.setPosition(_button.getPosition());
@@ -36,12 +36,10 @@ _size(size), _position(position), _button_fill_color(fill_color), _button_outlin
 
 void Button::center_text(){
 
-    //TODO: FIX CENTER TEXT HORIZONTALLY
     float text_x = _button.getPosition().x + _button.getGlobalBounds().width / 2 - _text.getGlobalBounds().width / 2;
     float text_y = _button.getPosition().y + _button.getGlobalBounds().height / 2 - _text.getGlobalBounds().height / 2;
     _text.setPosition(text_x, text_y);
 }
-
 
 
 void Button::set_fill_color(sf::Color fill_color){
@@ -52,6 +50,13 @@ void Button::set_fill_color(sf::Color fill_color){
 void Button::set_outline_color(sf::Color outline_color){
     _button_outline_color = outline_color;
     _button.setOutlineColor(outline_color);
+    _text.setFillColor(outline_color);
+
+}
+
+void Button::set_font(const sf::Font& font){
+    _text.setFont(font);
+
 }
 
 void Button::set_text_string(const std::string& text){
@@ -59,21 +64,15 @@ void Button::set_text_string(const std::string& text){
 }
 
 void Button::set_position(sf::Vector2f pos){
-    _position = pos;
     _button.setPosition(pos);
     center_text();
 }
 
 void Button::set_size(sf::Vector2f size){
-
-    _size = size;
-    _button.setSize(size);
+    _button.setPosition(size);
     center_text();
 }
 
-sf::Vector2f Button::get_size(){
-    return _button.getSize();
-}
 
 
 bool Button::is_mouse_over(sf::RenderWindow &window){
@@ -113,7 +112,7 @@ bool Button::inside_grid(sf::Vector2f window_coords, Level& lv){
     
     int res = lv.get_square_size()*10;
     
-    // dont care to flip to level as grid is a square
+    // dont need flip to level coords as grid is a square
     if(x>0 && x<res && y>0 && y<800){
         return true;
     }else{
@@ -126,8 +125,8 @@ std::pair<int, int> Button::window_coords_to_grid_index(sf::Vector2i mouse_pos, 
     
     // NOTE: pass only coords inside game 0<=coord<=800  
 
-    int row = floor((mouse_pos.x)  / lv.get_square_size());
-    int col = floor((mouse_pos.y) / lv.get_square_size());
+    int col = floor((mouse_pos.x)  / lv.get_square_size());
+    int row = floor((mouse_pos.y) / lv.get_square_size());
 
     if(row<0 && row>9 && col<0 && col>9){
         std::cout << "in Button::window_coords_to_grid_index - position out of grid" << std::endl; 
@@ -142,8 +141,8 @@ std::pair<int, int> Button::window_coords_to_grid_index(sf::Vector2f window_coor
 
     // NOTE: pass only coords inside game 0<=coord<=800  
 
-    int row = floor(window_coords.x / lv.get_square_size());
-    int col = floor(window_coords.y / lv.get_square_size());
+    int col = floor(window_coords.x / lv.get_square_size());
+    int row = floor(window_coords.y / lv.get_square_size());
 
     if(row<0 && row>9 && col<0 && col>9){
         std::cout << "in Button::window_coords_to_grid_index - position out of grid" << std::endl; 
@@ -171,6 +170,14 @@ Vector2D Button::window_coords_to_level_coords(sf::Vector2f window_coords){
     
 }
 
+bool Button::button_pressed(){
+    return _button_pressed;
+}
+
+void Button::reset_button(){
+    _button_pressed = false;
+}
+
 
 
 
@@ -179,19 +186,23 @@ void Button::handle_events(sf::RenderWindow& window, const sf::Event& event, Lev
     if (event.type == sf::Event::MouseMoved){
         if(is_mouse_over(window)){
             // TODO: implicate some how that button can be pressed
-            set_fill_color(sf::Color::Yellow);
+            _button_fill_color.a = 10 ;
+            set_fill_color(_button_fill_color);
         }else{
-            set_fill_color(sf::Color::Red);
+            _button_fill_color.a = 0;
+            set_fill_color(_button_fill_color);
+
         }
     }
     
     if(event.type == sf::Event::MouseButtonPressed){
-        if(is_mouse_over(window)){
-            set_fill_color(sf::Color::Green);
-            some_action_from_level(window, level); // TODO: ad some function to do something
+        if(is_mouse_over(window)){    
+            _button_pressed = true;
         }
     }
     
+    
+
 }
 
 

@@ -24,6 +24,7 @@
 #include "tank_enemy.hpp"
 
 #include "side_menu.hpp"
+#include "upgrade.hpp"
 
 #include "side_menu.hpp"
 
@@ -130,7 +131,7 @@ private:
      */
     Level _level;
     SideMenu _side_menu;
-
+    Upgrade _upgrade;
 
     /**
      * @brief a class to select either random or existing maps.

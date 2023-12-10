@@ -10,6 +10,12 @@
     needs to be created in game class, pass as reference
 */
 
+namespace TowerAttributes{
+    enum Atr{
+        HP, DMG, RNG, ATKSPD, MONEY, UPGRADE
+    };
+};
+
 class ResourceHandler{
 
 public:
