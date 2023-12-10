@@ -1,20 +1,30 @@
 #include "tower_drag_button.hpp"
 #include <iostream>
 
-TowerDragButton::TowerDragButton(int type, const std::string& name, sf::Vector2f position,  
-sf::Texture obj_texture, sf::Color outline, sf::Color fill, std::array<int, 5>& tower_attrs, const sf::Font* font, ResourceHandler& rh): 
+TowerDragButton::TowerDragButton(int type, sf::Vector2f position, sf::Color outline, sf::Color fill, ResourceHandler& rh): 
 
-Button(name, {130, 180}, position, fill, outline, font), 
+Button(rh.get_tower_name(type), {130, 180}, position, fill, outline, &_rh.get_font()), 
     _tower_type(type), 
-    _texture(obj_texture), 
-    _attributes(tower_attrs), 
     _drag_flag(false), 
-    _tower_name(name),
-    _rh(rh){
+    _rh(rh),
+    _tower_price(0){
+    
+    _tower_price = _rh.get_tower_info(_tower_type, TowerAttributes::MONEY);
 
     // set the first frame of the spreadsheet to represent tower as 
     //_drawable_tower.setTextureRect(sf::IntRect(d(frame + animation_pos) * 32, 0 * 32, 32, 32));
-    set_font();
+    setup_font();
+    
+    // TODO: set price and other attributes
+
+    setup_tower_images();
+    setup_button_texts();
+    setup_attribute_images();
+}
+
+
+void TowerDragButton::setup_tower_images(){
+    
     _button.setOutlineThickness(2);
 
     float image_size = 32;
@@ -22,7 +32,7 @@ Button(name, {130, 180}, position, fill, outline, font),
     // scale image to 80 pixels, and set scale negative for facing left
     float scale = 80 / image_size; 
 
-    _drawable_tower.setTexture(_texture);
+    _drawable_tower.setTexture(_rh.get_texture_tower(_tower_type));
     _drawable_tower.setTextureRect(sf::IntRect(0, 0, 32,32));
     _drawable_tower.setScale({-scale, scale});
 
@@ -32,8 +42,8 @@ Button(name, {130, 180}, position, fill, outline, font),
     // reserve space for title
     float title_space = 20;
 
-    float img_x = position.x + center_buffer;
-    float img_y = position.y + title_space;
+    float img_x = _position.x + center_buffer;
+    float img_y = _position.y + title_space;
 
     _drawable_tower.setPosition({img_x + _flip_correction, img_y}); 
 
@@ -45,23 +55,14 @@ Button(name, {130, 180}, position, fill, outline, font),
     _img_background.setOutlineColor(_button_outline_color);
     _img_background.setSize({80, 80});
     
-
     // same for the dragging tower image
 
-    _drawable_dragging_tower.setTexture(_texture);
+    _drawable_dragging_tower.setTexture(_rh.get_texture_tower(_tower_type));
     _drawable_dragging_tower.setTextureRect(sf::IntRect(0, 0, 32,32));
     _drawable_dragging_tower.setScale({-scale, scale});
 
 
-    // TODO: set price and other attributes
-
-
-    setup_button_texts();
-    setup_attribute_images();
 }
-
-
-
 
 void TowerDragButton::setup_button_texts(){
     
@@ -86,7 +87,6 @@ void TowerDragButton::setup_button_texts(){
 
     _text.setFillColor(brown);
     _text.setCharacterSize(15);
-    _text.setString(_tower_name);
 
     _price_text.setPosition({0,0});
 
@@ -101,7 +101,7 @@ void TowerDragButton::setup_button_texts(){
     _price_text.setFillColor(sf::Color::White);
     _price_text.setOutlineColor(sf::Color::Black);
     _price_text.setOutlineThickness(1);
-    _price_text.setString(std::to_string(_attributes.at(4))+"$");  
+    _price_text.setString(std::to_string(_tower_price)+"$");  
 
     _price_text.setOrigin(_price_text.getGlobalBounds().getSize() / 2.f);
 
@@ -132,7 +132,7 @@ void TowerDragButton::setup_button_texts(){
 
     _hp_text.setCharacterSize(char_size);
     _hp_text.setFillColor(brown);
-    _hp_text.setString(std::to_string(_attributes.at(0)));
+    _hp_text.setString(std::to_string(_rh.get_tower_info(_tower_type, TowerAttributes::HP)));
 
     _hp_text.setPosition({hp_x, hp_y});
 
@@ -141,7 +141,7 @@ void TowerDragButton::setup_button_texts(){
 
     _dmg_text.setCharacterSize(char_size);
     _dmg_text.setFillColor(brown);
-    _dmg_text.setString(std::to_string(_attributes.at(1))); 
+    _dmg_text.setString(std::to_string(_rh.get_tower_info(_tower_type, TowerAttributes::DMG))); 
 
     _dmg_text.setPosition({dmg_x, dmg_y});
 
@@ -150,7 +150,7 @@ void TowerDragButton::setup_button_texts(){
 
     _rng_text.setCharacterSize(char_size);
     _rng_text.setFillColor(brown);
-    _rng_text.setString(std::to_string(_attributes.at(2)));
+    _rng_text.setString(std::to_string(_rh.get_tower_info(_tower_type, TowerAttributes::RNG)));
 
     _rng_text.setPosition({rng_x, rng_y});
 
@@ -159,18 +159,17 @@ void TowerDragButton::setup_button_texts(){
 
     _atkspd_text.setCharacterSize(char_size);
     _atkspd_text.setFillColor(brown);
-    _atkspd_text.setString(std::to_string(_attributes.at(3)));
+    _atkspd_text.setString(std::to_string(_rh.get_tower_info(_tower_type, TowerAttributes::ATKSPD)));
     
     _atkspd_text.setPosition({atkspd_x, atkspd_y});
 }
 
-void TowerDragButton::set_font(){
-    _price_text.setFont(*_font);
-    _hp_text.setFont(*_font);
-    _dmg_text.setFont(*_font);
-    _rng_text.setFont(*_font);
-    _atkspd_text.setFont(*_font);
-
+void TowerDragButton::setup_font(){
+    _price_text.setFont(_rh.get_font());
+    _hp_text.setFont(_rh.get_font());
+    _dmg_text.setFont(_rh.get_font());
+    _rng_text.setFont(_rh.get_font());
+    _atkspd_text.setFont(_rh.get_font());
 
 }
 
@@ -187,28 +186,28 @@ void TowerDragButton::setup_attribute_images(){
     float hp_x = attr_start_x ;
     float hp_y = attr_start_y + start_y_offset ;
 
-    set_attribute_image(TowerAttributes::HP, _hp_img, {hp_x, hp_y});
+    setup_attribute_image(TowerAttributes::HP, _hp_img, {hp_x, hp_y});
 
     float dmg_x = attr_start_x;
     float dmg_y = hp_y + img_size + line_spacing;
 
-    set_attribute_image(TowerAttributes::RNG, _dmg_img, {dmg_x, dmg_y}); // TODO: get image 
+    setup_attribute_image(TowerAttributes::RNG, _dmg_img, {dmg_x, dmg_y}); // TODO: get image 
 
     float rng_x = attr_start_x;
     float rng_y = dmg_y + img_size + line_spacing;
 
-    set_attribute_image(TowerAttributes::RNG, _rng_img, {rng_x, rng_y});
+    setup_attribute_image(TowerAttributes::RNG, _rng_img, {rng_x, rng_y});
 
     float atkspd_x = attr_start_x;
     float atkspd_y = rng_y + img_size + line_spacing;
 
-    set_attribute_image(TowerAttributes::ATKSPD, _atkspd_img, {atkspd_x, atkspd_y});
+    setup_attribute_image(TowerAttributes::ATKSPD, _atkspd_img, {atkspd_x, atkspd_y});
 
 
 
 }
 
-void TowerDragButton::set_attribute_image(int type, sf::Sprite& sprite, sf::Vector2f pos ){
+void TowerDragButton::setup_attribute_image(int type, sf::Sprite& sprite, sf::Vector2f pos ){
     
     sprite.setTexture(_rh.get_texture_attribute(type));
     sprite.setPosition(pos);
@@ -248,20 +247,6 @@ void TowerDragButton::set_dragging_drawable_pos(sf::RenderWindow& window){
 
 }
 
-// call only once after mouse press obj button before drag_flag is set
-void TowerDragButton::set_dragging_drawable_offset(sf::RenderWindow& window){
-
-    
-    if(this->is_mouse_over(window)){
-        float mouse_x = sf::Mouse::getPosition(window).x;
-        float mouse_y = sf::Mouse::getPosition(window).y;
-
-        float button_x = _button.getPosition().x;
-        float button_y = _button.getPosition().y;
-
-    _dragging_tower_offset = sf::Vector2f(mouse_x - button_x, mouse_y - button_x);
-    }
-}
 
 const sf::Sprite* TowerDragButton::get_dragging_image() const{
 
@@ -276,12 +261,30 @@ int TowerDragButton::get_type() const {
     return _tower_type;
 }
 
-
 void TowerDragButton::some_action_from_level(sf::RenderWindow& window, Level& lv){
     if(inside_grid(_release_pos, lv) && (lv.get_cash()>=_tower_price)){
+
+
+        auto square_ptr = lv.get_square_by_pos(window_coords_to_level_coords(_release_pos));
+        std::cout << "BEFORE occupied by: " << square_ptr->get_occupied() << std::endl;
+        std::cout << "BEFORE center: " << square_ptr->get_center() << std::endl;
+
+        std::pair<int, int> index = window_coords_to_grid_index(_release_pos, lv);
+        square_ptr = lv.get_grid()[index.first][index.second];
+        std::cout << "center of indexed square: " << square_ptr->get_center() << std::endl;
+
+
         bool tower_add_successfull = lv.add_tower_by_type(_tower_type, window_coords_to_level_coords(_release_pos));
         lv.take_cash(_tower_price);
+
+        square_ptr = lv.get_square_by_pos(window_coords_to_level_coords(_release_pos));
+        std::cout << "AFTER occupied by: " << square_ptr->get_occupied() << std::endl;
+        std::cout << "AFTER enter: " << square_ptr->get_center() << std::endl;
+
+
     }
+    
+
 }
 
 
@@ -291,7 +294,6 @@ void TowerDragButton::handle_events(sf::RenderWindow& window, const sf::Event& e
      if(event.type == sf::Event::MouseButtonPressed){
                 if(is_mouse_over(window) && !_drag_flag){
                     set_drag_flag();
-                    set_dragging_drawable_offset(window);
                     set_dragging_drawable_pos(window);
                 }
             }
@@ -307,7 +309,7 @@ void TowerDragButton::handle_events(sf::RenderWindow& window, const sf::Event& e
             reset_drag_flag();
             _release_pos = sf::Mouse::getPosition(window);
             auto idx = window_coords_to_grid_index(_release_pos, lv);
-            //some_action_from_level(lv);
+            some_action_from_level(window, lv);
         }
     }
 
@@ -315,7 +317,7 @@ void TowerDragButton::handle_events(sf::RenderWindow& window, const sf::Event& e
 
 
 
-void TowerDragButton::draw(sf::RenderTarget& target, sf::RenderStates) const {
+void TowerDragButton::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 
     target.draw(_button);
     target.draw(_img_background);
