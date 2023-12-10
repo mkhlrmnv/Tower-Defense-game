@@ -173,7 +173,6 @@ bool Level::add_tower(Tower* tower){
 }
 
 
-// TODO: Mud and water mage when classes are ready
 bool Level::add_tower_by_type(int type, Vector2D pos){
     Vector2D center = Vector2D(get_square_by_pos(pos)->get_center().x, get_square_by_pos(pos)->get_center().y);
 

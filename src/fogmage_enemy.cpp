@@ -39,7 +39,6 @@ bool Fog_Mage::attack() {
                     }
                 }
             }
-            std::cout << "aaaaaaa" << std::endl;
         }
     }
     set_state(State::none);

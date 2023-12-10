@@ -22,12 +22,12 @@ bool Archer_Tower::attack() {
             double dist = this->distance_to(enemy->get_position());
 
             if (dist <= this->get_range()) {
-                if (get_attack_counter() > 0) {
+                if (get_attack_counter() <= get_attack_speed()) {
                     attack_counter_up();
                     set_state(State::none);
                     return false;
                 } else {
-                    set_attack_counter(get_attack_speed());
+                    set_attack_counter(0);
                     multiplier = check_type_multiplier(this, enemy);
                     enemy->lose_health(this->get_damage() * multiplier);
                     if (this->get_position().y > enemy->get_position().y){

@@ -22,12 +22,12 @@ bool Mud_Mage_Tower::attack() {
             double dist = this->distance_to(enemy->get_position());
 
             if (dist <= this->get_range()) {
-                if (get_attack_counter() > 0) {
+                if (get_attack_counter() <= get_attack_speed()) {
                     attack_counter_up();
                     set_state(State::none);
                     return false;
                 } else {
-                    set_attack_counter(get_attack_speed());
+                    set_attack_counter(0);
                     multiplier = check_type_multiplier(this, enemy);
                     if (enemy->get_speed() == enemy->get_original_speed() - 1) {
                         enemy->lose_speed(1);
