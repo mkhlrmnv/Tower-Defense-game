@@ -17,7 +17,7 @@
 
 // Initialize new level
 Level::Level(int resolution, int cash, int lives):
-    _square_size(resolution/10), _round(0), _cash(cash), _lives(lives) { }
+    _square_size(resolution/10), _round(1), _cash(cash), _lives(lives) { }
 
 // Returns current round
 int Level::get_round() const {
@@ -90,6 +90,14 @@ void Level::take_lives(int how_much){
     _lives -= how_much;
 }
 
+void Level::reset(int start_cash, int start_lives){
+    remove_all_enemies();
+    remove_all_towers();
+    _cash = start_cash;
+    _lives = start_lives;
+    _round = 1;
+}
+
 std::vector<Enemy*> Level::get_enemies() const{
     return _enemies;
 }
@@ -140,6 +148,20 @@ bool Level::remove_enemy(Enemy* enemy){
         }
     }
     return false;
+}
+
+void Level::remove_all_enemies(){
+    for(auto enemy_ptr : _enemies){
+        delete enemy_ptr;
+    }
+    _enemies.clear();
+}
+
+void Level::remove_all_enemies(){
+    for(auto enemy_ptr : _enemies){
+        delete enemy_ptr;
+    }
+    _enemies.clear();
 }
 
 <<<<<<< HEAD
@@ -226,6 +248,7 @@ bool Level::remove_tower(Tower* tower){
     for (size_t i = 0; i < _towers.size(); i++)
     {
         if (_towers[i]->get_position() == tower->get_position()){
+            current_square(_towers[i])->occupy_by_grass();
             delete _towers[i];
             _towers.erase(_towers.begin() + i);
             return true;
@@ -233,6 +256,14 @@ bool Level::remove_tower(Tower* tower){
     }
     return false;
 }
+
+void Level::remove_all_towers(){
+    for(auto tower_ptr : _towers){
+        // no need set level occupied as it is done in the make grid. 
+        delete tower_ptr;
+    }
+    _towers.clear();
+}   
 
 // returns pair where first is current column and second is current row
 std::pair<int, int> Level::current_row_col(Object* obj){
