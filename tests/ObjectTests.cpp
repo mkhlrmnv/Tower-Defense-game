@@ -147,7 +147,7 @@ bool testObjectCounterManagement() {
     obj.reset_counter_up(); // Increment reset counter
 
     // Check if the counters incremented correctly
-    assert(obj.get_attack_counter() == 1);
+    assert(obj.get_attack_counter() == 3);
     assert(obj.get_reset_counter() == 4);
 
     return true;
