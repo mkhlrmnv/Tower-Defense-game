@@ -28,6 +28,7 @@ bool Boss::attack() {
                     return false;
                 } else {
                     set_attack_counter(0);
+                    set_speed(0);
                     multiplier = check_type_multiplier(tower, this);
                     tower->lose_health(this->get_damage() * multiplier);
                     if (this->get_position().y > tower->get_position().y){
