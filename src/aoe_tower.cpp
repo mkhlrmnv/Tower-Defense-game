@@ -24,9 +24,6 @@ bool Aoe_Tower::attack() {
             double dist = this->distance_to(enemy->get_position());
 
             if (dist <= this->get_range()) {
-
-                std::cout << get_attack_counter() << std::endl;
-
                 if (get_attack_counter() <= get_attack_speed()) {
                     attack_counter_up();
                     set_state(State::none);
