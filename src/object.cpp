@@ -27,6 +27,10 @@ int Object::get_original_attack_speed() const {
     return (_original_attack_speed == 0) ? _attack_speed : _original_attack_speed;
 }
 
+int Object::get_original_attack_speed() const {
+    return (_original_attack_speed == 0) ? _attack_speed : _original_attack_speed;
+}
+
 const Vector2D Object::get_position() const {
     return _position;
 }

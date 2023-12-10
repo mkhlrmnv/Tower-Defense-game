@@ -45,11 +45,15 @@ void Game::open_window(){
 // runs whole game
 void Game::run(){
     open_window();
+<<<<<<< HEAD
     //generate_chosen_level_style(LevelSelection::load); 
 
     //_renderer.make_drawable_level(_level);
     //_renderer.make_level_info_texts(_game_resolution, _side_bar_width);
 
+=======
+   
+>>>>>>> 997ca9bcbdafbe6dd02e25b20acaf507d248efa7
     // manages tick rate of the game
     sf::Clock clock;
     sf::Time timeSinceLastUpdate = sf::Time::Zero;
@@ -85,12 +89,20 @@ void Game::update(){
         // transition to victory, starts timer to transition back to start menu
         if(_rounds_to_survive < _level.get_round()){
             _game_state = GameState::Victory;
+<<<<<<< HEAD
             _side_menu.pause();
             _reset_clock.restart();
 
         }
     
     break;
+=======
+            _side_menu.reset();
+            _reset_clock.restart();
+
+        }
+        break;
+>>>>>>> 997ca9bcbdafbe6dd02e25b20acaf507d248efa7
     
     case GameState::Round:
 
@@ -104,13 +116,18 @@ void Game::update(){
             _level.plus_round();
             _round_over = true;
             _game_state = GameState::Pause;
+<<<<<<< HEAD
             _side_menu.pause();
+=======
+            _side_menu.reset();
+>>>>>>> 997ca9bcbdafbe6dd02e25b20acaf507d248efa7
         }
 
         // transition to game over when no lives left, starts timer to transition back to start menu
         if (_level.get_lives() < 1){
             _round_over = true;
             _game_state = GameState::GameOver;
+<<<<<<< HEAD
             _side_menu.pause();
             _reset_clock.restart();
         }
@@ -121,11 +138,25 @@ void Game::update(){
         _reset_time = _reset_clock.getElapsedTime();
         if(_reset_time.asSeconds() > 10.f){
             _game_state = GameState::StartMenu;
+=======
+            _side_menu.reset();
+            _reset_clock.restart();
+        }
+        break;
+
+    case GameState::Victory :
+        _reset_time = _reset_clock.getElapsedTime();
+
+        // transition to MainMenu
+        if(_reset_time.asSeconds() > 10.f){
+            _game_state = GameState::MainMenu;
+>>>>>>> 997ca9bcbdafbe6dd02e25b20acaf507d248efa7
             _main_menu.reset();
             _main_menu.enable_menu();
             _level_menu.reset();
             _level.reset(_starting_cash, _starting_lives);
         }
+<<<<<<< HEAD
         
 
 
@@ -135,14 +166,28 @@ void Game::update(){
         _reset_time = _reset_clock.getElapsedTime();
         if(_reset_time.asSeconds() > 10.f){
             _game_state = GameState::StartMenu;
+=======
+        break;
+
+    case GameState::GameOver :
+        _reset_time = _reset_clock.getElapsedTime();
+
+        // transition to MainMenu
+        if(_reset_time.asSeconds() > 10.f){
+            _game_state = GameState::MainMenu;
+>>>>>>> 997ca9bcbdafbe6dd02e25b20acaf507d248efa7
             _main_menu.reset();
             _main_menu.enable_menu();
             _level_menu.reset();
             _level.reset(_starting_cash, _starting_lives);
         }
+<<<<<<< HEAD
         
 
     break;
+=======
+        break;
+>>>>>>> 997ca9bcbdafbe6dd02e25b20acaf507d248efa7
 
     }
 }
@@ -159,7 +204,11 @@ void Game::process_events(){
         // events based on _game_state
         switch (_game_state)
         {
+<<<<<<< HEAD
         case GameState::StartMenu:
+=======
+        case GameState::MainMenu:
+>>>>>>> 997ca9bcbdafbe6dd02e25b20acaf507d248efa7
             _main_menu.handle_events(_window, event);
             _game_state = _main_menu.get_state();
 
@@ -169,6 +218,7 @@ void Game::process_events(){
                 _level.make_grid();
                 _level.randomly_generate();
                 _renderer.make_drawable_level(_level);
+<<<<<<< HEAD
                 _main_menu.disable_menu(); // redundant
                 _upgrade.reset();
 
@@ -180,6 +230,18 @@ void Game::process_events(){
         break;
         
         case GameState::MapMenu:
+=======
+                _main_menu.disable_menu(); 
+                _upgrade.reset();
+
+            }else if(_game_state == GameState::ChooseLevelMenu){
+                
+                _main_menu.disable_menu();
+            }
+            break;
+        
+        case GameState::ChooseLevelMenu:
+>>>>>>> 997ca9bcbdafbe6dd02e25b20acaf507d248efa7
 
             _level_menu.enable_menu();
             _level_menu.handle_events(_window, event);
@@ -195,7 +257,11 @@ void Game::process_events(){
                 _upgrade.reset();
 
             }
+<<<<<<< HEAD
         break;
+=======
+            break;
+>>>>>>> 997ca9bcbdafbe6dd02e25b20acaf507d248efa7
 
         // paused or round running
 
@@ -207,6 +273,7 @@ void Game::process_events(){
             if(_game_state == GameState::Round){
                 start_round();
             }
+<<<<<<< HEAD
 
         break;
 
@@ -217,6 +284,16 @@ void Game::process_events(){
             _upgrade.handle_events(_window, event);
             // no transition from events, transition back to pause when round over
         break;
+=======
+            break;
+
+        case GameState::Round:
+
+            _side_menu.handle_events(_window, event);
+            _upgrade.handle_events(_window, event);
+            // no transition from events, transition back to pause when round over
+            break;
+>>>>>>> 997ca9bcbdafbe6dd02e25b20acaf507d248efa7
         
         }
     }
@@ -228,13 +305,21 @@ void Game::render(){
 
     switch (_game_state)
     {
+<<<<<<< HEAD
     case GameState::StartMenu:
+=======
+    case GameState::MainMenu:
+>>>>>>> 997ca9bcbdafbe6dd02e25b20acaf507d248efa7
         _window.clear();
         _window.draw(_main_menu);
         _window.display();
         break;
 
+<<<<<<< HEAD
     case GameState::MapMenu:
+=======
+    case GameState::ChooseLevelMenu:
+>>>>>>> 997ca9bcbdafbe6dd02e25b20acaf507d248efa7
         _window.clear();
         _window.draw(_level_menu);
         _window.display();
@@ -252,6 +337,7 @@ void Game::render(){
         // and through one moving animation for all moving enemies
         // goes through only one moving animation to make moving look more natural when enemy takes only one step at the time
 <<<<<<< HEAD
+<<<<<<< HEAD
         if (_animation_phase > 6){
             _animation_phase = 0;
         }
@@ -265,6 +351,8 @@ void Game::render(){
             _window.display(); // display the drawn entities
         _animation_phase++;
 =======
+=======
+>>>>>>> 997ca9bcbdafbe6dd02e25b20acaf507d248efa7
         for (int i = 0; i < 6; i++)
         {
             _window.clear();
@@ -278,6 +366,7 @@ void Game::render(){
         }
         _enemy_move_animation++;
 
+<<<<<<< HEAD
 >>>>>>> 934afcc (backed down to original animation method)
 
 <<<<<<< HEAD
@@ -289,6 +378,11 @@ void Game::render(){
 >>>>>>> a2d2f1e (removed debuging std:cout's)
 =======
 >>>>>>> 934afcc (backed down to original animation method)
+=======
+
+        // std::this_thread::sleep_for(std::chrono::milliseconds(100));
+
+>>>>>>> 997ca9bcbdafbe6dd02e25b20acaf507d248efa7
         // removes all towers and enemies with 0 hp, if their dying animation was already played
         for (auto* t : _level.get_towers()){
             if (t->get_health() <= 0 && t->get_state() == State::dying){
@@ -340,12 +434,19 @@ void Game::start_round(){
     _round_over = false;
     //Spawns round played ammount multiplied by difficulty level amount of enemies
 <<<<<<< HEAD
+<<<<<<< HEAD
     // for (int i = 0; i < (_difficulty_multiplier * _level.get_round()); i++)
 =======
+=======
+>>>>>>> 997ca9bcbdafbe6dd02e25b20acaf507d248efa7
     for (int i = 0; i < (_difficulty_multiplier * _level.get_round()); i++)
     {
         // Square where enemies can spawn
+        // Square where enemies can spawn
         Square* spawn_sq = _level.get_first_road();
+        // Picks random type of enemy from available types
+        int rand_types = rand() % (_available_types + 1);
+        // Picks random position inside spawn square
         // Picks random type of enemy from available types
         int rand_types = rand() % (_available_types + 1);
         // Picks random position inside spawn square
@@ -353,16 +454,22 @@ void Game::start_round(){
         int y = rand() % 40;
         Vector2D rand_pos = Vector2D(spawn_sq->get_center().x - (_level.get_square_size() / 2) + x, 1 + y);
         // add enemy to level
+        // add enemy to level
         _level.add_enemy_by_type(rand_types, rand_pos);
     }
+    // If available types are under 8, adds new type
     // If available types are under 8, adds new type
     if (_available_types < 7){
         _available_types++;
     }
     // for (int i = 0; i < 8; i++)
+<<<<<<< HEAD
 >>>>>>> 234056b (Fixed bug with boss knight now spawning)
     // {
     //     // Square where enemies can spawn
+=======
+    // {
+>>>>>>> 997ca9bcbdafbe6dd02e25b20acaf507d248efa7
     //     Square* spawn_sq = _level.get_first_road();
     //     // Picks random type of enemy from available types
     //     int rand_types = rand() % _available_types;
@@ -371,6 +478,7 @@ void Game::start_round(){
     //     int y = rand() % 40;
     //     Vector2D rand_pos = Vector2D(spawn_sq->get_center().x - (_level.get_square_size() / 2) + x, 1 + y);
     //     // add enemy to level
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     //     _level.add_enemy_by_type(rand_types, rand_pos);
@@ -397,6 +505,10 @@ void Game::start_round(){
         // add enemy to level
         _level.add_enemy_by_type(i, rand_pos);
     }
+=======
+    //     _level.add_enemy_by_type(i, rand_pos);
+    // }
+>>>>>>> 997ca9bcbdafbe6dd02e25b20acaf507d248efa7
     
 }
 

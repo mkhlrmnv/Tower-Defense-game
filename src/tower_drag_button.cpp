@@ -245,6 +245,70 @@ bool TowerDragButton::get_drag_flag() const{
     return _drag_flag;
 }
 
+const sf::Sprite* TowerDragButton::get_dragging_image() const{
+
+    // side draws the dragging image so that it is on top of every button.
+    if(get_drag_flag()){
+        return &_drawable_dragging_tower;
+    }else{
+        return nullptr;
+    }
+}
+
+int TowerDragButton::get_type() const {
+    return _tower_type;
+}
+
+void TowerDragButton::update(int player_cash){
+    if(player_cash < _tower_price){
+        _button_enabled = false;
+        _price_text.setFillColor(sf::Color::Red);
+    }else{
+        _price_text.setFillColor(sf::Color::White);
+        _button_enabled = true;
+    }
+}
+
+
+void TowerDragButton::handle_events(sf::RenderWindow& window, const sf::Event& event, Level& lv){
+
+    if(_button_enabled){
+        if(event.type == sf::Event::MouseButtonPressed){
+                    if(is_mouse_over(window) && !_drag_flag){
+                        set_drag_flag();
+                        set_dragging_drawable_pos(window);
+                    }
+        }
+        
+        if(event.type == sf::Event::MouseMoved){
+            if(get_drag_flag()){
+                set_dragging_drawable_pos(window);
+            }
+        }
+
+        if(event.type == sf::Event::MouseButtonReleased){
+            if(get_drag_flag()){
+                reset_drag_flag();
+                _release_pos = sf::Mouse::getPosition(window);
+                auto idx = window_coords_to_grid_index(_release_pos, lv);
+                add_tower_to_release_square(window, lv);
+            }
+        }
+
+    }
+     
+}
+
+void TowerDragButton::add_tower_to_release_square(sf::RenderWindow& window, Level& lv){
+    if(inside_grid(_release_pos, lv) && (lv.get_cash()>=_tower_price)){
+
+        auto square_ptr = lv.get_square_by_pos(window_coords_to_level_coords(_release_pos));
+        bool tower_add_successful = lv.add_tower_by_type(_tower_type, window_coords_to_level_coords(_release_pos));
+        if (tower_add_successful){
+            lv.take_cash(_tower_price);
+        }
+    }
+}
 
 void TowerDragButton::set_dragging_drawable_pos(sf::RenderWindow& window){
     // assumes mouse has clicked and flag is on

@@ -22,6 +22,19 @@
  * @param rh
  * @param level
  */
+
+
+/**
+ * @brief Implements side menu of the game. 
+ * Features: 
+ * - 6 drag buttons to purchase towers
+ * - one button to start rounds
+ * - displays the rounds, cash and lives stats
+ * @param game_resolution
+ * @param sidebar_width
+ * @param rh
+ * @param level
+ */
 class SideMenu : public sf::Drawable {
 
 public:

@@ -24,6 +24,13 @@ TowerDragButton(int type, sf::Vector2f position,  sf::Color outline, sf::Color f
      * @brief Set the drag flag to true.
      * 
      */
+TowerDragButton(int type, sf::Vector2f position,  sf::Color outline, sf::Color fill, ResourceHandler& rh);
+   
+    
+    /**
+     * @brief Set the drag flag to true.
+     * 
+     */
     void set_drag_flag();
 
     /**

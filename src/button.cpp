@@ -4,10 +4,20 @@
 
 Button::Button(const std::string& label, sf::Vector2f size, sf::Vector2f position, sf::Color fill_color, sf::Color outline_color, const sf::Font& font): 
 _size(size), _position(position), _button_fill_color(fill_color), _button_outline_color(outline_color), _text(), _button_pressed(false){
+
+Button::Button(const std::string& label, sf::Vector2f size, sf::Vector2f position, sf::Color fill_color, sf::Color outline_color, const sf::Font& font): 
+_size(size), _position(position), _button_fill_color(fill_color), _button_outline_color(outline_color), _text(), _button_pressed(false){
     
+    _button.setPosition(_position);
     _button.setPosition(_position);
     _button.setSize(_size);
     _button.setOutlineThickness(1);
+    _button.setFillColor(_button_fill_color);
+    _button.setOutlineColor(_button_outline_color); 
+
+    _text.setFont(font);
+    _text.setCharacterSize(15);
+    _text.setFillColor(_button_outline_color); 
     _button.setFillColor(_button_fill_color);
     _button.setOutlineColor(_button_outline_color); 
 
@@ -26,9 +36,26 @@ void Button::center_text(){
 
     float text_x = _button.getPosition().x + _button.getGlobalBounds().width / 2 - _text.getGlobalBounds().width / 2;
     float text_y = _button.getPosition().y + _button.getGlobalBounds().height / 2 - _text.getGlobalBounds().height / 2;
+    _text.setPosition(_button.getPosition());
+    
+}
+
+
+
+
+void Button::center_text(){
+
+    float text_x = _button.getPosition().x + _button.getGlobalBounds().width / 2 - _text.getGlobalBounds().width / 2;
+    float text_y = _button.getPosition().y + _button.getGlobalBounds().height / 2 - _text.getGlobalBounds().height / 2;
     _text.setPosition(text_x, text_y);
 }
 
+
+void Button::set_fill_color(sf::Color fill_color){
+
+    _button_fill_color = fill_color;
+    _button_fill_color = fill_color;
+    _button.setFillColor(fill_color);
 
 void Button::set_fill_color(sf::Color fill_color){
 
@@ -50,7 +77,9 @@ void Button::set_font(const sf::Font& font){
 
 }
 
+
 void Button::set_text_string(const std::string& text){
+
     _text.setString(text);
 }
 
@@ -73,6 +102,7 @@ sf::Vector2f Button::get_size(){
 
 
 bool Button::is_mouse_over(sf::RenderWindow &window){
+
     float mouse_x = sf::Mouse::getPosition(window).x;
     float mouse_y = sf::Mouse::getPosition(window).y;
 
@@ -152,10 +182,22 @@ void Button::handle_events(sf::RenderWindow& window, const sf::Event& event, Lev
             sf::Color hover_color(r,g,b,a);
             _button.setFillColor(hover_color);
 
+            
+            float a = (_button_fill_color.a + 30 < 255) ? _button_fill_color.a + 30 : 255;  
+            float r = (_button_fill_color.r + 10 < 255) ? _button_fill_color.r + 10 : 255; 
+            float g = (_button_fill_color.g + 10 < 255) ? _button_fill_color.g + 10 : 255; 
+            float b = (_button_fill_color.b + 10 < 255) ? _button_fill_color.b + 10 : 255; 
+            sf::Color hover_color(r,g,b,a);
+            _button.setFillColor(hover_color);
+
         }else{
             _button.setFillColor(_button_fill_color);
 
+            _button.setFillColor(_button_fill_color);
+
         }
+    }
+    
     }
     
     if(event.type == sf::Event::MouseButtonPressed){
@@ -168,6 +210,7 @@ void Button::handle_events(sf::RenderWindow& window, const sf::Event& event, Lev
 
 
 void Button::draw(sf::RenderTarget& target, sf::RenderStates) const {
+    
     target.draw(_button);
     target.draw(_text); 
 }

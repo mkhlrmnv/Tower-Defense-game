@@ -2,9 +2,11 @@
 #define TOWER_DEFENCE_SRC_GAME
 
 #include "level.hpp"
+#include "level.hpp"
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "renderer.hpp"
 #include "renderer.hpp"
 #include <random>
 
@@ -43,13 +45,20 @@ namespace GameState{
 
 /**
  * @brief A class for running the game. Opens a window in which a game loop handles user inputs, updates game state and draws game entities.
+ * @brief A class for running the game. Opens a window in which a game loop handles user inputs, updates game state and draws game entities.
  */
 class Game{
 public:
     /**
      * @brief Construct a new Game object
      */
+    /**
+     * @brief Construct a new Game object
+     */
     Game();
+    /**
+     * @brief Destroy the Game object
+     */
     /**
      * @brief Destroy the Game object
      */
@@ -61,7 +70,15 @@ public:
      * @brief Get the side bar width
      * @return int
      */
+    /**
+     * @brief Get the side bar width
+     * @return int
+     */
     int get_side_bar_width() const;
+    /**
+     * @brief Get the games resolution
+     * @return int 
+     */
     /**
      * @brief Get the games resolution
      * @return int 
@@ -71,10 +88,17 @@ public:
     /**
      * @brief Starts the game that loop until window is closed
      */
+    /**
+     * @brief Starts the game that loop until window is closed
+     */
     void run();
+
 
 private: 
 
+    /**
+     * @brief Opens window 
+     */
     /**
      * @brief Opens window 
      */
@@ -83,8 +107,14 @@ private:
     /**
      * @brief Process events in loop:  clicks, button presses
      */
+    /**
+     * @brief Process events in loop:  clicks, button presses
+     */
     void process_events();
 
+    /**
+     * @brief Update game state in loop: attacks, movement
+     */
     /**
      * @brief Update game state in loop: attacks, movement
      */
@@ -93,8 +123,14 @@ private:
     /**
      * @brief Draws a frame in loop,
      */
+    /**
+     * @brief Draws a frame in loop,
+     */
     void render();
 
+    /**
+     * @brief Starts new round
+     */
     /**
      * @brief Starts new round
      */
@@ -104,8 +140,16 @@ private:
      * @brief Updates all enemies
      * If enemy can attack, it attacks and if not it moves
      */
+    /**
+     * @brief Updates all enemies
+     * If enemy can attack, it attacks and if not it moves
+     */
     void update_enemies();
 
+    /**
+     * @brief Updates all towers
+     * Attacks if there is enemy in range
+     */
     /**
      * @brief Updates all towers
      * Attacks if there is enemy in range

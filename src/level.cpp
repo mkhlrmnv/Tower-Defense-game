@@ -18,6 +18,7 @@
 // Initialize new level
 Level::Level(int resolution, int cash, int lives):
     _square_size(resolution/10), _round(1), _cash(cash), _lives(lives) { }
+    _square_size(resolution/10), _round(1), _cash(cash), _lives(lives) { }
 
 // Returns current round
 int Level::get_round() const {
@@ -148,6 +149,13 @@ bool Level::remove_enemy(Enemy* enemy){
         }
     }
     return false;
+}
+
+void Level::remove_all_enemies(){
+    for(auto enemy_ptr : _enemies){
+        delete enemy_ptr;
+    }
+    _enemies.clear();
 }
 
 void Level::remove_all_enemies(){

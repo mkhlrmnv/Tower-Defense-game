@@ -20,6 +20,24 @@ SideMenu::SideMenu(float game_resolution, float side_menu_width, ResourceHandler
 
     _outline_color = light_brown;
     _fill_color = beige;
+    _game_resolution(game_resolution),
+    _side_menu_width(side_menu_width),
+    _level(level),
+    _rh(rh),
+    _fill_color(),
+    _outline_color(),
+    _drag_img_ptrs({}),
+    _disable_buttons(false),
+    _state(2) // pause
+    {
+    
+    
+    auto beige = sf::Color(255, 204, 128);
+    auto light_brown = sf::Color(199, 140, 88);
+    auto brown = sf::Color(121, 85, 72);
+
+    _outline_color = light_brown;
+    _fill_color = beige;
 
     setup_background();
     setup_info_displays();
@@ -100,16 +118,23 @@ void SideMenu::setup_info_display(int type, sf::Sprite& sprite, sf::Text& text_o
 void SideMenu::setup_info_displays(){
 
 
+
     float buffer = 5; 
     float char_size = 30;
+    float char_size = 30;
 
+    float side_menu_width = _background_img.getGlobalBounds().width;
+    float side_menu_height = _background_img.getGlobalBounds().height;
     float side_menu_width = _background_img.getGlobalBounds().width;
     float side_menu_height = _background_img.getGlobalBounds().height;
 
     
     int info_display_height = char_size;
+    int info_display_height = char_size;
     int info_display_width = side_menu_width / 3;
 
+    float display_start_x = _background_img.getGlobalBounds().left + buffer;
+    float display_start_y =  side_menu_height - info_display_height - buffer;
     float display_start_x = _background_img.getGlobalBounds().left + buffer;
     float display_start_y =  side_menu_height - info_display_height - buffer;
 
