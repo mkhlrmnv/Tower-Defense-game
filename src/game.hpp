@@ -174,10 +174,11 @@ private:
     int _available_types = 1;
 
     /**
-     * @brief Variable for animation phase
-     * To know which part of animation to play
+     * @brief Variable for enemies moving animation
+     * Thats because we want to play only one moving animation and all 
+     * attack animations at the time
      */
-    int _animation_phase;
+    int _enemy_move_animation;
 
     /**
      * @brief basic amount of money given
