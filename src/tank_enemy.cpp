@@ -27,6 +27,7 @@ bool Tank::attack() {
                     set_state(State::none);
                     return false;
                 } else {
+                    set_speed(0);
                     set_attack_counter(0);
                     multiplier = check_type_multiplier(tower, this);
                     tower->lose_health(this->get_damage() * multiplier);
