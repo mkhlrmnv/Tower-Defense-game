@@ -31,8 +31,8 @@ bool Healer::attack() {
 
                 if (get_attack_counter() <= get_attack_speed()) {
                     attack_counter_up();
-                    set_state(State::none);
-                    return false;
+                    // set_state(State::none);
+                    // return false;
                 } else {
                     set_speed(0);
                     set_attack_counter(0);
