@@ -28,7 +28,7 @@ public:
     sf::Font& get_font();
     
     // function to access tower attributes;
-    std::array<int, 5>& get_tower_info(int type);
+    int  get_tower_info(int tower_type, int attr_type);
     const std::string& get_tower_name(int type);
 
     // function to access attribute textures
@@ -47,8 +47,9 @@ private:
     void load_texture_attribute(int type, const std::string& filename);
     void load_font();
 
-    void fill_tower_attributes();
-    void fill_tower_names();
+    void fill_attribute_map(int type, std::array<int, 5> attributes);
+    void fill_tower_attributes_map();
+    void fill_tower_names_map();
 
     // place holders for all textures
     // object_type -->  texture_ptr
@@ -58,7 +59,7 @@ private:
 
     // holds info for towers
     // Tower_type --> attribute list
-    std::map<int, std::array<int, 5> > _tower_attributes;
+    std::map<int, std::shared_ptr<std::map<int, int>>> _tower_attributes;
     std::map<int, const std::string> _tower_names;
     sf::Font _font;
 

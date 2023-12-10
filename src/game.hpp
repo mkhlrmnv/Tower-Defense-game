@@ -23,6 +23,8 @@
 #include "sniper_tower.hpp"
 #include "tank_enemy.hpp"
 
+#include "side_menu.hpp"
+
 namespace LevelSelection{
     enum Choice: int{
         random, load
@@ -82,8 +84,11 @@ private:
 
     sf::RenderWindow _window;
 
+    ResourceHandler _rh;
     Renderer _renderer;
     Level _level;
+    SideMenu _side_menu;
+
 
     bool round_over = false;
 
