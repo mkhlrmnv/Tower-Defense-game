@@ -23,7 +23,7 @@ public:
      * @param defense Defense attribute of the Boss Enemy.
      * @param size Size of the Boss Enemy.
      */
-    Boss(Level& level, Vector2D& position, int health = 100, int damage = 10, int range = 80, int attack_speed = 1, 
+    Boss(Level& level, Vector2D& position, int health = 800, int damage = 20, int range = 150, int attack_speed = 40, 
          int type = ObjectTypes::BossKnight, int speed = 1, int defense = 20, int size = 5);
 
     /**

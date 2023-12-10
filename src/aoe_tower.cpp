@@ -42,7 +42,7 @@ bool Aoe_Tower::attack() {
                         has_attacked = true;
                     }
 
-                    if (counter >= 3) {
+                    if (counter >= 4) {
                         return true;
                         break;
                     }
