@@ -1,7 +1,9 @@
 #include <renderer.hpp>
 
-Renderer::Renderer():
-    _rh(ResourceHandler()){};
+Renderer::Renderer(ResourceHandler& rh):
+    _rh(rh){};
+Renderer::Renderer(ResourceHandler& rh):
+    _rh(rh){};
 
 void Renderer::draw_level(sf::RenderWindow& rwindow){
     rwindow.draw(_drawable_level);
@@ -33,8 +35,8 @@ void Renderer::draw_tower(sf::RenderWindow& rwindow, Tower* t_ptr, int frame){
     } else if (t_ptr->get_state() == State::dying){
         animation_pos = 4;
         if (frame > 4){ // stops animation in right place
-            animation_pos = 0;
-            frame = 0;
+            animation_pos = 4;
+            frame = 3;
         }
     }
 
@@ -51,9 +53,7 @@ void Renderer::draw_tower(sf::RenderWindow& rwindow, Tower* t_ptr, int frame){
         _drawable_tower.setPosition(sf::Vector2f (sq->get_center().y - (l.get_square_size() / 2), sq->get_center().x - (l.get_square_size() / 2)));
     } else {
         _drawable_tower.setScale(-_scale_factor_tower, _scale_factor_tower);
-        _drawable_tower.setPosition(sf::Vector2f (sq->get_center().y - (l.get_square_size() / 2) + l.get_square_size(), sq->get_center().x - (l.get_square_size() / 2)));
-
-        
+        _drawable_tower.setPosition(sf::Vector2f (sq->get_center().y - (l.get_square_size() / 2) + l.get_square_size(), sq->get_center().x - (l.get_square_size() / 2)));        
     }
 
     // Sets tower position to center of the square and draws it
@@ -61,29 +61,33 @@ void Renderer::draw_tower(sf::RenderWindow& rwindow, Tower* t_ptr, int frame){
 }
 
 void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr, int frame, int move_animation) {
+    // takes right spread sheet from resource handler and sets it as enemies texture
     _enemy_sprite = _rh.get_texture_enemy(e_ptr->get_type());
     _drawable_enemy.setTexture(_enemy_sprite);
 
+    // variable for where to start animation
     int animation_pos = 0;
 
+    // if statements for every state possible
     if (e_ptr->get_state() == State::attacking_right || e_ptr->get_state() == State::attacking_left) {
-        animation_pos = 1;
-        if (frame > 2) {
+        animation_pos = 10; // attacking animation is first to starts from first picture
+        if (frame > 2) { // in total animation is three pictures to stops if if gone too far
             animation_pos = 0;
             frame = 0;
         }
     } else if (e_ptr->get_state() == State::walking_left || e_ptr->get_state() == State::walking_right) {
-        animation_pos = 4;
-        frame = move_animation;
-        if (frame > 3) {
+        animation_pos = 0; // sets right animation start
+        frame = move_animation; // to make movements smoother frame is modified to move_animation value
+        if (frame > 3) { // if too far stops it
             animation_pos = 0;
             frame = 0;
         }
     } else if (e_ptr->get_state() == State::dying) {
-        animation_pos = 8;
-        frame = std::min(frame, 4);
+        animation_pos = 4; // sets right animation start
+        frame = std::min(frame, 4); // if too far stops it
     }
 
+    // variable for width of one picture
     int spriteWidth = 32;
 
     // Makes sure that animations isn't getting outside spreadsheet
@@ -93,12 +97,20 @@ void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr, int frame, in
        _drawable_enemy.setTextureRect(sf::IntRect(0, 0, spriteWidth, spriteWidth));
     }
 
-    float scale_factor_enemy = 1.0f; // Adjust as needed
-    _drawable_enemy.setScale((e_ptr->get_state() == State::walking_left || e_ptr->get_state() == State::attacking_left) ? scale_factor_enemy : -scale_factor_enemy, scale_factor_enemy);
+    // scales enemy by its size and determines its in game coordinates
+    float scale_factor_enemy = ceil(0.01f + (e_ptr->get_size() - 1) / 2);
+    float renderedX = e_ptr->get_position().y;
+    float renderedY = e_ptr->get_position().x;
 
-    float renderedX = e_ptr->get_position().y + 20;
-    float renderedY = e_ptr->get_position().x - _drawable_enemy.getTexture()->getSize().y;
+    // if flips texture if needed (if attacking ot the left for example)
+    if (e_ptr->get_state() == State::walking_left || e_ptr->get_state() == State::attacking_left){
+        _drawable_enemy.setScale(-scale_factor_enemy, scale_factor_enemy);
+    } else {
+        _drawable_enemy.setScale(scale_factor_enemy, scale_factor_enemy);
+    }
 
+    // sets texture to be drawn from bottom left corner
+    _drawable_enemy.setOrigin(0, 32);
     // Ensure enemy isn't drawn outside the field
     renderedX = std::max(renderedX, 1.0f);
     renderedY = std::max(renderedY, 1.0f);
@@ -110,7 +122,8 @@ void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr, int frame, in
 // function to draw multiple towers at once
 void Renderer::draw_towers(sf::RenderWindow& rwindow, std::vector<Tower*> towers, int frame){
     for(Tower* t_ptr : towers){
-        draw_tower(rwindow, t_ptr, frame); // zeros are placeholders
+        draw_tower(rwindow, t_ptr, frame);
+        draw_tower(rwindow, t_ptr, frame);
     }
 }
  // function to draw multiple enemies at once
@@ -120,29 +133,18 @@ void Renderer::draw_enemies(sf::RenderWindow& rwindow, std::vector<Enemy*> enemi
     }
 }
 
-// displays current cash
-void Renderer::draw_cash(sf::RenderWindow& rwindow, int cash){
 
-    std::string text_to_be_displayed = "$" + std::to_string(cash);
-    _cash_text.setString(text_to_be_displayed);
-    rwindow.draw(_cash_text);
+void Renderer::draw_end_screen_win(sf::RenderWindow& rwindow){
+   _end_screen.setTexture(_rh.get_texture_menu(4));
+    rwindow.draw(_end_screen);
 }
 
-// displays current lives
-void Renderer::draw_lives(sf::RenderWindow& rwindow, int lives){
-
-    std::string text_to_be_displayed = "Lives: " + std::to_string(lives);
-    _lives_text.setString(text_to_be_displayed);
-    rwindow.draw(_lives_text);
+void Renderer::draw_end_screen_lose(sf::RenderWindow& rwindow){
+    _end_screen.setTexture(_rh.get_texture_menu(3));
+    rwindow.draw(_end_screen);
 }
 
-// displays current round
-void Renderer::draw_round_count(sf::RenderWindow& rwindow, int round_count){
 
-    std::string text_to_be_displayed = "Round: " + std::to_string(round_count);
-    _round_count_text.setString(text_to_be_displayed);
-    rwindow.draw(_round_count_text);
-}
 
 // draws a grid with the rectangle to a rendertexture and sets this as the texture for the drawable level
 void Renderer::make_drawable_level(Level& lv){
@@ -178,6 +180,8 @@ void Renderer::make_drawable_level(Level& lv){
             upper_left_corner_y  = center_coords.y - lv.get_square_size()/2;
             // drawable_level_square.setOutlineColor(grey);
 
+            // draws house if it is on last piece of road
+            // otherwise draws road or grass picture depending on occupancy
             if (counter == 9){
                 if(square_type == occupied_type::grass){
                     drawable_level_square.setTexture(_grass_pic);
@@ -207,46 +211,4 @@ void Renderer::make_drawable_level(Level& lv){
     _drawable_level.setTexture(_level_texture.getTexture());
 }
 
-// loads font to use in level
-void Renderer::load_font(){
-    if(!_font.loadFromFile("../assets/fonts/Ubuntu-R.ttf")){
-        std::cout << "font load failed" << std::endl;
-    }else{
-        std::cout << "font load success" << std::endl;
 
-    }
-}
-
-// displays level on the screen 
-void Renderer::make_level_info_texts(int game_resolution, int side_bar_width){
-
-    load_font();
-
-    _cash_text.setFont(_font);
-    _lives_text.setFont(_font);
-    _round_count_text.setFont(_font);
-
-    int info_display_height = 20;
-    int info_display_width = side_bar_width / 3;
-
-    int cash_x = game_resolution;
-    int cash_y = game_resolution - info_display_height;
-
-    _cash_text.setPosition(sf::Vector2f(cash_x, cash_y));
-    _cash_text.setFillColor(sf::Color::White);
-    _cash_text.setCharacterSize(20);
-
-    int lives_x = cash_x + info_display_width;
-    int lives_y = game_resolution - info_display_height;
-
-    _lives_text.setPosition(sf::Vector2f(lives_x, lives_y));
-    _lives_text.setFillColor(sf::Color::White);
-    _lives_text.setCharacterSize(20);
-
-    int round_count_x = lives_x + info_display_width;
-    int round_count_y = game_resolution - info_display_height;
-
-    _round_count_text.setPosition(sf::Vector2f(round_count_x, round_count_y));
-    _round_count_text.setFillColor(sf::Color::White);
-    _round_count_text.setCharacterSize(20);
-}   

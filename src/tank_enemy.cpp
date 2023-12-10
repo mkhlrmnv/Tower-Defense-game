@@ -1,10 +1,20 @@
 #include "tank_enemy.hpp"
 #include "level.hpp"
 
-Tank::Tank(Level& level, Vector2D& position, int health, int damage, int range, int attack_speed, int type, int speed, int defense) :
-    Enemy(level, position, health, damage, range, attack_speed, type, speed, defense) {}
+Tank::Tank(Level& level, Vector2D& position, int health, int damage, int range, int attack_speed, int type, int speed, int defense, int size) :
+    Enemy(level, position, health, damage, range, attack_speed, type, speed, defense, size) {}
+Tank::Tank(Level& level, Vector2D& position, int health, int damage, int range, int attack_speed, int type, int speed, int defense, int size) :
+    Enemy(level, position, health, damage, range, attack_speed, type, speed, defense, size) {}
 
 bool Tank::attack() {
+    if (get_reset_counter() >= get_wait_time()) {
+        set_attack_speed(get_original_attack_speed());
+        set_speed(get_original_speed());
+        set_reset_counter(0);
+    } else {
+        reset_counter_up();
+    }
+    
     double multiplier;
     Level& level_reference = get_level_reference();
 

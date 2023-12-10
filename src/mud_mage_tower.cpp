@@ -6,6 +6,13 @@ Mud_Mage_Tower::Mud_Mage_Tower(Level& current_level, Vector2D& position, int hea
         Tower(current_level, position, health, damage, range, attack_speed, type, price, level) {}
 
 bool Mud_Mage_Tower::attack() {
+    if (get_reset_counter() >= get_wait_time()) {
+        set_attack_speed(get_original_attack_speed());
+        set_reset_counter(0);
+    } else {
+        reset_counter_up();
+    }
+
     double multiplier;
     Level& level_reference = get_level_reference();
 
@@ -15,12 +22,12 @@ bool Mud_Mage_Tower::attack() {
             double dist = this->distance_to(enemy->get_position());
 
             if (dist <= this->get_range()) {
-                if (get_attack_counter() <= get_attack_speed()) {
+                if (get_attack_counter() > 0) {
                     attack_counter_up();
                     set_state(State::none);
                     return false;
                 } else {
-                    set_attack_counter(0);
+                    set_attack_counter(get_attack_speed());
                     multiplier = check_type_multiplier(this, enemy);
                     if (enemy->get_speed() == enemy->get_original_speed() - 1) {
                         enemy->lose_speed(1);

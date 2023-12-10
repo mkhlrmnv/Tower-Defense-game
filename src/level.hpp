@@ -133,6 +133,14 @@ public:
      * @param how_much How much lives is added
      */
     void add_lives(int how_much);
+    
+    /**
+     * @brief resets the level for a new game.
+     * @param start_cash cash the new game starts with
+     * @param start_lives lives the new game starts with
+     */
+    void reset(int start_cash, int start_lives);
+
 
     /**
      * @brief Get the vector of enemies
@@ -155,6 +163,11 @@ public:
      * @return false if not removes
      */
     bool remove_enemy(Enemy* enemy);
+
+    /**
+     * @brief empties and deletes enemies from vector of all enemies
+     */
+    void remove_all_enemies();
 
     /**
      * @brief Makes and adds new enemy by type and position of enemy
@@ -183,10 +196,15 @@ public:
     /**
      * @brief Removes tower from vector of all towers
      * @param tower Pointer to tower
-     * @return true if added
-     * @return false if not added
+     * @return true if removed
+     * @return false if not removed
      */
     bool remove_tower(Tower* tower);
+
+    /**
+     * @brief empties and deletes towers from vector of all towers
+     */
+    void remove_all_towers();
 
     /**
      * @brief Makes and adds new tower to vector of all towers
@@ -251,10 +269,10 @@ public:
     void print_map();
     
     // Helper functions for randomly generate
-    // One handels situations of first few moves and other all the rest ones
+    // One handles situations of first few moves and other all the rest ones
     /**
      * @brief Helper functions for randomly generate
-     *   Handels situation where it's not few of first round
+     *   Handles situation where it's not few of first round
      * @param dir Direction where randomly generate wants to go
      * @param prev_dirs Vector of all previous directions
      * @param row Current row
@@ -266,7 +284,7 @@ public:
 
     /**
      * @brief Helper functions for randomly generate
-     *   Handels situation where its first few moves
+     *   Handles situation where its first few moves
      * @param dir Direction where randomly generate wants to go
      * @param prev_dirs Vector of all previous directions
      * @param row Current row

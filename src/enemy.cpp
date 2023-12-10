@@ -2,8 +2,8 @@
 #include "level.hpp"
 #include "attack_types.hpp"
 
-Enemy::Enemy(Level& level, Vector2D& position, int health, int damage, int range, int attack_speed, int type, int speed, int defense) : 
-            Object(level, position, health, damage, range, attack_speed, type), _speed(speed), _defense(defense) {}
+Enemy::Enemy(Level& level, Vector2D& position, int health, int damage, int range, int attack_speed, int type, int speed, int defense, int size) : 
+            Object(level, position, health, damage, range, attack_speed, type), _speed(speed), _defense(defense), _size(size) {}
 
 int Enemy::get_speed() const {
     return _speed;
@@ -15,6 +15,10 @@ int Enemy::get_original_speed() const {
 
 int Enemy::get_defense() const {
     return _defense;
+}
+
+int Enemy::get_size() const {
+    return _size;
 }
 
 std::vector<Vector2D> Enemy::get_route() const{
@@ -52,6 +56,13 @@ void Enemy::set_prev_pos(Vector2D pos){
 }
 
 void Enemy::move() {
+    if (get_reset_counter() >= get_wait_time()) {
+        set_attack_speed(get_original_attack_speed());
+        set_speed(get_original_speed());
+        set_reset_counter(0);
+    } else {
+        reset_counter_up();
+    }
 
     std::vector<Vector2D> route = get_route();
     // if current square center is different then previous center of previous position square
@@ -85,7 +96,7 @@ void Enemy::move() {
                 */
                 if (get_route().back() != pos && !moved && get_prev_pos().y >= get_position().y){
                     next_position = Vector2D(get_position().x, get_position().y - get_speed());
-                    set_state(State::walking_right);
+                    set_state(State::walking_left);
                     moved = true;
                 }
             } else {
@@ -93,7 +104,7 @@ void Enemy::move() {
                 // enemy gets new position and variable moved is switched to true, so enemy doesn't change direction on this call
                 if (!moved){
                     next_position = Vector2D(get_position().x, get_position().y - get_speed());
-                    set_state(State::walking_right);
+                    set_state(State::walking_left);
                     moved = true;
                 }
             }
@@ -138,13 +149,14 @@ void Enemy::move() {
             if (!get_route().empty()){
                 if (get_route().back() != pos && !moved && get_prev_pos().x >= get_position().x){
                     next_position = Vector2D(get_position().x - get_speed(), get_position().y); // get_level_reference().get_square_by_pos(get_position())->get_center().y
-                    set_state(State::walking_left);
+                    set_state(State::walking_right);
                     moved = true;
                 }
             } else {
                 if (!moved){
                     next_position = Vector2D(get_position().x - get_speed(), get_position().y);
                     moved = true;
+                    set_state(State::walking_right);
                 }
             }
             break;
