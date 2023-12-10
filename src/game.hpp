@@ -81,13 +81,6 @@ public:
 private: 
 
     /**
-     * @brief Makes the grid for the level and then fills it according to the chosen style: random or load from file
-     * @param chosen_lv choosen level
-     * @return int 1 if successful and 0 if not
-     */
-    int generate_chosen_level_style(int chosen_lv);
-
-    /**
      * @brief Opens window 
      */
     void open_window();
@@ -129,13 +122,31 @@ private:
 
     sf::RenderWindow _window;
 
-    ResourceHandler _rh;
-    Renderer _renderer;
-    Level _level;
-    MainMenu _main_menu;
-    ChooseLevelMenu _level_menu;
-    SideMenu _side_menu;
-    Upgrade _upgrade;
+    
+    
+    /**
+    * @brief sf::Time parameter determines the time which is spent in the end screen before reseting to the start menu
+    *  
+    */
+    sf::Time _reset_time = sf::Time::Zero;
+
+    /**
+    * @brief sf::Time parameter determines the time which is spent in the end screen before reseting to the start menu
+    *  
+    */
+    sf::Clock _reset_clock;
+    
+
+    /**
+     * @brief int parameter determines the starting cash for the level
+     *  
+     */
+    int _starting_cash = 500;
+
+    /**
+     * @brief int parameter determines the starting lives for the level
+     */
+    int _starting_lives = 5;
 
     /**
      * @brief int parameter determines state of the game state:
@@ -176,5 +187,13 @@ private:
      */
     int _basic_money = 50;
 
+
+    ResourceHandler _rh;
+    Renderer _renderer;
+    Level _level;
+    MainMenu _main_menu;
+    ChooseLevelMenu _level_menu;
+    SideMenu _side_menu;
+    Upgrade _upgrade;
 }; 
 #endif
