@@ -29,7 +29,13 @@ public:
     ~Upgrade(){delete _upgrade_button;}
     Upgrade(const Upgrade&) = delete; 
     Upgrade& operator=(const Upgrade&) = delete;
-   
+    
+     /**
+     * @brief Reset upgrade so the menu wont stay to next game.
+     * 
+     */
+    void reset();
+
     /**
      * @brief Handles events from the game.
      *
@@ -39,20 +45,6 @@ public:
      */
     void handle_events(sf::RenderWindow& window, sf::Event& event);
     
-    
-    /**
-     * @brief Disable grid click.
-     * 
-     */
-    void disable_grid_click();
-
-    /**
-     * @brief Reset upgrade so the menu wont stay to next game.
-     * 
-     */
-    void reset();
-
-
 private:
 
     /**
@@ -97,6 +89,12 @@ private:
     void close_upgrade_menu();
 
     /**
+     * @brief Calls tower.upgrade() if theres enough money to upgrade and removes price of upgrade from cash in level.
+     * 
+     */
+    void upgrade_tower();
+
+    /**
      * @brief Setup the menus sprite, rectangleshape and text objects
      * 
      */
@@ -132,11 +130,7 @@ private:
     void set_text_line(sf::Sprite& sprite, sf::Text &text, sf::Vector2f pos, int attr);
 
     
-    /**
-     * @brief Calls tower.upgrade() if theres enough money to upgrade and removes price of upgrade from cash in level.
-     * 
-     */
-    void upgrade_tower();
+    
 
     
     /**

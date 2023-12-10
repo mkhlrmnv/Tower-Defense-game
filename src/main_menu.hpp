@@ -12,7 +12,7 @@
 
 
 /**
- * @brief A class representing the start menu / main menu of the game. 
+ * @brief Class representing the start menu / main menu of the game. Inherits from the sf::Drawable class to hide draw calls.
  * @param ResourceHandler&
  * @param Level&
  */

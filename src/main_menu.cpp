@@ -15,38 +15,24 @@ _menu_background(){
     set_buttons();
 }
 
-void MainMenu::set_menu_background(){
-    
-    _menu_background.setTexture(_rh.get_texture_menu(0));
-    _menu_background.setPosition(0,0);
-}
-
-void MainMenu::set_buttons(){
-    
-    // draw transparent buttons on top of texture 
-    // positions and size hand picked
-    // When the mouse hovers on top of button button 
-
-    sf::Color transparent_beige(255, 204, 128, 0);
-    _choose_level_button = new Button("",{699.f-391.f, 517.f-374.f}, {391, 374}, transparent_beige, sf::Color::Transparent, _rh.get_font());
-    _random_level_button = new Button("",{699.f-391.f, 517.f-374.f}, {391, 586}, transparent_beige, sf::Color::Transparent, _rh.get_font());
-
-}
-
-void MainMenu::reset(){
-    _state = 0;
-}
-
 void MainMenu::disable_menu(){
+
     _menu_enabled = false;
 }
 
 void MainMenu::enable_menu(){
+
     _menu_enabled = true;
 }
 
 int MainMenu::get_state(){
+
     return _state;
+}
+
+void MainMenu::reset(){
+
+    _state = 0;
 }
 
 void MainMenu::handle_events(sf::RenderWindow& window, sf::Event& event){
@@ -70,15 +56,32 @@ void MainMenu::handle_events(sf::RenderWindow& window, sf::Event& event){
 
         }
     }
+}
+
+void MainMenu::set_menu_background(){
+    
+    _menu_background.setTexture(_rh.get_texture_menu(0));
+    _menu_background.setPosition(0,0);
+}
+
+void MainMenu::set_buttons(){
+    
+    // draw transparent buttons on top of texture 
+    // positions and size hand picked
+    // When the mouse hovers on top of button button 
+
+    sf::Color transparent_beige(255, 204, 128, 0);
+    _choose_level_button = new Button("",{699.f-391.f, 517.f-374.f}, {391, 374}, transparent_beige, sf::Color::Transparent, _rh.get_font());
+    _random_level_button = new Button("",{699.f-391.f, 517.f-374.f}, {391, 586}, transparent_beige, sf::Color::Transparent, _rh.get_font());
 
 }
 
 void MainMenu::draw(sf::RenderTarget& target, sf::RenderStates state) const {
+
     if(_menu_enabled){
         target.draw(_menu_background);
         target.draw(*_choose_level_button);
         target.draw(*_random_level_button);
     }
-   
 }
 

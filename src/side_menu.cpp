@@ -37,11 +37,54 @@ void SideMenu::enable_buttons(){
 }
 
 
+int SideMenu::get_state(){
+    return _state;
+}
+
+void SideMenu::reset(){
+    _state = 2;
+}
+
+void SideMenu::update(){
+
+    std::string cash = std::to_string(_level.get_cash());
+    std::string lives = std::to_string(_level.get_lives());
+    std::string round_count = std::to_string(_level.get_round());
+
+    _cash_text.setString(cash);
+    _lives_text.setString(lives);
+    _round_count_text.setString(round_count);
+
+    for(auto button : _drag_buttons){
+        button->update(_level.get_cash());
+    }
+}
+
+void SideMenu::handle_events(sf::RenderWindow& window, const sf::Event& event){
+
+    if(!_disable_buttons){
+
+        for(auto drag_button : _drag_buttons){
+
+            drag_button->handle_events(window, event, _level);
+            _drag_img_ptrs[drag_button->get_type()] =  drag_button->get_dragging_image();
+        }
+
+        _round_button->handle_events(window, event, _level);
+
+        if(_round_button->button_pressed()){
+            // set state to running
+            _state = 3;
+            _round_button->reset_button();
+        }
+
+    }
+}
+    
 void SideMenu::setup_background(){
     _background_img.setTexture(_rh.get_texture_menu(2));
     _background_img.setPosition({_game_resolution, 0});
 }
-
 
 void SideMenu::setup_drag_buttons(){
 
@@ -51,7 +94,6 @@ void SideMenu::setup_drag_buttons(){
     float x1 = x_wrt_bg  + _background_img.getPosition().x; 
     float y1 = y_wrt_bg + _background_img.getPosition().y;
 
-    sf::Color ashgrey(178, 190, 181); 
     
     // iterates trough tower types and creates buttons accordingly
     for(int i = 0; i<6; i++){
@@ -70,32 +112,7 @@ void SideMenu::setup_round_button(){
 
 }
 
-void SideMenu::setup_info_display(int type, sf::Sprite& sprite, sf::Text& text_obj, sf::Vector2f pos, float char_size){
 
-    auto brown = sf::Color(121, 85, 72);
-    auto color = brown;
-    
-    float image_size = 16;
-    float scale = 30 / image_size;
-    sprite.setTexture(_rh.get_texture_attribute(type));
-    sprite.setPosition(pos);
-    sprite.setScale(scale, scale);
-    
-
-    text_obj.setFont(_rh.get_font());
-    text_obj.setCharacterSize(char_size);
-    text_obj.setFillColor(sf::Color::White);
-    text_obj.setOutlineThickness(2);
-    text_obj.setOutlineColor(brown);
-    
-    auto img_size = sprite.getGlobalBounds();
-    auto img_pos = sprite.getPosition();
-    float gap_to_image = 5;
-    float y_offset_to_image = 5;
-
-    text_obj.setPosition( img_pos.x + img_size.width + gap_to_image, img_pos.y - y_offset_to_image);
-
-}
 
 void SideMenu::setup_info_displays(){
 
@@ -135,14 +152,32 @@ void SideMenu::setup_info_displays(){
 
 }
 
-int SideMenu::get_state(){
-    return _state;
-}
+void SideMenu::setup_info_display(int type, sf::Sprite& sprite, sf::Text& text_obj, sf::Vector2f pos, float char_size){
 
-void SideMenu::pause(){
-    _state = 2;
-}
+    auto brown = sf::Color(121, 85, 72);
+    auto color = brown;
+    
+    float image_size = 16;
+    float scale = 30 / image_size;
+    sprite.setTexture(_rh.get_texture_attribute(type));
+    sprite.setPosition(pos);
+    sprite.setScale(scale, scale);
+    
 
+    text_obj.setFont(_rh.get_font());
+    text_obj.setCharacterSize(char_size);
+    text_obj.setFillColor(sf::Color::White);
+    text_obj.setOutlineThickness(2);
+    text_obj.setOutlineColor(brown);
+    
+    auto img_size = sprite.getGlobalBounds();
+    auto img_pos = sprite.getPosition();
+    float gap_to_image = 5;
+    float y_offset_to_image = 5;
+
+    text_obj.setPosition( img_pos.x + img_size.width + gap_to_image, img_pos.y - y_offset_to_image);
+
+}
 
 void SideMenu::draw( sf::RenderTarget& target, sf::RenderStates states) const{
 
@@ -164,43 +199,4 @@ void SideMenu::draw( sf::RenderTarget& target, sf::RenderStates states) const{
             target.draw(*(drag_img_ptr));
         }
     }
-}
-
-
-void SideMenu::handle_events(sf::RenderWindow& window, const sf::Event& event){
-
-    if(!_disable_buttons){
-
-        for(auto drag_button : _drag_buttons){
-
-            drag_button->handle_events(window, event, _level);
-            _drag_img_ptrs[drag_button->get_type()] =  drag_button->get_dragging_image();
-        }
-
-        _round_button->handle_events(window, event, _level);
-
-        if(_round_button->button_pressed()){
-            // set state to running
-            _state = 3;
-            _round_button->reset_button();
-        }
-
-    }
-}
-    
-
-void SideMenu::update(){
-
-    std::string cash = std::to_string(_level.get_cash());
-    std::string lives = std::to_string(_level.get_lives());
-    std::string round_count = std::to_string(_level.get_round());
-
-    _cash_text.setString(cash);
-    _lives_text.setString(lives);
-    _round_count_text.setString(round_count);
-
-    for(auto button : _drag_buttons){
-        button->update(_level.get_cash());
-    }
-
 }

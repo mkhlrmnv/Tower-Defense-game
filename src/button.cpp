@@ -45,16 +45,14 @@ void Button::set_outline_color(sf::Color outline_color){
 
 }
 
-void Button::set_font(const sf::Font& font){
-    _text.setFont(font);
-
-}
 
 void Button::set_text_string(const std::string& text){
+
     _text.setString(text);
 }
 
 void Button::set_position(sf::Vector2f pos){
+
     _position = pos;
     _button.setPosition(pos);
     center_text();
@@ -67,12 +65,31 @@ void Button::set_size(sf::Vector2f size){
     center_text();
 }
 
+void Button::set_font(const sf::Font& font){
+
+    _text.setFont(font);
+
+}
+
 sf::Vector2f Button::get_size(){
+
     return _button.getSize();
 }
 
+bool Button::button_pressed(){
+
+    return _button_pressed;
+}
+
+void Button::reset_button(){
+    
+    _button_pressed = false;
+}
+
+
 
 bool Button::is_mouse_over(sf::RenderWindow &window){
+
     float mouse_x = sf::Mouse::getPosition(window).x;
     float mouse_y = sf::Mouse::getPosition(window).y;
 
@@ -86,6 +103,34 @@ bool Button::is_mouse_over(sf::RenderWindow &window){
     return (button_x < mouse_x) && (mouse_x < button_width_x) && (button_y < mouse_y) && (mouse_y < button_height_y);
 
 }
+
+void Button::handle_events(sf::RenderWindow& window, const sf::Event& event, Level& level){
+
+    if (event.type == sf::Event::MouseMoved){
+        if(is_mouse_over(window)){
+            // TODO: implicate some how that button can be pressed
+            
+            float a = (_button_fill_color.a + 30 < 255) ? _button_fill_color.a + 30 : 255;  
+            float r = (_button_fill_color.r + 10 < 255) ? _button_fill_color.r + 10 : 255; 
+            float g = (_button_fill_color.g + 10 < 255) ? _button_fill_color.g + 10 : 255; 
+            float b = (_button_fill_color.b + 10 < 255) ? _button_fill_color.b + 10 : 255; 
+            sf::Color hover_color(r,g,b,a);
+            _button.setFillColor(hover_color);
+
+        }else{
+            _button.setFillColor(_button_fill_color);
+
+        }
+    }
+    
+    if(event.type == sf::Event::MouseButtonPressed){
+        if(is_mouse_over(window)){    
+            _button_pressed = true;
+        }
+    }
+    
+}
+
 
 bool Button::inside_grid(sf::Vector2i mouse_pos, Level& lv){
     
@@ -128,46 +173,8 @@ Vector2D Button::window_coords_to_level_coords(sf::Vector2i mouse_pos){
     
 }
 
-bool Button::button_pressed(){
-    return _button_pressed;
-}
-
-void Button::reset_button(){
-    _button_pressed = false;
-}
-
-
-
-
-void Button::handle_events(sf::RenderWindow& window, const sf::Event& event, Level& level){
-
-    if (event.type == sf::Event::MouseMoved){
-        if(is_mouse_over(window)){
-            // TODO: implicate some how that button can be pressed
-            
-            float a = (_button_fill_color.a + 30 < 255) ? _button_fill_color.a + 30 : 255;  
-            float r = (_button_fill_color.r + 10 < 255) ? _button_fill_color.r + 10 : 255; 
-            float g = (_button_fill_color.g + 10 < 255) ? _button_fill_color.g + 10 : 255; 
-            float b = (_button_fill_color.b + 10 < 255) ? _button_fill_color.b + 10 : 255; 
-            sf::Color hover_color(r,g,b,a);
-            _button.setFillColor(hover_color);
-
-        }else{
-            _button.setFillColor(_button_fill_color);
-
-        }
-    }
-    
-    if(event.type == sf::Event::MouseButtonPressed){
-        if(is_mouse_over(window)){    
-            _button_pressed = true;
-        }
-    }
-    
-}
-
-
 void Button::draw(sf::RenderTarget& target, sf::RenderStates) const {
+    
     target.draw(_button);
     target.draw(_text); 
 }

@@ -45,11 +45,7 @@ void Game::open_window(){
 // runs whole game
 void Game::run(){
     open_window();
-    //generate_chosen_level_style(LevelSelection::load); 
-
-    //_renderer.make_drawable_level(_level);
-    //_renderer.make_level_info_texts(_game_resolution, _side_bar_width);
-
+   
     // manages tick rate of the game
     sf::Clock clock;
     sf::Time timeSinceLastUpdate = sf::Time::Zero;
@@ -85,12 +81,11 @@ void Game::update(){
         // transition to victory, starts timer to transition back to start menu
         if(_rounds_to_survive < _level.get_round()){
             _game_state = GameState::Victory;
-            _side_menu.pause();
+            _side_menu.reset();
             _reset_clock.restart();
 
         }
-    
-    break;
+        break;
     
     case GameState::Round:
 
@@ -104,45 +99,43 @@ void Game::update(){
             _level.plus_round();
             _round_over = true;
             _game_state = GameState::Pause;
-            _side_menu.pause();
+            _side_menu.reset();
         }
 
         // transition to game over when no lives left, starts timer to transition back to start menu
         if (_level.get_lives() < 1){
             _round_over = true;
             _game_state = GameState::GameOver;
-            _side_menu.pause();
+            _side_menu.reset();
             _reset_clock.restart();
         }
-    
-    break;
+        break;
 
     case GameState::Victory :
         _reset_time = _reset_clock.getElapsedTime();
+
+        // transition to MainMenu
         if(_reset_time.asSeconds() > 10.f){
-            _game_state = GameState::StartMenu;
+            _game_state = GameState::MainMenu;
             _main_menu.reset();
             _main_menu.enable_menu();
             _level_menu.reset();
             _level.reset(_starting_cash, _starting_lives);
         }
-        
-
-
-    break;
+        break;
 
     case GameState::GameOver :
         _reset_time = _reset_clock.getElapsedTime();
+
+        // transition to MainMenu
         if(_reset_time.asSeconds() > 10.f){
-            _game_state = GameState::StartMenu;
+            _game_state = GameState::MainMenu;
             _main_menu.reset();
             _main_menu.enable_menu();
             _level_menu.reset();
             _level.reset(_starting_cash, _starting_lives);
         }
-        
-
-    break;
+        break;
 
     }
 }
@@ -159,7 +152,7 @@ void Game::process_events(){
         // events based on _game_state
         switch (_game_state)
         {
-        case GameState::StartMenu:
+        case GameState::MainMenu:
             _main_menu.handle_events(_window, event);
             _game_state = _main_menu.get_state();
 
@@ -169,17 +162,16 @@ void Game::process_events(){
                 _level.make_grid();
                 _level.randomly_generate();
                 _renderer.make_drawable_level(_level);
-                _main_menu.disable_menu(); // redundant
+                _main_menu.disable_menu(); 
                 _upgrade.reset();
 
-            }else if(_game_state == GameState::MapMenu){
+            }else if(_game_state == GameState::ChooseLevelMenu){
                 
-                _main_menu.disable_menu(); // redundant
+                _main_menu.disable_menu();
             }
-
-        break;
+            break;
         
-        case GameState::MapMenu:
+        case GameState::ChooseLevelMenu:
 
             _level_menu.enable_menu();
             _level_menu.handle_events(_window, event);
@@ -195,7 +187,7 @@ void Game::process_events(){
                 _upgrade.reset();
 
             }
-        break;
+            break;
 
         // paused or round running
 
@@ -207,16 +199,14 @@ void Game::process_events(){
             if(_game_state == GameState::Round){
                 start_round();
             }
-
-        break;
+            break;
 
         case GameState::Round:
-        
-            // start round button isnt active in sidemenu 
+
             _side_menu.handle_events(_window, event);
             _upgrade.handle_events(_window, event);
             // no transition from events, transition back to pause when round over
-        break;
+            break;
         
         }
     }
@@ -228,13 +218,13 @@ void Game::render(){
 
     switch (_game_state)
     {
-    case GameState::StartMenu:
+    case GameState::MainMenu:
         _window.clear();
         _window.draw(_main_menu);
         _window.display();
         break;
 
-    case GameState::MapMenu:
+    case GameState::ChooseLevelMenu:
         _window.clear();
         _window.draw(_level_menu);
         _window.display();

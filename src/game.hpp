@@ -36,7 +36,7 @@
  */
 namespace GameState{
     enum State{
-        StartMenu, MapMenu, Pause, Round, Victory, GameOver
+        MainMenu, ChooseLevelMenu, Pause, Round, Victory, GameOver
     };
 }
 

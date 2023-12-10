@@ -35,8 +35,36 @@ public:
     }
     SideMenu(const SideMenu&) = delete; 
     SideMenu& operator=(const SideMenu&) = delete;
+
+     /**
+     * @brief disables handle events
+     * 
+     */
+    void disable_buttons();
+
+    /**
+     * @brief enables handle events
+     * 
+     */
+    void enable_buttons();
+    
+   
+
+    /**
+     * @brief Get the the next game state, either continue in pause or
+     * if round button pressed transition to round(implemented in game class)
+     * 
+     * @return int 
+     */
+    int get_state();
     
     /**
+     * @brief Sets state back to GameState::Pause 
+     * 
+     */
+    void reset(); 
+
+     /**
      * @brief updates the texts and buttons according to the cash, lives, rounds of level
      * 
      */
@@ -50,34 +78,8 @@ public:
      */
     void handle_events(sf::RenderWindow& window, const sf::Event& event);
 
-    /**
-     * @brief disables handle events
-     * 
-     */
-    void disable_buttons();
-
-    /**
-     * @brief enables handle events
-     * 
-     */
-    void enable_buttons();
-
-
-    // check state for transition to round start.
-
-    /**
-     * @brief Get the the next game state, either continue in pause or
-     * if round button pressed transition to round(implemented in game class)
-     * 
-     * @return int 
-     */
-    int get_state();
-    
-    /**
-     * @brief Sets state to GameState::Pause 
-     * 
-     */
-    void pause(); 
+   
+   
 
 private:
 
