@@ -8,10 +8,6 @@
  * Class for a Fast boy enemy
 */
 class Fast_Boy : public Enemy {
-/**
- * Class for a Fast boy enemy
-*/
-class Fast_Boy : public Enemy {
 public:
     /**
      * @brief Constructor to initialize a Fast Boy Enemy object.

@@ -8,10 +8,6 @@
  * Class for a Healer enemy
 */
 class Healer : public Enemy {
-/**
- * Class for a Healer enemy
-*/
-class Healer : public Enemy {
 public:
     /**
      * @brief Constructor to initialize a Healer Enemy object.

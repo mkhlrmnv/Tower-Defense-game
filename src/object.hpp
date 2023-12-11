@@ -13,9 +13,6 @@
 /**
  * @brief Forward declaration of level class.
  */
-/**
- * @brief Forward declaration of level class.
- */
 class Level;
 
 enum State{none, walking_right, walking_left, attacking_right, attacking_left, dying};
@@ -24,24 +21,8 @@ enum State{none, walking_right, walking_left, attacking_right, attacking_left, d
 /**
  * @brief Class that defines the behavior of all objects in the game.
  */
-
-/**
- * @brief Class that defines the behavior of all objects in the game.
- */
 class Object {
 public:
-
-    /**
-     * @brief Constructor to initialize an Object.
-     * 
-     * @param level Reference to the Level object.
-     * @param position Initial position of the Object (Vector2D).
-     * @param health Initial health points of the Object.
-     * @param damage Damage inflicted by the Object.
-     * @param range Range of attack for the Object.
-     * @param attack_speed Speed of attack for the Object.
-     * @param type Type of the Object.
-     */
 
     /**
      * @brief Constructor to initialize an Object.
@@ -108,12 +89,6 @@ public:
      * 
      * @return Integer representing the type of the object.
      */
-
-    /**
-     * @brief Get the type of the object.
-     * 
-     * @return Integer representing the type of the object.
-     */
     int get_type() const;
 
     /**
@@ -121,19 +96,7 @@ public:
      * 
      * @return Reference to the Level object.
      */
-
-    /**
-     * @brief Get a reference to the Level object associated with this object.
-     * 
-     * @return Reference to the Level object.
-     */
     Level& get_level_reference() const;
-
-    /**
-     * @brief Get the attack counter value of the object.
-     * 
-     * @return Integer representing the attack counter value.
-     */
 
     /**
      * @brief Get the attack counter value of the object.

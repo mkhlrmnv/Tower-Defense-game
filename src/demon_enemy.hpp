@@ -8,10 +8,6 @@
  * Class for a Demon enemy
 */
 class Demon : public Enemy {
-/**
- * Class for a Demon enemy
-*/
-class Demon : public Enemy {
 public:
     /**
      * @brief Constructor to initialize a Demon Enemy object.

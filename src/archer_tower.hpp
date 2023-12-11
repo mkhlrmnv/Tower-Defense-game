@@ -9,10 +9,6 @@
  * @brief Class for Archer tower
 */
 class Archer_Tower : public Tower {
-/**
- * @brief Class for Archer tower
-*/
-class Archer_Tower : public Tower {
 public:
     /**
      * @brief Constructor to initialize an Archer Tower object.

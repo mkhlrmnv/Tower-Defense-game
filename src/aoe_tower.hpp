@@ -9,10 +9,6 @@
  * @brief Class for AOE tower
 */
 class Aoe_Tower : public Tower {
-/**
- * @brief Class for AOE tower
-*/
-class Aoe_Tower : public Tower {
 public:
     /**
      * @brief Constructor to initialize an AOE Tower object.

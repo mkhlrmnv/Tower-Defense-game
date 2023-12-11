@@ -20,32 +20,11 @@ namespace TowerAttributes{
  * @brief A class to load all resources at one place; loads textures, fonts, tower attributes for the menu. Loads everything when it is constructed, distributes resources as references to shared pointers.
  * 
  */
-
-/**
- * @brief An enumerator for the tower attributes
- * 
- */
-namespace TowerAttributes{
-    enum Atr{
-        HP, DMG, RNG, ATKSPD, MONEY, ROUND
-    };
-};
-
-/**
- * @brief A class to load all resources at one place; loads textures, fonts, tower attributes for the menu. Loads everything when it is constructed, distributes resources as references to shared pointers.
- * 
- */
 class ResourceHandler{
 
 public:
     ResourceHandler(){load_all_textures();}
 
-    /**
-     * @brief Get the texture of tower by ObjectType enum as reference. 
-     * 
-     * @param type 
-     * @return sf::Texture& 
-     */
     /**
      * @brief Get the texture of tower by ObjectType enum as reference. 
      * 
@@ -136,14 +115,6 @@ private:
      * @param filename 
      */
     void load_texture_tower(int type, const std::string& filename);
-
-    
-    /**
-     * @brief Loads filename, creates a shared texture pointer and places it to the enemies map with key being the given type. 
-     * 
-     * @param type 
-     * @param filename 
-     */
 
     
     /**

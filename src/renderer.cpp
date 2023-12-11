@@ -2,8 +2,6 @@
 
 Renderer::Renderer(ResourceHandler& rh):
     _rh(rh){};
-Renderer::Renderer(ResourceHandler& rh):
-    _rh(rh){};
 
 void Renderer::draw_level(sf::RenderWindow& rwindow){
     rwindow.draw(_drawable_level);
@@ -105,12 +103,14 @@ void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr, int frame, in
     // if flips texture if needed (if attacking ot the left for example)
     if (e_ptr->get_state() == State::walking_left || e_ptr->get_state() == State::attacking_left){
         _drawable_enemy.setScale(-scale_factor_enemy, scale_factor_enemy);
+        _drawable_enemy.setOrigin(32, 32);
     } else {
         _drawable_enemy.setScale(scale_factor_enemy, scale_factor_enemy);
+        _drawable_enemy.setOrigin(0, 32);
     }
 
     // sets texture to be drawn from bottom left corner
-    _drawable_enemy.setOrigin(0, 32);
+    // _drawable_enemy.setOrigin(0, 32);
     // Ensure enemy isn't drawn outside the field
     renderedX = std::max(renderedX, 1.0f);
     renderedY = std::max(renderedY, 1.0f);
@@ -122,7 +122,6 @@ void Renderer::draw_enemy(sf::RenderWindow& rwindow, Enemy* e_ptr, int frame, in
 // function to draw multiple towers at once
 void Renderer::draw_towers(sf::RenderWindow& rwindow, std::vector<Tower*> towers, int frame){
     for(Tower* t_ptr : towers){
-        draw_tower(rwindow, t_ptr, frame);
         draw_tower(rwindow, t_ptr, frame);
     }
 }

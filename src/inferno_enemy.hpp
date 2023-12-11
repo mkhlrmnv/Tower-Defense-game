@@ -8,10 +8,6 @@
  * Class for an Inferno enemy
 */
 class Inferno : public Enemy {
-/**
- * Class for an Inferno enemy
-*/
-class Inferno : public Enemy {
 public:
     /**
      * @brief Constructor to initialize an Inferno Enemy object.

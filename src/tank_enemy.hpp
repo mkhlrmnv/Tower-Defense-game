@@ -8,10 +8,6 @@
  * @brief Class for a Tank enemy
 */
 class Tank : public Enemy {
-/**
- * @brief Class for a Tank enemy
-*/
-class Tank : public Enemy {
 public:
     /**
      * @brief Constructor to initialize a Tank Enemy object.

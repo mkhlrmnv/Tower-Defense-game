@@ -9,10 +9,6 @@
  * @brief Class for Sniper tower
 */
 class Sniper_Tower : public Tower {
-/**
- * @brief Class for Sniper tower
-*/
-class Sniper_Tower : public Tower {
 public:
     /**
      * @brief Constructor to initialize a Sniper Tower object.

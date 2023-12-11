@@ -32,7 +32,6 @@ public:
             delete button;
         }
         delete _round_button;
-        delete _round_button;
     }
     SideMenu(const SideMenu&) = delete; 
     SideMenu& operator=(const SideMenu&) = delete;

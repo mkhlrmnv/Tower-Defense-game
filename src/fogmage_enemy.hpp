@@ -8,10 +8,6 @@
  * @brief Class for a Fog Mage enemy
 */
 class Fog_Mage : public Enemy {
-/**
- * @brief Class for a Fog Mage enemy
-*/
-class Fog_Mage : public Enemy {
 public:
     /**
      * @brief Constructor to initialize a Fog Mage Enemy object.

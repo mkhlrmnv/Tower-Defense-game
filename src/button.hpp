@@ -5,9 +5,6 @@
 #include <SFML/Graphics.hpp>
 #include "level.hpp"
 #include "vector2d.hpp"
-#include "vector2d.hpp"
-#include "vector2d.hpp"
-#include "vector2d.hpp"
 #include <iostream>
 
 /**

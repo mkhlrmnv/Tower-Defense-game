@@ -3,8 +3,6 @@
 
 Tank::Tank(Level& level, Vector2D& position, int health, int damage, int range, int attack_speed, int type, int speed, int defense, int size) :
     Enemy(level, position, health, damage, range, attack_speed, type, speed, defense, size) {}
-Tank::Tank(Level& level, Vector2D& position, int health, int damage, int range, int attack_speed, int type, int speed, int defense, int size) :
-    Enemy(level, position, health, damage, range, attack_speed, type, speed, defense, size) {}
 
 bool Tank::attack() {
     if (get_reset_counter() >= get_wait_time()) {
@@ -26,9 +24,10 @@ bool Tank::attack() {
             if (dist <= this->get_range()) {
                 if (get_attack_counter() <= get_attack_speed()) {
                     attack_counter_up();
-                    set_state(State::none);
-                    return false;
+                    // set_state(State::none);
+                    // return false;
                 } else {
+                    set_speed(0);
                     set_attack_counter(0);
                     multiplier = check_type_multiplier(tower, this);
                     tower->lose_health(this->get_damage() * multiplier);

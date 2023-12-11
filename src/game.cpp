@@ -2,25 +2,6 @@
 #include <thread>
 #include <mutex>
 
-//TODO: balance game and update tower attribute values in resource handle for tower drag buttons!
-
-
-Game::Game(): 
-    _game_resolution(800),
-    _side_bar_width(300),
-    _window(),
-    _level(_game_resolution, _starting_cash, _starting_lives),
-    _rh(),
-    _renderer(_rh),
-    _main_menu(_rh, _level),
-    _level_menu(_rh, _level),
-    _side_menu(float(_game_resolution), float(_side_bar_width), _rh, _level),
-    _upgrade(_game_resolution, _rh, _level, 100, 2),
-    _reset_clock(){
-
-//TODO: balance game and update tower attribute values in resource handle for tower drag buttons!
-
-
 Game::Game(): 
     _game_resolution(800),
     _side_bar_width(300),
@@ -323,26 +304,8 @@ void Game::render(){
 void Game::start_round(){
     _round_over = false;
     //Spawns round played ammount multiplied by difficulty level amount of enemies
-    // for (int i = 0; i < (_difficulty_multiplier * _level.get_round()); i++)
-    // {
-    //     // Square where enemies can spawn
-    //     Square* spawn_sq = _level.get_first_road();
-    //     // Picks random type of enemy from available types
-    //     int rand_types = rand() % _available_types;
-    //     // Picks random position inside spawn square
-    //     int x = rand() % 80;
-    //     int y = rand() % 40;
-    //     Vector2D rand_pos = Vector2D(spawn_sq->get_center().x - (_level.get_square_size() / 2) + x, 1 + y);
-    //     // add enemy to level
-    //     _level.add_enemy_by_type(rand_types, rand_pos);
-    // }
-    // // If available types are under 8, adds new type
-    // if (_available_types < 7){
-    //     _available_types++;
-    // }
-    for (int i = 0; i < 8; i++)
+    for (int i = 0; i < (_difficulty_multiplier * _level.get_round()); i++)
     {
-        // Square where enemies can spawn
         // Square where enemies can spawn
         Square* spawn_sq = _level.get_first_road();
         // Picks random type of enemy from available types
@@ -377,7 +340,6 @@ void Game::start_round(){
 void Game::update_enemies(){
     for (Enemy* e : _level.get_enemies()){
         if (e->get_health() <= 0){ // if enemies hp is 0 sets state to dying
-            if (e->get_type() == ObjectTypes::BossKnight) { // BossKnight spawns two new skeletons when dies
             if (e->get_type() == ObjectTypes::BossKnight) { // BossKnight spawns two new skeletons when dies
                 _level.add_enemy_by_type(ObjectTypes::NoobSkeleton_NoAttack, e->get_position());
                 _level.add_enemy_by_type(ObjectTypes::NoobSkeleton_NoAttack, e->get_position() + Vector2D(5, 5));
