@@ -1,13 +1,15 @@
 # Tower Defense Game
 
-We have built developed our own tower defense game. Game has fully own graphics and a lot of features. Our game has 8 different kinds of enemies and 6 different kinds of towers. Enemies and towers have all their own animations when attacking, moving or dying. Game has money system where player gets cash by surviving rounds, player can use that cash to buy new towers or to upgrade existing ones. Also, there is mechanic where damage between towers and enemies depends on objects type and on the type of object that it’s attacking
+We have built developed our own tower defense game with C++ and SFML. Game has fully own graphics and a lot of features. Our game has 8 different kinds of enemies and 6 different kinds of towers. Enemies and towers have all their own animations when attacking, moving or dying. Game has money system where player gets cash by surviving rounds, player can use that cash to buy new towers or to upgrade existing ones. Also, there is mechanic where damage between towers and enemies depends on objects type and on the type of object that it’s attacking
 
 # Group
+This project is developed as a group project of Aalto University ELEC-A7151 Object-oriented Programming with C++ course in 2023. The responsible teacher for the course was Yusein Ali, and the project advisor was Santeri Salmela (email: santeri.v.salmela@aalto.fi).
 
-- Leo Teodosin
-- Mikhail Romanov
-- Aki oura
-- Kalle Lindgren
+The project was developed by:
+- Mikhail Romanov (GitHub: mkhlrmnv)
+- Leo Teodosin (Github: leodosin)
+- Aki oura (GitHub: asikusai)
+- Kalle Lindgren (GitHub: lindgrenkalle)
 
 # Repository organization
 
